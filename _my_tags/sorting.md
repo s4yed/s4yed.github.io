@@ -1,4 +1,0 @@
----
-slug: sorting
-name: Sorting
----

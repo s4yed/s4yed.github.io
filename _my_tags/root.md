@@ -1,4 +1,0 @@
----
-slug: root
-name: Root
----

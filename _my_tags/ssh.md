@@ -1,4 +1,0 @@
----
-slug: ssh
-name: SSH
----
