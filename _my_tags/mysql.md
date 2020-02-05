@@ -1,4 +1,0 @@
----
-slug: mysql
-name: MySQL
----
