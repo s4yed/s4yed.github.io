@@ -3,13 +3,13 @@
 blog_theme: dark # Or use dark
 name: Ahmed Sayed
 paginate: 5
-url: localhost:4000
+url: ah-sayed.github.io
 
 
 # Optional settings
 
 about_enabled: true # Change to true if you wish to show an icon in the navigation that redirects to the about page
-# baseurl: # Set if blog doesn't sit at the root of the domain (format: /blog)
+baseurl: /blog # Set if blog doesn't sit at the root of the domain (format: /blog)
 discus_identifier: chalk-1 # Add your Disqus identifier
 ga_analytics: UA-28631876-6 # Add your GA Tracking Id
 local_fonts: false # Change to true if you wish to use local fonts
