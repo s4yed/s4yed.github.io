@@ -1,4 +1,0 @@
----
-slug: projects
-name: Projects
----
