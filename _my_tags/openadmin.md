@@ -1,0 +1,4 @@
+---
+slug: openadmin
+name: OpenAdmin
+---
