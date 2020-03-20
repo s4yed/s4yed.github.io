@@ -1,0 +1,720 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Ahmed | angstromCTF 2020</title>
+  <meta name="description" content="This is my writeups for ångstromCTF 2020.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta property="og:title" content="angstromCTF 2020">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="http://localhost:4000/posts/angstromctf-2020">
+  <meta property="og:description" content="This is my writeups for ångstromCTF 2020.">
+  <meta property="og:site_name" content="Ahmed">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:url" content="http://localhost:4000/posts/angstromctf-2020">
+  <meta name="twitter:title" content="angstromCTF 2020">
+  <meta name="twitter:description" content="This is my writeups for ångstromCTF 2020.">
+
+  
+    
+      <meta property="og:image" content="http://localhost:4000/assets/documentation/angstrom-ctf/angstrom-3e0d6c871da7786e59fcc988735f4f5ded75aab5fac89f538291b3ef033801eb.png">
+      <meta name="twitter:image" content="http://localhost:4000/assets/documentation/angstrom-ctf/angstrom-3e0d6c871da7786e59fcc988735f4f5ded75aab5fac89f538291b3ef033801eb.png">
+    
+  
+
+  <link href="http://localhost:4000/feed.xml" type="application/rss+xml" rel="alternate" title="Ahmed Last 10 blog posts" />
+
+  
+
+  
+
+    
+      <link rel="icon" type="image/x-icon" href="/assets/favicon-color-0e896bd8673d9f83cea8d7b0a12fcc894681d58fc475ad499adfed94067b1e1f.png">
+      <link rel="apple-touch-icon" href="/assets/apple-touch-icon-light-87d1f2a3a19b1500e5c1626a0492025ca5f7f97d24540dc5900288e92112925a.png">
+      <link rel="stylesheet" type="text/css" href="/assets/light-83304512506681e2b59cb21cd769d96bad9e8ed6de554134b3be35543e0e69aa.css">
+    
+
+  
+
+</head>
+
+<body>
+  <main>
+    <div class="grid grid-centered">
+      <div class="grid-cell">
+        <nav class="header-nav scrollappear">
+  <a href="/" class="header-logo" title="Ahmed">Ahmed</a>
+  <ul class="header-links">
+    
+      <li>
+        <a href="/about" title="About me">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon-about">
+  <use href="/assets/about-ab4928d09cef6e09136b8d40637999db4f9575f927c33156e7f3e37d450e5df1.svg#icon-about" xlink:href="/assets/about-ab4928d09cef6e09136b8d40637999db4f9575f927c33156e7f3e37d450e5df1.svg#icon-about"></use>
+</svg>
+
+        </a>
+      </li>
+    
+    
+    
+      <li>
+        <a href="https://www.facebook.com/manneredperson" rel="noreferrer noopener" target="_blank" title="Facebook">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon-facebook">
+  <use href="/assets/facebook-5a38f0a900ec68e86eaccd4683fcad4e4de77281f876d9476a560a0a69cac8bf.svg#icon-facebook" xlink:href="/assets/facebook-5a38f0a900ec68e86eaccd4683fcad4e4de77281f876d9476a560a0a69cac8bf.svg#icon-facebook"></use>
+</svg>
+
+        </a>
+      </li>
+    
+    
+    
+      <li>
+        <a href="https://github.com/ah-sayed" rel="noreferrer noopener" target="_blank" title="GitHub">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon-github">
+  <use href="/assets/github-706d546fe6b5a32deca92fb08bbe60e78ea4e8027e889107905eb61f1063bcec.svg#icon-github" xlink:href="/assets/github-706d546fe6b5a32deca92fb08bbe60e78ea4e8027e889107905eb61f1063bcec.svg#icon-github"></use>
+</svg>
+
+        </a>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+      <li>
+        <a href="https://www.linkedin.com/in/sayeddd" rel="noreferrer noopener" target="_blank" title="LinkedIn">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon-linkedin">
+  <use href="/assets/linkedin-3bd8eb5ea036958dc7b3ee3de6612dbfa9e0744f369f20f7895d6a2782bbaf43.svg#icon-linkedin" xlink:href="/assets/linkedin-3bd8eb5ea036958dc7b3ee3de6612dbfa9e0744f369f20f7895d6a2782bbaf43.svg#icon-linkedin"></use>
+</svg>
+
+        </a>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      <li>
+        <a href="mailto:ahmedsayedgfx@gmail.com" title="Email">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon-email">
+  <use href="/assets/email-30a104adb1e2728097a984fbea2995978b6fff6c12906a734044ebd388848b70.svg#icon-email" xlink:href="/assets/email-30a104adb1e2728097a984fbea2995978b6fff6c12906a734044ebd388848b70.svg#icon-email"></use>
+</svg>
+
+        </a>
+      </li>
+    
+    
+      <li>
+        <a href="/feed.xml" rel="noreferrer noopener" target="_blank" title="RSS">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon-rss">
+  <use href="/assets/rss-cdc7a721b47671668abb0ba57f9f8db8022096e0051ff51b9e08e6cc049453a4.svg#icon-rss" xlink:href="/assets/rss-cdc7a721b47671668abb0ba57f9f8db8022096e0051ff51b9e08e6cc049453a4.svg#icon-rss"></use>
+</svg>
+
+        </a>
+      </li>
+    
+    
+  </ul>
+</nav>
+
+
+  <ul class="header-tags scrollappear">
+    
+    
+      
+        <li><a href="/tag/CTF">Ctf</a></li>
+    
+      
+        <li><a href="/tag/One-Time-Pad">One-time-pad</a></li>
+    
+      
+        <li><a href="/tag/algorithms">Algorithms</a></li>
+    
+      
+        <li><a href="/tag/analysis">Analysis</a></li>
+    
+      
+        <li><a href="/tag/angstromCTF">Angstromctf</a></li>
+    
+      
+        <li><a href="/tag/cryptography">Cryptography</a></li>
+    
+      
+        <li><a href="/tag/data">Data</a></li>
+    
+      
+        <li><a href="/tag/hack-the-box">Hack-the-box</a></li>
+    
+      
+        <li><a href="/tag/ida">Ida</a></li>
+    
+      
+        <li><a href="/tag/infosec">Infosec</a></li>
+    
+      
+        <li>...</li>
+        <li><a href="/tags">Show all</a></li>
+        
+  </ul>
+
+
+        <article class="article scrollappear">
+          <header class="article-header">
+            <h1>angstromCTF 2020</h1>
+            <p>This is my writeups for ångstromCTF 2020.</p>
+            <div class="article-list-footer">
+  <span class="article-list-date">
+    March 20, 2020
+  </span>
+  <span class="article-list-divider">-</span>
+  <span class="article-list-minutes">
+    
+    
+      14 minute read
+    
+  </span>
+  <span class="article-list-divider">-</span>
+  <div class="article-list-tags">
+    
+      
+      <a href="/tag/security" title="See all posts with tag 'Security'">Security</a>
+    
+      
+      <a href="/tag/angstromCTF" title="See all posts with tag 'angstromCTF'">angstromCTF</a>
+    
+      
+      <a href="/tag/CTF" title="See all posts with tag 'CTF'">CTF</a>
+    
+      
+      <a href="/tag/reverse" title="See all posts with tag 'Reverse'">Reverse</a>
+    
+      
+      <a href="/tag/cryptography" title="See all posts with tag 'Cryptography'">Cryptography</a>
+    
+      
+      <a href="/tag/infosec" title="See all posts with tag 'Infosec'">Infosec</a>
+    
+      
+      <a href="/tag/One-Time-Pad" title="See all posts with tag ''"></a>
+    
+      
+      <a href="/tag/linux" title="See all posts with tag 'Linux'">Linux</a>
+    
+      
+      <a href="/tag/ida" title="See all posts with tag 'IDA'">IDA</a>
+    
+  </div>
+</div>
+          </header>
+
+          <div class="article-content">
+            <p><a href="/assets/documentation/angstrom-ctf/angstrom-3e0d6c871da7786e59fcc988735f4f5ded75aab5fac89f538291b3ef033801eb.png">
+  <img src="/assets/documentation/angstrom-ctf/angstrom-3e0d6c871da7786e59fcc988735f4f5ded75aab5fac89f538291b3ef033801eb.png" alt="Angstrom" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/angstrom-3e0d6c871da7786e59fcc988735f4f5ded75aab5fac89f538291b3ef033801eb.png" data-zooming-width="894" data-zooming-height="448" />
+</a></p>
+
+<p>I participated in ångstromCTF 2020 with my awesome team <a href="https://2020.angstromctf.com/teams/6525">P1rates</a> as <code class="highlighter-rouge">y4mm1</code> and I was able to solve 11 challenges with them. This is my writeup about some challenges I solved during the competition.</p>
+
+<h2 id="cryptography">Cryptography</h2>
+
+<h3 id="1-reasonably-strong-algorithm">1. Reasonably Strong Algorithm</h3>
+
+<blockquote>
+  <p>RSA strikes again.</p>
+</blockquote>
+
+<p>This was an easy <code class="highlighter-rouge">RSA</code> challenge given the following:</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="go">n = 126390312099294739294606157407778835887
+e = 65537
+c = 13612260682947644362892911986815626931</span></code></pre></figure>
+
+<p>To solve this challenge you must know <a href="https://en.wikipedia.org/wiki/RSA_(cryptosystem)">RSA</a> and how it works.</p>
+
+<p>Now, we have <code class="highlighter-rouge">n</code> public modulus, <code class="highlighter-rouge">e</code> exponent and <code class="highlighter-rouge">c</code> ciphertext. 
+I thought If I just factor <code class="highlighter-rouge">n</code> to its primes I can compute the <code class="highlighter-rouge">φ(n)</code> and find private key <code class="highlighter-rouge">d</code> such that <code class="highlighter-rouge">d * e = 1 mod(φ(n))</code>.
+I can compute <code class="highlighter-rouge">d</code> as <code class="highlighter-rouge">modinverse(e, φ(n))</code> using <a href="https://en.wikipedia.org/wiki/Euclidean_algorithm">Euclidean Algorithm</a>. 
+Then calculate <img src="https://latex.codecogs.com/gif.latex?%7B%5Cdisplaystyle%20m%3Dc%5E%7Bd%7D%20%7B%5Cbmod%20%7Bn%7D%7D%7D" alt="{\displaystyle m=c^{d} {\bmod {n}}}" /> 
+where <code class="highlighter-rouge">m</code> is our flag.</p>
+
+<p>Here is my code to do it:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c1">#!/usr/bin/env python
+</span><span class="k">def</span> <span class="nf">modinv</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span> <span class="p">:</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">%</span> <span class="n">m</span><span class="p">;</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span> <span class="p">:</span>
+        <span class="k">if</span> <span class="p">((</span><span class="n">a</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">%</span> <span class="n">m</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">:</span>
+            <span class="k">return</span> <span class="n">x</span>
+    <span class="k">return</span> <span class="mi">1</span>
+    
+<span class="n">n</span> <span class="o">=</span> <span class="mi">126390312099294739294606157407778835887</span>
+<span class="n">e</span> <span class="o">=</span> <span class="mi">65537</span>
+<span class="n">c</span> <span class="o">=</span> <span class="mi">13612260682947644362892911986815626931</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="mi">13536574980062068373</span>
+<span class="n">q</span> <span class="o">=</span> <span class="mi">9336949138571181619</span>
+<span class="n">phi</span> <span class="o">=</span> <span class="p">(</span><span class="n">p</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">q</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">modinv</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">phi</span><span class="p">)</span>
+<span class="n">m</span> <span class="o">=</span> <span class="nb">hex</span><span class="p">(</span><span class="nb">pow</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="n">n</span><span class="p">))[</span><span class="mi">2</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="k">print</span> <span class="nb">str</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">'hex'</span><span class="p">)</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>python rsa.py 
+<span class="go">actf{10minutes}</span></code></pre></figure>
+
+<h3 id="2-wacko-images">2. Wacko Images</h3>
+
+<blockquote>
+  <p>How to make hiding stuff a e s t h e t i c? And can you make it normal again? enc.png image-encryption.py
+The flag is actf{x#xx#xx_xx#xxx} where x represents any lowercase letter and # represents any one digit number.</p>
+</blockquote>
+
+<p>So, we’re given the encoded image:</p>
+
+<p><a href="/assets/documentation/angstrom-ctf/wako-images/enc-1ef5c3f44f52d62ea8b19e61d9eb6ef11a75c4eec88e1c086efe01e290439223.png">
+  <img src="/assets/documentation/angstrom-ctf/wako-images/enc-1ef5c3f44f52d62ea8b19e61d9eb6ef11a75c4eec88e1c086efe01e290439223.png" alt="Encrypted" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/wako-images/enc-1ef5c3f44f52d62ea8b19e61d9eb6ef11a75c4eec88e1c086efe01e290439223.png" data-zooming-width="500" data-zooming-height="200" />
+</a></p>
+
+<p>And the encryption code:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+
+<span class="n">flag</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="s">r"flag.png"</span><span class="p">)</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">array</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span>
+<span class="n">key</span> <span class="o">=</span> <span class="p">[</span><span class="mi">41</span><span class="p">,</span> <span class="mi">37</span><span class="p">,</span> <span class="mi">23</span><span class="p">]</span>
+<span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span>
+
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="n">pixel</span> <span class="o">=</span> <span class="n">img</span><span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">):</span>
+            <span class="n">pixel</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">pixel</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">key</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">%</span> <span class="mi">251</span>
+        <span class="n">img</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">pixel</span>
+
+<span class="n">enc</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="n">enc</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">'enc.png'</span><span class="p">)</span></code></pre></figure>
+
+<p>The weakness here is the key is given in the code and <code class="highlighter-rouge">pixel[i] = pixel[i] * key[i] mod(251)</code>.</p>
+
+<p>Simply, the code does the following:</p>
+
+<ol>
+  <li>Find each pixel <code class="highlighter-rouge">(R, G, B)</code> in the original image where <code class="highlighter-rouge">RGB</code> are the Red, Green, Blue values respectively.</li>
+  <li>Calculate <code class="highlighter-rouge">(R*key[0], G*key[1], B*key[2])</code>.</li>
+</ol>
+
+<p>Now I should find the original pixels such that <code class="highlighter-rouge">pixel[i] * key[i] = 1 mod(251)</code>, and this is also the modular inverse <code class="highlighter-rouge">pixel[i] * modinverse(k[i], 251)</code>.</p>
+
+<p>So, let’s code and get the flag:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+
+<span class="n">flag</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="s">r"enc.png"</span><span class="p">)</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">array</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">modinv</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span> <span class="p">:</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">%</span> <span class="n">m</span><span class="p">;</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span> <span class="p">:</span>
+        <span class="k">if</span> <span class="p">((</span><span class="n">a</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">%</span> <span class="n">m</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">:</span>
+            <span class="k">return</span> <span class="n">x</span>
+    <span class="k">return</span> <span class="mi">1</span>
+    
+<span class="n">key</span> <span class="o">=</span> <span class="p">[</span><span class="mi">41</span><span class="p">,</span> <span class="mi">37</span><span class="p">,</span> <span class="mi">23</span><span class="p">]</span>
+<span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span>
+
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="n">pixel</span> <span class="o">=</span> <span class="n">img</span><span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">):</span>
+            <span class="n">pixel</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">modinv</span><span class="p">(</span><span class="n">key</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="mi">251</span><span class="p">)</span><span class="o">*</span><span class="n">pixel</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">%</span> <span class="mi">251</span>
+        <span class="n">img</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">pixel</span>
+
+<span class="n">enc</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="n">enc</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">'flag.png'</span><span class="p">)</span></code></pre></figure>
+
+<p>Give us the flag.png: <code class="highlighter-rouge">actf{m0dd1ng_sk1llz}</code></p>
+
+<p><a href="/assets/documentation/angstrom-ctf/wako-images/flag-f5f94f8ec1b0d78e8c8030e86dde3bc075190d2ba4e693366f90e6ccd241fffa.png">
+  <img src="/assets/documentation/angstrom-ctf/wako-images/flag-f5f94f8ec1b0d78e8c8030e86dde3bc075190d2ba4e693366f90e6ccd241fffa.png" alt="Encrypted" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/wako-images/flag-f5f94f8ec1b0d78e8c8030e86dde3bc075190d2ba4e693366f90e6ccd241fffa.png" data-zooming-width="500" data-zooming-height="200" />
+</a></p>
+
+<h3 id="3-confused-streaming">3. Confused Streaming</h3>
+
+<blockquote>
+  <p>I made a stream cipher!
+ nc crypto.2020.chall.actf.co 20601
+ hint: look at dream stream</p>
+</blockquote>
+
+<p>The given code it seems confusing:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+<span class="kn">import</span> <span class="nn">random</span><span class="p">,</span><span class="n">os</span><span class="p">,</span><span class="n">sys</span><span class="p">,</span><span class="n">binascii</span>
+<span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="k">try</span><span class="p">:</span>
+	<span class="nb">input</span> <span class="o">=</span> <span class="nb">raw_input</span>
+<span class="k">except</span><span class="p">:</span>
+	<span class="k">pass</span>
+<span class="n">getcontext</span><span class="p">()</span><span class="o">.</span><span class="n">prec</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="k">def</span> <span class="nf">keystream</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+	<span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s">"seed"</span><span class="p">]))</span>
+	<span class="n">e</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+	<span class="k">while</span> <span class="mi">1</span><span class="p">:</span>
+		<span class="n">d</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+		<span class="n">ret</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s">'0.'</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">key</span> <span class="o">**</span> <span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">'.'</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+			<span class="n">ret</span><span class="o">*=</span><span class="mi">2</span>
+		<span class="k">yield</span> <span class="nb">int</span><span class="p">((</span><span class="n">ret</span><span class="o">//</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="mi">2</span><span class="p">)</span>
+		<span class="n">e</span><span class="o">+=</span><span class="mi">1</span>
+<span class="k">try</span><span class="p">:</span>
+	<span class="n">a</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s">"a: "</span><span class="p">))</span>
+	<span class="n">b</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s">"b: "</span><span class="p">))</span>
+	<span class="n">c</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s">"c: "</span><span class="p">))</span>
+	<span class="c1"># remove those pesky imaginary numbers, rationals, zeroes, integers, big numbers, etc
+</span>	<span class="k">if</span> <span class="n">b</span><span class="o">*</span><span class="n">b</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="o">*</span><span class="n">a</span><span class="o">*</span><span class="n">c</span> <span class="ow">or</span> <span class="n">a</span><span class="o">==</span><span class="mi">0</span> <span class="ow">or</span> <span class="n">b</span><span class="o">==</span><span class="mi">0</span> <span class="ow">or</span> <span class="n">c</span><span class="o">==</span><span class="mi">0</span> <span class="ow">or</span> <span class="n">Decimal</span><span class="p">(</span><span class="n">b</span><span class="o">*</span><span class="n">b</span><span class="o">-</span><span class="mi">4</span><span class="o">*</span><span class="n">a</span><span class="o">*</span><span class="n">c</span><span class="p">)</span><span class="o">.</span><span class="n">sqrt</span><span class="p">()</span><span class="o">.</span><span class="n">to_integral_value</span><span class="p">()</span><span class="o">**</span><span class="mi">2</span><span class="o">==</span><span class="n">b</span><span class="o">*</span><span class="n">b</span><span class="o">-</span><span class="mi">4</span><span class="o">*</span><span class="n">a</span><span class="o">*</span><span class="n">c</span> <span class="ow">or</span> <span class="nb">abs</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">1000</span> <span class="ow">or</span> <span class="nb">abs</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">1000</span> <span class="ow">or</span> <span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">1000</span><span class="p">:</span>
+		<span class="k">raise</span> <span class="nb">Exception</span><span class="p">()</span>
+	<span class="n">key</span> <span class="o">=</span> <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="n">b</span><span class="o">*</span><span class="n">b</span><span class="o">-</span><span class="mi">4</span><span class="o">*</span><span class="n">a</span><span class="o">*</span><span class="n">c</span><span class="p">)</span><span class="o">.</span><span class="n">sqrt</span><span class="p">()</span> <span class="o">-</span> <span class="n">Decimal</span><span class="p">(</span><span class="n">b</span><span class="p">))</span><span class="o">/</span><span class="n">Decimal</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">except</span><span class="p">:</span>
+	<span class="k">print</span><span class="p">(</span><span class="s">"bad key"</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+	<span class="n">flag</span> <span class="o">=</span> <span class="n">binascii</span><span class="o">.</span><span class="n">hexlify</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s">"flag"</span><span class="p">]</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+	<span class="n">flag</span> <span class="o">=</span> <span class="nb">bin</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">flag</span><span class="p">,</span><span class="mi">16</span><span class="p">))[</span><span class="mi">2</span><span class="p">:]</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span><span class="o">*</span><span class="mi">4</span><span class="p">)</span>
+	<span class="n">ret</span> <span class="o">=</span> <span class="s">""</span>
+	<span class="n">k</span> <span class="o">=</span> <span class="n">keystream</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">flag</span><span class="p">:</span>
+		<span class="n">ret</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="o">^</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+	<span class="k">print</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span></code></pre></figure>
+
+<p>But here is the trick, the code wants you to enter <code class="highlighter-rouge">a b c</code> such that some condition is achieved and if you provided those values correctly, it gives you the flag. 
+The condition is</p>
+
+<p><code class="highlighter-rouge">b*b &lt; 4*a*c or a==0 or b==0 or c==0 or Decimal(b*b-4*a*c).sqrt().to_integral_value()**2==b*b-4*a*c or abs(a)&gt;1000 or abs(b)&gt;1000 or abs(c)&gt;1000</code></p>
+
+<p>But it checks the values that can validate the key as the comment says <strong>“remove those pesky imaginary numbers, rationals, zeroes, integers, big numbers, etc”</strong>.</p>
+
+<p>And guess what this is the real solutions of the quadratic equation.</p>
+
+<p><img src="https://latex.codecogs.com/gif.latex?ax%5E%7B2%7D&plus;bx&plus;c%3D0" alt="ax^{2}+bx+c=0" />
+ <img src="https://latex.codecogs.com/gif.latex?%5Cdisplaystyle%20x%3D%7B%5Cfrac%20%7B-b%5Cpm%20%7B%5Csqrt%20%7Bb%5E%7B2%7D-4ac%7D%7D%7D%7B2a%7D%7D" alt="\displaystyle x={\frac {-b\pm {\sqrt {b^{2}-4ac}}}{2a}}" /></p>
+
+<p>So, now I can brute force the values that <strong>cannot</strong> achieve the condition he wanted. Note that he want any correct values for <code class="highlighter-rouge">a b c</code>.
+Here is my code to do that:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c1">#!/usr/bin/env python
+</span><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">context</span><span class="o">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="s">'critical'</span>
+
+<span class="n">T</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">):</span>
+		<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">):</span>
+			<span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">b</span><span class="o">*</span><span class="n">b</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="o">*</span><span class="n">a</span><span class="o">*</span><span class="n">c</span> <span class="ow">or</span> <span class="n">a</span><span class="o">==</span><span class="mi">0</span> <span class="ow">or</span> <span class="n">b</span><span class="o">==</span><span class="mi">0</span> <span class="ow">or</span> <span class="n">c</span><span class="o">==</span><span class="mi">0</span> <span class="ow">or</span> <span class="n">Decimal</span><span class="p">(</span><span class="n">b</span><span class="o">*</span><span class="n">b</span><span class="o">-</span><span class="mi">4</span><span class="o">*</span><span class="n">a</span><span class="o">*</span><span class="n">c</span><span class="p">)</span><span class="o">.</span><span class="n">sqrt</span><span class="p">()</span><span class="o">.</span><span class="n">to_integral_value</span><span class="p">()</span><span class="o">**</span><span class="mi">2</span><span class="o">==</span><span class="n">b</span><span class="o">*</span><span class="n">b</span><span class="o">-</span><span class="mi">4</span><span class="o">*</span><span class="n">a</span><span class="o">*</span><span class="n">c</span> <span class="ow">or</span> <span class="nb">abs</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">100</span> <span class="ow">or</span> <span class="nb">abs</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">100</span> <span class="ow">or</span> <span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">100</span><span class="p">):</span>
+				<span class="n">T</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">))</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s">'crypto.2020.chall.actf.co'</span><span class="p">,</span><span class="mi">20601</span><span class="p">)</span>
+<span class="n">r</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s">'a'</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]))</span>
+<span class="n">r</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s">'b'</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]))</span>
+<span class="n">r</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s">'c'</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]))</span>
+
+<span class="k">print</span> <span class="nb">hex</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">recvall</span><span class="p">()[</span><span class="mi">2</span><span class="p">:],</span><span class="mi">2</span><span class="p">))[</span><span class="mi">2</span><span class="p">:]</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">'hex'</span><span class="p">)</span>
+<span class="n">r</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>python stream.py 
+<span class="go">actf{down_to_the_decimal}</span></code></pre></figure>
+
+<h3 id="4-one-time-bad">4. One Time Bad</h3>
+
+<blockquote>
+  <p>My super secure service is available now!
+Heck, even with the source, I bet you won’t figure it out.
+nc misc.2020.chall.actf.co 20301</p>
+</blockquote>
+
+<p><strong>One Time Pad</strong> is just known as unbreakable cryptographic technique that requires a random key as long as message being sent, but we’re the only ones who can make this it breakable by using wrong keys.</p>
+
+<p>So, when I connect to the server it asks me to enter either 1 to request encrypted sample with its key or 2 to decrypt some given sample.</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>nc misc.2020.chall.actf.co 20301
+<span class="go">Welcome to my one time pad service!
+It's so unbreakable that *if* you do manage to decrypt my text, I'll give you a flag!
+You will be given the ciphertext and key for samples, and the ciphertext for when you try to decrypt. All will be given in base 64, but when you enter your answer, give it in ASCII.
+Enter:
+	1) Request sample
+	2) Try your luck at decrypting something!
+</span><span class="gp">&gt;</span><span class="w"> </span></code></pre></figure>
+
+<p>In the code the function <code class="highlighter-rouge">otp(a, b)</code> takes 2 arguments the message and the key, then iterate through them one by one and do simple <code class="highlighter-rouge">xor</code>, but we know that <code class="highlighter-rouge">xor</code> is the reverse of itself.</p>
+
+<p>After analysing the given source code I notice the deadly bug and that is <code class="highlighter-rouge">random.seed(int(time.time()))</code>.</p>
+
+<p>It seeds the random generator with the current time when the connection <strong>initiated</strong> and that’s horrible because the random numbers repeats after some periods with the same seed.</p>
+
+<p>So, now let’s brute force the key and crack the unbreakable <strong>OTP</strong>.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c1">#!/usr/bin/env python
+</span><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span>  <span class="nn">base64</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">context</span><span class="o">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="s">'critical'</span>
+
+<span class="k">def</span> <span class="nf">otp</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+	<span class="n">r</span> <span class="o">=</span> <span class="s">""</span>
+	<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+		<span class="n">r</span> <span class="o">+=</span> <span class="nb">chr</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">^</span> <span class="nb">ord</span><span class="p">(</span><span class="n">j</span><span class="p">))</span>
+	<span class="k">return</span> <span class="n">r</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s">'misc.2020.chall.actf.co'</span><span class="p">,</span> <span class="mi">20301</span><span class="p">)</span>
+<span class="k">while</span> <span class="mi">1</span><span class="p">:</span>
+	<span class="n">r</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s">'&gt;'</span><span class="p">,</span><span class="s">'1'</span><span class="p">)</span>
+	<span class="n">msg_key</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">recvline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">' '</span><span class="p">)</span>
+	<span class="n">r</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s">'&gt;'</span><span class="p">,</span><span class="s">'2'</span><span class="p">)</span>
+	<span class="n">msg</span> <span class="o">=</span> <span class="n">b64decode</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">recvline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+
+	<span class="n">x</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="n">b64decode</span><span class="p">(</span><span class="n">msg_key</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">b64decode</span><span class="p">(</span><span class="n">msg_key</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+	<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">msg</span><span class="p">):</span>
+		<span class="k">print</span> <span class="s">'[*] Got one ...'</span>
+		<span class="n">res</span> <span class="o">=</span> <span class="n">otp</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
+		<span class="n">r</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s">'answer:'</span><span class="p">,</span><span class="n">res</span><span class="p">)</span>
+		<span class="k">print</span> <span class="s">'</span><span class="se">\t</span><span class="s">'</span><span class="p">,</span> <span class="n">res</span>
+		<span class="n">line</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">recvline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+		<span class="k">if</span> <span class="s">'actf{'</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+			<span class="k">print</span> <span class="s">'[+] Found it</span><span class="se">\n\t</span><span class="s">'</span><span class="p">,</span> <span class="n">line</span>
+			<span class="k">break</span>
+		<span class="k">continue</span>
+	<span class="k">else</span> <span class="p">:</span>
+		<span class="n">r</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s">'answer:'</span><span class="p">,</span><span class="s">'A'</span><span class="p">)</span>
+<span class="n">r</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></code></pre></figure>
+
+<p>I ran the script and after awhile I got the flag.</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>python otp.py 
+<span class="go">[*] Got one ...
+    }_r^OM`DDaKfDZXwZ{csxAgk
+[*] Got one ...
+    m]\\x7fqMzUrRwxWwYqu]
+</span><span class="c">.
+.
+.
+</span><span class="go">[+] Found it ...
+    actf{one_time_pad_more_like_i_dont_like_crypto-1982309}</span></code></pre></figure>
+
+<p>Later on I noticed that the encrypted string can be of length 1 or 2 and that blows my mind after the previous solution.</p>
+
+<p>So, If I can send any letter that can be encrypted using the any key of the same length it could be a solution.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c1">#!/usr/bin/env python
+</span><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">context</span><span class="o">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="s">'critical'</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s">'misc.2020.chall.actf.co'</span><span class="p">,</span> <span class="mi">20301</span><span class="p">)</span>
+<span class="k">while</span> <span class="mi">1</span><span class="p">:</span>
+	<span class="n">r</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s">'&gt;'</span><span class="p">,</span><span class="s">'1'</span><span class="p">)</span>
+	<span class="n">r</span><span class="o">.</span><span class="n">recvline</span><span class="p">()</span>
+	<span class="n">r</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s">'&gt;'</span><span class="p">,</span><span class="s">'2'</span><span class="p">)</span>
+	<span class="n">r</span><span class="o">.</span><span class="n">recvline</span><span class="p">()</span>
+	<span class="n">r</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="s">'G'</span><span class="p">)</span>
+	<span class="k">print</span> <span class="s">'[*] Trying...'</span>
+	<span class="n">line</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">recvline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+	<span class="k">if</span> <span class="s">"actf{"</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+		<span class="k">print</span> <span class="s">'[+] Flag:</span><span class="se">\n</span><span class="s">'</span><span class="p">,</span> <span class="n">line</span>
+		<span class="k">break</span>
+<span class="n">r</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>python otp.py 
+<span class="go">[*] Trying...
+[*] Trying...
+</span><span class="c">.
+.
+.
+</span><span class="go">[*] Trying...
+[+] Flag:
+Your answer: actf{one_time_pad_more_like_i_dont_like_crypto-1982309}</span></code></pre></figure>
+
+<p>One Time Pad is so bad.</p>
+<h1 id="reverse">Reverse</h1>
+
+<h3 id="1-windows-of-opportunity">1. Windows of Opportunity</h3>
+
+<blockquote>
+  <p>Clam’s a windows elitist and he just can’t stand seeing all of these linux challenges! So, he decided to step in and create his own rev challenge with the “superior” operating system.
+hint: You can probably solve it just by looking at the disassembly.</p>
+</blockquote>
+
+<p>The challenge give us the binary and let’s see the file:</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>file windows_of_opportunity.exe 
+<span class="go">windows_of_opportunity.exe: PE32+ executable (console) x86-64, for MS Windows</span></code></pre></figure>
+
+<p>It’s <code class="highlighter-rouge">PE32+</code> windows executable, but when I look at the hint it sounds interesting so let’s do what he says and disassemble it using strings.</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>strings windows_of_opportunity.exe | <span class="nb">grep</span> <span class="nt">-aoE</span> <span class="s2">"actf{.*}"</span>
+<span class="go">actf{ok4y_m4yb3_linux_is_s7ill_b3tt3r}</span></code></pre></figure>
+
+<p>Gotcha :D</p>
+
+<h3 id="2-taking-off">2. Taking Off</h3>
+<blockquote>
+  <p>So you started revving up, but is it enough to take off? Find the problem in <code class="highlighter-rouge">/problems/2020/taking_off/</code> in the shell server.</p>
+</blockquote>
+
+<p>This challenge seems nice it gives us the binary:</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>file taking_off 
+<span class="go">taking_off: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 3.2.0, BuildID[sha1]=fc4deaf2c2da6fdaf4cb7bc1e83d4f1372720832, not stripped</span></code></pre></figure>
+
+<p>Oh! That looks interesting it’s a <code class="highlighter-rouge">ELF</code> 64-bit linux file dynamically linked but not stripped its symbols. I ran strings on it, but nothing so let’s run it:</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>./taking_off 
+<span class="go">So you figured out how to provide input and command line arguments.
+But can you figure out what input to provide?
+Make sure you have the correct amount of command line arguments!</span></code></pre></figure>
+
+<p>It asks for some arguments I tried enter some, but nothing. 
+So, let’s jump into <code class="highlighter-rouge">IDA</code> and look what it does.</p>
+
+<p><a href="/assets/documentation/angstrom-ctf/reverse/takin_off1-c502232476c7cc46aaaeba6c0bca499c2fdc3a8137f10965a07e5222b580548f.png">
+  <img src="/assets/documentation/angstrom-ctf/reverse/takin_off1-c502232476c7cc46aaaeba6c0bca499c2fdc3a8137f10965a07e5222b580548f.png" alt="Functions" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/reverse/takin_off1-c502232476c7cc46aaaeba6c0bca499c2fdc3a8137f10965a07e5222b580548f.png" data-zooming-width="396" data-zooming-height="308" />
+</a></p>
+
+<p>I found some interesting functions <code class="highlighter-rouge">main</code>, <code class="highlighter-rouge">print_flag</code>, <code class="highlighter-rouge">is_valid</code>. Let’s start with <code class="highlighter-rouge">main</code> and see what it contains:</p>
+
+<p><a href="/assets/documentation/angstrom-ctf/reverse/main-2862b1c1738c3abff2938aba1f463b1ad969a9aa3eb4eea8b2663759f9496de4.png">
+  <img src="/assets/documentation/angstrom-ctf/reverse/main-2862b1c1738c3abff2938aba1f463b1ad969a9aa3eb4eea8b2663759f9496de4.png" alt="Main" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/reverse/main-2862b1c1738c3abff2938aba1f463b1ad969a9aa3eb4eea8b2663759f9496de4.png" data-zooming-width="738" data-zooming-height="453" />
+</a></p>
+
+<p>As we see at line <code class="highlighter-rouge">17</code> it accepts 4 arguments and convert the first 3  <code class="highlighter-rouge">v4</code> <code class="highlighter-rouge">v5</code> <code class="highlighter-rouge">v6</code> into integers, then it checks for each value is it invalid or not with <code class="highlighter-rouge">is_invalid</code> function:</p>
+
+<p><a href="/assets/documentation/angstrom-ctf/reverse/isvalid-19eacb3fe659539d3cc43f35f9ad84113ebab4dbc9ae28102ea14b6dce8896d5.png">
+  <img src="/assets/documentation/angstrom-ctf/reverse/isvalid-19eacb3fe659539d3cc43f35f9ad84113ebab4dbc9ae28102ea14b6dce8896d5.png" alt="IsValid" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/reverse/isvalid-19eacb3fe659539d3cc43f35f9ad84113ebab4dbc9ae28102ea14b6dce8896d5.png" data-zooming-width="432" data-zooming-height="66" />
+</a></p>
+
+<p>It just checks for given integer <code class="highlighter-rouge">a1</code> if less than 0 or greater than 9. And after that at line <code class="highlighter-rouge">26</code> compute the following equation <code class="highlighter-rouge">100*v5 + 10*v4 + v6</code> if it’s equal to <code class="highlighter-rouge">932</code>. It also checks for the 4th argument to be <code class="highlighter-rouge">chicken</code>. If all the above checks fail it prints <code class="highlighter-rouge">Don't try to guess...</code></p>
+
+<p>So, now we’re really smart to find that <code class="highlighter-rouge">v5 = 9</code>, <code class="highlighter-rouge">v4 = 3</code> and <code class="highlighter-rouge">v6 = 2</code> to validate the equation he wanted let’s try it now with our correct arguments.</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>./taking_off 3 9 2 chicken
+<span class="go">So you figured out how to provide input and command line arguments.
+But can you figure out what input to provide?
+Well, you found the arguments, but what's the password?</span></code></pre></figure>
+
+<p>Now, It asks for a password. So, let’s jump into the remaining part of the <code class="highlighter-rouge">main</code>:</p>
+
+<p><a href="/assets/documentation/angstrom-ctf/reverse/rem-2bb8af4112585ea364e40810bffcbda482ac245619170727cc63e371e71ec78c.png">
+  <img src="/assets/documentation/angstrom-ctf/reverse/rem-2bb8af4112585ea364e40810bffcbda482ac245619170727cc63e371e71ec78c.png" alt="Remaining" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/reverse/rem-2bb8af4112585ea364e40810bffcbda482ac245619170727cc63e371e71ec78c.png" data-zooming-width="707" data-zooming-height="468" />
+</a></p>
+
+<p>As we see above at line <code class="highlighter-rouge">34</code> it asks to enter the password and store it in <code class="highlighter-rouge">s</code>.
+From line <code class="highlighter-rouge">39</code> to <code class="highlighter-rouge">51</code> do the following:</p>
+
+<ol>
+  <li>Iterate through the entered password.</li>
+  <li>Check for each character if its value <code class="highlighter-rouge">xor 0x2a</code> to be equal some value stored in <code class="highlighter-rouge">desired</code> variable.</li>
+  <li>If all values correctly checked it gives us the flag with <code class="highlighter-rouge">print_flag</code> functions.</li>
+</ol>
+
+<p><a href="/assets/documentation/angstrom-ctf/reverse/print_flag-8067053e5bef4e8a4f4f4ae01a3b08a6be6ac6534091f22abf0b06430b4b6e62.png">
+  <img src="/assets/documentation/angstrom-ctf/reverse/print_flag-8067053e5bef4e8a4f4f4ae01a3b08a6be6ac6534091f22abf0b06430b4b6e62.png" alt="PrintFlag" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/reverse/print_flag-8067053e5bef4e8a4f4f4ae01a3b08a6be6ac6534091f22abf0b06430b4b6e62.png" data-zooming-width="412" data-zooming-height="307" />
+</a></p>
+
+<p>Let’s look what the <code class="highlighter-rouge">desired</code> variable stored in data section:</p>
+
+<p><a href="/assets/documentation/angstrom-ctf/reverse/desired-f3cbe3f72801d78073f8d3ccd553b93a8c8025b13c0df5094f552c5b88691ece.png">
+  <img src="/assets/documentation/angstrom-ctf/reverse/desired-f3cbe3f72801d78073f8d3ccd553b93a8c8025b13c0df5094f552c5b88691ece.png" alt="Desired" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/reverse/desired-f3cbe3f72801d78073f8d3ccd553b93a8c8025b13c0df5094f552c5b88691ece.png" data-zooming-width="824" data-zooming-height="107" />
+</a></p>
+
+<p>The value <code class="highlighter-rouge">0Ah</code> is just a linefeed <code class="highlighter-rouge">\n</code>, but we know that the decompilation process is optimized so it can be a <code class="highlighter-rouge">space</code> in the password.</p>
+
+<p>As far as we got here now, we have all we need to reverse the binary and get our flag.</p>
+
+<p>Now, let’s brute force the password and give it to the server to retrieve the flag:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c1">#!/usr/bin/env python
+</span><span class="kn">from</span> <span class="nn">string</span> <span class="kn">import</span> <span class="n">ascii_letters</span>
+
+<span class="n">key</span> <span class="o">=</span> <span class="s">'ZFOKYO</span><span class="se">\n</span><span class="s">MC</span><span class="se">\\</span><span class="s">O</span><span class="se">\n</span><span class="s">LFKM*'</span>
+<span class="n">passw</span> <span class="o">=</span> <span class="s">""</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">key</span><span class="p">)):</span>
+    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="s">' '</span> <span class="o">+</span> <span class="n">ascii_letters</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">chr</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">^</span> <span class="mi">42</span><span class="p">)</span> <span class="o">==</span> <span class="n">key</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+            <span class="n">passw</span> <span class="o">+=</span> <span class="n">c</span>
+            <span class="k">break</span>
+<span class="k">print</span> <span class="n">passw</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>python ape.py 
+<span class="go">please give flag</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">team6525@actf:/problems/2020/taking_off$</span><span class="w"> </span>./taking_off 3 9 2 chicken
+<span class="go">So you figured out how to provide input and command line arguments.
+But can you figure out what input to provide?
+Well, you found the arguments, but what's the password?
+please give flag
+Good job! You're ready to move on to bigger and badder rev!
+actf{th3y_gr0w_up_s0_f4st}</span></code></pre></figure>
+
+          </div>
+          <div class="article-share">
+            
+            
+            <a href="https://twitter.com/home?status=angstromCTF+2020%20-%20http://localhost:4000/posts/angstromctf-2020" title="Share on Twitter" rel="noreferrer noopener" target="_blank">
+              <svg viewBox="0 0 512 512"><path d="M492 109.5c-17.4 7.7-36 12.9-55.6 15.3 20-12 35.4-31 42.6-53.6 -18.7 11.1-39.4 19.2-61.5 23.5C399.8 75.8 374.6 64 346.8 64c-53.5 0-96.8 43.4-96.8 96.9 0 7.6 0.8 15 2.5 22.1 -80.5-4-151.9-42.6-199.6-101.3 -8.3 14.3-13.1 31-13.1 48.7 0 33.6 17.2 63.3 43.2 80.7C67 210.7 52 206.3 39 199c0 0.4 0 0.8 0 1.2 0 47 33.4 86.1 77.7 95 -8.1 2.2-16.7 3.4-25.5 3.4 -6.2 0-12.3-0.6-18.2-1.8 12.3 38.5 48.1 66.5 90.5 67.3 -33.1 26-74.9 41.5-120.3 41.5 -7.8 0-15.5-0.5-23.1-1.4C62.8 432 113.7 448 168.3 448 346.6 448 444 300.3 444 172.2c0-4.2-0.1-8.4-0.3-12.5C462.6 146 479 129 492 109.5z"/></svg>
+            </a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/posts/angstromctf-2020" title="Share on Facebook" rel="noreferrer noopener" target="_blank">
+              <svg viewBox="0 0 512 512"><path d="M288 192v-38.1c0-17.2 3.8-25.9 30.5-25.9H352V64h-55.9c-68.5 0-91.1 31.4-91.1 85.3V192h-45v64h45v192h83V256h56.4l7.6-64H288z"/></svg>
+            </a>
+          </div>
+
+          
+            <div id="disqus_thread" class="article-comments"></div>
+            <script src="https://my-blog-0vgcdsd8x2.disqus.com/embed.js" async defer></script>
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+          
+        </article>
+        <footer class="footer scrollappear">
+    <p style="text-align: center">
+      This is my little tech blog, feel free to ask me any question &#169;
+      <a href="/about" title="About me">Ahmed Sayed</a>
+    </p>
+</footer>
+
+      </div>
+    </div>
+  </main>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-157807027-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-157807027-1');
+  </script>
+
+
+<script src="/assets/vendor-2c224c53eb697c739f9490c38819a72184f09472739fd9e492272ef174090428.js" type="text/javascript"></script>
+
+
+  <script src="/assets/webfonts-96493456d319d1bf419afdf8701552d4d486fee6afd304897d4fd81eb4e0cc0b.js" type="text/javascript"></script>
+
+
+
+  <script src="/assets/scrollappear-e2da8ea567e418637e31266cc5302126eaa79f62a2273739086358b589a89ee6.js" type="text/javascript"></script>
+
+
+<script src="/assets/application-cfde13ac81ddaf4351b2e739603e2baf688d0fcc9aba613fe62bbb1c7b037fb9.js" type="text/javascript"></script>
+
+
+</body>
+</html>

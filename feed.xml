@@ -7,6 +7,14 @@
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>angstromCTF 2020</title>
+        <description>This is my writeups for ångstromCTF 2020.</description>
+        <pubDate>Fri, 20 Mar 2020 00:00:00 +0200</pubDate>
+        <link>http://localhost:4000/posts/angstromctf-2020</link>
+        <guid isPermaLink="true">http://localhost:4000/posts/angstromctf-2020</guid>
+      </item>
+    
+      <item>
         <title>Hack The Box - Postman</title>
         <description>This is my writeup and walkthrough for Postman from Hack The Box.</description>
         <pubDate>Sat, 14 Mar 2020 00:00:00 +0200</pubDate>
