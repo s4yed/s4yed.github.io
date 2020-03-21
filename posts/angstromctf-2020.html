@@ -34,7 +34,7 @@
     
       <link rel="icon" type="image/x-icon" href="/assets/favicon-color-0e896bd8673d9f83cea8d7b0a12fcc894681d58fc475ad499adfed94067b1e1f.png">
       <link rel="apple-touch-icon" href="/assets/apple-touch-icon-light-87d1f2a3a19b1500e5c1626a0492025ca5f7f97d24540dc5900288e92112925a.png">
-      <link rel="stylesheet" type="text/css" href="/assets/light-83304512506681e2b59cb21cd769d96bad9e8ed6de554134b3be35543e0e69aa.css">
+      <link rel="stylesheet" type="text/css" href="/assets/light-99b54e055e5435bb1556d0f9f999721c5796a68f1bb681dadd487c231236d939.css">
     
 
   
@@ -138,9 +138,6 @@
         <li><a href="/tag/CTF">Ctf</a></li>
     
       
-        <li><a href="/tag/One-Time-Pad">One-time-pad</a></li>
-    
-      
         <li><a href="/tag/algorithms">Algorithms</a></li>
     
       
@@ -157,6 +154,9 @@
     
       
         <li><a href="/tag/hack-the-box">Hack-the-box</a></li>
+    
+      
+        <li><a href="/tag/hacking">Hacking</a></li>
     
       
         <li><a href="/tag/ida">Ida</a></li>
@@ -183,7 +183,7 @@
   <span class="article-list-minutes">
     
     
-      14 minute read
+      21 minute read
     
   </span>
   <span class="article-list-divider">-</span>
@@ -208,7 +208,7 @@
       <a href="/tag/infosec" title="See all posts with tag 'Infosec'">Infosec</a>
     
       
-      <a href="/tag/One-Time-Pad" title="See all posts with tag ''"></a>
+      <a href="/tag/one-time-pad" title="See all posts with tag 'One-Time-Pad'">One-Time-Pad</a>
     
       
       <a href="/tag/linux" title="See all posts with tag 'Linux'">Linux</a>
@@ -216,18 +216,60 @@
       
       <a href="/tag/ida" title="See all posts with tag 'IDA'">IDA</a>
     
+      
+      <a href="/tag/rsa" title="See all posts with tag 'Rsa'">Rsa</a>
+    
+      
+      <a href="/tag/wireshark" title="See all posts with tag 'Wireshark'">Wireshark</a>
+    
+      
+      <a href="/tag/python" title="See all posts with tag 'Python'">Python</a>
+    
+      
+      <a href="/tag/shell" title="See all posts with tag 'Shell'">Shell</a>
+    
+      
+      <a href="/tag/hacking" title="See all posts with tag 'Hacking'">Hacking</a>
+    
   </div>
 </div>
           </header>
 
           <div class="article-content">
             <p><a href="/assets/documentation/angstrom-ctf/angstrom-3e0d6c871da7786e59fcc988735f4f5ded75aab5fac89f538291b3ef033801eb.png">
-  <img src="/assets/documentation/angstrom-ctf/angstrom-3e0d6c871da7786e59fcc988735f4f5ded75aab5fac89f538291b3ef033801eb.png" alt="Angstrom" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/angstrom-3e0d6c871da7786e59fcc988735f4f5ded75aab5fac89f538291b3ef033801eb.png" data-zooming-width="894" data-zooming-height="448" />
+  <img src="/assets/documentation/angstrom-ctf/angstrom-3e0d6c871da7786e59fcc988735f4f5ded75aab5fac89f538291b3ef033801eb.png" alt="Angstrom" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/angstrom-3e0d6c871da7786e59fcc988735f4f5ded75aab5fac89f538291b3ef033801eb.png" data-zooming-width="894" data-zooming-height="448">
 </a></p>
 
-<p>I participated in ångstromCTF 2020 with my awesome team <a href="https://2020.angstromctf.com/teams/6525">P1rates</a> as <code class="highlighter-rouge">y4mm1</code> and I was able to solve 11 challenges with them. This is my writeup about some challenges I solved during the competition.</p>
+<p>I participated in ångstromCTF 2020 with my awesome team <a href="https://2020.angstromctf.com/teams/6525">P1rates</a> as <code class="highlighter-rouge">y4mm1</code> and I was able to solve 11 challenges with them. This is my writeup about some challenges I managed to solve during the competition.</p>
+
+<p>Contents:</p>
+<ul>
+  <li>Cryptography
+    <ol>
+      <li><a href="http://localhost:4000/posts/angstromctf-2020#1-reasonably-strong-algorithm">Reasonably Strong Algorithm</a></li>
+      <li><a href="http://localhost:4000/posts/angstromctf-2020#2-wacko-images">Wacko Images</a></li>
+      <li><a href="http://localhost:4000/posts/angstromctf-2020#3-confused-streaming">Confused Streaming</a></li>
+      <li><a href="http://localhost:4000/posts/angstromctf-2020#4-one-time-pad">One Time Pad</a></li>
+    </ol>
+  </li>
+  <li>Reverse
+    <ol>
+      <li><a href="http://localhost:4000/posts/angstromctf-2020#1-windows-of-opportunity">Windows of Opportunity</a></li>
+      <li><a href="http://localhost:4000/posts/angstromctf-2020#2-taking-off">Taking Off</a></li>
+    </ol>
+  </li>
+  <li>Miscellaneous
+    <ol>
+      <li><a href="http://localhost:4000/posts/angstromctf-2020#1-ws2">ws2</a></li>
+      <li><a href="http://localhost:4000/posts/angstromctf-2020#2-ws3">ws3</a></li>
+      <li><a href="http://localhost:4000/posts/angstromctf-2020#3-psk">PSK</a></li>
+      <li><a href="http://localhost:4000/posts/angstromctf-2020#4-shifter">Shifter</a></li>
+    </ol>
+  </li>
+</ul>
 
 <h2 id="cryptography">Cryptography</h2>
+<hr>
 
 <h3 id="1-reasonably-strong-algorithm">1. Reasonably Strong Algorithm</h3>
 
@@ -246,7 +288,7 @@ c = 13612260682947644362892911986815626931</span></code></pre></figure>
 <p>Now, we have <code class="highlighter-rouge">n</code> public modulus, <code class="highlighter-rouge">e</code> exponent and <code class="highlighter-rouge">c</code> ciphertext. 
 I thought If I just factor <code class="highlighter-rouge">n</code> to its primes I can compute the <code class="highlighter-rouge">φ(n)</code> and find private key <code class="highlighter-rouge">d</code> such that <code class="highlighter-rouge">d * e = 1 mod(φ(n))</code>.
 I can compute <code class="highlighter-rouge">d</code> as <code class="highlighter-rouge">modinverse(e, φ(n))</code> using <a href="https://en.wikipedia.org/wiki/Euclidean_algorithm">Euclidean Algorithm</a>. 
-Then calculate <img src="https://latex.codecogs.com/gif.latex?%7B%5Cdisplaystyle%20m%3Dc%5E%7Bd%7D%20%7B%5Cbmod%20%7Bn%7D%7D%7D" alt="{\displaystyle m=c^{d} {\bmod {n}}}" /> 
+Then calculate <img src="https://latex.codecogs.com/gif.latex?%7B%5Cdisplaystyle%20m%3Dc%5E%7Bd%7D%20%7B%5Cbmod%20%7Bn%7D%7D%7D" alt="{\displaystyle m=c^{d} {\bmod {n}}}"> 
 where <code class="highlighter-rouge">m</code> is our flag.</p>
 
 <p>Here is my code to do it:</p>
@@ -278,13 +320,13 @@ where <code class="highlighter-rouge">m</code> is our flag.</p>
 
 <blockquote>
   <p>How to make hiding stuff a e s t h e t i c? And can you make it normal again? enc.png image-encryption.py
-The flag is actf{x#xx#xx_xx#xxx} where x represents any lowercase letter and # represents any one digit number.</p>
+The flag is <code class="highlighter-rouge">actf{x#xx#xx_xx#xxx}</code> where x represents any lowercase letter and # represents any one digit number.</p>
 </blockquote>
 
 <p>So, we’re given the encoded image:</p>
 
 <p><a href="/assets/documentation/angstrom-ctf/wako-images/enc-1ef5c3f44f52d62ea8b19e61d9eb6ef11a75c4eec88e1c086efe01e290439223.png">
-  <img src="/assets/documentation/angstrom-ctf/wako-images/enc-1ef5c3f44f52d62ea8b19e61d9eb6ef11a75c4eec88e1c086efe01e290439223.png" alt="Encrypted" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/wako-images/enc-1ef5c3f44f52d62ea8b19e61d9eb6ef11a75c4eec88e1c086efe01e290439223.png" data-zooming-width="500" data-zooming-height="200" />
+  <img src="/assets/documentation/angstrom-ctf/wako-images/enc-1ef5c3f44f52d62ea8b19e61d9eb6ef11a75c4eec88e1c086efe01e290439223.png" alt="Encrypted" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/wako-images/enc-1ef5c3f44f52d62ea8b19e61d9eb6ef11a75c4eec88e1c086efe01e290439223.png" data-zooming-width="500" data-zooming-height="200">
 </a></p>
 
 <p>And the encryption code:</p>
@@ -349,15 +391,18 @@ The flag is actf{x#xx#xx_xx#xxx} where x represents any lowercase letter and # r
 <p>Give us the flag.png: <code class="highlighter-rouge">actf{m0dd1ng_sk1llz}</code></p>
 
 <p><a href="/assets/documentation/angstrom-ctf/wako-images/flag-f5f94f8ec1b0d78e8c8030e86dde3bc075190d2ba4e693366f90e6ccd241fffa.png">
-  <img src="/assets/documentation/angstrom-ctf/wako-images/flag-f5f94f8ec1b0d78e8c8030e86dde3bc075190d2ba4e693366f90e6ccd241fffa.png" alt="Encrypted" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/wako-images/flag-f5f94f8ec1b0d78e8c8030e86dde3bc075190d2ba4e693366f90e6ccd241fffa.png" data-zooming-width="500" data-zooming-height="200" />
+  <img src="/assets/documentation/angstrom-ctf/wako-images/flag-f5f94f8ec1b0d78e8c8030e86dde3bc075190d2ba4e693366f90e6ccd241fffa.png" alt="Encrypted" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/wako-images/flag-f5f94f8ec1b0d78e8c8030e86dde3bc075190d2ba4e693366f90e6ccd241fffa.png" data-zooming-width="500" data-zooming-height="200">
 </a></p>
 
 <h3 id="3-confused-streaming">3. Confused Streaming</h3>
 
 <blockquote>
   <p>I made a stream cipher!
- nc crypto.2020.chall.actf.co 20601
- hint: look at dream stream</p>
+<code class="highlighter-rouge">nc crypto.2020.chall.actf.co 20601</code></p>
+</blockquote>
+
+<blockquote>
+  <p>hint: look at dream stream</p>
 </blockquote>
 
 <p>The given code it seems confusing:</p>
@@ -408,8 +453,8 @@ The condition is</p>
 
 <p>And guess what this is the real solutions of the quadratic equation.</p>
 
-<p><img src="https://latex.codecogs.com/gif.latex?ax%5E%7B2%7D&plus;bx&plus;c%3D0" alt="ax^{2}+bx+c=0" />
- <img src="https://latex.codecogs.com/gif.latex?%5Cdisplaystyle%20x%3D%7B%5Cfrac%20%7B-b%5Cpm%20%7B%5Csqrt%20%7Bb%5E%7B2%7D-4ac%7D%7D%7D%7B2a%7D%7D" alt="\displaystyle x={\frac {-b\pm {\sqrt {b^{2}-4ac}}}{2a}}" /></p>
+<p><img src="https://latex.codecogs.com/gif.latex?ax%5E%7B2%7D&amp;plus;bx&amp;plus;c%3D0" alt="ax^{2}+bx+c=0">
+ <img src="https://latex.codecogs.com/gif.latex?%5Cdisplaystyle%20x%3D%7B%5Cfrac%20%7B-b%5Cpm%20%7B%5Csqrt%20%7Bb%5E%7B2%7D-4ac%7D%7D%7D%7B2a%7D%7D" alt="\displaystyle x={\frac {-b\pm {\sqrt {b^{2}-4ac}}}{2a}}"></p>
 
 <p>So, now I can brute force the values that <strong>cannot</strong> achieve the condition he wanted. Note that he want any correct values for <code class="highlighter-rouge">a b c</code>.
 Here is my code to do that:</p>
@@ -437,12 +482,12 @@ Here is my code to do that:</p>
 <figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>python stream.py 
 <span class="go">actf{down_to_the_decimal}</span></code></pre></figure>
 
-<h3 id="4-one-time-bad">4. One Time Bad</h3>
+<h3 id="4-one-time-pad">4. One Time Pad</h3>
 
 <blockquote>
   <p>My super secure service is available now!
 Heck, even with the source, I bet you won’t figure it out.
-nc misc.2020.chall.actf.co 20301</p>
+<code class="highlighter-rouge">nc misc.2020.chall.actf.co 20301</code></p>
 </blockquote>
 
 <p><strong>One Time Pad</strong> is just known as unbreakable cryptographic technique that requires a random key as long as message being sent, but we’re the only ones who can make this it breakable by using wrong keys.</p>
@@ -545,13 +590,17 @@ Enter:
 Your answer: actf{one_time_pad_more_like_i_dont_like_crypto-1982309}</span></code></pre></figure>
 
 <p>One Time Pad is so bad.</p>
-<h1 id="reverse">Reverse</h1>
+<h2 id="reverse">Reverse</h2>
+<hr>
 
 <h3 id="1-windows-of-opportunity">1. Windows of Opportunity</h3>
 
 <blockquote>
-  <p>Clam’s a windows elitist and he just can’t stand seeing all of these linux challenges! So, he decided to step in and create his own rev challenge with the “superior” operating system.
-hint: You can probably solve it just by looking at the disassembly.</p>
+  <p>Clam’s a windows elitist and he just can’t stand seeing all of these linux challenges! So, he decided to step in and create his own rev challenge with the “superior” operating system.</p>
+</blockquote>
+
+<blockquote>
+  <p>hint: You can probably solve it just by looking at the disassembly.</p>
 </blockquote>
 
 <p>The challenge give us the binary and let’s see the file:</p>
@@ -564,7 +613,7 @@ hint: You can probably solve it just by looking at the disassembly.</p>
 <figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>strings windows_of_opportunity.exe | <span class="nb">grep</span> <span class="nt">-aoE</span> <span class="s2">"actf{.*}"</span>
 <span class="go">actf{ok4y_m4yb3_linux_is_s7ill_b3tt3r}</span></code></pre></figure>
 
-<p>Gotcha :D</p>
+<p>Gotcha <img class="emoji" title=":grinning:" alt=":grinning:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f600.png" height="20" width="20"></p>
 
 <h3 id="2-taking-off">2. Taking Off</h3>
 <blockquote>
@@ -587,19 +636,19 @@ Make sure you have the correct amount of command line arguments!</span></code></
 So, let’s jump into <code class="highlighter-rouge">IDA</code> and look what it does.</p>
 
 <p><a href="/assets/documentation/angstrom-ctf/reverse/takin_off1-c502232476c7cc46aaaeba6c0bca499c2fdc3a8137f10965a07e5222b580548f.png">
-  <img src="/assets/documentation/angstrom-ctf/reverse/takin_off1-c502232476c7cc46aaaeba6c0bca499c2fdc3a8137f10965a07e5222b580548f.png" alt="Functions" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/reverse/takin_off1-c502232476c7cc46aaaeba6c0bca499c2fdc3a8137f10965a07e5222b580548f.png" data-zooming-width="396" data-zooming-height="308" />
+  <img src="/assets/documentation/angstrom-ctf/reverse/takin_off1-c502232476c7cc46aaaeba6c0bca499c2fdc3a8137f10965a07e5222b580548f.png" alt="Functions" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/reverse/takin_off1-c502232476c7cc46aaaeba6c0bca499c2fdc3a8137f10965a07e5222b580548f.png" data-zooming-width="396" data-zooming-height="308">
 </a></p>
 
 <p>I found some interesting functions <code class="highlighter-rouge">main</code>, <code class="highlighter-rouge">print_flag</code>, <code class="highlighter-rouge">is_valid</code>. Let’s start with <code class="highlighter-rouge">main</code> and see what it contains:</p>
 
 <p><a href="/assets/documentation/angstrom-ctf/reverse/main-2862b1c1738c3abff2938aba1f463b1ad969a9aa3eb4eea8b2663759f9496de4.png">
-  <img src="/assets/documentation/angstrom-ctf/reverse/main-2862b1c1738c3abff2938aba1f463b1ad969a9aa3eb4eea8b2663759f9496de4.png" alt="Main" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/reverse/main-2862b1c1738c3abff2938aba1f463b1ad969a9aa3eb4eea8b2663759f9496de4.png" data-zooming-width="738" data-zooming-height="453" />
+  <img src="/assets/documentation/angstrom-ctf/reverse/main-2862b1c1738c3abff2938aba1f463b1ad969a9aa3eb4eea8b2663759f9496de4.png" alt="Main" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/reverse/main-2862b1c1738c3abff2938aba1f463b1ad969a9aa3eb4eea8b2663759f9496de4.png" data-zooming-width="738" data-zooming-height="453">
 </a></p>
 
 <p>As we see at line <code class="highlighter-rouge">17</code> it accepts 4 arguments and convert the first 3  <code class="highlighter-rouge">v4</code> <code class="highlighter-rouge">v5</code> <code class="highlighter-rouge">v6</code> into integers, then it checks for each value is it invalid or not with <code class="highlighter-rouge">is_invalid</code> function:</p>
 
 <p><a href="/assets/documentation/angstrom-ctf/reverse/isvalid-19eacb3fe659539d3cc43f35f9ad84113ebab4dbc9ae28102ea14b6dce8896d5.png">
-  <img src="/assets/documentation/angstrom-ctf/reverse/isvalid-19eacb3fe659539d3cc43f35f9ad84113ebab4dbc9ae28102ea14b6dce8896d5.png" alt="IsValid" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/reverse/isvalid-19eacb3fe659539d3cc43f35f9ad84113ebab4dbc9ae28102ea14b6dce8896d5.png" data-zooming-width="432" data-zooming-height="66" />
+  <img src="/assets/documentation/angstrom-ctf/reverse/isvalid-19eacb3fe659539d3cc43f35f9ad84113ebab4dbc9ae28102ea14b6dce8896d5.png" alt="IsValid" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/reverse/isvalid-19eacb3fe659539d3cc43f35f9ad84113ebab4dbc9ae28102ea14b6dce8896d5.png" data-zooming-width="432" data-zooming-height="66">
 </a></p>
 
 <p>It just checks for given integer <code class="highlighter-rouge">a1</code> if less than 0 or greater than 9. And after that at line <code class="highlighter-rouge">26</code> compute the following equation <code class="highlighter-rouge">100*v5 + 10*v4 + v6</code> if it’s equal to <code class="highlighter-rouge">932</code>. It also checks for the 4th argument to be <code class="highlighter-rouge">chicken</code>. If all the above checks fail it prints <code class="highlighter-rouge">Don't try to guess...</code></p>
@@ -614,7 +663,7 @@ Well, you found the arguments, but what's the password?</span></code></pre></fig
 <p>Now, It asks for a password. So, let’s jump into the remaining part of the <code class="highlighter-rouge">main</code>:</p>
 
 <p><a href="/assets/documentation/angstrom-ctf/reverse/rem-2bb8af4112585ea364e40810bffcbda482ac245619170727cc63e371e71ec78c.png">
-  <img src="/assets/documentation/angstrom-ctf/reverse/rem-2bb8af4112585ea364e40810bffcbda482ac245619170727cc63e371e71ec78c.png" alt="Remaining" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/reverse/rem-2bb8af4112585ea364e40810bffcbda482ac245619170727cc63e371e71ec78c.png" data-zooming-width="707" data-zooming-height="468" />
+  <img src="/assets/documentation/angstrom-ctf/reverse/rem-2bb8af4112585ea364e40810bffcbda482ac245619170727cc63e371e71ec78c.png" alt="Remaining" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/reverse/rem-2bb8af4112585ea364e40810bffcbda482ac245619170727cc63e371e71ec78c.png" data-zooming-width="707" data-zooming-height="468">
 </a></p>
 
 <p>As we see above at line <code class="highlighter-rouge">34</code> it asks to enter the password and store it in <code class="highlighter-rouge">s</code>.
@@ -627,13 +676,13 @@ From line <code class="highlighter-rouge">39</code> to <code class="highlighter-
 </ol>
 
 <p><a href="/assets/documentation/angstrom-ctf/reverse/print_flag-8067053e5bef4e8a4f4f4ae01a3b08a6be6ac6534091f22abf0b06430b4b6e62.png">
-  <img src="/assets/documentation/angstrom-ctf/reverse/print_flag-8067053e5bef4e8a4f4f4ae01a3b08a6be6ac6534091f22abf0b06430b4b6e62.png" alt="PrintFlag" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/reverse/print_flag-8067053e5bef4e8a4f4f4ae01a3b08a6be6ac6534091f22abf0b06430b4b6e62.png" data-zooming-width="412" data-zooming-height="307" />
+  <img src="/assets/documentation/angstrom-ctf/reverse/print_flag-8067053e5bef4e8a4f4f4ae01a3b08a6be6ac6534091f22abf0b06430b4b6e62.png" alt="PrintFlag" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/reverse/print_flag-8067053e5bef4e8a4f4f4ae01a3b08a6be6ac6534091f22abf0b06430b4b6e62.png" data-zooming-width="412" data-zooming-height="307">
 </a></p>
 
 <p>Let’s look what the <code class="highlighter-rouge">desired</code> variable stored in data section:</p>
 
 <p><a href="/assets/documentation/angstrom-ctf/reverse/desired-f3cbe3f72801d78073f8d3ccd553b93a8c8025b13c0df5094f552c5b88691ece.png">
-  <img src="/assets/documentation/angstrom-ctf/reverse/desired-f3cbe3f72801d78073f8d3ccd553b93a8c8025b13c0df5094f552c5b88691ece.png" alt="Desired" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/reverse/desired-f3cbe3f72801d78073f8d3ccd553b93a8c8025b13c0df5094f552c5b88691ece.png" data-zooming-width="824" data-zooming-height="107" />
+  <img src="/assets/documentation/angstrom-ctf/reverse/desired-f3cbe3f72801d78073f8d3ccd553b93a8c8025b13c0df5094f552c5b88691ece.png" alt="Desired" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/reverse/desired-f3cbe3f72801d78073f8d3ccd553b93a8c8025b13c0df5094f552c5b88691ece.png" data-zooming-width="824" data-zooming-height="107">
 </a></p>
 
 <p>The value <code class="highlighter-rouge">0Ah</code> is just a linefeed <code class="highlighter-rouge">\n</code>, but we know that the decompilation process is optimized so it can be a <code class="highlighter-rouge">space</code> in the password.</p>
@@ -665,6 +714,260 @@ please give flag
 Good job! You're ready to move on to bigger and badder rev!
 actf{th3y_gr0w_up_s0_f4st}</span></code></pre></figure>
 
+<h2 id="--misc">- Misc</h2>
+<hr>
+
+<h3 id="1-ws2">1. ws2</h3>
+<blockquote>
+  <p>No ascii, not problem :)
+<a href="https://files.actf.co/3d02af8f9607577cbf7565844a1343efe1885c5428905499e86ebfb5197be21f/recording.pcapng">recording.pcapng</a></p>
+</blockquote>
+
+<p>This challenge like the first one <strong>ws1</strong> it gives us a network packet capture file, so first let’s see what it contains using <code class="highlighter-rouge">binwalk</code>.</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>binwalk recording.pcapng 
+<span class="go">
+DECIMAL       HEXADECIMAL     DESCRIPTION
+--------------------------------------------------------------------------------
+3003          0xBBB           HTML document header
+3328          0xD00           HTML document footer
+5688          0x1638          JPEG image data, JFIF standard 1.01
+111167        0x1B23F         HTML document header
+111545        0x1B3B9         HTML document footer</span></code></pre></figure>
+
+<p>It contains some HTML files and that means there are some <code class="highlighter-rouge">HTTP</code> requests in the capture file and the interesting one is a <code class="highlighter-rouge">JPEG</code> image at offset <code class="highlighter-rouge">0x1638</code>.</p>
+
+<p>Let’s extract this image using <code class="highlighter-rouge">dd</code> command:</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span><span class="nb">dd </span><span class="k">if</span><span class="o">=</span>recording.pcapng <span class="nv">bs</span><span class="o">=</span>1 <span class="nv">skip</span><span class="o">=</span><span class="k">$((</span><span class="m">0</span>x1638<span class="k">))</span> <span class="nv">count</span><span class="o">=</span><span class="k">$((</span><span class="m">0</span>x1b23f-0x1638<span class="k">))</span> <span class="nv">of</span><span class="o">=</span>file2.jpg
+<span class="go">105479+0 records in
+105479+0 records out
+105479 bytes (105 kB, 103 KiB) copied, 0.509051 s, 207 kB/s
+</span><span class="gp">root@kali:~#</span><span class="w"> </span>file file.jpg 
+<span class="go">file2.jpg: JPEG image data, JFIF standard 1.01, aspect ratio, density 72x72, segment length 16, baseline, precision 8, 1500x1461, components 3</span></code></pre></figure>
+
+<p>The command just skip <code class="highlighter-rouge">0x1638</code> blocks and count <code class="highlighter-rouge">0x1b23f-0x1638</code> blocks to extract the image and by looking at it.</p>
+
+<p><a href="/assets/documentation/angstrom-ctf/ws2/corrupted-c61f1fbad190f11c9291f79b32ab786bc1ffc694ff96287f52b2033b1d04be0c.jpg">
+  <img src="/assets/documentation/angstrom-ctf/ws2/corrupted-c61f1fbad190f11c9291f79b32ab786bc1ffc694ff96287f52b2033b1d04be0c.jpg" alt="corr" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/ws2/corrupted-c61f1fbad190f11c9291f79b32ab786bc1ffc694ff96287f52b2033b1d04be0c.jpg" data-zooming-width="1500" data-zooming-height="1461">
+</a></p>
+
+<p>It looks corrupted so let’s look at the magic bytes in hex editor. As we know the <code class="highlighter-rouge">JPEG</code> images starts with <code class="highlighter-rouge">FF D8</code> and ends with <code class="highlighter-rouge">FF D9</code>.</p>
+
+<p>I found the first bytes it seems good nothing with them.</p>
+
+<p><a href="/assets/documentation/angstrom-ctf/ws2/hex1-979e1b1c8e0b81d99373e2504701173f9bf0ff5c20483f2e4e678c319e778bd6.png">
+  <img src="/assets/documentation/angstrom-ctf/ws2/hex1-979e1b1c8e0b81d99373e2504701173f9bf0ff5c20483f2e4e678c319e778bd6.png" alt="hex" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/ws2/hex1-979e1b1c8e0b81d99373e2504701173f9bf0ff5c20483f2e4e678c319e778bd6.png" data-zooming-width="639" data-zooming-height="60">
+</a></p>
+
+<p>But when I looked at the last bytes there’re some addtional bytes in the hex dump, so let’s remove them and save the file.</p>
+
+<p><a href="/assets/documentation/angstrom-ctf/ws2/hex2-bb41fba9489748a43066caf31ace8e44899e75c31bdf114831834dc6cfba5067.png">
+  <img src="/assets/documentation/angstrom-ctf/ws2/hex2-bb41fba9489748a43066caf31ace8e44899e75c31bdf114831834dc6cfba5067.png" alt="hex" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/ws2/hex2-bb41fba9489748a43066caf31ace8e44899e75c31bdf114831834dc6cfba5067.png" data-zooming-width="637" data-zooming-height="68">
+</a></p>
+
+<p>Oh! That’s not good the image still the same. Now, let’s jump into <code class="highlighter-rouge">wireshark</code> and see the original packets.</p>
+
+<p><a href="/assets/documentation/angstrom-ctf/ws2/wire-336b949aced0c538ec6d8e1658e2261ee1205156f5ae12189d5f52118a8db255.png">
+  <img src="/assets/documentation/angstrom-ctf/ws2/wire-336b949aced0c538ec6d8e1658e2261ee1205156f5ae12189d5f52118a8db255.png" alt="wire" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/ws2/wire-336b949aced0c538ec6d8e1658e2261ee1205156f5ae12189d5f52118a8db255.png" data-zooming-width="1093" data-zooming-height="265">
+</a></p>
+
+<p>After I filtered the packets I got 4 <code class="highlighter-rouge">HTTP</code> requests and one of them is <code class="highlighter-rouge">POST</code> request contains an image. So let’s follow HTTP stream and extract the raw bytes.</p>
+
+<p><a href="/assets/documentation/angstrom-ctf/ws2/raw-94e4103328f23d29d47ae5458042cea1afe6fabb8625b68eb7451a2030978330.png">
+  <img src="/assets/documentation/angstrom-ctf/ws2/raw-94e4103328f23d29d47ae5458042cea1afe6fabb8625b68eb7451a2030978330.png" alt="raw" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/ws2/raw-94e4103328f23d29d47ae5458042cea1afe6fabb8625b68eb7451a2030978330.png" data-zooming-width="1244" data-zooming-height="654">
+</a></p>
+
+<p>After I dumped the raw bytes from <code class="highlighter-rouge">FF D8 FF E0</code> to <code class="highlighter-rouge">FF D9</code> into a new file I got the original image.</p>
+
+<p><a href="/assets/documentation/angstrom-ctf/ws2/flag-144b4aacbb62ed8bfd9d955f5902d73d54d9b43391cd0f6db258dae9e5bc952e.jpg">
+  <img src="/assets/documentation/angstrom-ctf/ws2/flag-144b4aacbb62ed8bfd9d955f5902d73d54d9b43391cd0f6db258dae9e5bc952e.jpg" alt="flag" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/ws2/flag-144b4aacbb62ed8bfd9d955f5902d73d54d9b43391cd0f6db258dae9e5bc952e.jpg" data-zooming-width="1500" data-zooming-height="1461">
+</a></p>
+
+<p>Flag: <code class="highlighter-rouge">actf{ok_to_b0r0s-4809813}</code></p>
+
+<h3 id="2-ws3">2. ws3</h3>
+
+<blockquote>
+  <p>What the… <a href="https://files.actf.co/5dfa75c41aee37fc4b27257d31d06e6e7ebc41f618f8a81961f94f25905e6aa9/record.pcapng">record.pcapng</a>
+hint: Did I send something? Or…</p>
+</blockquote>
+
+<p>Like the previous one I ran binwalk on the capture file but this time I got a bunch of <code class="highlighter-rouge">zlib</code> files.</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>binwalk record.pcapng 
+<span class="go">DECIMAL       HEXADECIMAL     DESCRIPTION
+--------------------------------------------------------------------------------
+3664          0xE50           Zlib compressed data, default compression
+3793          0xED1           Zlib compressed data, default compression
+3841          0xF01           Zlib compressed data, default compression
+14810         0x39DA          Zlib compressed data, default compression
+14969         0x3A79          Zlib compressed data, default compression
+38120         0x94E8          Zlib compressed data, default compression
+38258         0x9572          Zlib compressed data, default compression</span></code></pre></figure>
+
+<p>So I decided to jumb into <code class="highlighter-rouge">wireshark</code> again and look for any <code class="highlighter-rouge">HTTP</code> packets.</p>
+
+<p><a href="/assets/documentation/angstrom-ctf/ws3/wire-3802b822a0a554c70de58ddcad6dc0c349ae1a8d9cb2352b9b70707c65bf752c.png">
+  <img src="/assets/documentation/angstrom-ctf/ws3/wire-3802b822a0a554c70de58ddcad6dc0c349ae1a8d9cb2352b9b70707c65bf752c.png" alt="wire" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/ws3/wire-3802b822a0a554c70de58ddcad6dc0c349ae1a8d9cb2352b9b70707c65bf752c.png" data-zooming-width="1550" data-zooming-height="597">
+</a></p>
+
+<p>I noticed <code class="highlighter-rouge">HTTP</code> packet with length <code class="highlighter-rouge">2131</code> bigger than the others, so let’s look at it.</p>
+
+<p><a href="/assets/documentation/angstrom-ctf/ws3/raw-32fd7938a489dd8171f7ac8c7c715e4937b786a07032b8e0614f005bdf8a1afa.png">
+  <img src="/assets/documentation/angstrom-ctf/ws3/raw-32fd7938a489dd8171f7ac8c7c715e4937b786a07032b8e0614f005bdf8a1afa.png" alt="raw" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/ws3/raw-32fd7938a489dd8171f7ac8c7c715e4937b786a07032b8e0614f005bdf8a1afa.png" data-zooming-width="1392" data-zooming-height="692">
+</a></p>
+
+<p>I know the magic bytes for <code class="highlighter-rouge">zlib</code> file and can be one of:</p>
+<ol>
+  <li>
+<code class="highlighter-rouge">78 01</code> - No Compression/low</li>
+  <li>
+<code class="highlighter-rouge">78 9C</code> - Default Compression</li>
+  <li>
+<code class="highlighter-rouge">78 DA</code> - Best Compression</li>
+</ol>
+
+<p>After looking in the raw bytes for the packet I found first <code class="highlighter-rouge">78 9C</code> and the end of the file is unknown so let’s extract it into a new file.</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>file file.zlib 
+<span class="go">ws3_3.zlib: zlib compressed data</span></code></pre></figure>
+
+<p>I looked again with binwalk the file contains 3 other <code class="highlighter-rouge">zlib</code> files.</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>binwalk Zlib 
+<span class="go">DECIMAL       HEXADECIMAL     DESCRIPTION
+--------------------------------------------------------------------------------
+0             0x0             Zlib compressed data, default compression
+159           0x9F            Zlib compressed data, default compression
+242           0xF2            Zlib compressed data, default compression</span></code></pre></figure>
+
+<p>So, I decided to extract each one and look at them one by one.</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span><span class="nb">dd </span><span class="k">if</span><span class="o">=</span>Zlib <span class="nv">bs</span><span class="o">=</span>1 <span class="nv">count</span><span class="o">=</span>159 <span class="nv">of</span><span class="o">=</span>1.zlip
+<span class="go">159+0 records in
+159+0 records out
+159 bytes copied, 0.0008654 s, 184 kB/s
+</span><span class="gp">root@kali:~#</span><span class="w"> </span><span class="nb">dd </span><span class="k">if</span><span class="o">=</span>Zlib <span class="nv">bs</span><span class="o">=</span>1 <span class="nv">skip</span><span class="o">=</span>159 <span class="nv">count</span><span class="o">=</span><span class="k">$((</span><span class="m">0</span>xf2-0x9f<span class="k">))</span> <span class="nv">of</span><span class="o">=</span>2.zlip
+<span class="go">83+0 records in
+83+0 records out
+83 bytes copied, 0.00072573 s, 114 kB/s
+</span><span class="gp">root@kali:~#</span><span class="w"> </span><span class="nb">dd </span><span class="k">if</span><span class="o">=</span>Zlib <span class="nv">bs</span><span class="o">=</span>1 <span class="nv">skip</span><span class="o">=</span>242 <span class="nv">of</span><span class="o">=</span>3.zlip
+<span class="go">17643+0 records in
+17643+0 records out
+17643 bytes (18 kB, 17 KiB) copied, 0.050157 s, 352 kB/s</span></code></pre></figure>
+
+<p>Now, let’s extract them:</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span><span class="nb">cat </span>3.zlip | python <span class="nt">-c</span> <span class="s2">"import zlib,sys;sys.stdout.write(zlib.decompress(sys.stdin.read()))"</span> | <span class="nb">head</span> <span class="nt">-1</span>
+<span class="go">����JFIFHH��C   	
+close failed in file object destructor:
+sys.excepthook is missing
+lost sys.stderr</span></code></pre></figure>
+
+<p>And I got the flag as a <code class="highlighter-rouge">JPEG</code> image at the last file.</p>
+
+<p><a href="/assets/documentation/angstrom-ctf/ws3/flag-45696f671cee10b441388d6a10034488684d9c13abafe2137698cc14ca015d42.jpg">
+  <img src="/assets/documentation/angstrom-ctf/ws3/flag-45696f671cee10b441388d6a10034488684d9c13abafe2137698cc14ca015d42.jpg" alt="flag" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/ws3/flag-45696f671cee10b441388d6a10034488684d9c13abafe2137698cc14ca015d42.jpg" data-zooming-width="413" data-zooming-height="549">
+</a></p>
+
+<p><code class="highlighter-rouge">actf{git_good_git_wireshark-123323}</code></p>
+
+<h3 id="3-psk">3. PSK</h3>
+
+<blockquote>
+  <p>My friend sent my yet another mysterious recording…
+He told me he was inspired by PicoCTF 2019 and made his own transmissions. I’ve looked at it, and it seems to be really compact and efficient.
+Only 31 bps!!
+See if you can decode <a href="https://files.actf.co/eae0a3d5c6d525249b88d8f11881e3a99665c986f526d20d1b8bb98247a8e85a/transmission.wav">what he sent to me</a>. It’s in actf{} format</p>
+</blockquote>
+
+<p>This one I spend some time to figure out what he want and what’s the record. But after searching about <code class="highlighter-rouge">PSK</code> I found It’s just an audio with amplitude and phase-modulated waveform that is converted to an audio frequency analog signal by a sound card.</p>
+
+<p>And guess what it can be decoded usign the PSK31 software like <code class="highlighter-rouge">EssexPSK</code>.</p>
+
+<p>After I download the software and put the mic on the headphones to decode the audio it gives me the flag. <img class="emoji" title=":grinning:" alt=":grinning:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f600.png" height="20" width="20"></p>
+
+<p><a href="/assets/documentation/angstrom-ctf/PSK-5a539985ce01430fbde7a8468521492d026a5b6eef7e27cfaf9b308de706e8d7.png">
+  <img src="/assets/documentation/angstrom-ctf/PSK-5a539985ce01430fbde7a8468521492d026a5b6eef7e27cfaf9b308de706e8d7.png" alt="flag" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/PSK-5a539985ce01430fbde7a8468521492d026a5b6eef7e27cfaf9b308de706e8d7.png" data-zooming-width="841" data-zooming-height="312">
+</a></p>
+
+<p><code class="highlighter-rouge">actf{hamhamhamhamham}</code></p>
+
+<h3 id="4-shifter">4. Shifter</h3>
+
+<blockquote>
+  <p>What a strange challenge…
+It’ll be no problem for you, of course!
+<code class="highlighter-rouge">nc misc.2020.chall.actf.co 20300</code></p>
+</blockquote>
+
+<blockquote>
+  <p>hint: Do you really need to calculate all those numbers?</p>
+</blockquote>
+
+<p>This challenges seems interesting when I connect with the server it asks me the following:</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>nc misc.2020.chall.actf.co 20300
+<span class="go">Solve 50 of these epic problems in a row to prove you are a master crypto man like Aplet123!
+You'll be given a number n and also a plaintext p.
+Caesar shift `p` with the nth Fibonacci number.
+n &lt; 50, p is completely uppercase and alphabetic, len(p) &lt; 50
+You have 60 seconds!
+--------------------
+Shift AZPHUYBJHVY by n=44
+: </span></code></pre></figure>
+
+<p>It’s just a ceaser cipher but with key as <a href="https://en.wikipedia.org/wiki/Fibonacci_number">Fibonacci</a> number, and the n he given is pretty small to calculate.</p>
+
+<p><img src="https://latex.codecogs.com/gif.latex?Fib%28n%29%3DFib%28n-1%29%20&amp;plus;%20Fib%28n-2%29" alt="Fib(n)=Fib(n-1) + Fib(n-2)"></p>
+
+<p>So, let’s write small <code class="highlighter-rouge">python</code> script to do it and get the flag.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c1">#!/usr/bin/env python
+</span><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">context</span><span class="o">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="s">'critical'</span>
+
+<span class="n">fib_arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+<span class="k">def</span> <span class="nf">fib</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span><span class="o">&lt;=</span><span class="nb">len</span><span class="p">(</span><span class="n">fib_arr</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">fib_arr</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">temp_fib</span> <span class="o">=</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">fib_arr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">temp_fib</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">temp_fib</span>
+<span class="n">fib</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">encrypt</span><span class="p">(</span><span class="n">text</span><span class="p">,</span><span class="n">k</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="s">""</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)):</span>
+        <span class="n">char</span> <span class="o">=</span> <span class="n">text</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">result</span> <span class="o">+=</span> <span class="nb">chr</span><span class="p">((</span><span class="nb">ord</span><span class="p">(</span><span class="n">char</span><span class="p">)</span> <span class="o">+</span> <span class="n">k</span> <span class="o">-</span> <span class="mi">65</span><span class="p">)</span> <span class="o">%</span> <span class="mi">26</span> <span class="o">+</span> <span class="mi">65</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s">'misc.2020.chall.actf.co'</span><span class="p">,</span> <span class="mi">20300</span><span class="p">)</span>
+<span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s">'--------------------'</span><span class="p">)</span>
+<span class="n">r</span><span class="o">.</span><span class="n">recvline</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">50</span><span class="p">):</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">recvline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">' '</span><span class="p">)</span>
+    <span class="n">m</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">fib_arr</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">:])]</span>
+    <span class="k">print</span> <span class="s">'</span><span class="se">\r</span><span class="s">[+] Level'</span><span class="p">,</span> <span class="p">(</span><span class="n">_</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">encrypt</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s">':'</span><span class="p">,</span><span class="n">res</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">recvall</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span></code></pre></figure>
+
+<p>And finally I got it.</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>python shifter.py 
+<span class="go">[+] Level 1
+[+] Level 2
+</span><span class="c">.
+.
+.
+</span><span class="go">[+] Level 49
+[+] Level 50
+actf{h0p3_y0u_us3d_th3_f0rmu14-1985098}</span></code></pre></figure>
+
 <blockquote>
   <p>I’ll update the remaining challenges soon…</p>
 </blockquote>
@@ -674,10 +977,10 @@ actf{th3y_gr0w_up_s0_f4st}</span></code></pre></figure>
             
             
             <a href="https://twitter.com/home?status=angstromCTF+2020%20-%20http://localhost:4000/posts/angstromctf-2020" title="Share on Twitter" rel="noreferrer noopener" target="_blank">
-              <svg viewBox="0 0 512 512"><path d="M492 109.5c-17.4 7.7-36 12.9-55.6 15.3 20-12 35.4-31 42.6-53.6 -18.7 11.1-39.4 19.2-61.5 23.5C399.8 75.8 374.6 64 346.8 64c-53.5 0-96.8 43.4-96.8 96.9 0 7.6 0.8 15 2.5 22.1 -80.5-4-151.9-42.6-199.6-101.3 -8.3 14.3-13.1 31-13.1 48.7 0 33.6 17.2 63.3 43.2 80.7C67 210.7 52 206.3 39 199c0 0.4 0 0.8 0 1.2 0 47 33.4 86.1 77.7 95 -8.1 2.2-16.7 3.4-25.5 3.4 -6.2 0-12.3-0.6-18.2-1.8 12.3 38.5 48.1 66.5 90.5 67.3 -33.1 26-74.9 41.5-120.3 41.5 -7.8 0-15.5-0.5-23.1-1.4C62.8 432 113.7 448 168.3 448 346.6 448 444 300.3 444 172.2c0-4.2-0.1-8.4-0.3-12.5C462.6 146 479 129 492 109.5z"/></svg>
+              <svg viewbox="0 0 512 512"><path d="M492 109.5c-17.4 7.7-36 12.9-55.6 15.3 20-12 35.4-31 42.6-53.6 -18.7 11.1-39.4 19.2-61.5 23.5C399.8 75.8 374.6 64 346.8 64c-53.5 0-96.8 43.4-96.8 96.9 0 7.6 0.8 15 2.5 22.1 -80.5-4-151.9-42.6-199.6-101.3 -8.3 14.3-13.1 31-13.1 48.7 0 33.6 17.2 63.3 43.2 80.7C67 210.7 52 206.3 39 199c0 0.4 0 0.8 0 1.2 0 47 33.4 86.1 77.7 95 -8.1 2.2-16.7 3.4-25.5 3.4 -6.2 0-12.3-0.6-18.2-1.8 12.3 38.5 48.1 66.5 90.5 67.3 -33.1 26-74.9 41.5-120.3 41.5 -7.8 0-15.5-0.5-23.1-1.4C62.8 432 113.7 448 168.3 448 346.6 448 444 300.3 444 172.2c0-4.2-0.1-8.4-0.3-12.5C462.6 146 479 129 492 109.5z"></path></svg>
             </a>
             <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/posts/angstromctf-2020" title="Share on Facebook" rel="noreferrer noopener" target="_blank">
-              <svg viewBox="0 0 512 512"><path d="M288 192v-38.1c0-17.2 3.8-25.9 30.5-25.9H352V64h-55.9c-68.5 0-91.1 31.4-91.1 85.3V192h-45v64h45v192h83V256h56.4l7.6-64H288z"/></svg>
+              <svg viewbox="0 0 512 512"><path d="M288 192v-38.1c0-17.2 3.8-25.9 30.5-25.9H352V64h-55.9c-68.5 0-91.1 31.4-91.1 85.3V192h-45v64h45v192h83V256h56.4l7.6-64H288z"></path></svg>
             </a>
           </div>
 
@@ -689,7 +992,7 @@ actf{th3y_gr0w_up_s0_f4st}</span></code></pre></figure>
         </article>
         <footer class="footer scrollappear">
     <p style="text-align: center">
-      This is my little tech blog, feel free to ask me any question &#169;
+      This is my little tech blog, feel free to ask me any question ©
       <a href="/about" title="About me">Ahmed Sayed</a>
     </p>
 </footer>
