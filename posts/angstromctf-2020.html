@@ -831,11 +831,11 @@ hint: Did I send something? Or…</p>
 <p>After looking in the raw bytes for the packet I found first <code class="highlighter-rouge">78 9C</code> and the end of the file is unknown so let’s extract it into a new file.</p>
 
 <figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>file file.zlib 
-<span class="go">ws3_3.zlib: zlib compressed data</span></code></pre></figure>
+<span class="go">file.zlib: zlib compressed data</span></code></pre></figure>
 
 <p>I looked again with binwalk the file contains 3 other <code class="highlighter-rouge">zlib</code> files.</p>
 
-<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>binwalk Zlib 
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>binwalk file.zlib 
 <span class="go">DECIMAL       HEXADECIMAL     DESCRIPTION
 --------------------------------------------------------------------------------
 0             0x0             Zlib compressed data, default compression
@@ -844,15 +844,15 @@ hint: Did I send something? Or…</p>
 
 <p>So, I decided to extract each one and look at them one by one.</p>
 
-<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span><span class="nb">dd </span><span class="k">if</span><span class="o">=</span>Zlib <span class="nv">bs</span><span class="o">=</span>1 <span class="nv">count</span><span class="o">=</span>159 <span class="nv">of</span><span class="o">=</span>1.zlip
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span><span class="nb">dd </span><span class="k">if</span><span class="o">=</span>file.zlib <span class="nv">bs</span><span class="o">=</span>1 <span class="nv">count</span><span class="o">=</span>159 <span class="nv">of</span><span class="o">=</span>1.zlip
 <span class="go">159+0 records in
 159+0 records out
 159 bytes copied, 0.0008654 s, 184 kB/s
-</span><span class="gp">root@kali:~#</span><span class="w"> </span><span class="nb">dd </span><span class="k">if</span><span class="o">=</span>Zlib <span class="nv">bs</span><span class="o">=</span>1 <span class="nv">skip</span><span class="o">=</span>159 <span class="nv">count</span><span class="o">=</span><span class="k">$((</span><span class="m">0</span>xf2-0x9f<span class="k">))</span> <span class="nv">of</span><span class="o">=</span>2.zlip
+</span><span class="gp">root@kali:~#</span><span class="w"> </span><span class="nb">dd </span><span class="k">if</span><span class="o">=</span>file.zlib <span class="nv">bs</span><span class="o">=</span>1 <span class="nv">skip</span><span class="o">=</span>159 <span class="nv">count</span><span class="o">=</span><span class="k">$((</span><span class="m">0</span>xf2-0x9f<span class="k">))</span> <span class="nv">of</span><span class="o">=</span>2.zlip
 <span class="go">83+0 records in
 83+0 records out
 83 bytes copied, 0.00072573 s, 114 kB/s
-</span><span class="gp">root@kali:~#</span><span class="w"> </span><span class="nb">dd </span><span class="k">if</span><span class="o">=</span>Zlib <span class="nv">bs</span><span class="o">=</span>1 <span class="nv">skip</span><span class="o">=</span>242 <span class="nv">of</span><span class="o">=</span>3.zlip
+</span><span class="gp">root@kali:~#</span><span class="w"> </span><span class="nb">dd </span><span class="k">if</span><span class="o">=</span>file.zlib <span class="nv">bs</span><span class="o">=</span>1 <span class="nv">skip</span><span class="o">=</span>242 <span class="nv">of</span><span class="o">=</span>3.zlip
 <span class="go">17643+0 records in
 17643+0 records out
 17643 bytes (18 kB, 17 KiB) copied, 0.050157 s, 352 kB/s</span></code></pre></figure>
