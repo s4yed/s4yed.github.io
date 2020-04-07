@@ -183,7 +183,7 @@
   <span class="article-list-minutes">
     
     
-      7 minute read
+      8 minute read
     
   </span>
   <span class="article-list-divider">-</span>
@@ -237,14 +237,14 @@
   <img src="/assets/documentation/AUCTF/auctf-logo-f4c506564857c6cbf71512884d2a45707c33c51be525e911b53b542bc2ade6e2.png" alt="Angstrom" class="zooming" data-rjs="/assets/documentation/AUCTF/auctf-logo-f4c506564857c6cbf71512884d2a45707c33c51be525e911b53b542bc2ade6e2.png" data-zooming-width="750" data-zooming-height="450">
 </a></p>
 
-<p>I participated in AUCTF 2020 with my team <a href="https://ctftime.org/team/113157">P1rates</a> as <code class="highlighter-rouge">y4mm1</code> and I was able to solve some cool challenges with them. This is my writeup about some challenges I managed to solve during the competition.</p>
+<p>I participated in AUCTF 2020 with my team <a href="https://ctf.auburn.edu/teams/316">P1rates</a> as <code class="highlighter-rouge">y4mm1</code> and I was able to solve some cool challenges with them. This is my writeup about some challenges I managed to solve during the competition.</p>
 
 <h2 id="forensics">Forensics</h2>
 <hr>
 
 <h3 id="1-block2">1. Block2</h3>
 
-<p>The challenge want to get the time when the player of <code class="highlighter-rouge">Mine Craft</code> rolled back and give us <code class="highlighter-rouge">co_block.sql</code> file with data inside it.
+<p>The challenge want to get the time when the player of <code class="highlighter-rouge">Mine Craft</code> rolled back and give us <a href="https://gofile.io/?c=y6Z6Gs"><code class="highlighter-rouge">co_block.sql</code></a> file with data inside it.
 I looked into the file and I saw <code class="highlighter-rouge">rolled_back</code> column if it is <code class="highlighter-rouge">1</code> it rolled back otherwise <code class="highlighter-rouge">0</code>. So, I wrote <code class="highlighter-rouge">python</code> script to get the flag.</p>
 
 <figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c1">#!/usr/bin/env python
@@ -259,11 +259,27 @@ I looked into the file and I saw <code class="highlighter-rouge">rolled_back</co
         <span class="k">except</span><span class="p">:</span>
             <span class="k">pass</span></code></pre></figure>
 
+<p>There is another solution to this challenge and that is:</p>
+
+<ol>
+  <li>Start your <code class="highlighter-rouge">MySQL</code> server <code class="highlighter-rouge">service mysql start</code> and create a new database.</li>
+  <li>Import the given file into the database <code class="highlighter-rouge">mysql -u root -p auctf &lt; co_block.sql</code>.</li>
+  <li>After that you can select what you need from the database.</li>
+</ol>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>mysql <span class="nt">-u</span> root <span class="nt">-p</span> auctf <span class="nt">-e</span> <span class="s2">"SELECT time FROM co_block WHERE rolled_back = 1;"</span>
+<span class="go">Enter password: 
++------------+
+| time       |
++------------+
+| 1581060905 |
++------------+</span></code></pre></figure>
+
 <p>The Flag: <code class="highlighter-rouge">auctf{1581060905}</code></p>
 
 <h3 id="2-animal-crossing">2. Animal Crossing</h3>
 
-<p>This challenge gave us a <code class="highlighter-rouge">pcapng</code> file with a lot of dns traffic after open it with <code class="highlighter-rouge">strings</code> I saw some weird values sended by <code class="highlighter-rouge">DNS</code> traffic.</p>
+<p>This challenge gave us a <a href="https://gofile.io/?c=wYVVwe"><code class="highlighter-rouge">pcapng</code></a> file with a lot of dns traffic after open it with <code class="highlighter-rouge">strings</code> I saw some weird values sended by <code class="highlighter-rouge">DNS</code> traffic.</p>
 
 <figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>strings animalcrossing.pcapng | less
 <span class="go">quickbrownfoxes
@@ -285,12 +301,12 @@ quickbrownfoxes</span></code></pre></figure>
 <p>The Flag: <code class="highlighter-rouge">auctf{it_was_star_wars_all_along}</code></p>
 
 <h3 id="3-boom">3. Boom</h3>
-<p>The challnege give me <code class="highlighter-rouge">boom.sql.gz</code> file I tried different approaches to solve this challenge and extract the hidden file but nothing worked but this one that I’m going to explain:</p>
+<p>The challnege give me <a href="https://gofile.io/?c=Kv8a7s"><code class="highlighter-rouge">boom.sql.gz</code></a> file I tried different approaches to solve this challenge and extract the hidden file but nothing worked but this one that I’m going to explain:</p>
 
 <ol>
   <li>Run <code class="highlighter-rouge">MySQL</code> server to create a new database called <code class="highlighter-rouge">auctf</code>.</li>
   <li>Import <code class="highlighter-rouge">boom.sql</code> file into the created database.</li>
-  <li>Export the hidden archive file into a new one using <code class="highlighter-rouge">SQL</code> command.</li>
+  <li>Export the hidden archive file into a new one using some <code class="highlighter-rouge">SQL</code> command.</li>
 </ol>
 
 <p>Solution:</p>
@@ -311,7 +327,7 @@ quickbrownfoxes</span></code></pre></figure>
 
 <h3 id="4-fahrenheit-451">4. Fahrenheit 451</h3>
 
-<p>This challenge also gave us <code class="highlighter-rouge">pcapng</code> file I run strings on it but nothing usefull. I ran <code class="highlighter-rouge">binwalk</code> I saw <code class="highlighter-rouge">PDF</code> file at offset <code class="highlighter-rouge">0x25326</code> and tried to extract it it was corrupted.</p>
+<p>This challenge also gave us <a href="https://gofile.io/?c=rkwQDX"><code class="highlighter-rouge">pcapng</code></a> file I run strings on it but nothing usefull. I ran <code class="highlighter-rouge">binwalk</code> I saw <code class="highlighter-rouge">PDF</code> file at offset <code class="highlighter-rouge">0x25326</code> and tried to extract it it was corrupted.</p>
 
 <figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>binwalk f451.pcapng 
 <span class="go">
@@ -332,7 +348,7 @@ DECIMAL       HEXADECIMAL     DESCRIPTION
 </a></p>
 
 <p>It looks like garbage, but he given a word <code class="highlighter-rouge">Substitute</code> as a hint in the challenge description <code class="highlighter-rouge">2F4E7L3FC?0E9603@@&lt;DPP`PN</code> so I opened <code class="highlighter-rouge">ascii</code> table and observe the values with <code class="highlighter-rouge">auctf{</code>.
-He subtracted the actual flag with <code class="highlighter-rouge">47</code> so I wrote some lines of code to get the actual flag.</p>
+He just subtracted the actual flag with <code class="highlighter-rouge">47</code>, so I wrote some lines of code to get the actual flag.</p>
 
 <figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c1">#!/usr/bin/env python
 </span><span class="n">cipher</span> <span class="o">=</span> <span class="s">'2F4E7L3FC?0E9603@@&lt;DPP`PN'</span>
@@ -340,7 +356,7 @@ He subtracted the actual flag with <code class="highlighter-rouge">47</code> so 
 <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">cipher</span><span class="p">:</span>
     <span class="n">flag</span> <span class="o">+=</span> <span class="nb">chr</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">+</span> <span class="mi">47</span><span class="p">)</span></code></pre></figure>
 
-<p>It gave me some of the flag and the last bytes are also garbage <code class="highlighter-rouge">auctf{burn_the_books\x7f\x7f\x8f\x7f}</code>. But after analysing the last four bytes he added it with <code class="highlighter-rouge">47</code> <img class="emoji" title=":grinning:" alt=":grinning:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f600.png" height="20" width="20"></p>
+<p>It gave me part of the flag and the last <code class="highlighter-rouge">4</code> bytes are also garbage <code class="highlighter-rouge">auctf{burn_the_books\x7f\x7f\x8f\x7f}</code>. But after analysing the last four bytes he just added it with <code class="highlighter-rouge">47</code> <img class="emoji" title=":grinning:" alt=":grinning:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f600.png" height="20" width="20"></p>
 
 <figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">P -&gt;</span><span class="w"> </span><span class="o">!</span> and  <span class="sb">`</span> -&gt; 1</code></pre></figure>
 
@@ -348,7 +364,7 @@ He subtracted the actual flag with <code class="highlighter-rouge">47</code> so 
 
 <h3 id="5-oops">5. Oops</h3>
 
-<p>This challenge was a little easy for me it gave us a corrupted virtual hard disk <code class="highlighter-rouge">debmini.vhdx</code>. I just ran <code class="highlighter-rouge">binwalk</code> to extract any thing in the disk.</p>
+<p>This challenge was a little easy for me it gave us a virtual hard disk <a href="https://gofile.io/?c=ZV8Qg5"><code class="highlighter-rouge">debmini.vhdx</code></a>. I tried to mount it, but it is corrupted, so let’s run <code class="highlighter-rouge">binwalk</code> to see any files or hidden data and extract any thing inside that disk.</p>
 
 <figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>binwalk debmini.vhdx <span class="nt">-e</span> <span class="nt">-D</span><span class="o">=</span><span class="s1">'.*'</span>
 <span class="go">
@@ -356,8 +372,9 @@ DECIMAL       HEXADECIMAL     DESCRIPTION
 --------------------------------------------------------------------------------
 4194304       0x400000        ISO 9660 Primary Volume,</span></code></pre></figure>
 
-<p>After extraction I got some system files inside <code class="highlighter-rouge">iso-root</code> folder I ran <code class="highlighter-rouge">strings * | grep -oE "auctf{.*}"</code> again and grep for any flag format.
-The Flag: <code class="highlighter-rouge">auctf{pls_dont_delete_me}</code></p>
+<p>After extraction I got some system files inside <code class="highlighter-rouge">iso-root</code> folder I examine the folders but nothing useful, so I ran <code class="highlighter-rouge">strings * | grep -oE "auctf{.*}"</code> and grep for any flag format and I found it.</p>
+
+<p>The Flag: <code class="highlighter-rouge">auctf{pls_dont_delete_me}</code></p>
 
 <h2 id="password-cracking">Password Cracking</h2>
 <hr>
@@ -367,7 +384,7 @@ The Flag: <code class="highlighter-rouge">auctf{pls_dont_delete_me}</code></p>
 </blockquote>
 
 <h3 id="1-big-mac">1. Big Mac</h3>
-<p>The challenge gave us the salt <code class="highlighter-rouge">thisisasecret</code> and the hash <code class="highlighter-rouge">5ee9fafd697e40593d66bef8427d40f8beca6921</code> and after analysing the hash it is <code class="highlighter-rouge">SHA1</code>, but the challenge called <code class="highlighter-rouge">Big MAC</code>. So, the goal is to find the correct <code class="highlighter-rouge">MAC</code> type and put the hash with the salt in the correct format then use <code class="highlighter-rouge">hashcat</code>.</p>
+<p>The challenge gave us the salt <code class="highlighter-rouge">thisisasecret</code> and the hash <code class="highlighter-rouge">5ee9fafd697e40593d66bef8427d40f8beca6921</code> and after analysing the hash it is <code class="highlighter-rouge">SHA1</code>, but the challenge called <code class="highlighter-rouge">Big MAC</code>. So, the goal here is to find the correct <code class="highlighter-rouge">MAC</code> type and put the hash with the salt in the correct format to use <code class="highlighter-rouge">hashcat</code>.</p>
 
 <p>The hash type is <code class="highlighter-rouge">HMAC-SHA1</code> and the format might look like:</p>
 
@@ -382,7 +399,7 @@ The Flag: <code class="highlighter-rouge">auctf{pls_dont_delete_me}</code></p>
 
 <h3 id="2-zippy">2. Zippy</h3>
 
-<p>This challenge gave us <code class="highlighter-rouge">zippy.zip</code> file and it contains 6 other <code class="highlighter-rouge">zip</code> file that are protected by some passwords, so the goal is to extract the hashs for every one and crack it with our friend <code class="highlighter-rouge">john</code>.</p>
+<p>This challenge gave us <a href="https://gofile.io/?c=6pFD2a"><code class="highlighter-rouge">zippy.zip</code></a> file and it contains 6 other <code class="highlighter-rouge">zip</code> file that are protected by some passwords, so the goal is to extract the hashs for every one and crack it with our friend <code class="highlighter-rouge">john</code>.</p>
 
 <figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>zip2john zippy.zip <span class="o">&gt;</span> hash1
 <span class="gp">root@kali:~#</span><span class="w"> </span>john <span class="nt">-w</span><span class="o">=</span>/usr/share/wordlists/rockyou.txt hash1
@@ -405,8 +422,8 @@ The Flag: <code class="highlighter-rouge">y0ud1d17#15789</code></p>
 
 <h3 id="3-manager">3. Manager</h3>
 
-<p>The challenge gave us keepass <code class="highlighter-rouge">manager.kdbx</code> file and told us the password is all digits the goal to get the password hash, create a wordlist, crack it , and get the flag inside that file.
-I used my friend <code class="highlighter-rouge">john</code> tto get the hash and format it to using <code class="highlighter-rouge">hashcat</code>.</p>
+<p>The challenge gave us keepass <a href="https://gofile.io/?c=WDmRI7"><code class="highlighter-rouge">manager.kdbx</code></a> file and told us the password is all digits, so the goal is to get the password hash, create a wordlist, crack it, and get the flag inside that file.
+I used my friend <code class="highlighter-rouge">john</code> to extract the hash and format it to using <code class="highlighter-rouge">hashcat</code>.</p>
 
 <figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>keepass2john manager.kdbx | <span class="nb">cut</span> <span class="nt">-d</span> <span class="s2">":"</span> <span class="nt">-f2</span> <span class="o">&gt;</span> <span class="nb">hash</span>
 <span class="gp">root@kali:~#</span><span class="w"> </span>crunch 3 7 0123456789 <span class="o">&gt;</span> numbers.lst
@@ -439,18 +456,13 @@ Crunch will now generate the following number of lines: 11111000</span></code></
 <p>Solution:</p>
 <ol>
   <li>When I go to the <code class="highlighter-rouge">URL</code> I got some info about the site and gave me <code class="highlighter-rouge">/static/help</code> route to look.</li>
-  <li>After I look what it says there are some endpoints to make <code class="highlighter-rouge">POST</code> requests. <code class="highlighter-rouge">/api/login</code> to login with <code class="highlighter-rouge">username</code> and <code class="highlighter-rouge">password</code> , <code class="highlighter-rouge">/api/ftp/get_file</code> to get a <code class="highlighter-rouge">file</code> from the server.</li>
-  <li>I tried to make <code class="highlighter-rouge">POST</code> request using <code class="highlighter-rouge">Postman</code> to login with <code class="highlighter-rouge">username</code> and <code class="highlighter-rouge">password</code> it gave me <code class="highlighter-rouge">400</code> bad request, so I assumed it accepts data as <code class="highlighter-rouge">JSON</code> format.
-    <code class="highlighter-rouge">{"username":"username","password":"password"}</code>
-</li>
-  <li>It took about 2-3 minutes to finish the request I hold on and after returninig it gave me an error page.</li>
-  <li>I looked at the stack trace in the bottom of the page I saw some hidden endpoint error <code class="highlighter-rouge">/api/login_check</code> to check for the token field in the request body.</li>
+  <li>After I look what it says there are some endpoints to make <code class="highlighter-rouge">POST</code> requests. <code class="highlighter-rouge">/api/login</code> to login with <code class="highlighter-rouge">username</code> and <code class="highlighter-rouge">password</code> , <code class="highlighter-rouge">/api/ftp/get_file</code> to get a <code class="highlighter-rouge">file</code> from the server, and <code class="highlighter-rouge">/api/ftp/dir</code> to get a directory.</li>
+  <li>I tried to make <code class="highlighter-rouge">POST</code> request using <code class="highlighter-rouge">Postman</code> to login with <code class="highlighter-rouge">username</code> and <code class="highlighter-rouge">password</code> it gave me <code class="highlighter-rouge">400</code> bad request, so I assumed it accepts data as <code class="highlighter-rouge">JSON</code> format <code class="highlighter-rouge">{"username":"username","password":"password"}</code>.</li>
+  <li>I send the request and It took about 2-3 minutes to finish, so I hold on and after returninig it gave me an error page.</li>
+  <li>I looked at the errors and I saw a stack trace error in the bottom of the page and the error happened because of some hidden endpoint <code class="highlighter-rouge">/api/login_check</code> to check for the token field in the request body.</li>
   <li>Now, I assumed that endpoint is check for the correct <code class="highlighter-rouge">username</code> and <code class="highlighter-rouge">password</code> and if it’s correct it returns the token.</li>
   <li>I tried the above credintials and it worked and gave me the token.</li>
-  <li>
-    <p>I have the token and I know there is <code class="highlighter-rouge">/api/ft[/get_file</code> endpoint to get a file from the server I send the request with  following body to get the flag file.
-   <code class="highlighter-rouge">{"file":"flag.txt","token": "bc842c31a9e54efe320d30d948be61291f3ceee4766e36ab25fa65243cd76e0e"}</code></p>
-  </li>
+  <li>Now, I have the token and I know there is <code class="highlighter-rouge">/api/ftp/get_file</code> endpoint to get a file from the server, so I send the request with following body to get the flag file <code class="highlighter-rouge">{"file":"flag.txt","token": "bc842c31a9e54efe320d30d948be61291f3ceee4766e36ab25fa65243cd76e0e"}</code>.</li>
   <li>It returned with the <code class="highlighter-rouge">base64</code> text <code class="highlighter-rouge">YXVjdGZ7MHdAc3BfNnJvSzNOX0B1dGh9Cg==</code> and after decode it gives me the flag.</li>
 </ol>
 
