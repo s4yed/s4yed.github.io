@@ -33,8 +33,9 @@
 
     
       <link rel="icon" type="image/x-icon" href="/assets/favicon-color-0e896bd8673d9f83cea8d7b0a12fcc894681d58fc475ad499adfed94067b1e1f.png">
-      <link rel="apple-touch-icon" href="/assets/apple-touch-icon-light-87d1f2a3a19b1500e5c1626a0492025ca5f7f97d24540dc5900288e92112925a.png">
-      <link rel="stylesheet" type="text/css" href="/assets/light-d09aacb6545f381fc97f304886774210c2a8683515671143f960bc0912af94fe.css">
+      <link rel="apple-touch-icon" href="/assets/apple-touch-icon-dark-d161409442b7e523089f24d08d0a55951549ece7504207c376d53b020713494d.png">
+      <link rel="stylesheet" type="text/css" title="light" id="light" href="/assets/light-d09aacb6545f381fc97f304886774210c2a8683515671143f960bc0912af94fe.css">
+      <link rel="stylesheet" type="text/css" title="dark" id="dark" href="/assets/dark-1a88caef1b83a1b99fe022465f0090bba4bad8ec27b2338cfe7cd88de11c00df.css" disabled="false">
     
 
   
@@ -126,6 +127,15 @@
         </a>
       </li>
     
+    
+      <li>
+        <a onclick="toggle()" title="Toggle Theme">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon-theme">
+  <use href="/assets/theme-610197c56844c5ba34608b2018c4cc3b79f8833e2efc7a99bcb5589f1d3cfd7b.svg#icon-theme" xlink:href="/assets/theme-610197c56844c5ba34608b2018c4cc3b79f8833e2efc7a99bcb5589f1d3cfd7b.svg#icon-theme"></use>
+</svg>
+
+        </a>
+      </li>
     
   </ul>
 </nav>
@@ -306,7 +316,7 @@ History Software Agent          : Gimp 2.10 (Linux), Gimp 2.10 (Linux), Gimp 2.1
 History When                    : -04:00, -04:00, -04:00, -04:00, -04:00
 </span><span class="c">...</span></code></pre></figure>
 
-<p>The image contains some useful info but there is one thing that made me pay attention <code class="highlighter-rouge">Study Physician: awcIsALegendAndIHopeThisIsAStrongPasswordJackTheRipperBegone</code>. So when I tried to unzip the archive with that password it worked and gave me 2 another files <code class="highlighter-rouge">Just In Case.png</code> and <code class="highlighter-rouge">jut</code>.</p>
+<p>The image contains some useful info but there is one thing that made me pay attention<code class="highlighter-rouge">Study Physician: awcIsALegendAndIHopeThisIsAStrongPasswordJackTheRipperBegone</code>. So when I tried to unzip the archive with that password it worked and gave me 2 another files <code class="highlighter-rouge">Just In Case.png</code> and <code class="highlighter-rouge">jut</code>.</p>
 
 <p>The image wasn’t useful for me maybe there is another solution i don’t know, but the other file seems interesting. The <code class="highlighter-rouge">file</code> command didn’t recognize it so let see the magic bytes.</p>
 
@@ -428,23 +438,21 @@ These are the resources we were able to gather for you:</p>
     <li>the note left behind by the ransomware. I’m not sure you’ll find anything usefull here
 ransomNote.txt</li>
     <li>a packet capture that our IDS isolated, it seems that the program has some weird form of data exfiltration
-<a href="https://gofile.io/?c=EhS33Y"><code class="highlighter-rouge">192-168-1-11_potential-malware.pcap</code></a>
-We need you to reverse the malware and recover our flag.gif file. Good luck!
+<a href="https://gofile.io/?c=EhS33Y"><code class="highlighter-rouge">192-168-1-11_potential-malware.pcap</code></a></li>
+    <li>We need you to reverse the malware and recover our flag.gif file. Good luck!
 A note from the creator: Shoutout to Demonslay335 for challenge inspiration - he’s done some awesome work in fighting ransomware. Also, the ransomware in this challenge is programmed to only target files named “flag.gif” so you shouldn’t need to worry about the accidental execution, I just zipped it out of habit/good practice. Have fun and happy hacking!</li>
   </ul>
 </blockquote>
 
-<p>The challenge was a little bit easy for me it gives us some network traffic <code class="highlighter-rouge">pcap</code> file, a binary, a text note, and the encrypted flag file.
-The goal here is to debug the binary and see what it does and reverse the process of encryption.</p>
+<p>The challenge was a little bit easy for me it gives us some network traffic <code class="highlighter-rouge">pcap</code> file, a binary, a text note, and the encrypted flag file. The goal here is to debug the binary and see what it does and reverse the process of encryption. Let’s open the binary in <code class="highlighter-rouge">IDA</code> and see what it looks like.</p>
 
-<p>Let’s open the binary in <code class="highlighter-rouge">IDA</code> and see what it looks like.
-I see there is a main function with some heavy code from line <code class="highlighter-rouge">26</code> to <code class="highlighter-rouge">52</code> it’s just seeds the <code class="highlighter-rouge">srand</code> with the current time, trying to connect to the socket with address <code class="highlighter-rouge">108.61.127.136</code>, send the seed value and thats so interesting because the same seed produce the same random values.</p>
+<p>I noticed there is a main function with some heavy code, so let’s analyze it. From line <code class="highlighter-rouge">26</code> to <code class="highlighter-rouge">52</code> it’s just seeds the <code class="highlighter-rouge">srand</code> with the current time, trying to connect to the socket with address <code class="highlighter-rouge">108.61.127.136</code>, send the seed value and thats so interesting because the same seed produce the same random values.</p>
 
 <p><a href="/assets/documentation/WPICTF/first-d29ecd610ec5095d86a918e2dbcacda236562e6c75067887a830b8f3c1a27107.png">
   <img src="/assets/documentation/WPICTF/first-d29ecd610ec5095d86a918e2dbcacda236562e6c75067887a830b8f3c1a27107.png" alt="flag" class="zooming" data-rjs="/assets/documentation/WPICTF/first-d29ecd610ec5095d86a918e2dbcacda236562e6c75067887a830b8f3c1a27107.png" data-zooming-width="451" data-zooming-height="410" />
 </a></p>
 
-<p>From line <code class="highlighter-rouge">54</code> to <code class="highlighter-rouge">58</code> it opens the <code class="highlighter-rouge">flag.gif</code> file in the read mode, save the size at <code class="highlighter-rouge">v19</code> and print the size.</p>
+<p>From line <code class="highlighter-rouge">54</code> to <code class="highlighter-rouge">58</code> it opens the <code class="highlighter-rouge">flag.gif</code> file in the read mode, save the file size at <code class="highlighter-rouge">v19</code> and print it.</p>
 
 <p><a href="/assets/documentation/WPICTF/second-645a144a915bfbea67c514ce1c5cbcd2d1e68dfeaa905aa6be42b6efb0c79f5d.png">
   <img src="/assets/documentation/WPICTF/second-645a144a915bfbea67c514ce1c5cbcd2d1e68dfeaa905aa6be42b6efb0c79f5d.png" alt="flag" class="zooming" data-rjs="/assets/documentation/WPICTF/second-645a144a915bfbea67c514ce1c5cbcd2d1e68dfeaa905aa6be42b6efb0c79f5d.png" data-zooming-width="347" data-zooming-height="93" />
@@ -581,6 +589,8 @@ Connection: close
 
 <script type="text/javascript" src="/assets/application-cfde13ac81ddaf4351b2e739603e2baf688d0fcc9aba613fe62bbb1c7b037fb9.js"></script>
 
+
+  <script type="text/javascript" src="/assets/themetoggle-df0d3d73164dc26dffbd630182ae4d0dfa7bee6b694a2b5d565d73595b582bbf.js"></script>
 
 </body>
 </html>
