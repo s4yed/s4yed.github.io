@@ -7,6 +7,14 @@
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>ASC - Wargames Finals 2020</title>
+        <description>This is my writeup and walkthrough for all the crypto challenges from the final competition</description>
+        <pubDate>Sun, 27 Sep 2020 00:00:00 +0200</pubDate>
+        <link>http://localhost:4000/posts/asc-wargames-finals2020</link>
+        <guid isPermaLink="true">http://localhost:4000/posts/asc-wargames-finals2020</guid>
+      </item>
+    
+      <item>
         <title>ASC - Wargames 2020 Filtration Phase</title>
         <description>This is my writeup and walkthrough for the Challenge2 crypto from the competition</description>
         <pubDate>Sat, 15 Aug 2020 00:00:00 +0200</pubDate>
