@@ -1,0 +1,839 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Ahmed | ASC - Wargames Finals 2021</title>
+  <meta name="description" content="This is not also a writeup for the crypto challenges in the wargames final competition, but also an introduction to the future of cryptography.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta property="og:title" content="ASC - Wargames Finals 2021">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://s4yed.github.io/posts/asc-wargames-finals-2021">
+  <meta property="og:description" content="This is not also a writeup for the crypto challenges in the wargames final competition, but also an introduction to the future of cryptography.">
+  <meta property="og:site_name" content="Ahmed">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:url" content="https://s4yed.github.io/posts/asc-wargames-finals-2021">
+  <meta name="twitter:title" content="ASC - Wargames Finals 2021">
+  <meta name="twitter:description" content="This is not also a writeup for the crypto challenges in the wargames final competition, but also an introduction to the future of cryptography.">
+
+  
+    
+      <meta property="og:image" content="https://s4yed.github.io/assets/documentation/ASCWargames/2021/ASCWG-95eb185e36f506f4a6357e80959942e51a9fb88a4ac5d36233b57c22eda0d678.jpg">
+      <meta name="twitter:image" content="https://s4yed.github.io/assets/documentation/ASCWargames/2021/ASCWG-95eb185e36f506f4a6357e80959942e51a9fb88a4ac5d36233b57c22eda0d678.jpg">
+    
+  
+
+  <link href="https://s4yed.github.io/feed.xml" type="application/rss+xml" rel="alternate" title="Ahmed Last 10 blog posts" />
+
+  
+
+  
+
+    
+      <link rel="icon" type="image/x-icon" href="/assets/favicon-color-0e896bd8673d9f83cea8d7b0a12fcc894681d58fc475ad499adfed94067b1e1f.png">
+      <link rel="apple-touch-icon" href="/assets/apple-touch-icon-dark-d161409442b7e523089f24d08d0a55951549ece7504207c376d53b020713494d.png">
+      <link rel="stylesheet" type="text/css" href="/assets/dark-bd87a972117a631461755cc733ab96b66bb38fb9d09359688cac8e4c2c561606.css">
+    
+
+  
+
+  <!-- Load KaTeX -->
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.1.1/katex.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.1.1/katex.min.js"></script>
+</head>
+
+<body>
+  <main>
+    <div class="grid grid-centered">
+      <div class="grid-cell">
+        <nav class="header-nav scrollappear">
+  <a href="/" class="header-logo" title="Ahmed">Ahmed</a>
+  <ul class="header-links">
+    
+      <li>
+        <a href="/about" title="About me">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon-about">
+  <use href="/assets/about-ab4928d09cef6e09136b8d40637999db4f9575f927c33156e7f3e37d450e5df1.svg#icon-about" xlink:href="/assets/about-ab4928d09cef6e09136b8d40637999db4f9575f927c33156e7f3e37d450e5df1.svg#icon-about"></use>
+</svg>
+
+        </a>
+      </li>
+    
+    
+    
+    
+    
+      <li>
+        <a href="https://github.com/s4yed" rel="noreferrer noopener" target="_blank" title="GitHub">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon-github">
+  <use href="/assets/github-706d546fe6b5a32deca92fb08bbe60e78ea4e8027e889107905eb61f1063bcec.svg#icon-github" xlink:href="/assets/github-706d546fe6b5a32deca92fb08bbe60e78ea4e8027e889107905eb61f1063bcec.svg#icon-github"></use>
+</svg>
+
+        </a>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+      <li>
+        <a href="https://www.linkedin.com/in/s4yed" rel="noreferrer noopener" target="_blank" title="LinkedIn">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon-linkedin">
+  <use href="/assets/linkedin-3bd8eb5ea036958dc7b3ee3de6612dbfa9e0744f369f20f7895d6a2782bbaf43.svg#icon-linkedin" xlink:href="/assets/linkedin-3bd8eb5ea036958dc7b3ee3de6612dbfa9e0744f369f20f7895d6a2782bbaf43.svg#icon-linkedin"></use>
+</svg>
+
+        </a>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      <li>
+        <a href="mailto:ahmedsayedgfx@gmail.com" title="Email">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon-email">
+  <use href="/assets/email-30a104adb1e2728097a984fbea2995978b6fff6c12906a734044ebd388848b70.svg#icon-email" xlink:href="/assets/email-30a104adb1e2728097a984fbea2995978b6fff6c12906a734044ebd388848b70.svg#icon-email"></use>
+</svg>
+
+        </a>
+      </li>
+    
+    
+      <li>
+        <a href="/feed.xml" rel="noreferrer noopener" target="_blank" title="RSS">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon-rss">
+  <use href="/assets/rss-cdc7a721b47671668abb0ba57f9f8db8022096e0051ff51b9e08e6cc049453a4.svg#icon-rss" xlink:href="/assets/rss-cdc7a721b47671668abb0ba57f9f8db8022096e0051ff51b9e08e6cc049453a4.svg#icon-rss"></use>
+</svg>
+
+        </a>
+      </li>
+    
+    
+  </ul>
+</nav>
+
+
+  <ul class="header-tags scrollappear">
+    
+    
+      
+        <li><a href="/tag/AES">Aes</a></li>
+    
+      
+        <li><a href="/tag/ASC-Wargames">Asc-wargames</a></li>
+    
+      
+        <li><a href="/tag/AUCTF">Auctf</a></li>
+    
+      
+        <li><a href="/tag/CTF">Ctf</a></li>
+    
+      
+        <li><a href="/tag/RSA">Rsa</a></li>
+    
+      
+        <li><a href="/tag/WPICTF">Wpictf</a></li>
+    
+      
+        <li><a href="/tag/algorithms">Algorithms</a></li>
+    
+      
+        <li><a href="/tag/analysis">Analysis</a></li>
+    
+      
+        <li><a href="/tag/angstromCTF">Angstromctf</a></li>
+    
+      
+        <li><a href="/tag/c">C</a></li>
+    
+      
+        <li>...</li>
+        <li><a href="/tags">Show all</a></li>
+        
+  </ul>
+
+
+        <article class="article scrollappear">
+          <header class="article-header">
+            <h1>ASC - Wargames Finals 2021</h1>
+            <p>This is not also a writeup for the crypto challenges in the wargames final competition, but also an introduction to the future of cryptography.</p>
+            <div class="article-list-footer">
+  <span class="article-list-date">
+    September 19, 2021
+  </span>
+  <span class="article-list-divider">-</span>
+  <span class="article-list-minutes">
+    
+    
+      22 minute read
+    
+  </span>
+  <span class="article-list-divider">-</span>
+  <div class="article-list-tags">
+    
+      
+      <a href="/tag/security" title="See all posts with tag 'Security'">Security</a>
+    
+      
+      <a href="/tag/ASC-Wargames" title="See all posts with tag 'ASC-Wargames'">ASC-Wargames</a>
+    
+      
+      <a href="/tag/CTF" title="See all posts with tag 'CTF'">CTF</a>
+    
+      
+      <a href="/tag/infosec" title="See all posts with tag 'Infosec'">Infosec</a>
+    
+      
+      <a href="/tag/python" title="See all posts with tag 'Python'">Python</a>
+    
+      
+      <a href="/tag/hacking" title="See all posts with tag 'Hacking'">Hacking</a>
+    
+      
+      <a href="/tag/cryptography" title="See all posts with tag 'Cryptography'">Cryptography</a>
+    
+      
+      <a href="/tag/cracking" title="See all posts with tag 'cracking'">cracking</a>
+    
+      
+      <a href="/tag/lattice-based" title="See all posts with tag 'Lattice-Based'">Lattice-Based</a>
+    
+      
+      <a href="/tag/hash-based" title="See all posts with tag 'Hash-Based'">Hash-Based</a>
+    
+      
+      <a href="/tag/quantum" title="See all posts with tag 'Quantum'">Quantum</a>
+    
+      
+      <a href="/tag/AES" title="See all posts with tag 'AES'">AES</a>
+    
+      
+      <a href="/tag/padding-oracle" title="See all posts with tag 'Padding-Oracle'">Padding-Oracle</a>
+    
+  </div>
+</div>
+          </header>
+
+          <div class="article-content">
+            <p><a href="/assets/documentation/ASCWargames/2021/ASCWG-95eb185e36f506f4a6357e80959942e51a9fb88a4ac5d36233b57c22eda0d678.jpg">
+  <img src="/assets/documentation/ASCWargames/2021/ASCWG-95eb185e36f506f4a6357e80959942e51a9fb88a4ac5d36233b57c22eda0d678.jpg" alt="ASC" class="zooming" data-rjs="/assets/documentation/ASCWargames/2021/ASCWG-95eb185e36f506f4a6357e80959942e51a9fb88a4ac5d36233b57c22eda0d678.jpg" data-zooming-width="1250" data-zooming-height="833" />
+</a></p>
+
+<h3 id="table-of-content">Table of Content</h3>
+
+<ul>
+    <li><a href="#intro">Introduction</a></li>
+    <li><a href="#bb">Black Box</a></li>
+    <li><a href="#ttg">Time To Guess</a></li>
+    <li><a href="#wots">Winter On The Street</a></li>
+    <li><a href="#lwe">Learn With Encryption</a></li>
+    <li><a href="#conc">Conclusion</a></li>
+</ul>
+
+<hr />
+
+<p><a id="intro"></a></p>
+<h2 id="intro">Intro</h2>
+
+<p>Arab Security Conference was held this year from 5<sup>th</sup> till 7<sup>th</sup> of September and as always the last day was for the cyber wargames competition where ten qualified teams compete with each other and solve sophisticated challenges in 5 different categories in information security. In this write-up, we’re going to discuss and solve the 4 crypto challenges I created in the ASC wargames finals this year 2021 with my bro <a href="https://www.linkedin.com/in/x-vector/">X-Vector</a>. The challenges was a bit heavy and full of tricks for those who aren’t up-todate with the latest crypto systems and techniques. However, I’ll show you my thought process when I face a tough challenge and how to divide it into sub-challenges in order to find a correct solution.</p>
+
+<h4 id="disclaimer">:DISCLAIMER:</h4>
+
+<p>You’re not gonna find here all the tips and tricks in crypto since I wanted to leave some space for you to think and ask. So, feel free to think more about the challenge before jumping into the solution.</p>
+
+<hr />
+
+<p><a id="bb"></a></p>
+<h2 id="black-box">Black Box</h2>
+
+<p>Description:</p>
+<blockquote>
+  <p>A plane was attacked by a highly skilled hacker and in order to control it, he has to break the black box encryption. Can you help him to decrypt the commands and control the plane?</p>
+</blockquote>
+
+<p>The challenge’s name and describtion seems to have a good hint about what type of attack we’re gonna do on this server. When connecting to the <code class="language-plaintext highlighter-rouge">ip/port</code> it gives us the following</p>
+
+<p><a href="/assets/documentation/ASCWargames/2021/bb-85d0c0cee6cb1dede14649cf60deb1d4a564cf0d1aec8587d0fa13e7e6030f47.png">
+  <img src="/assets/documentation/ASCWargames/2021/bb-85d0c0cee6cb1dede14649cf60deb1d4a564cf0d1aec8587d0fa13e7e6030f47.png" alt="Black Box" class="zooming" data-rjs="/assets/documentation/ASCWargames/2021/bb-85d0c0cee6cb1dede14649cf60deb1d4a564cf0d1aec8587d0fa13e7e6030f47.png" data-zooming-width="1640" data-zooming-height="317" />
+</a></p>
+
+<h3 id="analysis">Analysis</h3>
+
+<p>The server uses <a href="https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation#Cipher_block_chaining_.28CBC.29">AES CBC</a> and of course from its name, we’ll assume it’s a padding oracle attack on <strong>AES</strong>. In order to test our assumtion, we should modify the last byte of ciphertext and pass it to the oracle and it gives us <strong>Padding Error!</strong> also after modifying the first byte and pass it to the oracle it given us <strong>MAC Error!</strong>, now we’re 100% sure it’s a padding oracle attack. The CBC uses <a href="https://en.wikipedia.org/wiki/Padding_(cryptography)#PKCS#5_and_PKCS#7">PKCS7</a> scheme in order to pad the messages before the encryption. The given cipherhex contains 80 bytes which means we have to deal with 5 blocks of ciphertext 16 bytes each.</p>
+
+<h3 id="solution">Solution</h3>
+
+<p>For those who unaware of this type of attack, I found this great <a href="https://research.nccgroup.com/2021/02/17/cryptopals-exploiting-cbc-padding-oracles/">article</a> explaining the attack in detail.</p>
+
+<p>The decryption process goes as following:</p>
+
+\[P_k = D(k,C_k) \oplus C_{k-1} \\ P_{k-1} = D(k,C_{k-1}) \oplus C_{k-2} \\ ... \\ P_1 = D(k,C_1) \oplus iv\]
+
+<p>Briefly, if we have just one block beside the <code class="language-plaintext highlighter-rouge">iv</code>, we have to start from the previous block (or <code class="language-plaintext highlighter-rouge">iv</code>) in our case we don’t know the <code class="language-plaintext highlighter-rouge">iv</code>, so we shall start attacking each block based on the previous block. To do so, we’ll start by the last or 5<sup>th</sup> block to determine the padding size and the following steps will be repeated for each block:</p>
+
+<ul>
+  <li>Pick a random byte \(B\) from \([0,255]\) and replace it with the last byte of \(C_k\).</li>
+</ul>
+
+\[C'_{k-1} = C_{k_{1:15}} \cdot B\]
+
+<ul>
+  <li>If the decryptoin of \(C'_{k-1} \cdot C_k\) succeeds e.g.</li>
+</ul>
+
+\[P'_{k_{15}} = D(k, C_{k_{15}}) \oplus C'_{(k-1)_{15}} = 01 \\ C_{k_{15}} = E(k, P_{k_{15}} \oplus C_{(k-1)_{15}}\]
+
+<ul>
+  <li>Rearraging the above equation, we shall get the plaintext byte</li>
+</ul>
+
+\[P_{k_{16-i}} = C_{(k-1)_{16-i}} \oplus C'_{(k-1)_{16-i}} \oplus i\]
+
+<p>where \(i = 1,..,15\).</p>
+
+<p>This attack is pretty straightforward, but the implementation may be a little confusing due to multiple runs for trial and error.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c1">#!/usr/bin/env python3
+</span><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="n">remote</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="n">xor</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span><span class="p">,</span> <span class="n">time_ns</span>
+<span class="n">context</span><span class="p">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="s">'critical'</span>
+<span class="n">BLOCK</span> <span class="o">=</span> <span class="mi">16</span>
+<span class="n">get_blocks</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">msg</span><span class="p">:</span> <span class="p">[</span><span class="n">msg</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">BLOCK</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">msg</span><span class="p">),</span> <span class="n">BLOCK</span><span class="p">)]</span>
+
+<span class="n">HOST</span><span class="p">,</span> <span class="n">PORT</span> <span class="o">=</span> <span class="s">'10.0.0.4'</span><span class="p">,</span> <span class="mi">33176</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="n">HOST</span><span class="p">,</span> <span class="n">PORT</span><span class="p">)</span>
+<span class="c1"># get ciphertext
+</span><span class="n">ct</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">.</span><span class="n">fromhex</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s">'(hex): '</span><span class="p">).</span><span class="n">split</span><span class="p">(</span><span class="sa">b</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">)[</span><span class="o">-</span><span class="mi">3</span><span class="p">].</span><span class="n">decode</span><span class="p">())</span>
+
+<span class="c1"># convert ct into blocks each of size 16 bytes
+</span><span class="n">blocks</span> <span class="o">=</span> <span class="n">get_blocks</span><span class="p">(</span><span class="n">ct</span><span class="p">)</span>
+
+<span class="n">flag</span> <span class="o">=</span> <span class="p">[</span><span class="sa">b</span><span class="s">''</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">blocks</span><span class="p">))]</span>
+<span class="n">start</span> <span class="o">=</span> <span class="n">time_ns</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">plain</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">([</span><span class="mi">0</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">BLOCK</span><span class="p">)])</span>
+    <span class="n">c_prime</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">([</span><span class="n">b</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">blocks</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">BLOCK</span><span class="p">):</span>
+        <span class="n">padding</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">([</span><span class="mi">0</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">BLOCK</span> <span class="o">-</span> <span class="n">i</span><span class="p">)]</span> <span class="o">+</span> <span class="p">[(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">)])</span>
+        <span class="n">c_prime</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">(</span><span class="n">xor</span><span class="p">(</span><span class="n">padding</span><span class="p">,</span> <span class="n">plain</span><span class="p">,</span> <span class="n">blocks</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]))</span>
+
+        <span class="k">for</span> <span class="n">byte</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">256</span><span class="p">):</span>
+            <span class="c1"># performing step 1
+</span>            <span class="n">c_prime</span><span class="p">[</span><span class="mi">15</span> <span class="o">-</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">byte</span>
+            <span class="n">to_decrypt</span> <span class="o">=</span> <span class="n">c_prime</span> <span class="o">+</span> <span class="n">blocks</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            <span class="n">r</span><span class="p">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">to_decrypt</span><span class="p">.</span><span class="nb">hex</span><span class="p">())</span>
+            <span class="k">if</span> <span class="s">'MAC'</span> <span class="ow">in</span> <span class="n">r</span><span class="p">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">).</span><span class="n">decode</span><span class="p">():</span>
+                <span class="c1"># performing step 2 and 3
+</span>                <span class="n">poss_byte</span> <span class="o">=</span> <span class="n">blocks</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">15</span> <span class="o">-</span> <span class="n">i</span><span class="p">]</span> <span class="o">^</span> <span class="n">byte</span> <span class="o">^</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="c1"># checking the correct padding, this step got first
+</span>                <span class="k">with</span> <span class="n">trial</span> <span class="ow">and</span> <span class="n">error</span>
+                <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">4</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">poss_byte</span> <span class="o">!=</span> <span class="mh">0xf</span><span class="p">:</span>
+                    <span class="nb">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">plain</span><span class="p">[</span><span class="mi">15</span> <span class="o">-</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">poss_byte</span>
+                <span class="k">break</span>
+            <span class="n">r</span><span class="p">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s">'(hex): '</span><span class="p">)</span>
+    <span class="n">flag</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">plain</span><span class="p">)</span>
+<span class="n">r</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">b</span><span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">([</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">flag</span><span class="p">[</span><span class="mi">1</span><span class="p">:]])[:</span><span class="o">-</span><span class="mi">6</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'Run in </span><span class="si">{</span><span class="p">(</span><span class="n">time_ns</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span><span class="o">/</span><span class="mf">1e9</span><span class="si">}</span><span class="s"> secs'</span><span class="p">)</span></code></pre></figure>
+
+<p>And we’ll get the flag: <code class="language-plaintext highlighter-rouge">ASCWG{0r4cl3_0r4cl3_0N_A3S_L3f7_R19H7_U9_D0wN!!}</code></p>
+
+<hr />
+
+<p><a id="ttg"></a></p>
+<h2 id="time-to-guess">Time To Guess</h2>
+
+<p>This challenge has no describtion and has 2 pitfalls. The first one is the intended solution and the other one for those who focus on details. It also gives us the source code and a server to connect. When connecting to the server it gives the following.</p>
+
+<p><a href="/assets/documentation/ASCWargames/2021/ttg-cc9cc4b6cb5a466d0a6e44c889b11eced07ac8097d33197cae772f848d7c947f.png">
+  <img src="/assets/documentation/ASCWargames/2021/ttg-cc9cc4b6cb5a466d0a6e44c889b11eced07ac8097d33197cae772f848d7c947f.png" alt="Time To Guess" class="zooming" data-rjs="/assets/documentation/ASCWargames/2021/ttg-cc9cc4b6cb5a466d0a6e44c889b11eced07ac8097d33197cae772f848d7c947f.png" data-zooming-width="899" data-zooming-height="133" />
+</a></p>
+
+<p>Let’s look at the source code:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c1">#!/usr/bin/env python3
+</span><span class="kn">from</span> <span class="nn">Crypto.Util.number</span> <span class="kn">import</span> <span class="n">getRandomNBitInteger</span><span class="p">,</span> <span class="n">long_to_bytes</span> <span class="k">as</span> <span class="n">ltb</span>
+<span class="kn">from</span> <span class="nn">Crypto.Cipher</span> <span class="kn">import</span> <span class="n">AES</span>
+<span class="kn">from</span> <span class="nn">Crypto.Util.Padding</span> <span class="kn">import</span> <span class="n">pad</span><span class="p">,</span> <span class="n">unpad</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">gcd</span>
+
+<span class="k">def</span> <span class="nf">BBS</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+    <span class="n">seed</span> <span class="o">=</span> <span class="n">getRandomNBitInteger</span><span class="p">(</span><span class="mi">512</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">gcd</span><span class="p">(</span><span class="n">seed</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">seed</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+        <span class="k">yield</span> <span class="n">X</span><span class="p">,</span> <span class="n">X</span> <span class="o">&amp;</span> <span class="mi">1</span>
+
+<span class="k">def</span> <span class="nf">encrypt</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+    <span class="n">cipher</span> <span class="o">=</span> <span class="n">AES</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">AES</span><span class="p">.</span><span class="n">MODE_CBC</span><span class="p">,</span> <span class="n">iv</span><span class="p">)</span>
+    <span class="n">ct</span> <span class="o">=</span> <span class="n">cipher</span><span class="p">.</span><span class="n">encrypt</span><span class="p">(</span><span class="n">pad</span><span class="p">(</span><span class="n">FLAG</span><span class="p">,</span> <span class="mi">16</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">ct</span><span class="p">.</span><span class="nb">hex</span><span class="p">(),</span> <span class="n">cipher</span><span class="p">.</span><span class="n">iv</span><span class="p">.</span><span class="nb">hex</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">secret</span> <span class="kn">import</span> <span class="n">FLAG</span><span class="p">,</span> <span class="n">N</span>
+    <span class="n">gen</span> <span class="o">=</span> <span class="n">BBS</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'It</span><span class="se">\'</span><span class="s">s time to guess!'</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'n: </span><span class="si">{</span><span class="n">N</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'v: </span><span class="si">{</span><span class="nb">next</span><span class="p">(</span><span class="n">gen</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+    <span class="nb">input</span><span class="p">(</span><span class="s">'Give me the next 1000 bits!'</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">().</span><span class="n">strip</span><span class="p">())</span> <span class="o">!=</span> <span class="nb">next</span><span class="p">(</span><span class="n">gen</span><span class="p">)[</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">'Try again!'</span><span class="p">)</span>
+            <span class="nb">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">key</span> <span class="o">=</span> <span class="s">''</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">128</span><span class="p">):</span>
+        <span class="n">key</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">gen</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">ciphertext</span><span class="p">,</span> <span class="n">iv</span> <span class="o">=</span> <span class="n">encrypt</span><span class="p">(</span><span class="n">ltb</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="mi">2</span><span class="p">)))</span>
+    <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'</span><span class="si">{</span><span class="n">ciphertext</span><span class="o">=</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="n">iv</span><span class="o">=</span><span class="si">}</span><span class="s">'</span><span class="p">)</span></code></pre></figure>
+
+<h3 id="analysis-1">Analysis</h3>
+
+<p>After analyzing the code, the server wants from us to sumbit the next 1000 bits after it prints <code class="language-plaintext highlighter-rouge">N</code> and <code class="language-plaintext highlighter-rouge">v</code> based on some sort of function called <code class="language-plaintext highlighter-rouge">BBS</code> and the next 128 bits are the secret key for the AES encryption of the flag. Looking at <code class="language-plaintext highlighter-rouge">BBS</code>, it simply do the following:</p>
+
+<ol>
+  <li>Generate 512 bit random integer as a seed and check it has no divisors with \(N\).</li>
+  <li>Calculate \(X = seed^2 \pmod N\).</li>
+  <li>Loop forever and for each iteration return \(X^2 \pmod N\) and its least significant bit (e.g. right-most bit).</li>
+</ol>
+
+<p>Rearranging the equations gives:</p>
+
+\[X_{i+1} = X_i^{2^i} \pmod N : \ X_0 = seed\]
+
+<p>Surprisingly, this algorithm is called <a href="https://en.wikipedia.org/wiki/Blum_Blum_Shub">Blum Blum Shub</a>, a pseudorandom number generator based on hardness of factorization of the modulus <code class="language-plaintext highlighter-rouge">N</code> and our goal is to find the <code class="language-plaintext highlighter-rouge">seed</code> in order to crack the <code class="language-plaintext highlighter-rouge">BBS</code>.</p>
+
+<h3 id="1st-solution">1<sup>st</sup> Solution</h3>
+
+<p>Connecting to the server multiple times gives us the same <code class="language-plaintext highlighter-rouge">N</code> but different <code class="language-plaintext highlighter-rouge">v</code>, so let’s try to factor <code class="language-plaintext highlighter-rouge">N</code> since it’s only 271 bits. <a href="http://factordb.com/">Factordb</a> couldn’t make it, let’s go to <a href="https://www.alpertron.com.ar/ECM.HTM">Alpertron</a>. At first, there was no hope, but after awhile it seems to be able to factor it in almost 20 min.</p>
+
+<p><code class="language-plaintext highlighter-rouge">N = 46404135538347313105324845256452679880827 × 62935919582590588934355071817888577583483</code></p>
+
+<p>Now, we know that \(v = seed ^ {2^2} \pmod N\), so we want to find the 4<sup>th</sup> root module \(N\) which leads to a quadratic residue problem and hopefully it’s easy to compute after we found the primes of the modulus \(N\).</p>
+
+<p>So, the whole attack goes as following:</p>
+
+<ol>
+  <li>Find \(x, y\) such that \(v = x ^ 4 \pmod p\) and \(v = y ^ 4 \pmod q\) where \(p, q\) are the only prime factors of \(N\).</li>
+  <li>Use <a href="https://en.wikipedia.org/wiki/Chinese_remainder_theorem">The Chinees Remainder Theorem</a> to get a unique solution \(seed \pmod {N=pq}\) for the following equations:</li>
+</ol>
+
+\[seed = x \pmod p \\ seed = y \pmod q\]
+
+<h3 id="2nd-solution-unintended">2<sup>nd</sup> Solution (Unintended)</h3>
+
+<p>If you noriced that <code class="language-plaintext highlighter-rouge">v</code> is the first value that <code class="language-plaintext highlighter-rouge">BBS</code> generates which means \(v = X^2 \pmod N\), however if you square it again you’ll get the second value of the function and of course its right-most bit and so on.</p>
+
+<p>Therefore, the next random bits can be obtained by squaring <code class="language-plaintext highlighter-rouge">v</code> 1000 times each of which contains the bit you wanted in order to send it to the server.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c1">#!/usr/bin/env python3
+</span><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="n">remote</span><span class="p">,</span> <span class="n">context</span>
+<span class="kn">from</span> <span class="nn">sympy.ntheory.modular</span> <span class="kn">import</span> <span class="n">crt</span>
+<span class="kn">from</span> <span class="nn">sympy.ntheory.residue_ntheory</span> <span class="kn">import</span> <span class="n">nthroot_mod</span>
+<span class="kn">from</span> <span class="nn">Crypto.Util.number</span> <span class="kn">import</span> <span class="n">long_to_bytes</span> <span class="k">as</span> <span class="n">ltb</span>
+<span class="kn">from</span> <span class="nn">Crypto.Cipher</span> <span class="kn">import</span> <span class="n">AES</span>
+<span class="kn">from</span> <span class="nn">Crypto.Util.Padding</span> <span class="kn">import</span> <span class="n">pad</span><span class="p">,</span> <span class="n">unpad</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">gcd</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time_ns</span><span class="p">,</span> <span class="n">sleep</span>
+<span class="n">context</span><span class="p">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="s">'critical'</span>
+
+<span class="k">def</span> <span class="nf">BBS</span><span class="p">(</span><span class="n">seed</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">gcd</span><span class="p">(</span><span class="n">seed</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">seed</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+        <span class="k">yield</span> <span class="n">X</span><span class="p">,</span> <span class="n">X</span> <span class="o">&amp;</span> <span class="mi">1</span>
+
+<span class="k">def</span> <span class="nf">decrypt</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">iv</span><span class="p">):</span>
+    <span class="n">cipher</span> <span class="o">=</span> <span class="n">AES</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">AES</span><span class="p">.</span><span class="n">MODE_CBC</span><span class="p">,</span> <span class="n">iv</span><span class="p">)</span>
+    <span class="n">ct</span> <span class="o">=</span> <span class="n">unpad</span><span class="p">(</span><span class="n">cipher</span><span class="p">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">msg</span><span class="p">),</span> <span class="mi">16</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ct</span>
+
+<span class="n">host</span><span class="p">,</span> <span class="n">port</span> <span class="o">=</span> <span class="s">'10.0.0.4'</span><span class="p">,</span> <span class="mi">33175</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">)</span>
+<span class="n">n</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">r</span><span class="p">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s">'bits!'</span><span class="p">).</span><span class="n">split</span><span class="p">(</span><span class="sa">b</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">)[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">[</span><span class="mi">3</span><span class="p">:].</span><span class="n">decode</span><span class="p">())</span>
+<span class="n">v</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">3</span><span class="p">:].</span><span class="n">decode</span><span class="p">())</span>
+<span class="n">p</span> <span class="o">=</span> <span class="mi">46404135538347313105324845256452679880827</span>
+<span class="n">q</span> <span class="o">=</span> <span class="mi">62935919582590588934355071817888577583483</span>
+
+<span class="c1"># Solution 1
+</span><span class="n">start</span> <span class="o">=</span> <span class="n">time_ns</span><span class="p">()</span>
+<span class="n">roots</span> <span class="o">=</span> <span class="p">[</span><span class="n">nthroot_mod</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">p</span><span class="p">),</span> <span class="n">nthroot_mod</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">q</span><span class="p">)]</span>
+<span class="n">seed</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">crt</span><span class="p">([</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">],</span> <span class="n">roots</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="n">gen</span> <span class="o">=</span> <span class="n">BBS</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+<span class="k">assert</span> <span class="nb">next</span><span class="p">(</span><span class="n">gen</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">v</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
+    <span class="n">r</span><span class="p">.</span><span class="n">sendline</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">gen</span><span class="p">)[</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="c1"># some delay to prevent crashing
+</span>    <span class="n">sleep</span><span class="p">(.</span><span class="mi">03</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">r</span><span class="p">.</span><span class="n">recvall</span><span class="p">().</span><span class="n">split</span><span class="p">(</span><span class="sa">b</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span>
+<span class="n">r</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="c1"># Solution 2
+</span><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
+    <span class="n">r</span><span class="p">.</span><span class="n">sendline</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">pow</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">n</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="c1"># some delay to prevent crashing
+</span>    <span class="n">sleep</span><span class="p">(.</span><span class="mi">03</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">r</span><span class="p">.</span><span class="n">recvall</span><span class="p">().</span><span class="n">split</span><span class="p">(</span><span class="sa">b</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span>
+<span class="n">r</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="n">key</span> <span class="o">=</span> <span class="s">''</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">128</span><span class="p">):</span>
+    <span class="n">key</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">gen</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">ct</span><span class="p">,</span> <span class="n">iv</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+<span class="n">ct</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">.</span><span class="n">fromhex</span><span class="p">(</span><span class="n">ct</span><span class="p">[</span><span class="mi">12</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">].</span><span class="n">decode</span><span class="p">())</span>
+<span class="n">iv</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">.</span><span class="n">fromhex</span><span class="p">(</span><span class="n">iv</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">].</span><span class="n">decode</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">decrypt</span><span class="p">(</span><span class="n">ltb</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="mi">2</span><span class="p">)),</span> <span class="n">ct</span><span class="p">,</span> <span class="n">iv</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'Run in </span><span class="si">{</span><span class="p">(</span><span class="n">time_ns</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">//</span> <span class="mf">1e9</span><span class="si">}</span><span class="s">s'</span><span class="p">)</span></code></pre></figure>
+
+<p>And it gives us the flag: <code class="language-plaintext highlighter-rouge">ASCWG{7h3_P0wer_0f_F@c7oR1z4t10n_T0_Br3aK_R4nd0mNe$$!}</code></p>
+
+<hr />
+
+<p><a id="wots"></a></p>
+<h2 id="winter-on-the-street">Winter On The Street</h2>
+
+<p>Description:</p>
+
+<blockquote>
+  <p>Winter was walking around the street and he has found a new way of a public-key cryptosystem to encrypt messages in a quantum channel. He thinks that his idea is fascinating and no one can break it. Could you prove him wrong?</p>
+</blockquote>
+
+<p>The challenge comes with a python script <code class="language-plaintext highlighter-rouge">challenge.py</code> and <code class="language-plaintext highlighter-rouge">output.txt</code> files. The name looks unfamiliar, but the description sounds a bit tricky since it mentioned a public-key system with a quantum sense.</p>
+
+<p>The text file:</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="go">public = 70a79a427440334bb164dd221e987d1e988aea1ae331097d63f9a3d8e68cbec039707084e3cf6914e93fb732b8c5ffa5473c4f04aa745c922178faa6cba53bc9
+ciphertext = d7ae83c99ba7ab3a4075ac6625883876274af2e04382f25c0528178f5a4448a23b6cca458c7207aa2ddfd8cb47b1e92639822bf723cc17b03d50b7804459d14e
+iv = dbf4b3ba270f7389feb0a72b830cd6f3</span></code></pre></figure>
+
+<p>The script contains:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c1">#!/usr/bin/env python3
+</span><span class="kn">from</span> <span class="nn">Crypto.Cipher</span> <span class="kn">import</span> <span class="n">AES</span>
+<span class="kn">from</span> <span class="nn">Crypto.Util.Padding</span> <span class="kn">import</span> <span class="n">pad</span>
+<span class="kn">from</span> <span class="nn">Crypto.Random.random</span> <span class="kn">import</span> <span class="n">choice</span><span class="p">,</span> <span class="n">bytes_to_long</span> <span class="k">as</span> <span class="n">btl</span>
+<span class="kn">from</span> <span class="nn">hashlib</span> <span class="kn">import</span> <span class="n">sha512</span>
+<span class="kn">from</span> <span class="nn">secret</span> <span class="kn">import</span> <span class="n">FLAG</span><span class="p">,</span> <span class="n">secret_key</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">BLOCK</span> <span class="o">=</span> <span class="mi">16</span>
+<span class="n">BITS</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="n">BLOCK</span>
+
+<span class="k">def</span> <span class="nf">H</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="n">public</span> <span class="o">=</span> <span class="n">msg</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">public</span> <span class="o">=</span> <span class="n">sha512</span><span class="p">(</span><span class="n">public</span><span class="p">).</span><span class="n">digest</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">public</span>
+
+<span class="k">def</span> <span class="nf">encrypt</span><span class="p">(</span><span class="n">plain</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+    <span class="n">cipher</span> <span class="o">=</span> <span class="n">AES</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">AES</span><span class="p">.</span><span class="n">MODE_CBC</span><span class="p">)</span>
+    <span class="n">ct</span> <span class="o">=</span> <span class="n">cipher</span><span class="p">.</span><span class="n">encrypt</span><span class="p">(</span><span class="n">pad</span><span class="p">(</span><span class="n">plain</span><span class="p">,</span> <span class="n">BLOCK</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">ct</span><span class="p">,</span> <span class="n">cipher</span><span class="p">.</span><span class="n">iv</span>
+
+<span class="c1"># private key
+</span><span class="n">private</span> <span class="o">=</span> <span class="n">H</span><span class="p">(</span><span class="n">secret_key</span><span class="p">,</span> <span class="n">BITS</span><span class="p">)</span>
+<span class="n">binary</span> <span class="o">=</span> <span class="nb">bin</span><span class="p">(</span><span class="n">btl</span><span class="p">(</span><span class="n">private</span><span class="p">))[</span><span class="mi">2</span><span class="p">:]</span>
+<span class="n">msg_sign</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">binary</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">BLOCK</span><span class="p">],</span><span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">binary</span><span class="p">),</span> <span class="n">BLOCK</span><span class="p">)]</span>
+
+<span class="c1"># public key
+</span><span class="n">public</span> <span class="o">=</span> <span class="n">H</span><span class="p">(</span><span class="n">secret_key</span><span class="p">,</span> <span class="n">choice</span><span class="p">(</span><span class="n">msg_sign</span><span class="p">))</span>
+
+<span class="n">ct</span><span class="p">,</span> <span class="n">iv</span> <span class="o">=</span> <span class="n">encrypt</span><span class="p">(</span><span class="n">FLAG</span><span class="p">,</span> <span class="n">private</span><span class="p">[</span><span class="n">BLOCK</span><span class="p">:</span><span class="o">-</span><span class="n">BLOCK</span><span class="p">])</span>
+
+<span class="c1"># Write info
+</span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'output.txt'</span><span class="p">,</span> <span class="s">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">p</span><span class="p">:</span>
+    <span class="n">p</span><span class="p">.</span><span class="n">writelines</span><span class="p">([</span><span class="sa">f</span><span class="s">'public = </span><span class="si">{</span><span class="n">public</span><span class="p">.</span><span class="nb">hex</span><span class="p">()</span><span class="si">}</span><span class="se">\n</span><span class="s">'</span><span class="p">,</span> \
+    <span class="sa">f</span><span class="s">'ciphertext = </span><span class="si">{</span><span class="n">ct</span><span class="p">.</span><span class="nb">hex</span><span class="p">()</span><span class="si">}</span><span class="se">\n</span><span class="s">'</span><span class="p">,</span> \
+    <span class="sa">f</span><span class="s">'iv = </span><span class="si">{</span><span class="n">iv</span><span class="p">.</span><span class="nb">hex</span><span class="p">()</span><span class="si">}</span><span class="s">'</span><span class="p">])</span></code></pre></figure>
+
+<h3 id="analysis-2">Analysis</h3>
+
+<p>Looking at the code, it has a function <code class="language-plaintext highlighter-rouge">H</code> that hashing a message <code class="language-plaintext highlighter-rouge">n</code> times with <code class="language-plaintext highlighter-rouge">sha512</code>. It also generates a private key based on a secret and hash it <code class="language-plaintext highlighter-rouge">65536</code> times, and a public key based on the same secret, but hashing it with 16 bit random number from the private key after converting it into binary. Then, it encrypts the flag with the middle 16 bytes of the private key.</p>
+
+<p>After searching about such known quantum cryptosystems, we found <a href="https://cryptoservices.github.io/quantum/2015/12/04/one-time-signatures.html#winternitz-ots-wots">Winternitz One Time Signature</a>. It’s a quantum resistant digital signature hash based scheme that uses relatively small key and signature sizes, but the challenge looks a modified version of it.</p>
+
+<p>The scheme works as follow:</p>
+
+<p>If you want to sign a message between \(0\) and \(w-1\), where \(w\) is some parameter of the scheme.</p>
+
+<ol>
+  <li>The private key \(K\) to sign a message \(M\), where \(0 &lt; M &lt; w\), compute \(H^M (K)\).</li>
+  <li>The public key is \(H^w(K)\).</li>
+  <li><strong>WOTS</strong> signature \(S\) verified by checking that \(H^{w-M}(S)\) is equal to the public key, where \(S\) is the private key after \(M\) hashing.</li>
+</ol>
+
+<p>From the above, we shall get \(M + (w - M) = w\) times which is the public key.</p>
+
+<h3 id="solution-1">Solution</h3>
+
+<p>To get all the pieces together, we don’t know what <code class="language-plaintext highlighter-rouge">K = secret_key</code> and \(M\), but we know only \(w = 2^{16}\). Notice that, \(M\) in the code generated by 16 bit integer chosen randomly from the private key and also we know that \(M &lt; w\). Thus, our goal is to brute force over \(M\) in the range \([0, 2^{16}]\) and hash the public key \(M\) times in order to get the flag.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c1">#!/usr/bin/env python3
+</span><span class="kn">from</span> <span class="nn">Crypto.Cipher</span> <span class="kn">import</span> <span class="n">AES</span>
+<span class="kn">from</span> <span class="nn">Crypto.Util.Padding</span> <span class="kn">import</span> <span class="n">unpad</span>
+<span class="kn">from</span> <span class="nn">hashlib</span> <span class="kn">import</span> <span class="n">sha512</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">import</span> <span class="nn">multiprocessing</span> <span class="k">as</span> <span class="n">mp</span>
+
+<span class="n">BLOCK_SIZE</span> <span class="o">=</span> <span class="mi">16</span>
+<span class="n">BITS</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="n">BLOCK_SIZE</span>
+
+<span class="k">def</span> <span class="nf">H</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="n">public</span> <span class="o">=</span> <span class="n">msg</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">public</span> <span class="o">=</span> <span class="n">sha512</span><span class="p">(</span><span class="n">public</span><span class="p">).</span><span class="n">digest</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">public</span>
+
+<span class="k">def</span> <span class="nf">decrypt</span><span class="p">(</span><span class="n">ct</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">iv</span><span class="p">):</span>
+    <span class="n">cipher</span> <span class="o">=</span> <span class="n">AES</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">AES</span><span class="p">.</span><span class="n">MODE_CBC</span><span class="p">,</span> <span class="n">iv</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">plain</span> <span class="o">=</span> <span class="n">unpad</span><span class="p">(</span><span class="n">cipher</span><span class="p">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">ct</span><span class="p">),</span> <span class="n">BLOCK_SIZE</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">plain</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">b</span><span class="s">''</span>
+
+<span class="k">def</span> <span class="nf">attack</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">M</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">BITS</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+            <span class="c1">#priv = H(public, BITS - M) the systematic way is to calculate the hash M times
+</span>            <span class="n">public</span> <span class="o">=</span> <span class="n">sha512</span><span class="p">(</span><span class="n">public</span><span class="p">).</span><span class="n">digest</span><span class="p">()</span> <span class="c1"># the correct one shall be here directly (optimized)
+</span>            <span class="n">dec</span> <span class="o">=</span> <span class="n">decrypt</span><span class="p">(</span><span class="n">ciphertext</span><span class="p">,</span> <span class="n">public</span><span class="p">[</span><span class="mi">16</span><span class="p">:</span><span class="o">-</span><span class="mi">16</span><span class="p">],</span> <span class="n">iv</span><span class="p">)</span>
+            <span class="k">if</span> <span class="sa">b</span><span class="s">'ASCWG{'</span> <span class="ow">in</span> <span class="n">dec</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'Secret: </span><span class="si">{</span><span class="n">M</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+                <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'Flag: </span><span class="si">{</span><span class="n">dec</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+                <span class="k">return</span> <span class="bp">True</span>
+
+
+<span class="n">public</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">.</span><span class="n">fromhex</span><span class="p">(</span><span class="s">'70a79a427440334bb164dd221e987d1e988aea1ae331097d63f9a3d8e68cbec039707084e3cf6914e93fb732b8c5ffa5473c4f04aa745c922178faa6cba53bc9'</span><span class="p">)</span>
+<span class="n">ciphertext</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">.</span><span class="n">fromhex</span><span class="p">(</span><span class="s">'ea8174d42438c795c5e622a48fedb46a535115e1e95efb095266784e72f9f6ee14a1c5e50fe1f7e4e3c8e95d7755c904c2c2f836cb9abdc10eb7af3e3fdc73d5'</span><span class="p">)</span>
+<span class="n">iv</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">.</span><span class="n">fromhex</span><span class="p">(</span><span class="s">'03a615eb6074a28fc06804c0d1e37264'</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time_ns</span>
+<span class="n">start</span> <span class="o">=</span> <span class="n">time_ns</span><span class="p">()</span>
+<span class="n">attack</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'Run in </span><span class="si">{</span><span class="p">(</span><span class="n">time_ns</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span><span class="o">/</span><span class="mf">1e9</span><span class="si">}</span><span class="s"> secs'</span><span class="p">)</span></code></pre></figure>
+
+<p>The flag: <code class="language-plaintext highlighter-rouge">ASCWG{H@sh1n9_B4s3d_CrYp70_15_N0_L0n93r_$3cUr3_1337}</code></p>
+
+<hr />
+
+<p><a id="lwe"></a></p>
+<h2 id="learn-with-encryption">Learn With Encryption</h2>
+
+<p>Description:</p>
+
+<blockquote>
+  <p>Y4mm1 has created a super-secure communication on a quantum computer so that he can easily send any messages to Vector, but somehow he messed up with his secret so that no one can retrieve it. Could you help Vector to read the message?</p>
+</blockquote>
+
+<p>This was the toughest one among all the previous challenges. The description gives us a big hit along with the name that this one deals with a quantum system as well. However, this time it has 5 file <code class="language-plaintext highlighter-rouge">cipher.txt</code>, <code class="language-plaintext highlighter-rouge">error.txt</code>, <code class="language-plaintext highlighter-rouge">U.txt</code>, <code class="language-plaintext highlighter-rouge">Vector.pub</code>, and <code class="language-plaintext highlighter-rouge">Y4mm1.pub</code> and a Python script <code class="language-plaintext highlighter-rouge">challenge.py</code>. Looking at the text file, all of them contains a lot of lines contains nonsense long integers.</p>
+
+<p>Let’s look at the script:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c1">#!/usr/bin/env python3
+</span><span class="kn">from</span> <span class="nn">Crypto.Util.number</span> <span class="kn">import</span> <span class="n">getStrongPrime</span><span class="p">,</span> <span class="n">long_to_bytes</span><span class="p">,</span> <span class="n">bytes_to_long</span><span class="p">,</span> <span class="n">isPrime</span>
+<span class="kn">from</span> <span class="nn">Crypto.Random.random</span> <span class="kn">import</span> <span class="n">getrandbits</span><span class="p">,</span> <span class="n">randint</span>
+
+<span class="n">BITS</span> <span class="o">=</span> <span class="mi">2048</span>
+<span class="n">m</span> <span class="o">=</span> <span class="mi">50</span>
+
+<span class="k">def</span> <span class="nf">random_sampling</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
+    <span class="n">A_sample</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">B_sample</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">A_sample</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+        <span class="n">B_sample</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">B</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">A_sample</span><span class="p">,</span> <span class="n">B_sample</span>
+
+<span class="k">def</span> <span class="nf">encrypt</span><span class="p">(</span><span class="n">binary</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">V</span><span class="p">):</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">bit</span> <span class="ow">in</span> <span class="n">binary</span><span class="p">:</span>
+        <span class="n">A_sample</span><span class="p">,</span> <span class="n">B_sample</span> <span class="o">=</span> <span class="n">random_sampling</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+        <span class="n">u</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">A_sample</span><span class="p">))</span>
+        <span class="n">v</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">B_sample</span><span class="p">)</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">bit</span><span class="p">)</span> <span class="o">*</span> <span class="n">q</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">secret</span> <span class="kn">import</span> <span class="n">FLAG</span>
+    <span class="n">flag_bin</span> <span class="o">=</span> <span class="nb">bin</span><span class="p">(</span><span class="n">bytes_to_long</span><span class="p">(</span><span class="n">FLAG</span><span class="p">))[</span><span class="mi">2</span><span class="p">:]</span>
+
+    <span class="c1"># Vector's public V and q
+</span>    <span class="n">q</span> <span class="o">=</span> <span class="n">getStrongPrime</span><span class="p">(</span><span class="n">BITS</span><span class="o">//</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># 141005691252576910321815300061524449403845156924370242363315198848732371339932991756697517095443419110596785676030977421942118579454753665338366954459064297763829764285379194891675397250604611542915187836155005789963659035798773723913603251708665381916244748924954152641555562387549588439698777943453481516067
+</span>    <span class="n">V</span> <span class="o">=</span> <span class="p">[</span><span class="n">getrandbits</span><span class="p">(</span><span class="n">BITS</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span> <span class="o">%</span> <span class="n">q</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">)]</span>
+
+    <span class="c1"># Secret keys
+</span>    <span class="n">s</span> <span class="o">=</span> <span class="n">getrandbits</span><span class="p">(</span><span class="n">BITS</span><span class="p">)</span> <span class="o">%</span> <span class="n">q</span>
+    <span class="n">Error</span> <span class="o">=</span> <span class="p">[</span><span class="n">getrandbits</span><span class="p">(</span><span class="n">BITS</span><span class="o">//</span><span class="mi">8</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">)]</span>
+
+    <span class="c1"># Y4mm1's public
+</span>    <span class="n">Y</span> <span class="o">=</span> <span class="p">[(</span><span class="n">v</span><span class="o">*</span><span class="n">s</span> <span class="o">+</span> <span class="n">e</span><span class="p">)</span> <span class="o">%</span> <span class="n">q</span> <span class="k">for</span> <span class="n">v</span><span class="p">,</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">Error</span><span class="p">)]</span>
+
+    <span class="c1"># cipher
+</span>    <span class="n">u</span><span class="p">,</span> <span class="n">cb</span> <span class="o">=</span> <span class="n">encrypt</span><span class="p">(</span><span class="n">flag_bin</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">V</span><span class="p">)</span>
+
+    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+    <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">V</span><span class="p">).</span><span class="n">tofile</span><span class="p">(</span><span class="s">'Vector.pub'</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span>
+    <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">Y</span><span class="p">).</span><span class="n">tofile</span><span class="p">(</span><span class="s">'Y4mm1.pub'</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span>
+    <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">Error</span><span class="p">).</span><span class="n">tofile</span><span class="p">(</span><span class="s">'error.txt'</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span>
+    <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">u</span><span class="p">).</span><span class="n">tofile</span><span class="p">(</span><span class="s">'U.txt'</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span>
+    <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">cb</span><span class="p">).</span><span class="n">tofile</span><span class="p">(</span><span class="s">'cipher.txt'</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span></code></pre></figure>
+
+<h3 id="analysis-3">Analysis</h3>
+
+<p>The script has 2 main functions <code class="language-plaintext highlighter-rouge">encrypt</code> and <code class="language-plaintext highlighter-rouge">random_sampling</code>. Then it does the following:</p>
+
+<ol>
+  <li>Get the flag from the secret file, then converts it into binary.</li>
+  <li>Generate a known random 1024 bit prime \(q\).</li>
+  <li>Generate 50 random integers 4096 bit each as a Vector’s public key.</li>
+  <li>Generate a 2048 bit random integer \(s\) along with 50 random integers 256 bit each.</li>
+  <li>Generate Y4mm1’s public key based on Vector’s key and the <code class="language-plaintext highlighter-rouge">Error</code> with this equation \(Y = Vs + Error\).</li>
+</ol>
+
+<p>All the previous are reduced module \(q\), then it encrypts the bits of the flag with the Vector and Y4mm1 public keys.</p>
+
+<p>The encryption function get random samples from both public keys, iterate over the bits of the flag and in each iteration does the folowing:</p>
+
+<ol>
+  <li>Sum the first sample that belongs to Vector’s public and append it into a list <code class="language-plaintext highlighter-rouge">u</code>.</li>
+  <li>Sum the second sample that belongs to Y4mm1’s public and add to it the current flag bit multiplied by \(\frac{q}{2}\), then append it into a list <code class="language-plaintext highlighter-rouge">v</code>.</li>
+</ol>
+
+<h3 id="solution-2">Solution</h3>
+
+<p>After some digging about quantum cryptography, this technique is pretty known in the robust quantum world of crypto systems called <a href="https://cryptography.fandom.com/wiki/Learning_with_errors">Learning With Errors</a>. It’s a  <a href="https://en.wikipedia.org/wiki/Lattice-based_cryptography">lattice based</a> cryptography algorithm built on top of <a href="https://en.wikipedia.org/wiki/Lattice_problem">SVP &amp; CVP</a> hard problems. This challenge is a simplfied version of the <strong>LWE</strong> system.</p>
+
+<p>The secret parameters should be \(s\) and \(Error\), but we know only the \(Error\) vector and from this equation \(Y = Vs + Error \pmod q\) the only unknown here is the secret integer \(s\), where \(Y\) and \(V\) are the public keys. Rearranging the equation, we shall get \(s = V^{-1}(Y - Error) \pmod q\) where \(xV = 1 \pmod q\) the equation to get the modular inverse of \(V \pmod q\).</p>
+
+<p>Note that, the public keys are lists and the secret is a single integer, so for any values of the public keys, we should get the same secret value \(s\) from the previous equation.</p>
+
+<p>Then, we can apply the decryption process \(dec = c - su \pmod q\) where \(c\) is the encrypted bit integer from <code class="language-plaintext highlighter-rouge">cipher.txt</code> and \(u\) is the value from <code class="language-plaintext highlighter-rouge">U.txt</code>. In order to get each bit of the flag, we should check \(dec &lt; \frac{q}{2}\) for 0 and 1 otherwise.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c1">#!/usr/bin/env python3
+</span><span class="kn">from</span> <span class="nn">Crypto.Util.number</span> <span class="kn">import</span> <span class="n">long_to_bytes</span><span class="p">,</span> <span class="n">isPrime</span><span class="p">,</span> <span class="n">inverse</span>
+
+<span class="n">q</span> <span class="o">=</span> <span class="mi">141005691252576910321815300061524449403845156924370242363315198848732371339932991756697517095443419110596785676030977421942118579454753665338366954459064297763829764285379194891675397250604611542915187836155005789963659035798773723913603251708665381916244748924954152641555562387549588439698777943453481516067</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'Vector.pub'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">alice</span><span class="p">,</span> \
+    <span class="nb">open</span><span class="p">(</span><span class="s">'Y4mm1.pub'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">bob</span><span class="p">,</span> \
+    <span class="nb">open</span><span class="p">(</span><span class="s">'cipher.txt'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">c</span><span class="p">,</span> \
+    <span class="nb">open</span><span class="p">(</span><span class="s">'U.txt'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">u</span><span class="p">,</span> \
+    <span class="nb">open</span><span class="p">(</span><span class="s">'error.txt'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span> <span class="p">:</span>
+    <span class="n">alice</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">alice</span><span class="p">.</span><span class="n">readlines</span><span class="p">()))</span>
+    <span class="n">bob</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">bob</span><span class="p">.</span><span class="n">readlines</span><span class="p">()))</span>
+    <span class="n">cipher</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">c</span><span class="p">.</span><span class="n">readlines</span><span class="p">()))</span>
+    <span class="n">u_vec</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">u</span><span class="p">.</span><span class="n">readlines</span><span class="p">()))</span>
+    <span class="n">e_vec</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">e</span><span class="p">.</span><span class="n">readlines</span><span class="p">()))</span>
+
+<span class="n">flag</span> <span class="o">=</span> <span class="s">''</span>
+<span class="n">As</span> <span class="o">=</span> <span class="p">[(</span><span class="n">b</span> <span class="o">-</span> <span class="n">e</span><span class="p">)</span> <span class="k">for</span> <span class="n">b</span><span class="p">,</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">bob</span><span class="p">,</span> <span class="n">e_vec</span><span class="p">)]</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">inverse</span><span class="p">(</span><span class="n">alice</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">q</span><span class="p">)</span> <span class="o">*</span> <span class="n">As</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">%</span> <span class="n">q</span>
+
+<span class="k">for</span> <span class="n">v</span><span class="p">,</span> <span class="n">u</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">cipher</span><span class="p">,</span> <span class="n">u_vec</span><span class="p">):</span>
+    <span class="n">dec</span> <span class="o">=</span> <span class="p">(</span><span class="n">v</span> <span class="o">-</span> <span class="n">s</span><span class="o">*</span><span class="n">u</span><span class="p">)</span> <span class="o">%</span> <span class="n">q</span>
+    <span class="k">if</span> <span class="n">dec</span> <span class="o">&lt;</span> <span class="n">q</span> <span class="o">//</span> <span class="mi">4</span><span class="p">:</span>
+        <span class="n">flag</span> <span class="o">+=</span> <span class="s">'0'</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">flag</span> <span class="o">+=</span> <span class="s">'1'</span>
+<span class="k">print</span><span class="p">(</span><span class="n">long_to_bytes</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">flag</span><span class="p">,</span><span class="mi">2</span><span class="p">)))</span></code></pre></figure>
+
+<blockquote>
+  <p>It doesn’t matter \(dec &lt; \frac{q}{2^i}\), for any arbitrary \(i&gt;0\). The \(dec\) should be close to 0, you could notice that from the encryption function.</p>
+</blockquote>
+
+<p>Finally, we’ll get the flag:</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">ASCWG{L@tt1c3_B4s3d_Cryp70_5y$</span>7em_15_M0r3_53cUr3_7h4n_U_7h1nk!^_^<span class="o">}</span></code></pre></figure>
+
+<hr />
+
+<p><a id="conc"></a></p>
+<h2 id="conclusion">Conclusion</h2>
+
+<p>This write-up discussed and analyzed not only the crypto challenges in the competition but also how to deal with difficult problems and how to cut them into pieces in order to be able to find a solution. In addition, it covered new topics in cryptography and post-quantum crypto in a simplified way to get into the concept and understand how it works.</p>
+
+<p>The topics included:</p>
+
+<ul>
+  <li>Padding Oracle Attack on AES-CBC mode and implementation steps.</li>
+  <li>Attacking Blum Blum Shub pseudo random number generator algorithm.</li>
+  <li>Post Quantum Hash-Based Cryptography and Winternitz One Time Signature.</li>
+  <li>Post Quantum Lattice-Based Cryptography and Learning With Errors.</li>
+</ul>
+
+<p>All post-quantum schemes are considered <a href="https://en.wikipedia.org/wiki/NP-hardness">NP-Hard</a> which means its security remains hard to quantify, but when security looks too good to be true, it often is. Because of the lack of understanding of the constructions of such a scheme, however you get the first step in the future of cryptography.</p>
+
+<p>Finally, there isn’t one way of thinking about a challenge to find a solution. Although, you may take hours, days, weeks, or even months in order to understand how such a cryptosystem works and find flaws to break it.</p>
+
+          </div>
+          <div class="article-share">
+            
+            
+            <a href="https://twitter.com/home?status=ASC+-+Wargames+Finals+2021%20-%20https://s4yed.github.io/posts/asc-wargames-finals-2021" title="Share on Twitter" rel="noreferrer noopener" target="_blank">
+              <svg viewBox="0 0 512 512"><path d="M492 109.5c-17.4 7.7-36 12.9-55.6 15.3 20-12 35.4-31 42.6-53.6 -18.7 11.1-39.4 19.2-61.5 23.5C399.8 75.8 374.6 64 346.8 64c-53.5 0-96.8 43.4-96.8 96.9 0 7.6 0.8 15 2.5 22.1 -80.5-4-151.9-42.6-199.6-101.3 -8.3 14.3-13.1 31-13.1 48.7 0 33.6 17.2 63.3 43.2 80.7C67 210.7 52 206.3 39 199c0 0.4 0 0.8 0 1.2 0 47 33.4 86.1 77.7 95 -8.1 2.2-16.7 3.4-25.5 3.4 -6.2 0-12.3-0.6-18.2-1.8 12.3 38.5 48.1 66.5 90.5 67.3 -33.1 26-74.9 41.5-120.3 41.5 -7.8 0-15.5-0.5-23.1-1.4C62.8 432 113.7 448 168.3 448 346.6 448 444 300.3 444 172.2c0-4.2-0.1-8.4-0.3-12.5C462.6 146 479 129 492 109.5z"/></svg>
+            </a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://s4yed.github.io/posts/asc-wargames-finals-2021" title="Share on Facebook" rel="noreferrer noopener" target="_blank">
+              <svg viewBox="0 0 512 512"><path d="M288 192v-38.1c0-17.2 3.8-25.9 30.5-25.9H352V64h-55.9c-68.5 0-91.1 31.4-91.1 85.3V192h-45v64h45v192h83V256h56.4l7.6-64H288z"/></svg>
+            </a>
+          </div>
+
+          
+            <div id="disqus_thread" class="article-comments"></div>
+            <script src="https://my-blog-0vgcdsd8x2.disqus.com/embed.js" async defer></script>
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+          
+        </article>
+        <footer class="footer scrollappear">
+    <p style="text-align: center">
+      This is my little tech blog, feel free to ask me any question &#169;
+      <a href="/about" title="About me">Ahmed Sayed</a>
+    </p>
+</footer>
+
+      </div>
+    </div>
+  </main>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-157807027-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-157807027-1');
+  </script>
+
+
+<script type="text/javascript" src="/assets/vendor-2c224c53eb697c739f9490c38819a72184f09472739fd9e492272ef174090428.js"></script>
+
+
+  <script type="text/javascript" src="/assets/webfonts-96493456d319d1bf419afdf8701552d4d486fee6afd304897d4fd81eb4e0cc0b.js"></script>
+
+
+
+  <script type="text/javascript" src="/assets/scrollappear-e2da8ea567e418637e31266cc5302126eaa79f62a2273739086358b589a89ee6.js"></script>
+
+
+<script type="text/javascript" src="/assets/application-cfde13ac81ddaf4351b2e739603e2baf688d0fcc9aba613fe62bbb1c7b037fb9.js"></script>
+
+
+
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+</body>
+</html>

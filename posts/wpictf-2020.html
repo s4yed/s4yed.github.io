@@ -33,13 +33,15 @@
 
     
       <link rel="icon" type="image/x-icon" href="/assets/favicon-color-0e896bd8673d9f83cea8d7b0a12fcc894681d58fc475ad499adfed94067b1e1f.png">
-      <link rel="apple-touch-icon" href="/assets/apple-touch-icon-light-87d1f2a3a19b1500e5c1626a0492025ca5f7f97d24540dc5900288e92112925a.png">
-      <link rel="stylesheet" type="text/css" title="light" id="light" href="/assets/light-268b84a5df702d717857e91d8b80ec0f176d52b07f0893bd82eac76e7e8f0c40.css">
-      <link rel="stylesheet" type="text/css" title="dark" id="dark" href="/assets/dark-b6f8f6ceb983aa3da9f5bf7550d7516c131ba02c21bd7efe6fcdc1ac1eb1a693.css" disabled="true">
+      <link rel="apple-touch-icon" href="/assets/apple-touch-icon-dark-d161409442b7e523089f24d08d0a55951549ece7504207c376d53b020713494d.png">
+      <link rel="stylesheet" type="text/css" href="/assets/dark-bd87a972117a631461755cc733ab96b66bb38fb9d09359688cac8e4c2c561606.css">
     
 
   
 
+  <!-- Load KaTeX -->
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.1.1/katex.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.1.1/katex.min.js"></script>
 </head>
 
 <body>
@@ -119,21 +121,15 @@
       </li>
     
     
-      <li>
-        <a onclick="toggle()" title="Toggle Theme">
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon-theme">
-  <use href="/assets/theme-610197c56844c5ba34608b2018c4cc3b79f8833e2efc7a99bcb5589f1d3cfd7b.svg#icon-theme" xlink:href="/assets/theme-610197c56844c5ba34608b2018c4cc3b79f8833e2efc7a99bcb5589f1d3cfd7b.svg#icon-theme"></use>
-</svg>
-
-        </a>
-      </li>
-    
   </ul>
 </nav>
 
 
   <ul class="header-tags scrollappear">
     
+    
+      
+        <li><a href="/tag/AES">Aes</a></li>
     
       
         <li><a href="/tag/ASC-Wargames">Asc-wargames</a></li>
@@ -163,9 +159,6 @@
         <li><a href="/tag/c">C</a></li>
     
       
-        <li><a href="/tag/cracking">Cracking</a></li>
-    
-      
         <li>...</li>
         <li><a href="/tags">Show all</a></li>
         
@@ -184,7 +177,7 @@
   <span class="article-list-minutes">
     
     
-      8 minute read
+      9 minute read
     
   </span>
   <span class="article-list-divider">-</span>
@@ -252,15 +245,15 @@
 </blockquote>
 
 <p>This challenge was the most interesting one I solved during the competition.
-It gives us an archive <a href="https://gofile.io/?c=nsXYhZ"><code class="highlighter-rouge">Luna.tar.xz</code></a> and it contains a <code class="highlighter-rouge">1.png</code> image and another password protected archive <code class="highlighter-rouge">so you take the moon.zip</code>.</p>
+It gives us an archive <a href="https://gofile.io/?c=nsXYhZ"><code class="language-plaintext highlighter-rouge">Luna.tar.xz</code></a> and it contains a <code class="language-plaintext highlighter-rouge">1.png</code> image and another password protected archive <code class="language-plaintext highlighter-rouge">so you take the moon.zip</code>.</p>
 
-<p>I tried to extract the password hash to crack it with <code class="highlighter-rouge">john</code> but it seems it was uncrackable password, so let’s look at the image.</p>
+<p>I tried to extract the password hash to crack it with <code class="language-plaintext highlighter-rouge">john</code> but it seems it was uncrackable password, so let’s look at the image.</p>
 
 <p><a href="/assets/documentation/WPICTF/1-399743d67c4bf96130cc168755c7588a1d1bf8738a408a7c0ba439000bf9a58f.png">
   <img src="/assets/documentation/WPICTF/1-399743d67c4bf96130cc168755c7588a1d1bf8738a408a7c0ba439000bf9a58f.png" alt="flag" class="zooming" data-rjs="/assets/documentation/WPICTF/1-399743d67c4bf96130cc168755c7588a1d1bf8738a408a7c0ba439000bf9a58f.png" data-zooming-width="300" data-zooming-height="300" />
 </a></p>
 
-<p>It’s just an empty white image nothing usefull in it, so let’s try to run <code class="highlighter-rouge">exiftool</code> to see any hidden text.</p>
+<p>It’s just an empty white image nothing usefull in it, so let’s try to run <code class="language-plaintext highlighter-rouge">exiftool</code> to see any hidden text.</p>
 
 <figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>exiftool 1.png 
 <span class="go">ExifTool Version Number         : 11.93
@@ -307,27 +300,27 @@ History Software Agent          : Gimp 2.10 (Linux), Gimp 2.10 (Linux), Gimp 2.1
 History When                    : -04:00, -04:00, -04:00, -04:00, -04:00
 </span><span class="c">...</span></code></pre></figure>
 
-<p>The image contains some useful info but there is one thing that made me pay attention<code class="highlighter-rouge">Study Physician: awcIsALegendAndIHopeThisIsAStrongPasswordJackTheRipperBegone</code>. So when I tried to unzip the archive with that password it worked and gave me 2 another files <code class="highlighter-rouge">Just In Case.png</code> and <code class="highlighter-rouge">jut</code>.</p>
+<p>The image contains some useful info but there is one thing that made me pay attention<code class="language-plaintext highlighter-rouge">Study Physician: awcIsALegendAndIHopeThisIsAStrongPasswordJackTheRipperBegone</code>. So when I tried to unzip the archive with that password it worked and gave me 2 another files <code class="language-plaintext highlighter-rouge">Just In Case.png</code> and <code class="language-plaintext highlighter-rouge">jut</code>.</p>
 
-<p>The image wasn’t useful for me maybe there is another solution i don’t know, but the other file seems interesting. The <code class="highlighter-rouge">file</code> command didn’t recognize it so let see the magic bytes.</p>
+<p>The image wasn’t useful for me maybe there is another solution i don’t know, but the other file seems interesting. The <code class="language-plaintext highlighter-rouge">file</code> command didn’t recognize it so let see the magic bytes.</p>
 
-<p><code class="highlighter-rouge">00000000  42 50 53 31  54 42 8F 37   15 90 80 08  80 21 23 80      BPS1TB.7.....!#.</code></p>
+<p><code class="language-plaintext highlighter-rouge">00000000  42 50 53 31  54 42 8F 37   15 90 80 08  80 21 23 80      BPS1TB.7.....!#.</code></p>
 
-<p>First I assumed that maybe a Photoshop <code class="highlighter-rouge">PSD</code> file since the magic bytes look similar. However I’ve tried to add the missing bytes and open it with Photoshop, but the file looks corrupted. I struggled at this point for some time, so let’s run <code class="highlighter-rouge">binwalk</code> to see any hidden files.</p>
+<p>First I assumed that maybe a Photoshop <code class="language-plaintext highlighter-rouge">PSD</code> file since the magic bytes look similar. However I’ve tried to add the missing bytes and open it with Photoshop, but the file looks corrupted. I struggled at this point for some time, so let’s run <code class="language-plaintext highlighter-rouge">binwalk</code> to see any hidden files.</p>
 
 <figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>binwalk jut
 <span class="go">DECIMAL       HEXADECIMAL     DESCRIPTION
 --------------------------------------------------------------------------------
 45            0x2D            Zlib compressed data, best compression</span></code></pre></figure>
 
-<p>There is a <code class="highlighter-rouge">zlib</code> file at position <code class="highlighter-rouge">0x2d</code> let’s extract it.</p>
+<p>There is a <code class="language-plaintext highlighter-rouge">zlib</code> file at position <code class="language-plaintext highlighter-rouge">0x2d</code> let’s extract it.</p>
 
 <figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span><span class="nb">dd </span><span class="k">if</span><span class="o">=</span>jut <span class="nv">bs</span><span class="o">=</span>1 <span class="nv">skip</span><span class="o">=</span>45 <span class="nv">of</span><span class="o">=</span>file.zlib
 <span class="go">17893+0 records in
 17893+0 records out
 17893 bytes (18 kB, 17 KiB) copied, 0.0917604 s, 195 kB/s</span></code></pre></figure>
 
-<p>Now, we have <code class="highlighter-rouge">zlib</code> compressed file the goal is to extract and see if it contains any data. I wrote a <code class="highlighter-rouge">bash</code> line code to take the file and extract the data using <code class="highlighter-rouge">zlib</code> library in python.</p>
+<p>Now, we have <code class="language-plaintext highlighter-rouge">zlib</code> compressed file the goal is to extract and see if it contains any data. I wrote a <code class="language-plaintext highlighter-rouge">bash</code> line code to take the file and extract the data using <code class="language-plaintext highlighter-rouge">zlib</code> library in python.</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c">#!/usr/bin/bash</span>
 <span class="nb">cat</span> <span class="nv">$1</span> | python <span class="nt">-c</span> <span class="s2">"import zlib,sys;sys.stdout.write(zlib.decompress(sys.stdin.read()))"</span></code></pre></figure>
@@ -351,14 +344,14 @@ aa0000006987040001000000be0000002588040001000000d00000003201000008000800
 </span><span class="go">a0028a28a0028a28a0028a28a0028a28a0028a28a0028a28a0028a28a0028a28a0028a28
 a0028a28a0028a28a0028a28a0028a28a0028a28a0028a28a0028a28a0028a28a00fffd9</span></code></pre></figure>
 
-<p>It looks interesting some hex bytes and I noticed that the last 2 bytes <code class="highlighter-rouge">ff d9</code>, so I assumed it’s a <code class="highlighter-rouge">jpg</code> image I searched for the first magic bytes <code class="highlighter-rouge">ff d8 ff</code> I found it at line <code class="highlighter-rouge">12</code> so let’s put those values into a new hex editor and save it as <code class="highlighter-rouge">flag.jpg</code>.</p>
+<p>It looks interesting some hex bytes and I noticed that the last 2 bytes <code class="language-plaintext highlighter-rouge">ff d9</code>, so I assumed it’s a <code class="language-plaintext highlighter-rouge">jpg</code> image I searched for the first magic bytes <code class="language-plaintext highlighter-rouge">ff d8 ff</code> I found it at line <code class="language-plaintext highlighter-rouge">12</code> so let’s put those values into a new hex editor and save it as <code class="language-plaintext highlighter-rouge">flag.jpg</code>.</p>
 
 <p><a href="/assets/documentation/WPICTF/flag-975e9974896b7ae5bb867e7f301e97c800808261ac2a53031706b376b8df8a97.jpg">
   <img src="/assets/documentation/WPICTF/flag-975e9974896b7ae5bb867e7f301e97c800808261ac2a53031706b376b8df8a97.jpg" alt="flag" class="zooming" data-rjs="/assets/documentation/WPICTF/flag-975e9974896b7ae5bb867e7f301e97c800808261ac2a53031706b376b8df8a97.jpg" data-zooming-width="256" data-zooming-height="256" />
 </a></p>
 
-<p>Thanks to <code class="highlighter-rouge">Jutin</code> the creator of this challenge.
-the flag: <code class="highlighter-rouge">WPI{M00N_mOOn}</code></p>
+<p>Thanks to <code class="language-plaintext highlighter-rouge">Jutin</code> the creator of this challenge.
+the flag: <code class="language-plaintext highlighter-rouge">WPI{M00N_mOOn}</code></p>
 
 <h2 id="crypto">Crypto</h2>
 <hr />
@@ -383,11 +376,11 @@ the flag: <code class="highlighter-rouge">WPI{M00N_mOOn}</code></p>
 
 <span class="n">e</span><span class="o">=</span><span class="mi">3</span></code></pre></figure>
 
-<p>The challenge very obvious it gives us some <code class="highlighter-rouge">c1 c2 c3</code> and <code class="highlighter-rouge">n1 n2 n3</code> with <code class="highlighter-rouge">e=3</code> I know it’s a <code class="highlighter-rouge">RSA</code> challenge with very famouse <a href="https://en.wikipedia.org/wiki/Chinese_remainder_theorem">Chinese Remainder Theorem</a> and <a href="https://en.wikipedia.org/wiki/Coppersmith%27s_attack#H%C3%A5stad%27s_broadcast_attack">Coppermith Attack</a>.</p>
+<p>The challenge very obvious it gives us some <code class="language-plaintext highlighter-rouge">c1 c2 c3</code> and <code class="language-plaintext highlighter-rouge">n1 n2 n3</code> with <code class="language-plaintext highlighter-rouge">e=3</code> I know it’s a <code class="language-plaintext highlighter-rouge">RSA</code> challenge with very famouse <a href="https://en.wikipedia.org/wiki/Chinese_remainder_theorem">Chinese Remainder Theorem</a> and <a href="https://en.wikipedia.org/wiki/Coppersmith%27s_attack#H%C3%A5stad%27s_broadcast_attack">Coppermith Attack</a>.</p>
 
-<p>Now, the goal is to find <code class="highlighter-rouge">M</code> such that <code class="highlighter-rouge">C = M^3 mod(n1*n2*n3)</code> and we know that <code class="highlighter-rouge">M &lt; Ni</code> so <code class="highlighter-rouge">C = M^3</code> and <code class="highlighter-rouge">M</code> is our message (flag).</p>
+<p>Now, the goal is to find <code class="language-plaintext highlighter-rouge">M</code> such that <code class="language-plaintext highlighter-rouge">C = M^3 mod(n1*n2*n3)</code> and we know that <code class="language-plaintext highlighter-rouge">M &lt; Ni</code> so <code class="language-plaintext highlighter-rouge">C = M^3</code> and <code class="language-plaintext highlighter-rouge">M</code> is our message (flag).</p>
 
-<p>Hopefully, there is a method in <code class="highlighter-rouge">sympy</code> library to compute <code class="highlighter-rouge">C</code> and get the flag.</p>
+<p>Hopefully, there is a method in <code class="language-plaintext highlighter-rouge">sympy</code> library to compute <code class="language-plaintext highlighter-rouge">C</code> and get the flag.</p>
 
 <figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">sympy.ntheory.modular</span> <span class="kn">import</span> <span class="n">crt</span>
 <span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">root</span>
@@ -411,7 +404,7 @@ the flag: <code class="highlighter-rouge">WPI{M00N_mOOn}</code></p>
 <span class="n">m</span> <span class="o">=</span> <span class="n">root</span><span class="p">(</span><span class="n">M</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
 <span class="k">print</span> <span class="n">m</span></code></pre></figure>
 
-<p>And I got ascii integer values for the flag: <code class="highlighter-rouge">WPI{Ch1n3s3_R3M@ind3R_Th30r3m_!_}</code>.</p>
+<p>And I got ascii integer values for the flag: <code class="language-plaintext highlighter-rouge">WPI{Ch1n3s3_R3M@ind3R_Th30r3m_!_}</code>.</p>
 
 <h2 id="reverse">Reverse</h2>
 <hr />
@@ -423,45 +416,45 @@ the flag: <code class="highlighter-rouge">WPI{M00N_mOOn}</code></p>
 These are the resources we were able to gather for you:</p>
   <ul>
     <li>the malicious ransomware executable
-<a href="https://gofile.io/?c=59GptB"><code class="highlighter-rouge">NotWannasigh.zip</code></a></li>
+<a href="https://gofile.io/?c=59GptB"><code class="language-plaintext highlighter-rouge">NotWannasigh.zip</code></a></li>
     <li>our poor encrypted file that we need you to recover
-<a href="https://gofile.io/?c=ELn6Wi"><code class="highlighter-rouge">flag-gif.EnCiPhErEd</code></a></li>
+<a href="https://gofile.io/?c=ELn6Wi"><code class="language-plaintext highlighter-rouge">flag-gif.EnCiPhErEd</code></a></li>
     <li>the note left behind by the ransomware. I’m not sure you’ll find anything usefull here
 ransomNote.txt</li>
     <li>a packet capture that our IDS isolated, it seems that the program has some weird form of data exfiltration
-<a href="https://gofile.io/?c=EhS33Y"><code class="highlighter-rouge">192-168-1-11_potential-malware.pcap</code></a></li>
+<a href="https://gofile.io/?c=EhS33Y"><code class="language-plaintext highlighter-rouge">192-168-1-11_potential-malware.pcap</code></a></li>
     <li>We need you to reverse the malware and recover our flag.gif file. Good luck!
 A note from the creator: Shoutout to Demonslay335 for challenge inspiration - he’s done some awesome work in fighting ransomware. Also, the ransomware in this challenge is programmed to only target files named “flag.gif” so you shouldn’t need to worry about the accidental execution, I just zipped it out of habit/good practice. Have fun and happy hacking!</li>
   </ul>
 </blockquote>
 
-<p>The challenge was a little bit easy for me it gives us some network traffic <code class="highlighter-rouge">pcap</code> file, a binary, a text note, and the encrypted flag file. The goal here is to debug the binary and see what it does and reverse the process of encryption. Let’s open the binary in <code class="highlighter-rouge">IDA</code> and see what it looks like.</p>
+<p>The challenge was a little bit easy for me it gives us some network traffic <code class="language-plaintext highlighter-rouge">pcap</code> file, a binary, a text note, and the encrypted flag file. The goal here is to debug the binary and see what it does and reverse the process of encryption. Let’s open the binary in <code class="language-plaintext highlighter-rouge">IDA</code> and see what it looks like.</p>
 
-<p>I noticed there is a main function with some heavy code, so let’s analyze it. From line <code class="highlighter-rouge">26</code> to <code class="highlighter-rouge">52</code> it’s just seeds the <code class="highlighter-rouge">srand</code> with the current time, trying to connect to the socket with address <code class="highlighter-rouge">108.61.127.136</code>, send the seed value and thats so interesting because the same seed produce the same random values.</p>
+<p>I noticed there is a main function with some heavy code, so let’s analyze it. From line <code class="language-plaintext highlighter-rouge">26</code> to <code class="language-plaintext highlighter-rouge">52</code> it’s just seeds the <code class="language-plaintext highlighter-rouge">srand</code> with the current time, trying to connect to the socket with address <code class="language-plaintext highlighter-rouge">108.61.127.136</code>, send the seed value and thats so interesting because the same seed produce the same random values.</p>
 
 <p><a href="/assets/documentation/WPICTF/first-d29ecd610ec5095d86a918e2dbcacda236562e6c75067887a830b8f3c1a27107.png">
   <img src="/assets/documentation/WPICTF/first-d29ecd610ec5095d86a918e2dbcacda236562e6c75067887a830b8f3c1a27107.png" alt="flag" class="zooming" data-rjs="/assets/documentation/WPICTF/first-d29ecd610ec5095d86a918e2dbcacda236562e6c75067887a830b8f3c1a27107.png" data-zooming-width="451" data-zooming-height="410" />
 </a></p>
 
-<p>From line <code class="highlighter-rouge">54</code> to <code class="highlighter-rouge">58</code> it opens the <code class="highlighter-rouge">flag.gif</code> file in the read mode, save the file size at <code class="highlighter-rouge">v19</code> and print it.</p>
+<p>From line <code class="language-plaintext highlighter-rouge">54</code> to <code class="language-plaintext highlighter-rouge">58</code> it opens the <code class="language-plaintext highlighter-rouge">flag.gif</code> file in the read mode, save the file size at <code class="language-plaintext highlighter-rouge">v19</code> and print it.</p>
 
 <p><a href="/assets/documentation/WPICTF/second-645a144a915bfbea67c514ce1c5cbcd2d1e68dfeaa905aa6be42b6efb0c79f5d.png">
   <img src="/assets/documentation/WPICTF/second-645a144a915bfbea67c514ce1c5cbcd2d1e68dfeaa905aa6be42b6efb0c79f5d.png" alt="flag" class="zooming" data-rjs="/assets/documentation/WPICTF/second-645a144a915bfbea67c514ce1c5cbcd2d1e68dfeaa905aa6be42b6efb0c79f5d.png" data-zooming-width="347" data-zooming-height="93" />
 </a></p>
 
-<p>From <code class="highlighter-rouge">63</code> to <code class="highlighter-rouge">66</code> it produces the random values and put them into an integer array <code class="highlighter-rouge">v17</code> of the same size of the <code class="highlighter-rouge">flag.gif</code>.</p>
+<p>From <code class="language-plaintext highlighter-rouge">63</code> to <code class="language-plaintext highlighter-rouge">66</code> it produces the random values and put them into an integer array <code class="language-plaintext highlighter-rouge">v17</code> of the same size of the <code class="language-plaintext highlighter-rouge">flag.gif</code>.</p>
 
 <p><a href="/assets/documentation/WPICTF/third-1d4ab4abf2ce727ac236da8cd10a587cce2fb621924e4601601e32b5efab86de.png">
   <img src="/assets/documentation/WPICTF/third-1d4ab4abf2ce727ac236da8cd10a587cce2fb621924e4601601e32b5efab86de.png" alt="flag" class="zooming" data-rjs="/assets/documentation/WPICTF/third-1d4ab4abf2ce727ac236da8cd10a587cce2fb621924e4601601e32b5efab86de.png" data-zooming-width="359" data-zooming-height="63" />
 </a></p>
 
-<p>At lines <code class="highlighter-rouge">72</code> to <code class="highlighter-rouge">80</code> it gets the current value from the file, do bitwise <code class="highlighter-rouge">xor</code> with the current random value of array <code class="highlighter-rouge">v17</code>, append the result into an array <code class="highlighter-rouge">v15</code>, close the file, and remove it.</p>
+<p>At lines <code class="language-plaintext highlighter-rouge">72</code> to <code class="language-plaintext highlighter-rouge">80</code> it gets the current value from the file, do bitwise <code class="language-plaintext highlighter-rouge">xor</code> with the current random value of array <code class="language-plaintext highlighter-rouge">v17</code>, append the result into an array <code class="language-plaintext highlighter-rouge">v15</code>, close the file, and remove it.</p>
 
 <p><a href="/assets/documentation/WPICTF/forth-444be541964991a17327cfb909511c2d269b9f469e8ff8d3ae9a585b2fb2c45f.png">
   <img src="/assets/documentation/WPICTF/forth-444be541964991a17327cfb909511c2d269b9f469e8ff8d3ae9a585b2fb2c45f.png" alt="flag" class="zooming" data-rjs="/assets/documentation/WPICTF/forth-444be541964991a17327cfb909511c2d269b9f469e8ff8d3ae9a585b2fb2c45f.png" data-zooming-width="347" data-zooming-height="137" />
 </a></p>
 
-<p>The last lines <code class="highlighter-rouge">81</code> to <code class="highlighter-rouge">92</code> it opens a new file <code class="highlighter-rouge">flag-gif.EnCiPhErEd</code> in the write mode, put each value of the aray <code class="highlighter-rouge">v15</code> into the file, close the file, open another file to write the text note.</p>
+<p>The last lines <code class="language-plaintext highlighter-rouge">81</code> to <code class="language-plaintext highlighter-rouge">92</code> it opens a new file <code class="language-plaintext highlighter-rouge">flag-gif.EnCiPhErEd</code> in the write mode, put each value of the aray <code class="language-plaintext highlighter-rouge">v15</code> into the file, close the file, open another file to write the text note.</p>
 
 <p><a href="/assets/documentation/WPICTF/fifth-5c74a981b5c6e1e9b50b19ff0ac894eef1436c7f70b73de586f5e8ec20cda246.png">
   <img src="/assets/documentation/WPICTF/fifth-5c74a981b5c6e1e9b50b19ff0ac894eef1436c7f70b73de586f5e8ec20cda246.png" alt="flag" class="zooming" data-rjs="/assets/documentation/WPICTF/fifth-5c74a981b5c6e1e9b50b19ff0ac894eef1436c7f70b73de586f5e8ec20cda246.png" data-zooming-width="535" data-zooming-height="199" />
@@ -492,9 +485,9 @@ Connection: close
 </span><span class="gp">root@kali:~#</span><span class="w"> </span><span class="nb">date</span> <span class="nt">-d</span> @1585599106
 <span class="go">Mon 30 Mar 2020 10:11:46 PM EET</span></code></pre></figure>
 
-<p>I assumed the seed value is <code class="highlighter-rouge">1585599106</code> and I checked with <code class="highlighter-rouge">date</code> it tells me the acual time when the program ran.</p>
+<p>I assumed the seed value is <code class="language-plaintext highlighter-rouge">1585599106</code> and I checked with <code class="language-plaintext highlighter-rouge">date</code> it tells me the acual time when the program ran.</p>
 
-<p>After that I have the seed and the encrypted flag file, so let’s wrote some code the reverse the process and get the <code class="highlighter-rouge">file.gif</code>.</p>
+<p>After that I have the seed and the encrypted flag file, so let’s wrote some code the reverse the process and get the <code class="language-plaintext highlighter-rouge">file.gif</code>.</p>
 
 <figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="cp">#include&lt;stdio.h&gt;
 </span>
@@ -528,7 +521,7 @@ Connection: close
   <img src="/assets/documentation/WPICTF/flag-897bdbd1632cdc92c6bfc1b8d7afdbbca574a3d4248c52e066c93bfc9e57593a.gif" alt="flag" class="zooming" data-rjs="/assets/documentation/WPICTF/flag-897bdbd1632cdc92c6bfc1b8d7afdbbca574a3d4248c52e066c93bfc9e57593a.gif" data-zooming-width="220" data-zooming-height="124" />
 </a></p>
 
-<p>And the flag: <code class="highlighter-rouge">WPI{It_always_feels_a_little_weird_writing_malware}</code></p>
+<p>And the flag: <code class="language-plaintext highlighter-rouge">WPI{It_always_feels_a_little_weird_writing_malware}</code></p>
 
           </div>
           <div class="article-share">
@@ -581,7 +574,7 @@ Connection: close
 <script type="text/javascript" src="/assets/application-cfde13ac81ddaf4351b2e739603e2baf688d0fcc9aba613fe62bbb1c7b037fb9.js"></script>
 
 
-  <script type="text/javascript" src="/assets/themetoggle-df0d3d73164dc26dffbd630182ae4d0dfa7bee6b694a2b5d565d73595b582bbf.js"></script>
 
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 </body>
 </html>

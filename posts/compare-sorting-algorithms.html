@@ -31,13 +31,15 @@
 
     
       <link rel="icon" type="image/x-icon" href="/assets/favicon-color-0e896bd8673d9f83cea8d7b0a12fcc894681d58fc475ad499adfed94067b1e1f.png">
-      <link rel="apple-touch-icon" href="/assets/apple-touch-icon-light-87d1f2a3a19b1500e5c1626a0492025ca5f7f97d24540dc5900288e92112925a.png">
-      <link rel="stylesheet" type="text/css" title="light" id="light" href="/assets/light-268b84a5df702d717857e91d8b80ec0f176d52b07f0893bd82eac76e7e8f0c40.css">
-      <link rel="stylesheet" type="text/css" title="dark" id="dark" href="/assets/dark-b6f8f6ceb983aa3da9f5bf7550d7516c131ba02c21bd7efe6fcdc1ac1eb1a693.css" disabled="true">
+      <link rel="apple-touch-icon" href="/assets/apple-touch-icon-dark-d161409442b7e523089f24d08d0a55951549ece7504207c376d53b020713494d.png">
+      <link rel="stylesheet" type="text/css" href="/assets/dark-bd87a972117a631461755cc733ab96b66bb38fb9d09359688cac8e4c2c561606.css">
     
 
   
 
+  <!-- Load KaTeX -->
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.1.1/katex.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.1.1/katex.min.js"></script>
 </head>
 
 <body>
@@ -117,21 +119,15 @@
       </li>
     
     
-      <li>
-        <a onclick="toggle()" title="Toggle Theme">
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon-theme">
-  <use href="/assets/theme-610197c56844c5ba34608b2018c4cc3b79f8833e2efc7a99bcb5589f1d3cfd7b.svg#icon-theme" xlink:href="/assets/theme-610197c56844c5ba34608b2018c4cc3b79f8833e2efc7a99bcb5589f1d3cfd7b.svg#icon-theme"></use>
-</svg>
-
-        </a>
-      </li>
-    
   </ul>
 </nav>
 
 
   <ul class="header-tags scrollappear">
     
+    
+      
+        <li><a href="/tag/AES">Aes</a></li>
     
       
         <li><a href="/tag/ASC-Wargames">Asc-wargames</a></li>
@@ -159,9 +155,6 @@
     
       
         <li><a href="/tag/c">C</a></li>
-    
-      
-        <li><a href="/tag/cracking">Cracking</a></li>
     
       
         <li>...</li>
@@ -206,7 +199,7 @@
 
           <div class="article-content">
             <h1 id="intro">Intro</h1>
-<p>In the world of algorithms, the first thing we would talk about is sorting. How we can sort a set of elements in a certain order? How long it takes to sort a set with a huge number of elements in it? To answer these questions we should be aware of most common sorting algorithms and its running time. There are two types of sorting algorithms, the slower one that could take <code class="highlighter-rouge">Ɵ(n^2)</code> time, and the faster one could take <code class="highlighter-rouge">Ɵ(n log n)</code> time. In this report, we shall discuss those types of algorithms and compare between them with different list sizes and the running time for each of them.</p>
+<p>In the world of algorithms, the first thing we would talk about is sorting. How we can sort a set of elements in a certain order? How long it takes to sort a set with a huge number of elements in it? To answer these questions we should be aware of most common sorting algorithms and its running time. There are two types of sorting algorithms, the slower one that could take <code class="language-plaintext highlighter-rouge">Ɵ(n^2)</code> time, and the faster one could take <code class="language-plaintext highlighter-rouge">Ɵ(n log n)</code> time. In this report, we shall discuss those types of algorithms and compare between them with different list sizes and the running time for each of them.</p>
 
 <h1 id="data">Data</h1>
 <ol>
@@ -228,13 +221,13 @@
       <li>Built-in Sort.</li>
     </ul>
 
-    <p>We used <code class="highlighter-rouge">C++</code> as our programming language to implement the functions that produced all of the above. Each of the sorting functions takes the size of the array and the array itself as an input. Then, we start with <code class="highlighter-rouge">N = 10000</code> and increment each time <code class="highlighter-rouge">10000</code> up to <code class="highlighter-rouge">N = 200000</code>. Now we have 20 arrays with different sizes.</p>
+    <p>We used <code class="language-plaintext highlighter-rouge">C++</code> as our programming language to implement the functions that produced all of the above. Each of the sorting functions takes the size of the array and the array itself as an input. Then, we start with <code class="language-plaintext highlighter-rouge">N = 10000</code> and increment each time <code class="language-plaintext highlighter-rouge">10000</code> up to <code class="language-plaintext highlighter-rouge">N = 200000</code>. Now we have 20 arrays with different sizes.</p>
   </li>
   <li>
     <p>Calculate the running time for each sort algorithm with each of the arrays and produce six directories represents 6 different arrays that mentioned before. Each directory contains 8 files, each file contains 20 lines, and each line contains 2 space separated values. The first one the size of the array and the second value represents the running time that took from the sorting algorithm.</p>
   </li>
   <li>
-    <p>Create Python file by which we can read the data and plot the graph to show us the curve for each sorting algorithm. We used some Python libraries to load and manipulate the data. The following libraries must be installed to run <code class="highlighter-rouge">Graph.py</code>:</p>
+    <p>Create Python file by which we can read the data and plot the graph to show us the curve for each sorting algorithm. We used some Python libraries to load and manipulate the data. The following libraries must be installed to run <code class="language-plaintext highlighter-rouge">Graph.py</code>:</p>
     <ul>
       <li>Pandas.</li>
       <li>Numpy.</li>
@@ -246,70 +239,70 @@
 <figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s">'bmh'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">style</span><span class="p">.</span><span class="n">use</span><span class="p">(</span><span class="s">'bmh'</span><span class="p">)</span>
 
 <span class="c1"># Legents list required to present each line with its color in the graph.
 </span><span class="n">legends</span> <span class="o">=</span> <span class="p">[</span><span class="s">'Merge Sort'</span><span class="p">,</span> <span class="s">'Quick Sort'</span><span class="p">,</span> <span class="s">'Modified Merge Sort'</span> <span class="p">,</span> <span class="s">'Randomized Quick Sort'</span><span class="p">,</span> <span class="s">'Build_in c++'</span><span class="p">,</span> <span class="s">'Insertion Sort'</span><span class="p">,</span> <span class="s">'Selection Sort'</span><span class="p">,</span> <span class="s">'Bubble Sort'</span><span class="p">]</span>
 <span class="n">col_names</span> <span class="o">=</span> <span class="p">[</span><span class="s">'array_size'</span><span class="p">,</span> <span class="s">'time_spent'</span><span class="p">]</span>
 
 <span class="c1"># The following line print available plot styles; just for fun :D 
-</span><span class="k">print</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">available</span><span class="p">)</span>
+</span><span class="k">print</span><span class="p">(</span><span class="n">plt</span><span class="p">.</span><span class="n">style</span><span class="p">.</span><span class="n">available</span><span class="p">)</span>
 
 <span class="c1"># Read data from the files and turn it into data frames to plot the graph.
 </span><span class="k">def</span> <span class="nf">show_graph</span><span class="p">():</span>
-    <span class="n">merge_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'merge.txt'</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">' '</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">col_names</span><span class="p">)</span>
-    <span class="n">quick_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'quick.txt'</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">' '</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">col_names</span><span class="p">)</span>
-    <span class="n">inser_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'insertion.txt'</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">' '</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">col_names</span><span class="p">)</span>
-    <span class="n">mod_merge</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'modded_merge.txt'</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">' '</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">col_names</span><span class="p">)</span>
-    <span class="n">rand_quick</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'rand_quick.txt'</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">' '</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">col_names</span><span class="p">)</span>
-    <span class="n">selec_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'selection.txt'</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">' '</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">col_names</span><span class="p">)</span>
-    <span class="n">bubble_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'bubble.txt'</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">' '</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">col_names</span><span class="p">)</span>
-    <span class="n">build_cpp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'cpp.txt'</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">' '</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">col_names</span><span class="p">)</span>
+    <span class="n">merge_data</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'merge.txt'</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">' '</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">col_names</span><span class="p">)</span>
+    <span class="n">quick_data</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'quick.txt'</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">' '</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">col_names</span><span class="p">)</span>
+    <span class="n">inser_data</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'insertion.txt'</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">' '</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">col_names</span><span class="p">)</span>
+    <span class="n">mod_merge</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'modded_merge.txt'</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">' '</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">col_names</span><span class="p">)</span>
+    <span class="n">rand_quick</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'rand_quick.txt'</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">' '</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">col_names</span><span class="p">)</span>
+    <span class="n">selec_data</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'selection.txt'</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">' '</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">col_names</span><span class="p">)</span>
+    <span class="n">bubble_data</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'bubble.txt'</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">' '</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">col_names</span><span class="p">)</span>
+    <span class="n">build_cpp</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'cpp.txt'</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">' '</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">col_names</span><span class="p">)</span>
 
     <span class="c1"># Convert each dataframe into numpy array.
-</span>    <span class="n">merge_tm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">merge_data</span><span class="p">[</span><span class="s">'time_spent'</span><span class="p">])</span>       <span class="c1"># Merge Sort
-</span>    <span class="n">merge_sz</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">merge_data</span><span class="p">[</span><span class="s">'array_size'</span><span class="p">])</span>
+</span>    <span class="n">merge_tm</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">merge_data</span><span class="p">[</span><span class="s">'time_spent'</span><span class="p">])</span>       <span class="c1"># Merge Sort
+</span>    <span class="n">merge_sz</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">merge_data</span><span class="p">[</span><span class="s">'array_size'</span><span class="p">])</span>
 
-    <span class="n">quick_tm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">quick_data</span><span class="p">[</span><span class="s">'time_spent'</span><span class="p">])</span>       <span class="c1"># Quick Sort
-</span>    <span class="n">quick_sz</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">quick_data</span><span class="p">[</span><span class="s">'array_size'</span><span class="p">])</span>
+    <span class="n">quick_tm</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">quick_data</span><span class="p">[</span><span class="s">'time_spent'</span><span class="p">])</span>       <span class="c1"># Quick Sort
+</span>    <span class="n">quick_sz</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">quick_data</span><span class="p">[</span><span class="s">'array_size'</span><span class="p">])</span>
 
-    <span class="n">mod_merge_tm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">mod_merge</span><span class="p">[</span><span class="s">'time_spent'</span><span class="p">])</span>    <span class="c1"># Modified Merge Sort
-</span>    <span class="n">mod_merge_sz</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">mod_merge</span><span class="p">[</span><span class="s">'array_size'</span><span class="p">])</span>
+    <span class="n">mod_merge_tm</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">mod_merge</span><span class="p">[</span><span class="s">'time_spent'</span><span class="p">])</span>    <span class="c1"># Modified Merge Sort
+</span>    <span class="n">mod_merge_sz</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">mod_merge</span><span class="p">[</span><span class="s">'array_size'</span><span class="p">])</span>
 
-    <span class="n">rand_quick_tm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">rand_quick</span><span class="p">[</span><span class="s">'time_spent'</span><span class="p">])</span>  <span class="c1"># Randomized Quick Sort
-</span>    <span class="n">rand_quick_sz</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">rand_quick</span><span class="p">[</span><span class="s">'array_size'</span><span class="p">])</span>
+    <span class="n">rand_quick_tm</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">rand_quick</span><span class="p">[</span><span class="s">'time_spent'</span><span class="p">])</span>  <span class="c1"># Randomized Quick Sort
+</span>    <span class="n">rand_quick_sz</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">rand_quick</span><span class="p">[</span><span class="s">'array_size'</span><span class="p">])</span>
 
-    <span class="n">build_cpp_tm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">build_cpp</span><span class="p">[</span><span class="s">'time_spent'</span><span class="p">])</span>    <span class="c1"># Build in Sort in c++
-</span>    <span class="n">build_cpp_sz</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">build_cpp</span><span class="p">[</span><span class="s">'array_size'</span><span class="p">])</span>
+    <span class="n">build_cpp_tm</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">build_cpp</span><span class="p">[</span><span class="s">'time_spent'</span><span class="p">])</span>    <span class="c1"># Build in Sort in c++
+</span>    <span class="n">build_cpp_sz</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">build_cpp</span><span class="p">[</span><span class="s">'array_size'</span><span class="p">])</span>
 
-    <span class="n">inser_data_tm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">inser_data</span><span class="p">[</span><span class="s">'time_spent'</span><span class="p">])</span>  <span class="c1"># Insertion Sort
-</span>    <span class="n">inser_data_sz</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">inser_data</span><span class="p">[</span><span class="s">'array_size'</span><span class="p">])</span>
+    <span class="n">inser_data_tm</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">inser_data</span><span class="p">[</span><span class="s">'time_spent'</span><span class="p">])</span>  <span class="c1"># Insertion Sort
+</span>    <span class="n">inser_data_sz</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">inser_data</span><span class="p">[</span><span class="s">'array_size'</span><span class="p">])</span>
 
-    <span class="n">selec_data_tm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">selec_data</span><span class="p">[</span><span class="s">'time_spent'</span><span class="p">])</span>  <span class="c1"># Selection Sort
-</span>    <span class="n">selec_data_sz</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">selec_data</span><span class="p">[</span><span class="s">'array_size'</span><span class="p">])</span>
+    <span class="n">selec_data_tm</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">selec_data</span><span class="p">[</span><span class="s">'time_spent'</span><span class="p">])</span>  <span class="c1"># Selection Sort
+</span>    <span class="n">selec_data_sz</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">selec_data</span><span class="p">[</span><span class="s">'array_size'</span><span class="p">])</span>
 
-    <span class="n">buble_data_tm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">buble_data</span><span class="p">[</span><span class="s">'time_spent'</span><span class="p">])</span>  <span class="c1"># Bubble Sort
-</span>    <span class="n">buble_data_sz</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">buble_data</span><span class="p">[</span><span class="s">'array_size'</span><span class="p">])</span>
+    <span class="n">buble_data_tm</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">buble_data</span><span class="p">[</span><span class="s">'time_spent'</span><span class="p">])</span>  <span class="c1"># Bubble Sort
+</span>    <span class="n">buble_data_sz</span><span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">buble_data</span><span class="p">[</span><span class="s">'array_size'</span><span class="p">])</span>
 
     <span class="c1"># Plot the graph that containing required info.
-</span>    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">merge_sz</span><span class="p">,</span> <span class="n">merge_tm</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">quick_sz</span><span class="p">,</span><span class="n">quick_tm</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">mod_merge_sz</span><span class="p">,</span> <span class="n">mod_merge_tm</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rand_quick_sz</span><span class="p">,</span> <span class="n">rand_quick_tm</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">build_cpp_sz</span><span class="p">,</span> <span class="n">build_cpp_tm</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">inser_data_sz</span><span class="p">,</span> <span class="n">inser_data_tm</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">selec_data_sz</span><span class="p">,</span> <span class="n">selec_data_tm</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">buble_data_sz</span><span class="p">,</span> <span class="n">buble_data_tm</span><span class="p">)</span>
+</span>    <span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">merge_sz</span><span class="p">,</span> <span class="n">merge_tm</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">quick_sz</span><span class="p">,</span><span class="n">quick_tm</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">mod_merge_sz</span><span class="p">,</span> <span class="n">mod_merge_tm</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rand_quick_sz</span><span class="p">,</span> <span class="n">rand_quick_tm</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">build_cpp_sz</span><span class="p">,</span> <span class="n">build_cpp_tm</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">inser_data_sz</span><span class="p">,</span> <span class="n">inser_data_tm</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">selec_data_sz</span><span class="p">,</span> <span class="n">selec_data_tm</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">buble_data_sz</span><span class="p">,</span> <span class="n">buble_data_tm</span><span class="p">)</span>
 
-    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">'Reversed sorted Array'</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">legends</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s">'upper left'</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">'Time (ms)'</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">'Array Size'</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">title</span><span class="p">(</span><span class="s">'Reversed sorted Array'</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">legend</span><span class="p">(</span><span class="n">legends</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s">'upper left'</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">'Time (ms)'</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">'Array Size'</span><span class="p">)</span>
     <span class="c1"># plt.xlim(-10, 20000) # Reduce y scale just to show more details
-</span>    <span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s">'log'</span><span class="p">)</span>
+</span>    <span class="n">plt</span><span class="p">.</span><span class="n">yscale</span><span class="p">(</span><span class="s">'log'</span><span class="p">)</span>
 
-    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
 
 <span class="n">show_graph</span><span class="p">()</span></code></pre></figure>
 
@@ -320,9 +313,9 @@
   <img src="/assets/documentation/data-analysis/Figure_1-461c556fe9a36dbff3011e2f68e8549b6ddb26e2ee9718d437b134674ce7bebb.png" alt="Fig1" class="zooming" data-rjs="/assets/documentation/data-analysis/Figure_1-461c556fe9a36dbff3011e2f68e8549b6ddb26e2ee9718d437b134674ce7bebb.png" data-zooming-width="1920" data-zooming-height="983" />
 </a></p>
 
-<p>In the <strong>Figure_1</strong>, bubble sort is bad choice it takes so much time and grows quickly. Selection sort and Insertion sort almost grows together with average <code class="highlighter-rouge">29.95 (ms)</code>, the above three algorithms is almost <code class="highlighter-rouge">Ɵ(n^2)</code>. 
+<p>In the <strong>Figure_1</strong>, bubble sort is bad choice it takes so much time and grows quickly. Selection sort and Insertion sort almost grows together with average <code class="language-plaintext highlighter-rouge">29.95 (ms)</code>, the above three algorithms is almost <code class="language-plaintext highlighter-rouge">Ɵ(n^2)</code>. 
 The other five algorithms are less in time, the Modified Merge sort and Randomized Quick sort are larger because of randomization process and handling pointers in the linked list.
-It’s obvious that Merge sort, Quick sort and Built-in <code class="highlighter-rouge">C++</code> sort is a better choice for random arrays with <code class="highlighter-rouge">Ɵ(n log n)</code> running time.</p>
+It’s obvious that Merge sort, Quick sort and Built-in <code class="language-plaintext highlighter-rouge">C++</code> sort is a better choice for random arrays with <code class="language-plaintext highlighter-rouge">Ɵ(n log n)</code> running time.</p>
 
 <p><strong>2. Semi-Sorted Arrays</strong></p>
 
@@ -330,9 +323,9 @@ It’s obvious that Merge sort, Quick sort and Built-in <code class="highlighter
   <img src="/assets/documentation/data-analysis/Figure_2-2b7e1540157ab66b815ef49b8e02d766af1e3cee7eaeb8a946c91014e82f44b8.png" alt="Fig2" class="zooming" data-rjs="/assets/documentation/data-analysis/Figure_2-2b7e1540157ab66b815ef49b8e02d766af1e3cee7eaeb8a946c91014e82f44b8.png" data-zooming-width="1920" data-zooming-height="983" />
 </a></p>
 
-<p>In the <strong>Figure_2</strong>, bubble sort is also a bad choice it takes so much time and grows quickly. Selection sort and Insertion sort almost grows together with average <code class="highlighter-rouge">29.95 (ms)</code>, the above three algorithms is almost <code class="highlighter-rouge">Ɵ(n^2)</code>. 
+<p>In the <strong>Figure_2</strong>, bubble sort is also a bad choice it takes so much time and grows quickly. Selection sort and Insertion sort almost grows together with average <code class="language-plaintext highlighter-rouge">29.95 (ms)</code>, the above three algorithms is almost <code class="language-plaintext highlighter-rouge">Ɵ(n^2)</code>. 
 The other five algorithms are less in time, the Modified Merge sort and Randomized Quick sort are larger because of randomization process and handling pointers in the linked list.
-It’s obvious that Merge sort, Quick sort and Built-in <code class="highlighter-rouge">C++</code> sort is also a better choice for semi-sorted arrays <code class="highlighter-rouge">Ɵ(n log n)</code> running time.</p>
+It’s obvious that Merge sort, Quick sort and Built-in <code class="language-plaintext highlighter-rouge">C++</code> sort is also a better choice for semi-sorted arrays <code class="language-plaintext highlighter-rouge">Ɵ(n log n)</code> running time.</p>
 
 <p><strong>3. Sorted Arrays</strong></p>
 
@@ -342,7 +335,7 @@ It’s obvious that Merge sort, Quick sort and Built-in <code class="highlighter
 
 <p>Unlike the previous figures, the <strong>Figure_3</strong> show us the Quick sort is the worst in this case, slower than selection and bubble sort.
 The Modified Merge sort and Randomized sort are less in running time because of randomization process and handling pointers in linked list.
-Insertion sort is almost <code class="highlighter-rouge">0.99 (ms)</code> in all sizes and it’s faster than Built-in <code class="highlighter-rouge">C++</code>. It’s obvious that Insertion sort is the best choice for sorted arrays with <code class="highlighter-rouge">Ɵ(n)</code> running time.</p>
+Insertion sort is almost <code class="language-plaintext highlighter-rouge">0.99 (ms)</code> in all sizes and it’s faster than Built-in <code class="language-plaintext highlighter-rouge">C++</code>. It’s obvious that Insertion sort is the best choice for sorted arrays with <code class="language-plaintext highlighter-rouge">Ɵ(n)</code> running time.</p>
 
 <p><strong>4. Reversed Sorted Array</strong></p>
 
@@ -350,14 +343,14 @@ Insertion sort is almost <code class="highlighter-rouge">0.99 (ms)</code> in all
   <img src="/assets/documentation/data-analysis/Figure_4-a8ee40fc93a6095b6074ecd56e1b362d3f3bedff28c449251ed4fb66b00e09df.png" alt="Fig1" class="zooming" data-rjs="/assets/documentation/data-analysis/Figure_4-a8ee40fc93a6095b6074ecd56e1b362d3f3bedff28c449251ed4fb66b00e09df.png" data-zooming-width="1920" data-zooming-height="983" />
 </a></p>
 
-<p><strong>Figure_4</strong> show us the same lines as in the sorted arrays, but the Insertion sort was unlucky it grows with <code class="highlighter-rouge">Ɵ(n^2)</code> running time.</p>
+<p><strong>Figure_4</strong> show us the same lines as in the sorted arrays, but the Insertion sort was unlucky it grows with <code class="language-plaintext highlighter-rouge">Ɵ(n^2)</code> running time.</p>
 
 <h1 id="conclusion">Conclusion</h1>
 <p>As we discussed above the most common sorting algorithms used in different types of lists. If the list contains random elements we can use the Built-in or Quick sort, it’s more efficient, less in memory and less in running time from other sorting algorithms.</p>
 
-<p>Insertion sort with sorted array it takes almost <code class="highlighter-rouge">Ɵ(n)</code> running time. Quick sort with sorted list or reversed sorted list it takes <code class="highlighter-rouge">Ɵ(n^2)</code> running time. Because of iterate n through <code class="highlighter-rouge">(n-1)</code> and it’s simple to calculate <code class="highlighter-rouge">T(n) = T(n-1) + Ɵ(1)</code> for both kinds.</p>
+<p>Insertion sort with sorted array it takes almost <code class="language-plaintext highlighter-rouge">Ɵ(n)</code> running time. Quick sort with sorted list or reversed sorted list it takes <code class="language-plaintext highlighter-rouge">Ɵ(n^2)</code> running time. Because of iterate n through <code class="language-plaintext highlighter-rouge">(n-1)</code> and it’s simple to calculate <code class="language-plaintext highlighter-rouge">T(n) = T(n-1) + Ɵ(1)</code> for both kinds.</p>
 
-<p>So, it depends on what kind of lists you have, but in the real world, we insert element in place. We don’t have to sort just take an element and put it into its right place and that takes <code class="highlighter-rouge">Ɵ(n)</code> to shift other elements after inserting the picked one.</p>
+<p>So, it depends on what kind of lists you have, but in the real world, we insert element in place. We don’t have to sort just take an element and put it into its right place and that takes <code class="language-plaintext highlighter-rouge">Ɵ(n)</code> to shift other elements after inserting the picked one.</p>
 
 <h4 id="notes">Notes:</h4>
 <p>All collected data produced by 4-core processor, so it might be slightly different if we use another higher computer to run the program. And it might be fast enough to get better results, but the running time for each algorithm will be the same.</p>
@@ -413,7 +406,7 @@ Insertion sort is almost <code class="highlighter-rouge">0.99 (ms)</code> in all
 <script type="text/javascript" src="/assets/application-cfde13ac81ddaf4351b2e739603e2baf688d0fcc9aba613fe62bbb1c7b037fb9.js"></script>
 
 
-  <script type="text/javascript" src="/assets/themetoggle-df0d3d73164dc26dffbd630182ae4d0dfa7bee6b694a2b5d565d73595b582bbf.js"></script>
 
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 </body>
 </html>

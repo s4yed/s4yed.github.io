@@ -20,8 +20,8 @@
 
   
     
-      <meta property="og:image" content="https://s4yed.github.io/assets/documentation/ASCWargames/banner-5e7c94ec26d0e81bcdc1f800b2e3d2828de0a113dd6906080f50a2c540a6e8bd.png">
-      <meta name="twitter:image" content="https://s4yed.github.io/assets/documentation/ASCWargames/banner-5e7c94ec26d0e81bcdc1f800b2e3d2828de0a113dd6906080f50a2c540a6e8bd.png">
+      <meta property="og:image" content="https://s4yed.github.io/assets/documentation/ASCWargames/2020/banner-5e7c94ec26d0e81bcdc1f800b2e3d2828de0a113dd6906080f50a2c540a6e8bd.png">
+      <meta name="twitter:image" content="https://s4yed.github.io/assets/documentation/ASCWargames/2020/banner-5e7c94ec26d0e81bcdc1f800b2e3d2828de0a113dd6906080f50a2c540a6e8bd.png">
     
   
 
@@ -33,13 +33,15 @@
 
     
       <link rel="icon" type="image/x-icon" href="/assets/favicon-color-0e896bd8673d9f83cea8d7b0a12fcc894681d58fc475ad499adfed94067b1e1f.png">
-      <link rel="apple-touch-icon" href="/assets/apple-touch-icon-light-87d1f2a3a19b1500e5c1626a0492025ca5f7f97d24540dc5900288e92112925a.png">
-      <link rel="stylesheet" type="text/css" title="light" id="light" href="/assets/light-268b84a5df702d717857e91d8b80ec0f176d52b07f0893bd82eac76e7e8f0c40.css">
-      <link rel="stylesheet" type="text/css" title="dark" id="dark" href="/assets/dark-b6f8f6ceb983aa3da9f5bf7550d7516c131ba02c21bd7efe6fcdc1ac1eb1a693.css" disabled="true">
+      <link rel="apple-touch-icon" href="/assets/apple-touch-icon-dark-d161409442b7e523089f24d08d0a55951549ece7504207c376d53b020713494d.png">
+      <link rel="stylesheet" type="text/css" href="/assets/dark-bd87a972117a631461755cc733ab96b66bb38fb9d09359688cac8e4c2c561606.css">
     
 
   
 
+  <!-- Load KaTeX -->
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.1.1/katex.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.1.1/katex.min.js"></script>
 </head>
 
 <body>
@@ -119,21 +121,15 @@
       </li>
     
     
-      <li>
-        <a onclick="toggle()" title="Toggle Theme">
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon-theme">
-  <use href="/assets/theme-610197c56844c5ba34608b2018c4cc3b79f8833e2efc7a99bcb5589f1d3cfd7b.svg#icon-theme" xlink:href="/assets/theme-610197c56844c5ba34608b2018c4cc3b79f8833e2efc7a99bcb5589f1d3cfd7b.svg#icon-theme"></use>
-</svg>
-
-        </a>
-      </li>
-    
   </ul>
 </nav>
 
 
   <ul class="header-tags scrollappear">
     
+    
+      
+        <li><a href="/tag/AES">Aes</a></li>
     
       
         <li><a href="/tag/ASC-Wargames">Asc-wargames</a></li>
@@ -161,9 +157,6 @@
     
       
         <li><a href="/tag/c">C</a></li>
-    
-      
-        <li><a href="/tag/cracking">Cracking</a></li>
     
       
         <li>...</li>
@@ -221,13 +214,13 @@
           <div class="article-content">
             <p>This is the Qualification phase for ASC War Games at Egypt. There was 5 crypto challenges in the competition and I’ll go through the Challenge2, the most interesting one for me.</p>
 
-<p><a href="/assets/documentation/ASCWargames/banner-5e7c94ec26d0e81bcdc1f800b2e3d2828de0a113dd6906080f50a2c540a6e8bd.png">
-  <img src="/assets/documentation/ASCWargames/banner-5e7c94ec26d0e81bcdc1f800b2e3d2828de0a113dd6906080f50a2c540a6e8bd.png" alt="ASC" class="zooming" data-rjs="/assets/documentation/ASCWargames/banner-5e7c94ec26d0e81bcdc1f800b2e3d2828de0a113dd6906080f50a2c540a6e8bd.png" data-zooming-width="1239" data-zooming-height="605" />
+<p><a href="/assets/documentation/ASCWargames/2020/banner-5e7c94ec26d0e81bcdc1f800b2e3d2828de0a113dd6906080f50a2c540a6e8bd.png">
+  <img src="/assets/documentation/ASCWargames/2020/banner-5e7c94ec26d0e81bcdc1f800b2e3d2828de0a113dd6906080f50a2c540a6e8bd.png" alt="ASC" class="zooming" data-rjs="/assets/documentation/ASCWargames/2020/banner-5e7c94ec26d0e81bcdc1f800b2e3d2828de0a113dd6906080f50a2c540a6e8bd.png" data-zooming-width="1239" data-zooming-height="605" />
 </a></p>
 
 <h3 id="analyzing-the-challenge">Analyzing the challenge</h3>
 
-<p>The challenge give us 2 files <code class="highlighter-rouge">challenge.py</code> script contains the encryption algorithm and <code class="highlighter-rouge">output.txt</code>. the <code class="highlighter-rouge">output.txt</code> file contains <code class="highlighter-rouge">temp</code> and <code class="highlighter-rouge">cipher</code> variables.</p>
+<p>The challenge give us 2 files <code class="language-plaintext highlighter-rouge">challenge.py</code> script contains the encryption algorithm and <code class="language-plaintext highlighter-rouge">output.txt</code>. the <code class="language-plaintext highlighter-rouge">output.txt</code> file contains <code class="language-plaintext highlighter-rouge">temp</code> and <code class="language-plaintext highlighter-rouge">cipher</code> variables.</p>
 
 <figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="go">temp = 37575548727135643944546138552f432b4748447a6d465a3954304c642b6d71455968774b4649674950704868714552547767682b503036776b4d6e475a615036494539503166796470536744312f53477978625030667a553373306874313478306e49324c7453375851424a5162646b33544e4f776c6737704148664e7a4b7a6859797550436b70634f7566554b485976787667386b506f526374457747493556786d624c43753631525072326a456f613054346c4c494661614b4252663773454a6674546f37496...
 cipher = 37642f4574474258656752564f3437555667442b6d71684d2b5a3052756147734b5674526264567a727466434f676a74794767556e765a6f6e756b4652484535</span></code></pre></figure>
@@ -245,58 +238,58 @@ cipher = 37642f4574474258656752564f3437555667442b6d71684d2b5a3052756147734b56745
 
 <span class="k">def</span> <span class="nf">encrypt</span><span class="p">(</span><span class="n">plain</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
     <span class="n">plain</span> <span class="o">=</span> <span class="n">pad</span><span class="p">(</span><span class="n">plain</span><span class="p">)</span>
-    <span class="n">cipher</span> <span class="o">=</span> <span class="n">AES</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">AES</span><span class="o">.</span><span class="n">MODE_ECB</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">cipher</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span><span class="n">plain</span><span class="p">))</span>
+    <span class="n">cipher</span> <span class="o">=</span> <span class="n">AES</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">AES</span><span class="p">.</span><span class="n">MODE_ECB</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">base64</span><span class="p">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">cipher</span><span class="p">.</span><span class="n">encrypt</span><span class="p">(</span><span class="n">plain</span><span class="p">))</span>
 
 <span class="k">def</span> <span class="nf">generate_random</span><span class="p">():</span>
     <span class="n">letters</span> <span class="o">=</span> <span class="n">printable</span>
     <span class="n">temp</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
-        <span class="n">temp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">letters</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">)))</span>
-    <span class="k">return</span> <span class="s">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
+        <span class="n">temp</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">random</span><span class="p">.</span><span class="n">choice</span><span class="p">(</span><span class="n">letters</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="s">""</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">choose_random</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
     <span class="n">letters</span> <span class="o">=</span> <span class="n">printable</span>
-    <span class="n">a</span> <span class="o">=</span> <span class="s">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">letters</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">length</span><span class="p">))</span>
-    <span class="n">b</span> <span class="o">=</span> <span class="s">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">letters</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">length</span><span class="p">))</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">random</span><span class="p">.</span><span class="n">choice</span><span class="p">(</span><span class="n">letters</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">length</span><span class="p">))</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">random</span><span class="p">.</span><span class="n">choice</span><span class="p">(</span><span class="n">letters</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">length</span><span class="p">))</span>
     <span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="o">+</span><span class="n">b</span>
     <span class="k">return</span> <span class="n">b</span>
 
 <span class="n">all_keys</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">):</span>
-    <span class="n">all_keys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">choose_random</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">all_keys</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">choose_random</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
 
-<span class="n">plain</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s">"temp.txt"</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"hex"</span><span class="p">)</span>
-<span class="n">c1</span> <span class="o">=</span> <span class="n">encrypt</span><span class="p">(</span><span class="n">plain</span><span class="p">,</span> <span class="n">all_keys</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">8</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"hex"</span><span class="p">)</span>
-<span class="n">c2</span> <span class="o">=</span> <span class="n">encrypt</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">all_keys</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mi">8</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"hex"</span><span class="p">)</span>
-<span class="n">c3</span> <span class="o">=</span> <span class="n">encrypt</span><span class="p">(</span><span class="n">c2</span><span class="p">,</span> <span class="n">all_keys</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="mi">8</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"hex"</span><span class="p">)</span>
-<span class="n">c4</span> <span class="o">=</span> <span class="n">encrypt</span><span class="p">(</span><span class="n">c3</span><span class="p">,</span> <span class="n">all_keys</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">*</span><span class="mi">8</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"hex"</span><span class="p">)</span>
-<span class="n">c5</span> <span class="o">=</span> <span class="n">encrypt</span><span class="p">(</span><span class="n">c4</span><span class="p">,</span> <span class="n">all_keys</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">*</span><span class="mi">8</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"hex"</span><span class="p">)</span>
-<span class="n">c6</span> <span class="o">=</span> <span class="n">encrypt</span><span class="p">(</span><span class="n">c5</span><span class="p">,</span> <span class="n">all_keys</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">*</span><span class="mi">8</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"hex"</span><span class="p">)</span>
-<span class="n">c7</span> <span class="o">=</span> <span class="n">encrypt</span><span class="p">(</span><span class="n">c6</span><span class="p">,</span> <span class="n">all_keys</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="o">*</span><span class="mi">8</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"hex"</span><span class="p">)</span>
-<span class="n">c8</span> <span class="o">=</span> <span class="n">encrypt</span><span class="p">(</span><span class="n">c7</span><span class="p">,</span> <span class="n">all_keys</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span><span class="o">*</span><span class="mi">8</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"hex"</span><span class="p">)</span>
+<span class="n">plain</span> <span class="o">=</span> <span class="n">base64</span><span class="p">.</span><span class="n">b64encode</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s">"temp.txt"</span><span class="p">).</span><span class="n">read</span><span class="p">()).</span><span class="n">encode</span><span class="p">(</span><span class="s">"hex"</span><span class="p">)</span>
+<span class="n">c1</span> <span class="o">=</span> <span class="n">encrypt</span><span class="p">(</span><span class="n">plain</span><span class="p">,</span> <span class="n">all_keys</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">8</span><span class="p">).</span><span class="n">encode</span><span class="p">(</span><span class="s">"hex"</span><span class="p">)</span>
+<span class="n">c2</span> <span class="o">=</span> <span class="n">encrypt</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">all_keys</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mi">8</span><span class="p">).</span><span class="n">encode</span><span class="p">(</span><span class="s">"hex"</span><span class="p">)</span>
+<span class="n">c3</span> <span class="o">=</span> <span class="n">encrypt</span><span class="p">(</span><span class="n">c2</span><span class="p">,</span> <span class="n">all_keys</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="mi">8</span><span class="p">).</span><span class="n">encode</span><span class="p">(</span><span class="s">"hex"</span><span class="p">)</span>
+<span class="n">c4</span> <span class="o">=</span> <span class="n">encrypt</span><span class="p">(</span><span class="n">c3</span><span class="p">,</span> <span class="n">all_keys</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">*</span><span class="mi">8</span><span class="p">).</span><span class="n">encode</span><span class="p">(</span><span class="s">"hex"</span><span class="p">)</span>
+<span class="n">c5</span> <span class="o">=</span> <span class="n">encrypt</span><span class="p">(</span><span class="n">c4</span><span class="p">,</span> <span class="n">all_keys</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">*</span><span class="mi">8</span><span class="p">).</span><span class="n">encode</span><span class="p">(</span><span class="s">"hex"</span><span class="p">)</span>
+<span class="n">c6</span> <span class="o">=</span> <span class="n">encrypt</span><span class="p">(</span><span class="n">c5</span><span class="p">,</span> <span class="n">all_keys</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">*</span><span class="mi">8</span><span class="p">).</span><span class="n">encode</span><span class="p">(</span><span class="s">"hex"</span><span class="p">)</span>
+<span class="n">c7</span> <span class="o">=</span> <span class="n">encrypt</span><span class="p">(</span><span class="n">c6</span><span class="p">,</span> <span class="n">all_keys</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="o">*</span><span class="mi">8</span><span class="p">).</span><span class="n">encode</span><span class="p">(</span><span class="s">"hex"</span><span class="p">)</span>
+<span class="n">c8</span> <span class="o">=</span> <span class="n">encrypt</span><span class="p">(</span><span class="n">c7</span><span class="p">,</span> <span class="n">all_keys</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span><span class="o">*</span><span class="mi">8</span><span class="p">).</span><span class="n">encode</span><span class="p">(</span><span class="s">"hex"</span><span class="p">)</span>
 
 <span class="n">random</span> <span class="o">=</span> <span class="n">generate_random</span><span class="p">()</span>
-<span class="n">c9</span> <span class="o">=</span> <span class="n">encrypt</span><span class="p">(</span><span class="n">c8</span><span class="p">,</span><span class="n">random</span><span class="o">*</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"hex"</span><span class="p">)</span>
+<span class="n">c9</span> <span class="o">=</span> <span class="n">encrypt</span><span class="p">(</span><span class="n">c8</span><span class="p">,</span><span class="n">random</span><span class="o">*</span><span class="mi">4</span><span class="p">).</span><span class="n">encode</span><span class="p">(</span><span class="s">"hex"</span><span class="p">)</span>
 <span class="k">print</span> <span class="s">"temp = "</span><span class="p">,</span> <span class="n">c9</span>
 
 <span class="n">key</span> <span class="o">=</span> <span class="s">""</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">all_keys</span><span class="p">:</span>
     <span class="n">key</span> <span class="o">=</span> <span class="n">key</span> <span class="o">+</span> <span class="n">i</span>
 
-<span class="n">flag</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">"flag.txt"</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="n">flag</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">"flag.txt"</span><span class="p">).</span><span class="n">read</span><span class="p">()</span>
 
-<span class="n">cipher</span> <span class="o">=</span> <span class="n">encrypt</span><span class="p">(</span><span class="n">flag</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"hex"</span><span class="p">)</span>
+<span class="n">cipher</span> <span class="o">=</span> <span class="n">encrypt</span><span class="p">(</span><span class="n">flag</span><span class="p">,</span> <span class="n">key</span><span class="p">).</span><span class="n">encode</span><span class="p">(</span><span class="s">"hex"</span><span class="p">)</span>
 <span class="k">print</span> <span class="s">"cipher = "</span><span class="p">,</span><span class="n">cipher</span></code></pre></figure>
 
 <p>After looking at the script, It has 3 functions :</p>
 <ul>
-  <li><code class="highlighter-rouge">encrypt(plain, key)</code>: It’s just create <code class="highlighter-rouge">AES</code> instanse and return <code class="highlighter-rouge">base64</code> of the encrypted text with a given key.</li>
-  <li><code class="highlighter-rouge">choose_random(length=1)</code>: This function return 2 bytes random string given a specified length or 1 random byte as a default value.</li>
-  <li><code class="highlighter-rouge">generate_random()</code>: Same as the above but it just returns 4 bytes random string.</li>
+  <li><code class="language-plaintext highlighter-rouge">encrypt(plain, key)</code>: It’s just create <code class="language-plaintext highlighter-rouge">AES</code> instanse and return <code class="language-plaintext highlighter-rouge">base64</code> of the encrypted text with a given key.</li>
+  <li><code class="language-plaintext highlighter-rouge">choose_random(length=1)</code>: This function return 2 bytes random string given a specified length or 1 random byte as a default value.</li>
+  <li><code class="language-plaintext highlighter-rouge">generate_random()</code>: Same as the above but it just returns 4 bytes random string.</li>
 </ul>
 
-<p>Then, the script generates 2 bytes keys, repeat that 8 times, and put them into a list of <code class="highlighter-rouge">all_keys</code>. After that, it performs 9 encryption operations on some data in <code class="highlighter-rouge">temp.txt</code> file.</p>
+<p>Then, the script generates 2 bytes keys, repeat that 8 times, and put them into a list of <code class="language-plaintext highlighter-rouge">all_keys</code>. After that, it performs 9 encryption operations on some data in <code class="language-plaintext highlighter-rouge">temp.txt</code> file.</p>
 
 <p>So, the vulnerability here is it encrypts the hex value of the data not on the raw bytes itself and we can take advantage of that by checking the decryption upon every possible subkey of length 2 is hex values if so, then we got the correct subkey.</p>
 
@@ -307,7 +300,7 @@ cipher = 37642f4574474258656752564f3437555667442b6d71684d2b5a3052756147734b56745
   <li>All the keys that is being used are repeated to be 16 bytes long.</li>
 </ol>
 
-<p>After analyzing the bruteforce search space we got <code class="highlighter-rouge">len(printable) = 100</code>, therefore 4 bytes string has <code class="highlighter-rouge">100*100*100*100 = 10^8</code> possible key values and 2 bytes string has <code class="highlighter-rouge">100*100 = 10000</code> possible values. So, it’s feasible to bruteforce the keys with the <code class="highlighter-rouge">itertools</code> library in python.</p>
+<p>After analyzing the bruteforce search space we got <code class="language-plaintext highlighter-rouge">len(printable) = 100</code>, therefore 4 bytes string has <code class="language-plaintext highlighter-rouge">100*100*100*100 = 10^8</code> possible key values and 2 bytes string has <code class="language-plaintext highlighter-rouge">100*100 = 10000</code> possible values. So, it’s feasible to bruteforce the keys with the <code class="language-plaintext highlighter-rouge">itertools</code> library in python.</p>
 
 <h3 id="cracking-the-4-bytes-key">Cracking the 4 bytes key</h3>
 
@@ -332,32 +325,32 @@ cipher = 37642f4574474258656752564f3437555667442b6d71684d2b5a3052756147734b56745
         <span class="k">return</span> <span class="bp">False</span>
 
 <span class="k">def</span> <span class="nf">decrypt</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
-    <span class="n">cipher</span> <span class="o">=</span> <span class="n">AES</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">AES</span><span class="o">.</span><span class="n">MODE_ECB</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">unpad</span><span class="p">(</span><span class="n">cipher</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>
+    <span class="n">cipher</span> <span class="o">=</span> <span class="n">AES</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">AES</span><span class="p">.</span><span class="n">MODE_ECB</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">unpad</span><span class="p">(</span><span class="n">cipher</span><span class="p">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>
 
 <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span> <span class="n">rep</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span><span class="n">printable</span><span class="p">,</span><span class="n">repeat</span><span class="o">=</span><span class="n">rep</span><span class="p">):</span>
-        <span class="n">key</span> <span class="o">=</span> <span class="s">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">BLOCK_SIZE</span><span class="o">//</span><span class="n">rep</span><span class="p">)</span>
-        <span class="n">dec</span> <span class="o">=</span> <span class="n">decrypt</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span> <span class="n">key</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">BLOCK_SIZE</span><span class="o">//</span><span class="n">rep</span><span class="p">)</span>
+        <span class="n">dec</span> <span class="o">=</span> <span class="n">decrypt</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span> <span class="n">key</span><span class="p">.</span><span class="n">encode</span><span class="p">())</span>
         <span class="k">if</span> <span class="n">is_hex</span><span class="p">(</span><span class="n">dec</span><span class="p">):</span>
-            <span class="n">dec</span> <span class="o">=</span> <span class="nb">bytes</span><span class="o">.</span><span class="n">fromhex</span><span class="p">(</span><span class="n">dec</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span>
-            <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">'[+] Key: {key[:rep]}'</span><span class="p">)</span>
+            <span class="n">dec</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">.</span><span class="n">fromhex</span><span class="p">(</span><span class="n">dec</span><span class="p">.</span><span class="n">decode</span><span class="p">())</span>
+            <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'[+] Key: </span><span class="si">{</span><span class="n">key</span><span class="p">[:</span><span class="n">rep</span><span class="p">]</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">key</span><span class="p">[:</span><span class="n">rep</span><span class="p">],</span> <span class="n">dec</span>
 
-<span class="n">temp</span> <span class="o">=</span> <span class="n">b64decode</span><span class="p">(</span><span class="nb">bytes</span><span class="o">.</span><span class="n">fromhex</span><span class="p">(</span><span class="n">temp</span><span class="p">))</span>
+<span class="n">temp</span> <span class="o">=</span> <span class="n">b64decode</span><span class="p">(</span><span class="nb">bytes</span><span class="p">.</span><span class="n">fromhex</span><span class="p">(</span><span class="n">temp</span><span class="p">))</span>
 <span class="n">key</span><span class="p">,</span> <span class="n">C8</span> <span class="o">=</span> <span class="n">run</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span></code></pre></figure>
 
-<p>I got the first big key <code class="highlighter-rouge">099!099!099!099!</code> and now the value <code class="highlighter-rouge">C8</code> can be used to get <code class="highlighter-rouge">Ci</code> where <code class="highlighter-rouge">0 &lt;= i &lt;= 7</code> and <code class="highlighter-rouge">C0</code> is the original <code class="highlighter-rouge">temp</code> plain text.</p>
+<p>I got the first big key <code class="language-plaintext highlighter-rouge">099!099!099!099!</code> and now the value <code class="language-plaintext highlighter-rouge">C8</code> can be used to get <code class="language-plaintext highlighter-rouge">Ci</code> where <code class="language-plaintext highlighter-rouge">0 &lt;= i &lt;= 7</code> and <code class="language-plaintext highlighter-rouge">C0</code> is the original <code class="language-plaintext highlighter-rouge">temp</code> plain text.</p>
 
 <h3 id="cracking-all-the-2-bytes-keys">Cracking all the 2 bytes keys</h3>
 
-<p>Before running the following script I got a one byte value problem from the <code class="highlighter-rouge">dec</code> variable while decrypting the <code class="highlighter-rouge">Ci</code>. So let’s check if the decryption string is greater than 1 by editing the <code class="highlighter-rouge">run</code> function and put <code class="highlighter-rouge">if is_hex(dec) and len(dec) &gt; 1:</code></p>
+<p>Before running the following script I got a one byte value problem from the <code class="language-plaintext highlighter-rouge">dec</code> variable while decrypting the <code class="language-plaintext highlighter-rouge">Ci</code>. So let’s check if the decryption string is greater than 1 by editing the <code class="language-plaintext highlighter-rouge">run</code> function and put <code class="language-plaintext highlighter-rouge">if is_hex(dec) and len(dec) &gt; 1:</code></p>
 
 <figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">Ci</span> <span class="o">=</span> <span class="n">b64decode</span><span class="p">(</span><span class="n">C8</span><span class="p">)</span>
 <span class="n">all_keys</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">):</span>
     <span class="n">subkey</span><span class="p">,</span> <span class="n">C7</span> <span class="o">=</span> <span class="n">run</span><span class="p">(</span><span class="n">Ci</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-    <span class="n">all_keys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">subkey</span><span class="p">)</span>
+    <span class="n">all_keys</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">subkey</span><span class="p">)</span>
     <span class="n">Ci</span> <span class="o">=</span> <span class="n">b64decode</span><span class="p">(</span><span class="n">C7</span><span class="p">)</span></code></pre></figure>
 
 <p>And now we got all the keys.</p>
@@ -373,13 +366,13 @@ cipher = 37642f4574474258656752564f3437555667442b6d71684d2b5a3052756147734b56745
 
 <h3 id="the-flag">The flag</h3>
 
-<p>Because we’ve been decrypting from <code class="highlighter-rouge">C9</code>, let’s reverse them and put them together as the final key to get the flag.</p>
+<p>Because we’ve been decrypting from <code class="language-plaintext highlighter-rouge">C9</code>, let’s reverse them and put them together as the final key to get the flag.</p>
 
-<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">flag_key</span> <span class="o">=</span> <span class="s">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">all_keys</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">'[+] Final Key: {flag_key}'</span><span class="p">)</span>
-<span class="n">flag_enc</span> <span class="o">=</span> <span class="n">b64decode</span><span class="p">(</span><span class="nb">bytes</span><span class="o">.</span><span class="n">fromhex</span><span class="p">(</span><span class="n">flag_enc</span><span class="p">))</span>
-<span class="n">flag</span> <span class="o">=</span> <span class="n">decrypt</span><span class="p">(</span><span class="n">flag_enc</span><span class="p">,</span> <span class="n">flag_key</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
-<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">'[+] Flag: {flag}'</span><span class="p">)</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">flag_key</span> <span class="o">=</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">all_keys</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'[+] Final Key: </span><span class="si">{</span><span class="n">flag_key</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+<span class="n">flag_enc</span> <span class="o">=</span> <span class="n">b64decode</span><span class="p">(</span><span class="nb">bytes</span><span class="p">.</span><span class="n">fromhex</span><span class="p">(</span><span class="n">flag_enc</span><span class="p">))</span>
+<span class="n">flag</span> <span class="o">=</span> <span class="n">decrypt</span><span class="p">(</span><span class="n">flag_enc</span><span class="p">,</span> <span class="n">flag_key</span><span class="p">.</span><span class="n">encode</span><span class="p">()).</span><span class="n">decode</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'[+] Flag: </span><span class="si">{</span><span class="n">flag</span><span class="si">}</span><span class="s">'</span><span class="p">)</span></code></pre></figure>
 
 <p>Eventually, the flag is here.</p>
 
@@ -437,7 +430,7 @@ cipher = 37642f4574474258656752564f3437555667442b6d71684d2b5a3052756147734b56745
 <script type="text/javascript" src="/assets/application-cfde13ac81ddaf4351b2e739603e2baf688d0fcc9aba613fe62bbb1c7b037fb9.js"></script>
 
 
-  <script type="text/javascript" src="/assets/themetoggle-df0d3d73164dc26dffbd630182ae4d0dfa7bee6b694a2b5d565d73595b582bbf.js"></script>
 
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 </body>
 </html>

