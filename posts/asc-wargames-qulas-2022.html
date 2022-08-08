@@ -1,0 +1,872 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Ahmed | ASC - Wargames 2022 Filtration Phase</title>
+  <meta name="description" content="This is my writeup and walkthrough for crypto challenges in ASC wargames 2022 gualification round">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta property="og:title" content="ASC - Wargames 2022 Filtration Phase">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://s4yed.github.io/posts/asc-wargames-qulas-2022">
+  <meta property="og:description" content="This is my writeup and walkthrough for crypto challenges in ASC wargames 2022 gualification round">
+  <meta property="og:site_name" content="Ahmed">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:url" content="https://s4yed.github.io/posts/asc-wargames-qulas-2022">
+  <meta name="twitter:title" content="ASC - Wargames 2022 Filtration Phase">
+  <meta name="twitter:description" content="This is my writeup and walkthrough for crypto challenges in ASC wargames 2022 gualification round">
+
+  
+    
+      <meta property="og:image" content="https://s4yed.github.io/assets/documentation/ASCWargames/2020/banner-5e7c94ec26d0e81bcdc1f800b2e3d2828de0a113dd6906080f50a2c540a6e8bd.png">
+      <meta name="twitter:image" content="https://s4yed.github.io/assets/documentation/ASCWargames/2020/banner-5e7c94ec26d0e81bcdc1f800b2e3d2828de0a113dd6906080f50a2c540a6e8bd.png">
+    
+  
+
+  <link href="https://s4yed.github.io/feed.xml" type="application/rss+xml" rel="alternate" title="Ahmed Last 10 blog posts" />
+
+  
+
+  
+
+    
+      <link rel="icon" type="image/x-icon" href="/assets/favicon-color-0e896bd8673d9f83cea8d7b0a12fcc894681d58fc475ad499adfed94067b1e1f.png">
+      <link rel="apple-touch-icon" href="/assets/apple-touch-icon-light-87d1f2a3a19b1500e5c1626a0492025ca5f7f97d24540dc5900288e92112925a.png">
+      <link rel="stylesheet" type="text/css" title="light" id="light" href="/assets/light-bb7276d8d120b220c757b517d626ef0000a5e8683dccce2b722031baaae3ade1.css">
+      <link rel="stylesheet" type="text/css" title="dark" id="dark" href="/assets/dark-bd87a972117a631461755cc733ab96b66bb38fb9d09359688cac8e4c2c561606.css" disabled="true">
+    
+
+  
+
+  <!-- Load KaTeX -->
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.1.1/katex.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.1.1/katex.min.js"></script>
+</head>
+
+<body>
+  <main>
+    <div class="grid grid-centered">
+      <div class="grid-cell">
+        <nav class="header-nav scrollappear">
+  <a href="/" class="header-logo" title="Ahmed">Ahmed</a>
+  <ul class="header-links">
+    
+      <li>
+        <a href="/about" title="About me">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon-about">
+  <use href="/assets/about-ab4928d09cef6e09136b8d40637999db4f9575f927c33156e7f3e37d450e5df1.svg#icon-about" xlink:href="/assets/about-ab4928d09cef6e09136b8d40637999db4f9575f927c33156e7f3e37d450e5df1.svg#icon-about"></use>
+</svg>
+
+        </a>
+      </li>
+    
+    
+    
+    
+    
+      <li>
+        <a href="https://github.com/s4yed" rel="noreferrer noopener" target="_blank" title="GitHub">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon-github">
+  <use href="/assets/github-706d546fe6b5a32deca92fb08bbe60e78ea4e8027e889107905eb61f1063bcec.svg#icon-github" xlink:href="/assets/github-706d546fe6b5a32deca92fb08bbe60e78ea4e8027e889107905eb61f1063bcec.svg#icon-github"></use>
+</svg>
+
+        </a>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+      <li>
+        <a href="https://www.linkedin.com/in/s4yed" rel="noreferrer noopener" target="_blank" title="LinkedIn">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon-linkedin">
+  <use href="/assets/linkedin-3bd8eb5ea036958dc7b3ee3de6612dbfa9e0744f369f20f7895d6a2782bbaf43.svg#icon-linkedin" xlink:href="/assets/linkedin-3bd8eb5ea036958dc7b3ee3de6612dbfa9e0744f369f20f7895d6a2782bbaf43.svg#icon-linkedin"></use>
+</svg>
+
+        </a>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      <li>
+        <a href="https://discord.gg/Y4mm1#7774" rel="noreferrer noopener" target="_blank" title="Discord Server">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon-discord">
+  <use href="/assets/discord-31958f8a24fd49834876e398b1793cd068c7d12a1db745c6da2ecc8b1f7576f5.svg#icon-discord" xlink:href="/assets/discord-31958f8a24fd49834876e398b1793cd068c7d12a1db745c6da2ecc8b1f7576f5.svg#icon-discord"></use>
+</svg>
+
+        </a>
+      </li>
+    
+    
+    
+    
+      <li>
+        <a href="mailto:ahmedsayedgfx@gmail.com" title="Email">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon-email">
+  <use href="/assets/email-30a104adb1e2728097a984fbea2995978b6fff6c12906a734044ebd388848b70.svg#icon-email" xlink:href="/assets/email-30a104adb1e2728097a984fbea2995978b6fff6c12906a734044ebd388848b70.svg#icon-email"></use>
+</svg>
+
+        </a>
+      </li>
+    
+    
+      <li>
+        <a href="/feed.xml" rel="noreferrer noopener" target="_blank" title="RSS">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon-rss">
+  <use href="/assets/rss-cdc7a721b47671668abb0ba57f9f8db8022096e0051ff51b9e08e6cc049453a4.svg#icon-rss" xlink:href="/assets/rss-cdc7a721b47671668abb0ba57f9f8db8022096e0051ff51b9e08e6cc049453a4.svg#icon-rss"></use>
+</svg>
+
+        </a>
+      </li>
+    
+    
+      <li>
+        <a onclick="toggle()" title="Toggle Theme">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon-theme">
+  <use href="/assets/theme-610197c56844c5ba34608b2018c4cc3b79f8833e2efc7a99bcb5589f1d3cfd7b.svg#icon-theme" xlink:href="/assets/theme-610197c56844c5ba34608b2018c4cc3b79f8833e2efc7a99bcb5589f1d3cfd7b.svg#icon-theme"></use>
+</svg>
+
+        </a>
+      </li>
+    
+  </ul>
+</nav>
+
+
+  <ul class="header-tags scrollappear">
+    
+    
+      
+        <li><a href="/tag/AES">Aes</a></li>
+    
+      
+        <li><a href="/tag/ASC-Wargames">Asc-wargames</a></li>
+    
+      
+        <li><a href="/tag/AUCTF">Auctf</a></li>
+    
+      
+        <li><a href="/tag/AnDetect">Andetect</a></li>
+    
+      
+        <li><a href="/tag/CTF">Ctf</a></li>
+    
+      
+        <li><a href="/tag/ECC">Ecc</a></li>
+    
+      
+        <li><a href="/tag/RSA">Rsa</a></li>
+    
+      
+        <li><a href="/tag/WPICTF">Wpictf</a></li>
+    
+      
+        <li><a href="/tag/algorithms">Algorithms</a></li>
+    
+      
+        <li><a href="/tag/analysis">Analysis</a></li>
+    
+      
+        <li>...</li>
+        <li><a href="/tags">Show all</a></li>
+        
+  </ul>
+
+
+        <article class="article scrollappear">
+          <header class="article-header">
+            <h1>ASC - Wargames 2022 Filtration Phase</h1>
+            <p>This is my writeup and walkthrough for crypto challenges in ASC wargames 2022 gualification round</p>
+            <div class="article-list-footer">
+  <span class="article-list-date">
+    August 4, 2022
+  </span>
+  <span class="article-list-divider">-</span>
+  <span class="article-list-minutes">
+    
+    
+      21 minute read
+    
+  </span>
+  <span class="article-list-divider">-</span>
+  <div class="article-list-tags">
+    
+      
+      <a href="/tag/security" title="See all posts with tag 'Security'">Security</a>
+    
+      
+      <a href="/tag/ASC-Wargames" title="See all posts with tag 'ASC-Wargames'">ASC-Wargames</a>
+    
+      
+      <a href="/tag/CTF" title="See all posts with tag 'CTF'">CTF</a>
+    
+      
+      <a href="/tag/infosec" title="See all posts with tag 'Infosec'">Infosec</a>
+    
+      
+      <a href="/tag/python" title="See all posts with tag 'Python'">Python</a>
+    
+      
+      <a href="/tag/hacking" title="See all posts with tag 'Hacking'">Hacking</a>
+    
+      
+      <a href="/tag/cryptography" title="See all posts with tag 'Cryptography'">Cryptography</a>
+    
+      
+      <a href="/tag/cracking" title="See all posts with tag 'cracking'">cracking</a>
+    
+      
+      <a href="/tag/RSA" title="See all posts with tag 'RSA'">RSA</a>
+    
+      
+      <a href="/tag/ECC" title="See all posts with tag 'ECC'">ECC</a>
+    
+  </div>
+</div>
+          </header>
+
+          <div class="article-content">
+            <p><a href="/assets/documentation/ASCWargames/2022/ASC-Quals-2022-426956f80726b655fbd32e230e07bb7759be8ed6fabf87dd9bf6513e8d6a3d4d.png">
+  <img src="/assets/documentation/ASCWargames/2022/ASC-Quals-2022-426956f80726b655fbd32e230e07bb7759be8ed6fabf87dd9bf6513e8d6a3d4d.png" alt="ASC" class="zooming" data-rjs="/assets/documentation/ASCWargames/2022/ASC-Quals-2022-426956f80726b655fbd32e230e07bb7759be8ed6fabf87dd9bf6513e8d6a3d4d.png" data-zooming-width="1880" data-zooming-height="931" />
+</a></p>
+
+<h3 id="table-of-content">Table of Content</h3>
+
+<ul>
+    <li><a href="#intro">Introduction</a></li>
+    <li><a href="#rsa">RSA in the wild</a></li>
+    <li><a href="#osp">OSP</a></li>
+    <li><a href="#teaser">Teaser</a></li>
+    <li><a href="#fhe">Fully Heuristic Encryption</a></li>
+    <li><a href="#vault">Vault</a></li>
+    <li><a href="#conc">Conclusion</a></li>
+</ul>
+
+<hr />
+
+<p><a id="intro"></a></p>
+
+<h2 id="intro"><strong>Intro</strong></h2>
+
+<p>Arab Security Cyber Wargames qualification round started this year from 5<sup>th</sup> till 6<sup>th</sup> of August and as always the top 10 teams will be qualified to the finals. In this write-up, we’re going to discuss and solve the 5 crypto challenges in the competition . The challenges was easy-medium ones, but full of tricks for those who aren’t up-todate with the encryption algorithms and techniques. However, I’ll show you my thought process and how to divide the challenge into sub-challenges in order to find a correct solution.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Challenge</th>
+      <th style="text-align: center">Difficulty</th>
+      <th style="text-align: right">Points</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">RSA in the wild</td>
+      <td style="text-align: center">Warmup</td>
+      <td style="text-align: right">100</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">OSP</td>
+      <td style="text-align: center">Easy</td>
+      <td style="text-align: right">300</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Teaser</td>
+      <td style="text-align: center">Medium</td>
+      <td style="text-align: right">600</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">FHE</td>
+      <td style="text-align: center">Medium</td>
+      <td style="text-align: right">600</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Vault</td>
+      <td style="text-align: center">Hard</td>
+      <td style="text-align: right">900</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<p><a id="rsa"></a></p>
+
+<h2 id="rsa-in-the-wild"><strong>RSA in the wild</strong></h2>
+
+<p>Description:</p>
+
+<blockquote>
+  <p>Our security team found encrypted messages between members of an active threat actor in the wild.</p>
+</blockquote>
+
+<p>This is a warmup straightforward challenge, so let’s have a look at the given files.</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">[</span><span class="w">
+</span><span class="p">{</span><span class="w">
+</span><span class="nl">"John"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="mi">9019465093803586877472891652042526017244423267918585684572141459337752636017501282398583984846819147555479788255766221465302452334708306581657478087163498882790399392556915932241903819600243256898710512837026330099749891149718206725456165654975013707057350042189177818505148923810842478214626652504947902299</span><span class="p">,</span><span class="w">
+</span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="mi">1490803635449005835981793387807741830923148060654731278738509797435451285285034156065878921946571927216460900511251526914548382779631334897120457669789539503101428807041786196779372071069328112093285546177856847259662170258558289415211977744184992082066716124590295955026240499770848142550445898094801157061</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span><span class="p">},</span><span class="w">
+</span><span class="p">{</span><span class="w">
+</span><span class="nl">"Sara"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="mi">23938372162005523177999938438562451374665546708075664883194200608993841377868039780046395969369898805670203008718315917149246468698236445400730491330343376568175458641957123986113999188370741703681470314365261825831443108787421922073023609145294588353146041309964285454626205876016177576199911694583578054203</span><span class="p">,</span><span class="w">
+</span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="mi">6350249974685514311455731678779522359350354799468017596988644954406012738159501505851851861514932395179333372434804220392980343950894714606458923379054304802233466609403548752751709359872922491353578150109676550914201161697356048954377466378161795747517549045847439371181670308693139841054101664947749441303</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span><span class="p">},</span><span class="w">
+</span><span class="p">{</span><span class="w">
+</span><span class="nl">"Y4mm1"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="mi">7492176105815056287406737107861152687669914817188441973876375606125509278843647128053495385472184164273276753734355681888283710630052589292533918258041321561584337044160204288159261124250897895150472928088930420119607423773142875636276401786832850472958085716356092462792054479554714349979034664376850407259</span><span class="p">,</span><span class="w">
+</span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="mi">2544223511735543039595079752083782272939464573374775456475586531619250161960313372895971808675158274512437185309522676978160116122909124405173644335952401335143161289490254404665940426997169777822971888908315046502903142588256830588219713706207832651682400227233863085882991692803261801301182265503150372301</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span><span class="p">},</span><span class="w">
+</span><span class="p">{</span><span class="w">
+</span><span class="nl">"Gary"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="mi">19226181445602743460246708025013176246822001005948560833211736039157554695246287037030410489087800335076044816379819628670911825715971233704410525113162113042540729331798511555022529148709471705473637189586448652726834752638590559219127165638752435997278633564685349397058307290548363125722837867180940021419</span><span class="p">,</span><span class="w">
+</span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="mi">12100625282820382536088469677465402939756857865013288698256765193122801312845842440176118885229553306158666539700152355154084650895509376550887918252093180450562973419960250796728283309496027020169076272415675948089735523228946553123649235016377673362851198236398841047345542435309022329198769047584615575574</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span><span class="p">]</span></code></pre></figure>
+
+<p>The output file contains an array of kinda users messages with some keys. Let’s look at the script:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c1"># WildRSA.py
+</span>
+<span class="kn">from</span> <span class="nn">Crypto.Util.number</span> <span class="kn">import</span> <span class="n">getRandomNBitInteger</span><span class="p">,</span> <span class="n">bytes_to_long</span><span class="p">,</span> <span class="n">long_to_bytes</span><span class="p">,</span> <span class="n">getStrongPrime</span><span class="p">,</span> <span class="n">isPrime</span>
+
+<span class="n">BITS</span> <span class="o">=</span> <span class="mi">512</span>
+<span class="n">SEED</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">while</span> <span class="n">SEED</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">:</span>
+<span class="n">SEED</span> <span class="o">=</span> <span class="n">getRandomNBitInteger</span><span class="p">(</span><span class="n">BITS</span><span class="o">//</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">WildRSA</span><span class="p">:</span>
+<span class="k">def</span> <span class="err">**</span><span class="nf">init</span><span class="o">**</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">getRandomNBitInteger</span><span class="p">(</span><span class="n">BITS</span><span class="o">//</span><span class="mi">2</span><span class="p">)):</span>
+<span class="bp">self</span><span class="p">.</span><span class="n">P</span> <span class="o">=</span> <span class="n">getStrongPrime</span><span class="p">(</span><span class="n">BITS</span><span class="p">)</span>
+<span class="bp">self</span><span class="p">.</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span>
+
+    <span class="k">def</span> <span class="nf">__get_q</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
+        <span class="n">Q</span> <span class="o">=</span> <span class="n">s</span>
+        <span class="k">while</span> <span class="ow">not</span> <span class="n">isPrime</span><span class="p">(</span><span class="n">Q</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">Q</span> <span class="o">=</span> <span class="n">s</span>
+            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">):</span>
+                <span class="n">Q</span> <span class="o">*=</span> <span class="n">getRandomNBitInteger</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Q</span> <span class="o">+</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">pub</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">N</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">P</span> <span class="o">*</span> <span class="bp">self</span><span class="p">.</span><span class="n">__get_q</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">seed</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">N</span><span class="p">,</span> <span class="mh">0x10001</span>
+
+<span class="kn">from</span> <span class="nn">secret</span> <span class="kn">import</span> <span class="n">APT</span>
+<span class="n">obj</span> <span class="o">=</span> <span class="n">WildRSA</span><span class="p">(</span><span class="n">SEED</span><span class="p">)</span>
+
+<span class="k">for</span> \<span class="n">_</span><span class="p">,</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">APT</span><span class="p">.</span><span class="n">items</span><span class="p">():</span>
+<span class="n">N</span><span class="p">,</span> <span class="n">E</span> <span class="o">=</span> <span class="n">obj</span><span class="p">.</span><span class="n">pub</span><span class="p">()</span>
+<span class="n">key</span> <span class="o">=</span> <span class="n">N</span>
+<span class="n">msg</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">bytes_to_long</span><span class="p">(</span><span class="n">user</span><span class="p">[</span><span class="s">"msg"</span><span class="p">]),</span><span class="n">E</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span></code></pre></figure>
+
+<p>The script has one class called <code class="language-plaintext highlighter-rouge">WildRSA</code> and it first generates a random 256-bit even integer seed. After that, it instantiate an object from the class with the generated seed as input, then it iterate over the APT array and encrypt the messages inside.</p>
+
+<h3 id="solution">Solution</h3>
+
+<p>Obviousley, the class generates a strong 512-bit prime in the constructor and there’re two functions <code class="language-plaintext highlighter-rouge">pub</code> and <code class="language-plaintext highlighter-rouge">__get_q</code>. The trick here is in the <code class="language-plaintext highlighter-rouge">pub</code> method. It generates only one random prime from <code class="language-plaintext highlighter-rouge">__get_q</code> and the other prime is still the same for each message.</p>
+
+<p>To visualiza, we have for each message \(N\) and \(E\):</p>
+
+\[N_i = PQ_i\]
+
+<p>This is a basic algebra problem to get \(P\) we have to find the GCD between each pair of the \(N_i\).</p>
+
+\[P = gcd(N_1, N_2, ...)\]
+
+<p>Finally, we can get the private key of the RSA.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">Crypto.Util.number</span> <span class="kn">import</span> <span class="n">getRandomNBitInteger</span><span class="p">,</span> <span class="n">bytes_to_long</span><span class="p">,</span> <span class="n">long_to_bytes</span><span class="p">,</span> <span class="n">GCD</span>
+
+<span class="n">N</span> <span class="o">=</span> <span class="p">[</span><span class="mi">9019465093803586877472891652042526017244423267918585684572141459337752636017501282398583984846819147555479788255766221465302452334708306581657478087163498882790399392556915932241903819600243256898710512837026330099749891149718206725456165654975013707057350042189177818505148923810842478214626652504947902299</span><span class="p">,</span><span class="mi">23938372162005523177999938438562451374665546708075664883194200608993841377868039780046395969369898805670203008718315917149246468698236445400730491330343376568175458641957123986113999188370741703681470314365261825831443108787421922073023609145294588353146041309964285454626205876016177576199911694583578054203</span><span class="p">,</span><span class="mi">7492176105815056287406737107861152687669914817188441973876375606125509278843647128053495385472184164273276753734355681888283710630052589292533918258041321561584337044160204288159261124250897895150472928088930420119607423773142875636276401786832850472958085716356092462792054479554714349979034664376850407259</span><span class="p">,</span><span class="mi">19226181445602743460246708025013176246822001005948560833211736039157554695246287037030410489087800335076044816379819628670911825715971233704410525113162113042540729331798511555022529148709471705473637189586448652726834752638590559219127165638752435997278633564685349397058307290548363125722837867180940021419</span><span class="p">]</span>
+
+<span class="n">messages</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1490803635449005835981793387807741830923148060654731278738509797435451285285034156065878921946571927216460900511251526914548382779631334897120457669789539503101428807041786196779372071069328112093285546177856847259662170258558289415211977744184992082066716124590295955026240499770848142550445898094801157061</span><span class="p">,</span><span class="mi">6350249974685514311455731678779522359350354799468017596988644954406012738159501505851851861514932395179333372434804220392980343950894714606458923379054304802233466609403548752751709359872922491353578150109676550914201161697356048954377466378161795747517549045847439371181670308693139841054101664947749441303</span><span class="p">,</span><span class="mi">2544223511735543039595079752083782272939464573374775456475586531619250161960313372895971808675158274512437185309522676978160116122909124405173644335952401335143161289490254404665940426997169777822971888908315046502903142588256830588219713706207832651682400227233863085882991692803261801301182265503150372301</span><span class="p">,</span><span class="mi">12100625282820382536088469677465402939756857865013288698256765193122801312845842440176118885229553306158666539700152355154084650895509376550887918252093180450562973419960250796728283309496027020169076272415675948089735523228946553123649235016377673362851198236398841047345542435309022329198769047584615575574</span><span class="p">]</span>
+<span class="n">E</span> <span class="o">=</span> <span class="mh">0x10001</span>
+<span class="n">P</span> <span class="o">=</span> <span class="n">GCD</span><span class="p">(</span><span class="n">N</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">N</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">P</span><span class="p">)</span>
+<span class="n">Q1</span> <span class="o">=</span> <span class="n">N</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">//</span> <span class="n">P</span>
+<span class="n">Q2</span> <span class="o">=</span> <span class="n">N</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">//</span> <span class="n">P</span>
+<span class="n">phi</span> <span class="o">=</span> <span class="p">(</span><span class="n">P</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> \<span class="o">*</span> <span class="p">(</span><span class="n">Q1</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">d</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">phi</span><span class="p">)</span>
+<span class="n">msg</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">messages</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">d</span><span class="p">,</span> <span class="n">N</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">long_to_bytes</span><span class="p">(</span><span class="n">msg</span><span class="p">))</span></code></pre></figure>
+
+<p>Flag: <code class="language-plaintext highlighter-rouge">ASCWG{7h3_c0mM0n_9re4t_P0W3r_0f_6r0k3N_R$A}</code></p>
+
+<p><a id="osp"></a></p>
+
+<h2 id="osp"><strong>OSP</strong></h2>
+
+<p>Description:</p>
+
+<blockquote>
+  <p>Have you heard of OTP? This is OSP (One Secret Password).</p>
+</blockquote>
+
+<p>This challenge was an easy one given the <code class="language-plaintext highlighter-rouge">OSP.py</code> script and <code class="language-plaintext highlighter-rouge">output.txt</code> file.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c1"># OSP.py
+</span>
+<span class="c1">#!/usr/bin/env python3
+</span><span class="kn">from</span> <span class="nn">Crypto.Util.number</span> <span class="kn">import</span> <span class="n">getPrime</span><span class="p">,</span> <span class="n">long_to_bytes</span><span class="p">,</span> <span class="n">bytes_to_long</span><span class="p">,</span> <span class="n">isPrime</span>
+<span class="kn">from</span> <span class="nn">string</span> <span class="kn">import</span> <span class="n">printable</span><span class="p">,</span> <span class="n">ascii_letters</span>
+<span class="kn">from</span> <span class="nn">secret</span> <span class="kn">import</span> <span class="n">FLAG</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">secret</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">urandom</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">FLAG</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">OSP</span><span class="p">(</span><span class="n">plain</span><span class="p">,</span> <span class="n">secret</span><span class="p">):</span>
+<span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">plain</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">secret</span><span class="p">),</span> <span class="s">'The length has to be idenntical!'</span>
+<span class="n">ct</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">getPrime</span><span class="p">(</span><span class="mi">256</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">f</span><span class="p">,</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">FLAG</span><span class="p">,</span> <span class="n">secret</span><span class="p">):</span>
+<span class="n">ct</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">f</span> \<span class="o">*</span> <span class="n">p</span> <span class="o">+</span> <span class="n">k</span><span class="p">))</span>
+<span class="k">return</span> <span class="n">ct</span><span class="p">,</span> <span class="n">p</span>
+
+<span class="n">ct</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="n">OSP</span><span class="p">(</span><span class="n">FLAG</span><span class="p">,</span> <span class="n">secret</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">ct</span><span class="p">)</span></code></pre></figure>
+
+<p>Basically, the script does some OTP on the flag with a randomly generated secret bytes and an odd 256-bit prime using the following equation \(C_i = F_ip + k\) where \(F_i\) are the flag bytes.</p>
+
+<p>And the other file contains the cipher bytes:</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="go">5447072546591309544167389173397699795993168970119080464536675615517059887871841
+6955492636416595264090666175261678201037431146459748900869908862891014933743799
+5614674778794119068603308840271475174331420323045821401907034865225277115190905
+7290697100822214312962505509009228957713933852313230775610627362307449388382150
+5949879243199738117475148174019025931007923028899303276647753364641711569829134
+10307537280472785752809059512737185767802458204994567648277093857055359480126320
+</span><span class="c">...</span></code></pre></figure>
+
+<h3 id="solution-1">Solution</h3>
+
+<p>Obviously, you can notice that \(k\) is in the byte range \([0, 255]\) and \(F_{0...5}\) all are known bytes <code class="language-plaintext highlighter-rouge">ASCWG{</code>. So, we can rearrange the equation above in order to get the prime number generated during the encryption.</p>
+
+\[p = \frac{C_i - k}{F_0}\]
+
+<p>We’ll calculate this by bruteforcing the \(k\) and check the result is it a prime or not, then we can do a bruteforce on the flag bytes itself.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">flag</span> <span class="o">=</span> <span class="sa">b</span><span class="s">''</span>
+<span class="n">p</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">256</span><span class="p">):</span>
+<span class="n">p</span> <span class="o">=</span> <span class="p">(</span><span class="n">ct</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">i</span><span class="p">)</span> <span class="o">//</span> <span class="nb">ord</span><span class="p">(</span><span class="s">'A'</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">isPrime</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+<span class="k">break</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">ct</span><span class="p">:</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">256</span><span class="p">):</span>
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">256</span><span class="p">):</span>
+<span class="k">if</span> <span class="n">i</span> \<span class="o">*</span> <span class="n">p</span> <span class="o">+</span> <span class="n">j</span> <span class="o">==</span> <span class="n">c</span><span class="p">:</span>
+<span class="n">flag</span> <span class="o">+=</span> <span class="n">long_to_bytes</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="k">break</span>
+<span class="k">print</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span></code></pre></figure>
+
+<p>Flag: <code class="language-plaintext highlighter-rouge">ASCWG{Wh47_1f_17's_N07_@_Pr1M3!-f0ffa3657e}</code></p>
+
+<p><a id="teaser"></a></p>
+
+<h2 id="teaser"><strong>Teaser</strong></h2>
+
+<p>Description:</p>
+
+<blockquote>
+  <p>The APT hasn’t stopped their operations yet and decided to change the technique they use.</p>
+</blockquote>
+
+<p>Given 2 files a python script <code class="language-plaintext highlighter-rouge">Teaser.py</code> and text <code class="language-plaintext highlighter-rouge">output.txt</code> file. The script contains 2 layers of encryption RSA with some modular polynomial equations.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">Crypto.Util.number</span> <span class="kn">import</span> <span class="n">bytes_to_long</span><span class="p">,</span> <span class="n">long_to_bytes</span><span class="p">,</span> <span class="n">getStrongPrime</span><span class="p">,</span> <span class="n">getRandomNBitInteger</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time_ns</span>
+<span class="kn">from</span> <span class="nn">secret</span> <span class="kn">import</span> <span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">FLAG</span>
+
+<span class="n">BITS</span> <span class="o">=</span> <span class="mi">512</span>
+
+<span class="n">N</span> <span class="o">=</span> <span class="n">p</span> \<span class="o">*</span> <span class="n">q</span>
+
+<span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="n">getRandomNBitInteger</span><span class="p">(</span><span class="mi">64</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)]</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="p">(</span><span class="n">a</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">inf</span> <span class="o">=</span> <span class="o">-</span><span class="n">x</span><span class="o">*</span><span class="p">(</span><span class="n">a</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
+<span class="n">FLAG</span> <span class="o">=</span> <span class="n">bytes_to_long</span><span class="p">(</span><span class="n">FLAG</span><span class="p">)</span>
+
+<span class="n">c1</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">FLAG</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+<span class="n">c2</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">FLAG</span><span class="p">,</span> <span class="n">inf</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+
+<span class="n">q1</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">a</span><span class="o">*</span><span class="n">c1</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">c2</span> <span class="o">+</span> <span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="p">)</span> <span class="o">%</span> <span class="n">N</span>
+<span class="n">q2</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">c2</span> <span class="o">-</span> <span class="n">x</span><span class="o">*</span><span class="n">b</span><span class="o">*</span><span class="n">c1</span> <span class="o">+</span> <span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="p">)</span> <span class="o">%</span> <span class="n">N</span>
+
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">N</span><span class="o">=</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="n">q1</span><span class="o">=</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="n">q2</span><span class="o">=</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+<span class="n">hint</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">5</span> <span class="o">+</span> <span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">4</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">x</span>\<span class="o">*</span>\<span class="o">*</span><span class="mi">3</span> <span class="o">-</span> <span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>\<span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">b</span><span class="o">*</span><span class="n">a</span>\<span class="o">*</span>\<span class="o">*</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">x</span> <span class="o">-</span> <span class="p">(</span><span class="n">b</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>\<span class="o">*</span><span class="p">(</span><span class="n">a</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">hint</span><span class="o">=</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="n">a</span><span class="o">=</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="n">b</span><span class="o">=</span><span class="si">}</span><span class="s">"</span><span class="p">)</span></code></pre></figure>
+
+<p>And the text files contains some values</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="go">N=136172654412975696672277699911326568930906766030832704596331587851913580572236893811129555165206299271122442434714570487317929463308920741438574074555215146250641537240478488340634101606111041980010829107689359885402204793049862837890400636654700457420935273510878322624221066308139237364134968330182982837219
+q1=129700851577911833951546779649879386781363652757273181746564105468579589496221524015498600435486574591787516500081344266887101103166695795763627773287485087193020550446476318981445160008866376604043109183290785818082565090275386881955913967486969291033661943236500735834562836343585517551647242966723167449078
+q2=106187520824836916140530981655653639328217502775479926753617707156322730832324365295797538549177802527036773048825921792473140235119964421139149577764124882650810667324422218800463880704315570077101568050089773823894917651766606738325184195516375067069083002909431495903494276122403106230525955048238146574777
+hint=6573544964235663795110387821358621068738264530355319754834598296204350028845729399053875214556575503920004379593112
+a=12011053116152205388
+b=11423234452039057359</span></code></pre></figure>
+
+<p>After analyzing the script, it computes the modulus \(N=pq\), then generates three 64-bit random numbers <code class="language-plaintext highlighter-rouge">a</code>, <code class="language-plaintext highlighter-rouge">b</code>, <code class="language-plaintext highlighter-rouge">x</code>. Aftet that, it calculates \(s = x( ax + b) + 1\) and \(inf = -x(ax + b)\) and they’re additive inverse of each other except the 1.</p>
+
+<p>Then here comes to the first layer with the following</p>
+
+\[C_1 = Flag^s \pmod{N}\]
+
+\[C_2 = Flag^{inf} \pmod{N}\]
+
+<p>Second layer calculates two modular polynomial linear eqautions</p>
+
+\[Q_1 = xaC_1 + bC_2 + ab \pmod{N}\]
+
+\[Q_2 = aC_2 - xbC_1 + ab \pmod{N}\]
+
+<p>Finally, it scrambles the value of x in some sort of another 5<sup>th</sup> degree polynomial equation \(hint = x^5 + abx^4 + bx^3 - ab^2x^2 + xba^2 - b^2a^2\)</p>
+
+<h3 id="solution-2">Solution</h3>
+
+<p>We can start from the end, so the goal first is to calculate the unknown variable \(x\), then try to solve the two modular equations to find \(C_1\) and \(C_2\) after that we can multiply each other to get the flag.</p>
+
+\[C_1C_2 = Flag^sFlag^{inf} = Flag^{s(inf)} = Flag^{x(ax+b) + 1 - x(ax+b)} = Flag \pmod{N}\]
+
+<p>We’ll use SageMath in order to recover the encrypted flag.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">N</span><span class="o">=</span><span class="mi">136172654412975696672277699911326568930906766030832704596331587851913580572236893811129555165206299271122442434714570487317929463308920741438574074555215146250641537240478488340634101606111041980010829107689359885402204793049862837890400636654700457420935273510878322624221066308139237364134968330182982837219</span>
+<span class="n">q1</span><span class="o">=</span><span class="mi">129700851577911833951546779649879386781363652757273181746564105468579589496221524015498600435486574591787516500081344266887101103166695795763627773287485087193020550446476318981445160008866376604043109183290785818082565090275386881955913967486969291033661943236500735834562836343585517551647242966723167449078</span>
+<span class="n">q2</span><span class="o">=</span><span class="mi">106187520824836916140530981655653639328217502775479926753617707156322730832324365295797538549177802527036773048825921792473140235119964421139149577764124882650810667324422218800463880704315570077101568050089773823894917651766606738325184195516375067069083002909431495903494276122403106230525955048238146574777</span>
+<span class="n">hint</span><span class="o">=</span><span class="mi">6573544964235663795110387821358621068738264530355319754834598296204350028845729399053875214556575503920004379593112</span>
+<span class="n">a</span><span class="o">=</span><span class="mi">12011053116152205388</span>
+<span class="n">b</span><span class="o">=</span><span class="mi">11423234452039057359</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">var</span><span class="p">(</span><span class="s">'x'</span><span class="p">)</span>
+<span class="n">pol</span> <span class="o">=</span> <span class="n">x</span><span class="o">^</span><span class="mi">5</span> <span class="o">+</span> <span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="o">*</span><span class="n">x</span><span class="o">^</span><span class="mi">4</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">x</span><span class="o">^</span><span class="mi">3</span> <span class="o">-</span> <span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">x</span><span class="o">^</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">b</span><span class="o">*</span><span class="n">a</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span><span class="n">_x</span> <span class="o">-</span> <span class="p">(</span><span class="n">b</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span><span class="n">_</span><span class="p">(</span><span class="n">a</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="n">hint</span>
+<span class="n">x</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">pol</span><span class="p">.</span><span class="n">roots</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span></code></pre></figure>
+
+<p>Then we’ll construct <code class="language-plaintext highlighter-rouge">PolynomialRing</code> with a field module \(N\), then we can use <a href="https://en.wikipedia.org/wiki/Ideal_(ring_theory)">Ideals</a> and <a href="https://en.wikipedia.org/wiki/Gr%C3%B6bner_basis">Groebner Basis</a>.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">F</span> <span class="o">=</span> <span class="n">Zmod</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+<span class="n">PR</span><span class="p">.</span><span class="o">&lt;</span><span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">PolynomialRing</span><span class="p">(</span><span class="n">F</span><span class="p">)</span>
+<span class="n">f1</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="n">a</span><span class="o">*</span><span class="n">c1</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">c2</span> <span class="o">+</span> <span class="n">a</span><span class="o">*</span><span class="n">b</span> <span class="o">-</span> <span class="n">q1</span>
+<span class="n">f2</span> <span class="o">=</span> <span class="n">a</span><span class="o">*</span><span class="n">c2</span> <span class="o">-</span> <span class="n">x</span><span class="o">*</span><span class="n">b</span><span class="o">*</span><span class="n">c1</span> <span class="o">+</span> <span class="n">a</span><span class="o">*</span><span class="n">b</span> <span class="o">-</span> <span class="n">q2</span>
+
+<span class="n">I</span> <span class="o">=</span> <span class="n">Ideal</span><span class="p">([</span><span class="n">f1</span><span class="p">,</span> <span class="n">f2</span><span class="p">])</span>
+<span class="n">I</span><span class="p">.</span><span class="n">groebner_basis</span><span class="p">()</span>
+
+<span class="c1"># [c1 + 129605315639493448970075136922290937178908733835389122798667679999645002511918751225679112934299574414218902904120640354628679425092067997512344836684845210103107098629862452090849238650480459973169748953515560552426758751304034613294461809691584124214680152686132787281209362547560156811179702797894368189923, c2 + 16301823837274342549830986630234325738949194338370818370588794724975224426894656835985621236373909782588949334404482254039646785783224270540302423929586850992446342322491817804966558550730248640999810574168456842642895073832374078601103825246815150330281607599953134437905377383158998850822351263862695676571]</span></code></pre></figure>
+
+<p>And we know that they’re basis so the result has to equal zero \(C_1 + 12960... \pmod{N}= 0\) and \(C_2 + 16301... \pmod{N}= 0\).</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">C1</span> <span class="o">=</span> <span class="n">F</span><span class="p">(</span><span class="o">-</span><span class="mi">129605315639493448970075136922290937178908733835389122798667679999645002511918751225679112934299574414218902904120640354628679425092067997512344836684845210103107098629862452090849238650480459973169748953515560552426758751304034613294461809691584124214680152686132787281209362547560156811179702797894368189923</span><span class="p">)</span>
+<span class="n">C2</span> <span class="o">=</span> <span class="n">F</span><span class="p">(</span><span class="o">-</span><span class="mi">16301823837274342549830986630234325738949194338370818370588794724975224426894656835985621236373909782588949334404482254039646785783224270540302423929586850992446342322491817804966558550730248640999810574168456842642895073832374078601103825246815150330281607599953134437905377383158998850822351263862695676571</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">int</span><span class="p">.</span><span class="n">to_bytes</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="n">C1</span>\<span class="o">*</span><span class="n">C2</span><span class="p">)),</span> <span class="mi">64</span><span class="p">,</span> <span class="s">'big'</span><span class="p">))</span></code></pre></figure>
+
+<p>Note that: There’re multiple ways to solve multivariate polynomials I’ll leave it for you to discover, but most of them are limited to for example the degree. However, Ideals and Groebner Basis are general ways to find roots of multivairate non-linear modular polynomials under certain conditions. You can learn more from this <a href="https://link.springer.com/book/10.1007/978-3-319-16721-3">book</a>.</p>
+
+<p>Flag: <code class="language-plaintext highlighter-rouge">ASCWG{8r4in_T3s$s1n9_7h3_Ba51s_0f_9r036n3r}</code></p>
+
+<p><a id="fhe"></a></p>
+
+<h2 id="fully-heuristic-encryption"><strong>Fully Heuristic Encryption</strong></h2>
+
+<p>This one is a bit tricky and it’s all about basic homomorphic encryption. Basically, you can look at the homomorphic encryption as an extension of public-key cryptography. Given the <code class="language-plaintext highlighter-rouge">FHE.py</code> script and a text <code class="language-plaintext highlighter-rouge">output.txt</code> file.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">Crypto.Util.number</span> <span class="kn">import</span> <span class="n">getPrime</span><span class="p">,</span> <span class="n">bytes_to_long</span><span class="p">,</span> <span class="n">long_to_bytes</span><span class="p">,</span> <span class="n">isPrime</span><span class="p">,</span> <span class="n">getRandomNBitInteger</span>
+<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">getrandbits</span><span class="p">,</span> <span class="n">randint</span>
+
+<span class="n">LEN</span> <span class="o">=</span> <span class="mi">25</span>
+<span class="n">BITS</span> <span class="o">=</span> <span class="mi">256</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'flag.txt'</span><span class="p">,</span> <span class="s">'rb'</span><span class="p">)</span> <span class="k">as</span> <span class="nb">file</span><span class="p">:</span>
+<span class="n">FLAG</span> <span class="o">=</span> <span class="nb">file</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="n">bin_flag</span> <span class="o">=</span> <span class="nb">bin</span><span class="p">(</span><span class="n">bytes_to_long</span><span class="p">(</span><span class="n">FLAG</span><span class="p">))[</span><span class="mi">2</span><span class="p">:]</span>
+
+<span class="k">def</span> <span class="nf">gen</span><span class="p">():</span>
+<span class="n">_p</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">while</span> <span class="ow">not</span> <span class="n">isPrime</span><span class="p">(</span>\<span class="n">_p</span><span class="p">):</span>
+\<span class="n">_p</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="mi">255</span> <span class="o">+</span> <span class="mi">2</span><span class="o">**</span><span class="mi">127</span> <span class="o">+</span> <span class="n">getRandomNBitInteger</span><span class="p">(</span><span class="n">LEN</span><span class="p">)</span>
+<span class="n">pub</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">LEN</span><span class="p">):</span>
+<span class="n">r</span><span class="p">,</span> <span class="n">q</span> <span class="o">=</span> <span class="n">getrandbits</span><span class="p">(</span><span class="n">BITS</span><span class="o">//</span><span class="mi">2</span><span class="p">),</span> <span class="n">getrandbits</span><span class="p">(</span><span class="n">BITS</span><span class="p">)</span>
+<span class="n">pub</span><span class="p">.</span><span class="n">append</span><span class="p">(</span>\<span class="n">_p</span><span class="o">*</span><span class="n">q</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">r</span><span class="p">)</span>
+<span class="k">return</span> <span class="n">pub</span><span class="p">,</span> \<span class="n">_p</span>
+
+<span class="k">def</span> <span class="nf">encrypt</span><span class="p">(</span><span class="n">public</span><span class="p">,</span> <span class="n">bins</span><span class="p">):</span>
+<span class="n">ciphertext</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">bit</span> <span class="ow">in</span> <span class="n">bins</span><span class="p">:</span>
+<span class="n">ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">public</span><span class="p">[</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">public</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span> <span class="k">for</span> \<span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)]</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">getrandbits</span><span class="p">(</span><span class="n">BITS</span><span class="o">//</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">ciphertext</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">ids</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span>\<span class="o">*</span><span class="n">r</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">bit</span><span class="p">))</span>
+<span class="k">return</span> <span class="n">ciphertext</span>
+
+<span class="n">public</span><span class="p">,</span> <span class="n">secret</span> <span class="o">=</span> <span class="n">gen</span><span class="p">()</span>
+<span class="n">ct</span> <span class="o">=</span> <span class="n">encrypt</span><span class="p">(</span><span class="n">public</span><span class="p">,</span> <span class="n">bin_flag</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'output.txt'</span><span class="p">,</span> <span class="s">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">h</span><span class="p">:</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">ct</span><span class="p">:</span>
+<span class="n">h</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="o">+</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span></code></pre></figure>
+
+<p>The script has two functions <code class="language-plaintext highlighter-rouge">gen</code> that retunrs a public key with a secret from and <code class="language-plaintext highlighter-rouge">encrypt</code> that does some sort of encryption on the flag bits with the generated public key.</p>
+
+<p>The first function <code class="language-plaintext highlighter-rouge">gen</code>, it generates a 256-bit prime number with the last 25 bits are random \(p = 2^{255} + 2^{127} + rand(2^{25})\). Aftet that, it generates two random numbers \(q\) and \(r\) 25 times, then computes the public-key using the following equation \(pub_i = pq_i + 2r_i\).</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">encrypt</code> functions takes the public key and the flag bits, then it get 5 random values from the public-key as <code class="language-plaintext highlighter-rouge">ids</code> with a random 128-bit <code class="language-plaintext highlighter-rouge">r</code>. After that, it encrypts the each bit of the flag with the following formula \(C_i = 2r + Flag_{bit} + \sum{ids}\).</p>
+
+<h3 id="solution-3">Solution</h3>
+
+<p>The attack here is pretty simple just you need to focus on what is given by looking at the equtions used. First you can notice that the last few bits of prime are low so we can bruteforce those bits, then after finding \(p\) and looking at the \(ids\) it’s just some values of the public-key \(\sum{ids} = \sum{pq_i + 2r_i}\).</p>
+
+<p>Now, here comes the interesting question: <strong>How can we get rid off the values \(2r + \sum{2r_i + pq_i}\) to recover the flag bits?</strong></p>
+
+<p>In order to make the above value equals to zero, the property of module somes into place by first take it module the recovered prime and this will get rid off all values multiplied by \(p\), then the remaining value is equal to some even number added to the flag bits.</p>
+
+\[2r + Flag_i + \sum{2r_i + pq_i} \pmod{p} = 2r + Flag_i + \sum{2r_i}\]
+
+\[Flag_i = 2(r + \sum{r_i}) + Flag_i \pmod{2}\]
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="n">LEN</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="mi">2</span><span class="o">**</span><span class="n">LEN</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span> <span class="c1"># Look at getRandomNBitInteger docs 😉
+</span><span class="n">p</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="mi">255</span> <span class="o">+</span> <span class="mi">2</span><span class="o">**</span><span class="mi">127</span> <span class="o">+</span> <span class="n">i</span>
+<span class="k">if</span> <span class="n">isPrime</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+<span class="n">flag</span> <span class="o">=</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">((</span><span class="n">x</span> <span class="o">%</span> <span class="n">p</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">ct</span><span class="p">])</span>
+<span class="n">flag</span> <span class="o">=</span> <span class="n">long_to_bytes</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">flag</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="k">if</span> <span class="sa">b</span><span class="s">"ASCWG{"</span> <span class="ow">in</span> <span class="n">flag</span><span class="p">:</span>
+<span class="k">print</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">flag</span><span class="p">)</span>
+<span class="k">break</span></code></pre></figure>
+
+<p>Flag: <code class="language-plaintext highlighter-rouge">ASCWG{DiV1n9_1n70_7h3_H0m0M0rpH1c_W0rl6_0f_We4k_Pr1m3_3nCryp7i0N}</code></p>
+
+<p><a id="vault"></a></p>
+
+<h2 id="vault"><strong>Vault</strong></h2>
+
+<p>The last challenge was about <a href="https://en.wikipedia.org/wiki/Elliptic-curve_cryptography">ECC</a> and especially on <a href="https://en.bitcoin.it/wiki/Secp256k1">SECP256k1</a> bitcoin curve, but with some tweeks on the curve params. Given <code class="language-plaintext highlighter-rouge">vault.py</code> script and <code class="language-plaintext highlighter-rouge">vault.enc</code> an encrypted file.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">Crypto.Util.number</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="n">getPrime</span><span class="p">,</span>
+<span class="n">getRandomRange</span><span class="p">,</span>
+<span class="n">getRandomNBitInteger</span><span class="p">,</span>
+<span class="n">long_to_bytes</span><span class="p">,</span>
+<span class="n">inverse</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">Crypto.Cipher</span> <span class="kn">import</span> <span class="n">AES</span>
+<span class="kn">from</span> <span class="nn">Crypto.Util.Padding</span> <span class="kn">import</span> <span class="n">pad</span><span class="p">,</span> <span class="n">unpad</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
+<span class="kn">from</span> <span class="nn">hashlib</span> <span class="kn">import</span> <span class="n">sha1</span>
+
+<span class="n">Point</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s">"Point"</span><span class="p">,</span> <span class="s">"x y"</span><span class="p">)</span>
+<span class="n">O</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">ECC</span><span class="p">:</span>
+<span class="k">def</span> <span class="err">**</span><span class="nf">init</span><span class="o">**</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">BITS</span><span class="o">=</span><span class="mi">128</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+<span class="k">assert</span> <span class="n">BITS</span> <span class="o">&gt;=</span> <span class="mi">128</span>
+<span class="bp">self</span><span class="p">.</span><span class="n">p</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="mi">256</span> <span class="o">-</span> <span class="mi">2</span><span class="o">**</span><span class="mi">32</span> <span class="o">-</span> <span class="mi">2</span><span class="o">**</span><span class="mi">9</span> <span class="o">-</span> <span class="mi">2</span><span class="o">**</span><span class="mi">8</span> <span class="o">-</span> <span class="mi">2</span><span class="o">**</span><span class="mi">7</span> <span class="o">-</span> <span class="mi">2</span><span class="o">**</span><span class="mi">6</span> <span class="o">-</span> <span class="mi">2</span>\<span class="o">*</span>\<span class="o">*</span><span class="mi">4</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="bp">self</span><span class="p">.</span><span class="n">a</span> <span class="o">=</span> <span class="o">-</span><span class="mi">32</span>
+<span class="bp">self</span><span class="p">.</span><span class="n">b</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="bp">self</span><span class="p">.</span>\<span class="n">_private</span> <span class="o">=</span> <span class="n">getRandomNBitInteger</span><span class="p">(</span><span class="n">BITS</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="p">.</span><span class="n">p</span>
+
+    <span class="k">def</span> <span class="nf">encrypt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">P</span><span class="p">:</span> <span class="n">Point</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+        <span class="n">C</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">mul</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">_private</span><span class="p">)</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="n">sha1</span><span class="p">(</span><span class="n">long_to_bytes</span><span class="p">(</span><span class="n">C</span><span class="p">.</span><span class="n">x</span> <span class="o">*</span> <span class="bp">self</span><span class="p">.</span><span class="n">inv_mod_p</span><span class="p">(</span><span class="n">C</span><span class="p">.</span><span class="n">y</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="p">.</span><span class="n">p</span><span class="p">)).</span><span class="n">digest</span><span class="p">()[:</span><span class="mi">16</span><span class="p">]</span>
+        <span class="n">cipher</span> <span class="o">=</span> <span class="n">AES</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">AES</span><span class="p">.</span><span class="n">MODE_CBC</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">key</span><span class="p">.</span><span class="nb">hex</span><span class="p">(),</span> <span class="n">cipher</span><span class="p">.</span><span class="n">iv</span><span class="p">.</span><span class="nb">hex</span><span class="p">(),</span> <span class="n">cipher</span><span class="p">.</span><span class="n">encrypt</span><span class="p">(</span><span class="n">pad</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="mi">16</span><span class="p">)).</span><span class="nb">hex</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">P</span><span class="p">:</span> <span class="n">Point</span><span class="p">,</span> <span class="n">Q</span><span class="p">:</span> <span class="n">Point</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Point</span><span class="p">:</span>
+        <span class="c1"># Adding 2 Points P and Q on the curve
+</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">valid</span><span class="p">(</span><span class="n">P</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="p">.</span><span class="n">valid</span><span class="p">(</span><span class="n">Q</span><span class="p">)):</span>
+            <span class="k">raise</span> <span class="nb">ValueError</span><span class="p">(</span><span class="s">"Invalid points"</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">P</span> <span class="o">==</span> <span class="n">O</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Q</span>
+        <span class="k">if</span> <span class="n">Q</span> <span class="o">==</span> <span class="n">O</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">P</span>
+        <span class="k">if</span> <span class="n">P</span><span class="p">.</span><span class="n">x</span> <span class="o">==</span> <span class="n">Q</span><span class="p">.</span><span class="n">x</span> <span class="ow">and</span> <span class="n">P</span><span class="p">.</span><span class="n">y</span> <span class="o">==</span> <span class="o">-</span><span class="n">Q</span><span class="p">.</span><span class="n">y</span> <span class="o">%</span> <span class="bp">self</span><span class="p">.</span><span class="n">p</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">O</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">P</span> <span class="o">==</span> <span class="n">Q</span><span class="p">:</span>
+                <span class="n">y_diff</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="p">(</span><span class="n">P</span><span class="p">.</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="p">.</span><span class="n">a</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="p">.</span><span class="n">p</span>
+                <span class="n">x_diff</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">P</span><span class="p">.</span><span class="n">y</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="p">.</span><span class="n">p</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">y_diff</span> <span class="o">=</span> <span class="p">(</span><span class="n">Q</span><span class="p">.</span><span class="n">y</span> <span class="o">-</span> <span class="n">P</span><span class="p">.</span><span class="n">y</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="p">.</span><span class="n">p</span>
+                <span class="n">x_diff</span> <span class="o">=</span> <span class="p">(</span><span class="n">Q</span><span class="p">.</span><span class="n">x</span> <span class="o">-</span> <span class="n">P</span><span class="p">.</span><span class="n">x</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="p">.</span><span class="n">p</span>
+
+            <span class="n">slope</span> <span class="o">=</span> <span class="p">(</span><span class="n">y_diff</span> <span class="o">*</span> <span class="bp">self</span><span class="p">.</span><span class="n">inv_mod_p</span><span class="p">(</span><span class="n">x_diff</span><span class="p">))</span> <span class="o">%</span> <span class="bp">self</span><span class="p">.</span><span class="n">p</span>
+            <span class="n">x3</span> <span class="o">=</span> <span class="p">(</span><span class="n">slope</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">P</span><span class="p">.</span><span class="n">x</span> <span class="o">-</span> <span class="n">Q</span><span class="p">.</span><span class="n">x</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="p">.</span><span class="n">p</span>
+            <span class="n">y3</span> <span class="o">=</span> <span class="p">(</span><span class="n">slope</span> <span class="o">*</span> <span class="p">(</span><span class="n">P</span><span class="p">.</span><span class="n">x</span> <span class="o">-</span> <span class="n">x3</span><span class="p">)</span> <span class="o">-</span> <span class="n">P</span><span class="p">.</span><span class="n">y</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="p">.</span><span class="n">p</span>
+            <span class="k">return</span> <span class="n">Point</span><span class="p">(</span><span class="n">x3</span><span class="p">,</span> <span class="n">y3</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">inv_mod_p</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="bp">self</span><span class="p">.</span><span class="n">p</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="nb">ZeroDivisionError</span><span class="p">(</span><span class="s">"Impossible inverse"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">pow</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">p</span> <span class="o">-</span> <span class="mi">2</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">p</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">valid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">P</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">P</span> <span class="o">==</span> <span class="n">O</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="p">(</span><span class="n">P</span><span class="p">.</span><span class="n">y</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">-</span> <span class="p">(</span><span class="n">P</span><span class="p">.</span><span class="n">x</span> <span class="o">**</span> <span class="mi">3</span> <span class="o">+</span> <span class="bp">self</span><span class="p">.</span><span class="n">a</span> <span class="o">*</span> <span class="n">P</span><span class="p">.</span><span class="n">x</span> <span class="o">+</span> <span class="bp">self</span><span class="p">.</span><span class="n">b</span><span class="p">))</span> <span class="o">%</span> <span class="bp">self</span><span class="p">.</span><span class="n">p</span> <span class="o">==</span> <span class="mi">0</span>
+            <span class="ow">and</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">P</span><span class="p">.</span><span class="n">x</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="p">.</span><span class="n">p</span>
+            <span class="ow">and</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">P</span><span class="p">.</span><span class="n">y</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="p">.</span><span class="n">p</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">mul</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">P</span><span class="p">:</span> <span class="n">Point</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Point</span><span class="p">:</span>
+        <span class="c1"># Adding a Point P to itself n times
+</span>        <span class="n">Q</span> <span class="o">=</span> <span class="n">P</span>
+        <span class="n">R</span> <span class="o">=</span> <span class="n">O</span>
+        <span class="k">while</span> <span class="n">n</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">n</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">R</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">R</span><span class="p">)</span>
+            <span class="n">Q</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">Q</span><span class="p">)</span>
+            <span class="n">n</span> <span class="o">&gt;&gt;=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">R</span>
+
+<span class="n">ecc</span> <span class="o">=</span> <span class="n">ECC</span><span class="p">()</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">39613264652991136516316121365481995043381995333181795575614979310610916877953</span><span class="p">,</span> <span class="mi">14487697298980196960516056623210206756245610286316104440426923097340932458937</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"vault.json"</span><span class="p">,</span> <span class="s">"rb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">h1</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="s">"vault.enc"</span><span class="p">,</span> <span class="s">"wb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">h2</span><span class="p">:</span>
+<span class="n">vault</span> <span class="o">=</span> <span class="n">h1</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
+<span class="n">key</span><span class="p">,</span> <span class="n">iv</span><span class="p">,</span> <span class="n">enc</span> <span class="o">=</span> <span class="n">ecc</span><span class="p">.</span><span class="n">encrypt</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="n">vault</span><span class="p">)</span>
+<span class="n">h2</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="nb">bytes</span><span class="p">.</span><span class="n">fromhex</span><span class="p">(</span><span class="n">enc</span><span class="p">))</span></code></pre></figure>
+
+<p>Looking at the script, it has a class called <code class="language-plaintext highlighter-rouge">ECC</code> with some functions operates on the curve adding points or multiplying constants. After that, it creates an instance from the class and a given generator point \(G\), then encrypts the <code class="language-plaintext highlighter-rouge">vault.json</code> file with <code class="language-plaintext highlighter-rouge">encrypt</code> function in the class.</p>
+
+<p>The class <code class="language-plaintext highlighter-rouge">ECC</code> has the following functions:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">add</code>: Add 2 points on the defined curve.</li>
+  <li><code class="language-plaintext highlighter-rouge">mul</code>: Add a point to itself <code class="language-plaintext highlighter-rouge">n</code> times.</li>
+  <li><code class="language-plaintext highlighter-rouge">valid</code>: Validate a point on the curve.</li>
+  <li><code class="language-plaintext highlighter-rouge">inv_mod_p</code>: Find modular inverse of a coordinates with the curve prime.</li>
+  <li><code class="language-plaintext highlighter-rouge">encrypt</code>: Encrypt a message with a secret point \(C = privG\) using AES-CBC mode.</li>
+</ul>
+
+<p>The curve is using the following parameters:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">p</span> <span class="o">=</span> <span class="mi">2</span><span class="o">^</span><span class="mi">256</span> <span class="o">-</span> <span class="mi">2</span><span class="o">^</span><span class="mi">32</span> <span class="o">-</span> <span class="mi">2</span><span class="o">^</span><span class="mi">9</span> <span class="o">-</span> <span class="mi">2</span><span class="o">^</span><span class="mi">8</span> <span class="o">-</span> <span class="mi">2</span><span class="o">^</span><span class="mi">7</span> <span class="o">-</span> <span class="mi">2</span><span class="o">^</span><span class="mi">6</span> <span class="o">-</span> <span class="mi">2</span><span class="o">^</span><span class="mi">4</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="o">-</span><span class="mi">32</span><span class="p">,</span> <span class="mi">7</span>
+<span class="n">E</span> <span class="o">=</span> <span class="n">EllipticCurve</span><span class="p">(</span><span class="n">FiniteField</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">]);</span> <span class="n">E</span>
+
+<span class="c1"># Elliptic Curve defined by y^2 = x^3 + 115792089237316195423570985008687907853269984665640564039457584007908834671631\*x + 7 over Finite Field of size 115792089237316195423570985008687907853269984665640564039457584007908834671663</span></code></pre></figure>
+
+<h3 id="solution-4">Solution</h3>
+
+<p>First thing you need to focus while working with elliptic curves is the curve structure. <strong>Is it secure or not with the defined parameters?</strong></p>
+
+<p>Let’s first look at the order of the curve is it secure? then we can llok at the order of the given generator point.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">E</span><span class="p">.</span><span class="n">order</span><span class="p">().</span><span class="n">factor</span><span class="p">()</span>
+
+<span class="c1"># 23 _ 9817 _ 4286059 _ 12708491 _ 172460042771 \* 54592331553134402818263581321437118002282885169
+</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">E</span><span class="p">(</span><span class="mi">39613264652991136516316121365481995043381995333181795575614979310610916877953</span><span class="p">,</span><span class="mi">14487697298980196960516056623210206756245610286316104440426923097340932458937</span><span class="p">)</span>
+<span class="n">G</span><span class="p">.</span><span class="n">order</span><span class="p">()</span>
+
+<span class="c1"># 12708491</span></code></pre></figure>
+
+<p>Apparently, the order is factored int small primes and one of the them is exactly the order of the generator point, so we can assume that the given point is generated by dividing the curve order by <code class="language-plaintext highlighter-rouge">12708491</code> then multiplied by the original generator <code class="language-plaintext highlighter-rouge">G = (o//12708491)*E.gens()[0]</code> that will produce a point with order or <code class="language-plaintext highlighter-rouge">12708491</code>.</p>
+
+<p>Notice that, any generated points from <code class="language-plaintext highlighter-rouge">G</code> will have the same order of <code class="language-plaintext highlighter-rouge">12708491</code>, so we can brute force the point from the range \([1,12708491]\), try to decrypt the message, and check if it contains the flag or not.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">Crypto.Util.number</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="n">getPrime</span><span class="p">,</span>
+<span class="n">getRandomRange</span><span class="p">,</span>
+<span class="n">getRandomNBitInteger</span><span class="p">,</span>
+<span class="n">long_to_bytes</span><span class="p">,</span>
+<span class="n">inverse</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">Crypto.Cipher</span> <span class="kn">import</span> <span class="n">AES</span>
+<span class="kn">from</span> <span class="nn">hashlib</span> <span class="kn">import</span> <span class="n">sha1</span>
+<span class="n">p</span> <span class="o">=</span> <span class="mi">2</span><span class="o">^</span><span class="mi">256</span> <span class="o">-</span> <span class="mi">2</span><span class="o">^</span><span class="mi">32</span> <span class="o">-</span> <span class="mi">2</span><span class="o">^</span><span class="mi">9</span> <span class="o">-</span> <span class="mi">2</span><span class="o">^</span><span class="mi">8</span> <span class="o">-</span> <span class="mi">2</span><span class="o">^</span><span class="mi">7</span> <span class="o">-</span> <span class="mi">2</span><span class="o">^</span><span class="mi">6</span> <span class="o">-</span> <span class="mi">2</span><span class="o">^</span><span class="mi">4</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="o">-</span><span class="mi">32</span><span class="p">,</span> <span class="mi">7</span>
+<span class="n">E</span> <span class="o">=</span> <span class="n">EllipticCurve</span><span class="p">(</span><span class="n">FiniteField</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">])</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">E</span><span class="p">(</span><span class="mi">39613264652991136516316121365481995043381995333181795575614979310610916877953</span><span class="p">,</span><span class="mi">14487697298980196960516056623210206756245610286316104440426923097340932458937</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">12708491</span><span class="p">):</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="n">G</span><span class="p">).</span><span class="n">xy</span><span class="p">()</span>
+<span class="n">inv</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">p</span><span class="p">)</span>
+<span class="n">key</span> <span class="o">=</span> <span class="n">sha1</span><span class="p">(</span><span class="n">long_to_bytes</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">inv</span><span class="p">)</span> <span class="o">%</span> <span class="n">p</span><span class="p">))).</span><span class="n">digest</span><span class="p">()[:</span><span class="mi">16</span><span class="p">]</span>
+<span class="n">cipher</span> <span class="o">=</span> <span class="n">AES</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">AES</span><span class="p">.</span><span class="n">MODE_CBC</span><span class="p">)</span>
+<span class="n">flag</span> <span class="o">=</span> <span class="n">cipher</span><span class="p">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">ct</span><span class="p">)</span>
+<span class="k">if</span> <span class="sa">b</span><span class="s">'ASCWG{'</span> <span class="ow">in</span> <span class="n">flag</span><span class="p">:</span>
+<span class="k">print</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span>
+<span class="k">break</span></code></pre></figure>
+
+<p>Flag: <code class="language-plaintext highlighter-rouge">ASCWG{Curv3_0u7_7h3_3111pt1c_5m4l1_0rd3r_0f_8i7c0in_$3cp256k1}</code></p>
+
+<p><a id="conc"></a></p>
+
+<h2 id="conclusion"><strong>Conclusion</strong></h2>
+
+<p>In this writeup, I’ve conducted a detailed analysis of all the crypto challenges I’ve created in the competition as well as, my thought process of how I can look over and examine the problem. I hope you’ve enjoyed the competition and learned something from the challenges that are created by me or even my teammates. For those who are still stuck or willing to learn more about cryptography, I’ve made a small roadmap <a href="https://drive.google.com/file/d/1kEciyRTYNWQvlkhXhqlVGlGVNIDxdnv7/view?usp=sharing">here</a> that can guide you through your journey and of course you can hit me up any time on my socials. Finally, congrats to every team who made it until the end and wish you all the best in the finals.</p>
+
+          </div>
+          <div class="article-share">
+            
+            
+            <a href="https://twitter.com/home?status=ASC+-+Wargames+2022+Filtration+Phase%20-%20https://s4yed.github.io/posts/asc-wargames-qulas-2022" title="Share on Twitter" rel="noreferrer noopener" target="_blank">
+              <svg viewBox="0 0 512 512"><path d="M492 109.5c-17.4 7.7-36 12.9-55.6 15.3 20-12 35.4-31 42.6-53.6 -18.7 11.1-39.4 19.2-61.5 23.5C399.8 75.8 374.6 64 346.8 64c-53.5 0-96.8 43.4-96.8 96.9 0 7.6 0.8 15 2.5 22.1 -80.5-4-151.9-42.6-199.6-101.3 -8.3 14.3-13.1 31-13.1 48.7 0 33.6 17.2 63.3 43.2 80.7C67 210.7 52 206.3 39 199c0 0.4 0 0.8 0 1.2 0 47 33.4 86.1 77.7 95 -8.1 2.2-16.7 3.4-25.5 3.4 -6.2 0-12.3-0.6-18.2-1.8 12.3 38.5 48.1 66.5 90.5 67.3 -33.1 26-74.9 41.5-120.3 41.5 -7.8 0-15.5-0.5-23.1-1.4C62.8 432 113.7 448 168.3 448 346.6 448 444 300.3 444 172.2c0-4.2-0.1-8.4-0.3-12.5C462.6 146 479 129 492 109.5z"/></svg>
+            </a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://s4yed.github.io/posts/asc-wargames-qulas-2022" title="Share on Facebook" rel="noreferrer noopener" target="_blank">
+              <svg viewBox="0 0 512 512"><path d="M288 192v-38.1c0-17.2 3.8-25.9 30.5-25.9H352V64h-55.9c-68.5 0-91.1 31.4-91.1 85.3V192h-45v64h45v192h83V256h56.4l7.6-64H288z"/></svg>
+            </a>
+          </div>
+
+          
+            <div id="disqus_thread" class="article-comments"></div>
+            <script src="https://my-blog-0vgcdsd8x2.disqus.com/embed.js" async defer></script>
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+          
+        </article>
+        <footer class="footer scrollappear">
+    <p style="text-align: center">
+      This is my little tech blog, feel free to ask me any question &#169;
+      <a href="/about" title="About me">Ahmed Sayed</a>
+    </p>
+</footer>
+
+      </div>
+    </div>
+  </main>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-157807027-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-157807027-1');
+  </script>
+
+
+<script type="text/javascript" src="/assets/vendor-2c224c53eb697c739f9490c38819a72184f09472739fd9e492272ef174090428.js"></script>
+
+
+  <script type="text/javascript" src="/assets/webfonts-96493456d319d1bf419afdf8701552d4d486fee6afd304897d4fd81eb4e0cc0b.js"></script>
+
+
+
+  <script type="text/javascript" src="/assets/scrollappear-e2da8ea567e418637e31266cc5302126eaa79f62a2273739086358b589a89ee6.js"></script>
+
+
+<script type="text/javascript" src="/assets/application-cfde13ac81ddaf4351b2e739603e2baf688d0fcc9aba613fe62bbb1c7b037fb9.js"></script>
+
+
+  <script type="text/javascript" src="/assets/themetoggle-df0d3d73164dc26dffbd630182ae4d0dfa7bee6b694a2b5d565d73595b582bbf.js"></script>
+
+
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+</body>
+</html>
