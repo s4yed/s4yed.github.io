@@ -1,0 +1,792 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Ahmed | ASC - Wargames 2022 Finals</title>
+  <meta name="description" content="This is my writeup and walkthrough for crypto challenges in ASC wargames 2022 final round">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta property="og:title" content="ASC - Wargames 2022 Finals">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://s4yed.github.io/posts/asc-wargames-finals-2022">
+  <meta property="og:description" content="This is my writeup and walkthrough for crypto challenges in ASC wargames 2022 final round">
+  <meta property="og:site_name" content="Ahmed">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:url" content="https://s4yed.github.io/posts/asc-wargames-finals-2022">
+  <meta name="twitter:title" content="ASC - Wargames 2022 Finals">
+  <meta name="twitter:description" content="This is my writeup and walkthrough for crypto challenges in ASC wargames 2022 final round">
+
+  
+    
+      <meta property="og:image" content="https://s4yed.github.io/assets/documentation/ASCWargames/2020/banner-5e7c94ec26d0e81bcdc1f800b2e3d2828de0a113dd6906080f50a2c540a6e8bd.png">
+      <meta name="twitter:image" content="https://s4yed.github.io/assets/documentation/ASCWargames/2020/banner-5e7c94ec26d0e81bcdc1f800b2e3d2828de0a113dd6906080f50a2c540a6e8bd.png">
+    
+  
+
+  <link href="https://s4yed.github.io/feed.xml" type="application/rss+xml" rel="alternate" title="Ahmed Last 10 blog posts" />
+
+  
+
+  
+
+    
+      <link rel="icon" type="image/x-icon" href="/assets/favicon-color-0e896bd8673d9f83cea8d7b0a12fcc894681d58fc475ad499adfed94067b1e1f.png">
+      <link rel="apple-touch-icon" href="/assets/apple-touch-icon-dark-d161409442b7e523089f24d08d0a55951549ece7504207c376d53b020713494d.png">
+      <link rel="stylesheet" type="text/css" title="light" id="light" href="/assets/light-bb7276d8d120b220c757b517d626ef0000a5e8683dccce2b722031baaae3ade1.css">
+      <link rel="stylesheet" type="text/css" title="dark" id="dark" href="/assets/dark-bd87a972117a631461755cc733ab96b66bb38fb9d09359688cac8e4c2c561606.css" disabled="false">
+    
+
+  
+
+  <!-- Load KaTeX -->
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.1.1/katex.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.1.1/katex.min.js"></script>
+</head>
+
+<body>
+  <main>
+    <div class="grid grid-centered">
+      <div class="grid-cell">
+        <nav class="header-nav scrollappear">
+  <a href="/" class="header-logo" title="Ahmed">Ahmed</a>
+  <ul class="header-links">
+    
+      <li>
+        <a href="/about" title="About me">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon-about">
+  <use href="/assets/about-ab4928d09cef6e09136b8d40637999db4f9575f927c33156e7f3e37d450e5df1.svg#icon-about" xlink:href="/assets/about-ab4928d09cef6e09136b8d40637999db4f9575f927c33156e7f3e37d450e5df1.svg#icon-about"></use>
+</svg>
+
+        </a>
+      </li>
+    
+    
+    
+    
+    
+      <li>
+        <a href="https://github.com/s4yed" rel="noreferrer noopener" target="_blank" title="GitHub">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon-github">
+  <use href="/assets/github-706d546fe6b5a32deca92fb08bbe60e78ea4e8027e889107905eb61f1063bcec.svg#icon-github" xlink:href="/assets/github-706d546fe6b5a32deca92fb08bbe60e78ea4e8027e889107905eb61f1063bcec.svg#icon-github"></use>
+</svg>
+
+        </a>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+      <li>
+        <a href="https://www.linkedin.com/in/s4yed" rel="noreferrer noopener" target="_blank" title="LinkedIn">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon-linkedin">
+  <use href="/assets/linkedin-3bd8eb5ea036958dc7b3ee3de6612dbfa9e0744f369f20f7895d6a2782bbaf43.svg#icon-linkedin" xlink:href="/assets/linkedin-3bd8eb5ea036958dc7b3ee3de6612dbfa9e0744f369f20f7895d6a2782bbaf43.svg#icon-linkedin"></use>
+</svg>
+
+        </a>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      <li>
+        <a href="https://discord.gg/Y4mm1#7774" rel="noreferrer noopener" target="_blank" title="Discord Server">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon-discord">
+  <use href="/assets/discord-31958f8a24fd49834876e398b1793cd068c7d12a1db745c6da2ecc8b1f7576f5.svg#icon-discord" xlink:href="/assets/discord-31958f8a24fd49834876e398b1793cd068c7d12a1db745c6da2ecc8b1f7576f5.svg#icon-discord"></use>
+</svg>
+
+        </a>
+      </li>
+    
+    
+    
+    
+      <li>
+        <a href="mailto:ahmedsayedgfx@gmail.com" title="Email">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon-email">
+  <use href="/assets/email-30a104adb1e2728097a984fbea2995978b6fff6c12906a734044ebd388848b70.svg#icon-email" xlink:href="/assets/email-30a104adb1e2728097a984fbea2995978b6fff6c12906a734044ebd388848b70.svg#icon-email"></use>
+</svg>
+
+        </a>
+      </li>
+    
+    
+      <li>
+        <a href="/feed.xml" rel="noreferrer noopener" target="_blank" title="RSS">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon-rss">
+  <use href="/assets/rss-cdc7a721b47671668abb0ba57f9f8db8022096e0051ff51b9e08e6cc049453a4.svg#icon-rss" xlink:href="/assets/rss-cdc7a721b47671668abb0ba57f9f8db8022096e0051ff51b9e08e6cc049453a4.svg#icon-rss"></use>
+</svg>
+
+        </a>
+      </li>
+    
+    
+      <li>
+        <a onclick="toggle()" title="Toggle Theme">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon-theme">
+  <use href="/assets/theme-610197c56844c5ba34608b2018c4cc3b79f8833e2efc7a99bcb5589f1d3cfd7b.svg#icon-theme" xlink:href="/assets/theme-610197c56844c5ba34608b2018c4cc3b79f8833e2efc7a99bcb5589f1d3cfd7b.svg#icon-theme"></use>
+</svg>
+
+        </a>
+      </li>
+    
+  </ul>
+</nav>
+
+
+  <ul class="header-tags scrollappear">
+    
+    
+      
+        <li><a href="/tag/AES">Aes</a></li>
+    
+      
+        <li><a href="/tag/ASC-Wargames">Asc-wargames</a></li>
+    
+      
+        <li><a href="/tag/AUCTF">Auctf</a></li>
+    
+      
+        <li><a href="/tag/AnDetect">Andetect</a></li>
+    
+      
+        <li><a href="/tag/CTF">Ctf</a></li>
+    
+      
+        <li><a href="/tag/ECC">Ecc</a></li>
+    
+      
+        <li><a href="/tag/El-Gamal">El-gamal</a></li>
+    
+      
+        <li><a href="/tag/RSA">Rsa</a></li>
+    
+      
+        <li><a href="/tag/WPICTF">Wpictf</a></li>
+    
+      
+        <li><a href="/tag/algorithms">Algorithms</a></li>
+    
+      
+        <li>...</li>
+        <li><a href="/tags">Show all</a></li>
+        
+  </ul>
+
+
+        <article class="article scrollappear">
+          <header class="article-header">
+            <h1>ASC - Wargames 2022 Finals</h1>
+            <p>This is my writeup and walkthrough for crypto challenges in ASC wargames 2022 final round</p>
+            <div class="article-list-footer">
+  <span class="article-list-date">
+    September 22, 2022
+  </span>
+  <span class="article-list-divider">-</span>
+  <span class="article-list-minutes">
+    
+    
+      21 minute read
+    
+  </span>
+  <span class="article-list-divider">-</span>
+  <div class="article-list-tags">
+    
+      
+      <a href="/tag/security" title="See all posts with tag 'Security'">Security</a>
+    
+      
+      <a href="/tag/ASC-Wargames" title="See all posts with tag 'ASC-Wargames'">ASC-Wargames</a>
+    
+      
+      <a href="/tag/CTF" title="See all posts with tag 'CTF'">CTF</a>
+    
+      
+      <a href="/tag/infosec" title="See all posts with tag 'Infosec'">Infosec</a>
+    
+      
+      <a href="/tag/python" title="See all posts with tag 'Python'">Python</a>
+    
+      
+      <a href="/tag/signature hacking" title="See all posts with tag ''"></a>
+    
+      
+      <a href="/tag/cryptography" title="See all posts with tag 'Cryptography'">Cryptography</a>
+    
+      
+      <a href="/tag/cracking" title="See all posts with tag 'cracking'">cracking</a>
+    
+      
+      <a href="/tag/RSA" title="See all posts with tag 'RSA'">RSA</a>
+    
+      
+      <a href="/tag/El-Gamal" title="See all posts with tag 'El-Gamal'">El-Gamal</a>
+    
+  </div>
+</div>
+          </header>
+
+          <div class="article-content">
+            <p><a href="/assets/documentation/ASCWargames/2022/ASC-Finals-2022-bdb071544ebe812d7672a1b42dc0028a72c2d3321cb32d5903177edd5385df76.jpg">
+  <img src="/assets/documentation/ASCWargames/2022/ASC-Finals-2022-bdb071544ebe812d7672a1b42dc0028a72c2d3321cb32d5903177edd5385df76.jpg" alt="ASC" class="zooming" data-rjs="/assets/documentation/ASCWargames/2022/ASC-Finals-2022-bdb071544ebe812d7672a1b42dc0028a72c2d3321cb32d5903177edd5385df76.jpg" data-zooming-width="850" data-zooming-height="323" />
+</a></p>
+
+<h3 id="table-of-content">Table of Content</h3>
+
+<ul>
+	<li><a href="#intro">Introduction</a></li>
+	<li><a href="#randomness">Randomness</a></li>
+	<li><a href="#double">Double</a></li>
+	<li><a href="#logout">Log Out</a></li>
+	<li><a href="#inbetween">In Between</a></li>
+	<li><a href="#squaregroup">Square Group</a></li>
+	<li><a href="#conc">Conclusion</a></li>
+</ul>
+
+<hr />
+
+<p><a id="intro"></a></p>
+
+<h2 id="intro"><strong>Intro</strong></h2>
+
+<p>Arab Security Conference was held this year from 18<sup>th</sup> till 19<sup>th</sup> of September and as always the last day was for the cyber wargames competition where ten qualified teams compete with each other and solve sophisticated real life challenges in 6 different categories. In this write-up, we’re going to discuss and solve the 5 crypto challenges in the competition. The challenges was easy-medium and hard ones, but full of tricks for those who aren’t aware of the encryption algorithms and techniques. However, I’ll show you my thought process and how to divide the challenge into sub-challenges in order to attack the algorithm or find a solution.</p>
+
+<h4 id="disclaimer">:DISCLAIMER:</h4>
+
+<p>As usual, you’re not gonna find here all the tips and tricks in cryptography since I wanted to leave some space for you to think and ask. So, feel free to think more about the challenge before jumping right into the solution.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Challenge</th>
+      <th style="text-align: center">Difficulty</th>
+      <th style="text-align: right">Points</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Randomeness</td>
+      <td style="text-align: center">Warmup</td>
+      <td style="text-align: right">150</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Double</td>
+      <td style="text-align: center">Easy</td>
+      <td style="text-align: right">300</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Log Out</td>
+      <td style="text-align: center">Medium</td>
+      <td style="text-align: right">600</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">In Between</td>
+      <td style="text-align: center">Medium</td>
+      <td style="text-align: right">600</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Square Group</td>
+      <td style="text-align: center">Hard</td>
+      <td style="text-align: right">900</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<p><a id="randomness"></a></p>
+
+<h2 id="randomness"><strong>Randomness</strong></h2>
+
+<p>Description:</p>
+
+<blockquote>
+  <p>Random everywhere.</p>
+</blockquote>
+
+<p>It’s a warmup challnege and pretty known attack, but need to be aware of the algorithm used in the encryption, so let’s have a look at the the files given <code class="language-plaintext highlighter-rouge">output.txt</code> text file and <code class="language-plaintext highlighter-rouge">randomness.py</code> a python script.</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="go">0x3ada728da2811b7928cb46cb97d9d905d6ef274f2535a361a549dcd99d26461d7e88ea5178c374339e0ada83487b8a1fc8ef6aea65e3f24b61
+0x133c7655470ef0b4d0bb6bcbe741117f1b372e14adc69211a6ef6fbc8fd8d3de0ba19a2214b64876b058cad79707b6f127fadbe16e906f18c8
+0x589645936cac16c433f6c15a6929f222d5b58f140009e43a1766cc56a3b5ec859529f3220115302acb51186d5e5e308a60b8891f888fafa552
+</span><span class="c">...</span></code></pre></figure>
+
+<p>The text file contains around 63 hex encoded lines. Let’s look at the script:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">Crypto.Util.number</span> <span class="kn">import</span> \<span class="o">*</span>
+<span class="kn">from</span> <span class="nn">secret</span> <span class="kn">import</span> <span class="n">plains</span>
+
+<span class="n">plain</span> <span class="o">=</span> <span class="sa">b</span><span class="s">'I wanna look closer, but my glasses are broken!'</span>
+<span class="k">class</span> <span class="nc">GDSA</span><span class="p">:</span>
+<span class="k">def</span> <span class="err">**</span><span class="nf">init</span><span class="o">**</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="bp">self</span><span class="p">.</span><span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">genPrime</span><span class="p">()</span> <span class="c1"># 71500532584610353335967572228576961622670888049686244244336530474941226340958441170979183862795117652159440106046491327947803659173888001
+</span><span class="bp">self</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">getRandomInteger</span><span class="p">(</span><span class="mi">256</span><span class="p">)</span>
+<span class="bp">self</span><span class="p">.</span><span class="n">g</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="bp">self</span><span class="p">.</span><span class="n">A</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">g</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">p</span><span class="p">)</span>
+<span class="bp">self</span><span class="p">.</span><span class="n">k</span> <span class="o">=</span> <span class="n">getRandomInteger</span><span class="p">(</span><span class="mi">128</span><span class="p">)</span>
+<span class="k">while</span> <span class="n">GCD</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">k</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">p</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+<span class="bp">self</span><span class="p">.</span><span class="n">k</span> <span class="o">=</span> <span class="n">getRandomInteger</span><span class="p">(</span><span class="mi">128</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">sign</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">bytes_to_long</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">g</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">k</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">p</span><span class="p">)</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="p">(</span><span class="nb">pow</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">k</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">p</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">m</span> <span class="o">-</span> <span class="bp">self</span><span class="p">.</span><span class="n">x</span><span class="o">*</span><span class="n">r</span><span class="p">))</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">p</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">r</span><span class="p">,</span> <span class="n">s</span>
+
+    <span class="k">def</span> <span class="nf">genPrime</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="ow">not</span> <span class="n">isPrime</span><span class="p">(</span><span class="n">p</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="mi">2</span>
+            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">((</span><span class="mi">2</span><span class="o">&lt;&lt;</span><span class="mi">2</span><span class="p">)):</span>
+                <span class="n">p</span> <span class="o">*=</span> <span class="n">getRandomInteger</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+            <span class="n">p</span> <span class="o">*=</span> <span class="n">getRandomInteger</span><span class="p">(</span><span class="mi">64</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">p</span><span class="o">+</span><span class="mi">1</span>
+
+<span class="n">obj</span> <span class="o">=</span> <span class="n">GDSA</span><span class="p">()</span>
+<span class="n">sigs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">plain</span> <span class="ow">in</span> <span class="n">plains</span><span class="p">:</span>
+<span class="n">r</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="n">obj</span><span class="p">.</span><span class="n">sign</span><span class="p">(</span><span class="n">plain</span><span class="p">)</span>
+<span class="n">sigs</span> <span class="o">+=</span> <span class="p">[</span><span class="nb">hex</span><span class="p">(</span><span class="n">s</span><span class="p">)]</span>
+<span class="n">sigs</span> <span class="o">+=</span> <span class="p">[</span><span class="nb">hex</span><span class="p">(</span><span class="n">r</span><span class="p">)]</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'output.txt'</span><span class="p">,</span> <span class="s">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">sigs</span><span class="p">:</span>
+<span class="n">f</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">encode</span><span class="p">()</span><span class="o">+</span><span class="sa">b</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span></code></pre></figure>
+
+<p>The script contains one class called <strong>GDSA</strong> with 2 functions <code class="language-plaintext highlighter-rouge">sign</code> and <code class="language-plaintext highlighter-rouge">genPrime</code>. It first generate a radom prime with the <code class="language-plaintext highlighter-rouge">genPrime</code> function, then it computes some parameters \(A = g^x \pmod p\) where \(x\) is a random 256-bit integer, \(g=7\) kind of a base, and \(p\) is a random odd prime. It also calcultes a random 128-bit integer \(k\) and check the \(gcd(k, p-1) = 1\).</p>
+
+<p>Next, the <code class="language-plaintext highlighter-rouge">genPrime</code> function calculates 464-bit odd prime and it seems that the integers generated the prime are 50-bit long so it most probably a weak prime. The next function <code class="language-plaintext highlighter-rouge">sign</code>, it takes a plain message \(m\) and calculate \(r = g^k \pmod p\) and \(sk = m-xr \pmod{p-1}\), then it returns \(r\) and \(s\).</p>
+
+<p>Actually, the last thing this script does is, it signs the <code class="language-plaintext highlighter-rouge">plains</code> that maybe contains a list of plain texts and the <code class="language-plaintext highlighter-rouge">plain = b'I wanna look closer, but my glasses are broken!'</code> looks one of them.</p>
+
+<h3 id="solution">Solution</h3>
+
+<p>The challenge has 2 vulnerablilities the first one is the weak prime and you can use it to calculate the random variable \(k\) and the second one is using the same \(k\) to sign multiple messages. Apparantly, the easy way is that you can search about this knwon attack on El Gamal signature scheme.</p>
+
+<p>\(r_i = g^k \pmod p\)
+\(s_ik = m_i - xr_i \pmod{p-1}\)</p>
+
+<p>So, if you take 2 signatures signed with the same random key, you can get the message back \(s_1k = m_1 - xr_1 \pmod{p-1}\) and \(s_2k = m_2 - xr_1 \pmod{p-1}\), then by subtracting the eqautions will give you \(s_1k - s_2k = m_1 - m_2 \pmod{p-1}\). Finally, you have all the variables except one of the \(m_i\), but you can bruteforce the other message to get the flag.</p>
+
+<ol>
+  <li>Using <a href="https://www.alpertron.com.ar/DILOG.HTM">DLP</a> to get the random key \(k = 45252513931146808668347235459955660091\).</li>
+  <li>Bruteforce the list of signatures to get the flag.</li>
+</ol>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'output.txt'</span><span class="p">,</span> <span class="s">'rb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="n">sigs</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">l</span><span class="p">.</span><span class="n">strip</span><span class="p">().</span><span class="n">decode</span><span class="p">()[</span><span class="mi">2</span><span class="p">:],</span><span class="mi">16</span><span class="p">)</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">f</span><span class="p">.</span><span class="n">readlines</span><span class="p">()]</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">sigs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">sigs</span> <span class="o">=</span> <span class="n">sigs</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">p</span> <span class="o">=</span> <span class="mi">71500532584610353335967572228576961622670888049686244244336530474941226340958441170979183862795117652159440106046491327947803659173888001</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mi">45252513931146808668347235459955660091</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">sigs</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">sigs</span><span class="p">)):</span>
+<span class="n">s1</span><span class="p">,</span> <span class="n">s2</span> <span class="o">=</span> <span class="n">sigs</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">sigs</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+<span class="n">m</span> <span class="o">=</span> <span class="p">(</span><span class="n">k</span>\<span class="o">*</span><span class="p">(</span><span class="n">s1</span> <span class="o">-</span> <span class="n">s2</span><span class="p">)</span><span class="o">+</span><span class="n">btl</span><span class="p">(</span><span class="n">plain</span><span class="p">))</span> <span class="o">%</span> <span class="p">(</span><span class="n">p</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">if</span> <span class="sa">b</span><span class="s">'ASCWG{'</span> <span class="ow">in</span> <span class="n">ltb</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+<span class="k">print</span><span class="p">(</span><span class="n">ltb</span><span class="p">(</span><span class="n">m</span><span class="p">).</span><span class="n">decode</span><span class="p">(</span><span class="s">'latin-1'</span><span class="p">))</span></code></pre></figure>
+
+<p>Flag: <code class="language-plaintext highlighter-rouge">ASCWG{H17719_7H3_W0r1d_0f_W33k_Pr1m3_E1G4m@1_$16n47ur3s}</code></p>
+
+<p><a id="double"></a></p>
+
+<h2 id="double"><strong>Double</strong></h2>
+
+<p>Description:</p>
+
+<blockquote>
+  <p>I’ve tried to mess up with the scheme a little bit, but I think using 2 ciphertexts is secure enough.</p>
+</blockquote>
+
+<p>This one was easy given a powershell <code class="language-plaintext highlighter-rouge">double.ps1</code> script and an <code class="language-plaintext highlighter-rouge">output.txt</code> files. Let’s look at the script first:</p>
+
+<figure class="highlight"><pre><code class="language-powershell" data-lang="powershell"><span class="c"># greatest common divisor</span><span class="w">
+
+</span><span class="kr">function</span><span class="w"> </span><span class="nf">GCD</span><span class="p">([</span><span class="n">bigint</span><span class="p">]</span><span class="nv">$a</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">bigint</span><span class="p">]</span><span class="nv">$b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span><span class="kr">while</span><span class="w"> </span><span class="p">(</span><span class="nv">$b</span><span class="w"> </span><span class="o">-ne</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nv">$a</span><span class="p">,</span><span class="w"> </span><span class="nv">$b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">$b</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nv">$a</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="nv">$b</span><span class="p">)</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span><span class="kr">return</span><span class="w"> </span><span class="nv">$a</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="kr">function</span><span class="w"> </span><span class="n">\_Gen</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span><span class="p">[</span><span class="n">bigint</span><span class="p">]</span><span class="nv">$p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">bigint</span><span class="p">]::</span><span class="n">Parse</span><span class="p">(</span><span class="s2">"[REDACTED]"</span><span class="p">)</span><span class="w">
+    </span><span class="p">[</span><span class="n">bigint</span><span class="p">]</span><span class="nv">$q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">bigint</span><span class="p">]::</span><span class="n">Parse</span><span class="p">(</span><span class="s2">"[REDACTED]"</span><span class="p">)</span><span class="w">
+</span><span class="p">[</span><span class="n">bigint</span><span class="p">]</span><span class="nv">$N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">$p</span><span class="o">*</span><span class="nv">$q</span><span class="w">
+</span><span class="p">[</span><span class="n">bigint</span><span class="p">]</span><span class="nv">$e</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Get-Random</span><span class="w"> </span><span class="nt">-Minimum</span><span class="w"> </span><span class="nx">2</span><span class="w"> </span><span class="nt">-Maximum</span><span class="w"> </span><span class="nv">$N</span><span class="w">
+    </span><span class="p">[</span><span class="n">bigint</span><span class="p">]</span><span class="nv">$g</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GCD</span><span class="w"> </span><span class="nv">$e</span><span class="w"> </span><span class="nv">$N</span><span class="w">
+    </span><span class="kr">while</span><span class="p">(</span><span class="nv">$g</span><span class="w"> </span><span class="o">-ne</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span><span class="p">[</span><span class="n">bigint</span><span class="p">]</span><span class="nv">$e</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Get-Random</span><span class="w"> </span><span class="nt">-Minimum</span><span class="w"> </span><span class="nx">2</span><span class="w"> </span><span class="nt">-Maximum</span><span class="w"> </span><span class="nv">$N</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+    </span><span class="p">[</span><span class="n">bigint</span><span class="p">]</span><span class="nv">$r1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Get-Random</span><span class="w"> </span><span class="nt">-Minimum</span><span class="w"> </span><span class="nx">2</span><span class="w"> </span><span class="nt">-Maximum</span><span class="w"> </span><span class="nv">$N</span><span class="w">
+    </span><span class="p">[</span><span class="n">bigint</span><span class="p">]</span><span class="nv">$r2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Get-Random</span><span class="w"> </span><span class="nt">-Minimum</span><span class="w"> </span><span class="nx">2</span><span class="w"> </span><span class="nt">-Maximum</span><span class="w"> </span><span class="nv">$N</span><span class="w">
+
+    </span><span class="p">[</span><span class="n">bigint</span><span class="p">]</span><span class="nv">$a1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">bigint</span><span class="p">]::</span><span class="n">ModPow</span><span class="p">(</span><span class="nv">$e</span><span class="p">,</span><span class="w"> </span><span class="nv">$r1</span><span class="o">*</span><span class="p">(</span><span class="nv">$p</span><span class="nt">-1</span><span class="p">),</span><span class="w"> </span><span class="nv">$N</span><span class="p">)</span><span class="w">
+    </span><span class="p">[</span><span class="n">bigint</span><span class="p">]</span><span class="nv">$a2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">bigint</span><span class="p">]::</span><span class="n">ModPow</span><span class="p">(</span><span class="nv">$e</span><span class="p">,</span><span class="w"> </span><span class="nv">$r2</span><span class="o">*</span><span class="p">(</span><span class="nv">$q</span><span class="nt">-1</span><span class="p">),</span><span class="w"> </span><span class="nv">$N</span><span class="p">)</span><span class="w">
+
+    </span><span class="nv">$pub</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">ordered</span><span class="p">]@{</span><span class="nx">a1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">$a1</span><span class="p">;</span><span class="w"> </span><span class="nx">a2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">$a2</span><span class="p">;</span><span class="w"> </span><span class="nx">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">$N</span><span class="p">}</span><span class="w">
+    </span><span class="nv">$priv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">ordered</span><span class="p">]@{</span><span class="nx">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">$p</span><span class="p">;</span><span class="w"> </span><span class="nx">q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">$q</span><span class="p">;</span><span class="w"> </span><span class="nx">r1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">$r1</span><span class="p">;</span><span class="w"> </span><span class="nx">r2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">$r2</span><span class="p">}</span><span class="w">
+
+    </span><span class="kr">return</span><span class="w"> </span><span class="nv">$pub</span><span class="p">,</span><span class="w"> </span><span class="nv">$priv</span><span class="w">
+
+</span><span class="p">}</span><span class="w">
+
+</span><span class="kr">function</span><span class="w"> </span><span class="nf">Encrypt</span><span class="w"> </span><span class="p">([</span><span class="n">bigint</span><span class="p">]</span><span class="nv">$m</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nv">$pub</span><span class="p">,</span><span class="w"> </span><span class="nv">$priv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">_</span><span class="n">Gen</span><span class="w">
+    </span><span class="p">[</span><span class="n">bigint</span><span class="p">]</span><span class="nv">$s1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Get-Random</span><span class="w"> </span><span class="nt">-Minimum</span><span class="w"> </span><span class="nx">2</span><span class="w"> </span><span class="nt">-Maximum</span><span class="w"> </span><span class="nv">$pub</span><span class="o">.</span><span class="nf">N</span><span class="w">
+    </span><span class="p">[</span><span class="n">bigint</span><span class="p">]</span><span class="nv">$s2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Get-Random</span><span class="w"> </span><span class="nt">-Minimum</span><span class="w"> </span><span class="nx">2</span><span class="w"> </span><span class="nt">-Maximum</span><span class="w"> </span><span class="nv">$pub</span><span class="o">.</span><span class="nf">N</span><span class="w">
+    </span><span class="p">[</span><span class="n">bigint</span><span class="p">]</span><span class="nv">$d1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">bigint</span><span class="p">]::</span><span class="n">ModPow</span><span class="p">(</span><span class="nv">$pub</span><span class="o">.</span><span class="nf">a1</span><span class="p">,</span><span class="w"> </span><span class="nv">$s1</span><span class="p">,</span><span class="w"> </span><span class="nv">$pub</span><span class="o">.</span><span class="nf">N</span><span class="p">)</span><span class="w"> 
+    </span><span class="p">[</span><span class="n">bigint</span><span class="p">]</span><span class="nv">$d2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">bigint</span><span class="p">]::</span><span class="n">ModPow</span><span class="p">(</span><span class="nv">$pub</span><span class="o">.</span><span class="nf">a2</span><span class="p">,</span><span class="w"> </span><span class="nv">$s2</span><span class="p">,</span><span class="w"> </span><span class="nv">$pub</span><span class="o">.</span><span class="nf">N</span><span class="p">)</span><span class="w">
+    </span><span class="p">[</span><span class="n">bigint</span><span class="p">]</span><span class="nv">$c1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">$m</span><span class="o">*</span><span class="nv">$d1</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="nv">$pub</span><span class="o">.</span><span class="nf">N</span><span class="w">
+    </span><span class="p">[</span><span class="n">bigint</span><span class="p">]</span><span class="nv">$c2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">$m</span><span class="o">*</span><span class="nv">$d2</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="nv">$pub</span><span class="o">.</span><span class="nf">N</span><span class="w">
+</span><span class="kr">return</span><span class="w"> </span><span class="p">[</span><span class="n">ordered</span><span class="p">]@{</span><span class="nx">c1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">$c1</span><span class="p">;</span><span class="w"> </span><span class="nx">c2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">$c2</span><span class="p">;</span><span class="w"> </span><span class="nx">pub</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">$pub</span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="nv">$Result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Encrypt</span><span class="w"> </span><span class="s2">"[REDACTED]"</span><span class="w">
+</span><span class="n">Out-File</span><span class="w"> </span><span class="nt">-FilePath</span><span class="w"> </span><span class="o">.</span><span class="nx">\output.txt</span><span class="w"> </span><span class="nt">-InputObject</span><span class="w"> </span><span class="nv">$Result</span><span class="o">.</span><span class="nf">Values</span></code></pre></figure>
+
+<p>The function <code class="language-plaintext highlighter-rouge">_Gen</code> it first parse a redacted primes \(p\) and \(q\), then generates a random integer \(e\) and checks the \(gcd(e, N) = 1\), then generates integer pairs \(r_1\) and \(r_2\), and calculates \(a_1 = e^{r_1(p-1)} \pmod{N}\), \(a_2 = e^{r_2(q-1)} \pmod{N}\). Finally, returns \((a_1, a_2, N)\) as public key and \((p, q, r_1, r_2)\) as private key.</p>
+
+<p>Second function <code class="language-plaintext highlighter-rouge">Encrypt</code> it takes an integer \(m\) and generates a random pair \(s_1\) and \(s_2\), then computes \(d_1 = a_1^{s_1} \pmod N\) and \(d_2 = a_2^{s_2} \pmod N\). After that, it calculate the ciphertexts \(c_1 = md_1 \pmod N\) and \(c_2 = md_2 \pmod N\) and write out the output into a text file <code class="language-plaintext highlighter-rouge">output.txt</code>.</p>
+
+<h3 id="solution-1">Solution</h3>
+
+<p>From the <code class="language-plaintext highlighter-rouge">_Gen</code> function you can notice that \(a_1 = e^{r_1(p-1)} \pmod{N}\) and if you can recall that <a href="https://en.wikipedia.org/wiki/Fermat%27s_little_theorem">Fermat’s Little Theorem</a> that \(x^{p-1} = 1 \pmod p\) for any arbirary \(x\). So, if we can use it to some how get one of the factors of \(N\).</p>
+
+<p>First, we can reorder the equation in order to get it exactly what we need \(a_1 = e^{r_1(p-1)} = 1 \pmod p\) and vice versa for \(a_2\), that is \(a_1 - 1 = 0 \pmod p\) which means that this value can divide \(p\), so subtracting \(a_1\) by 1 it gives a multiple of \(p\), thus \(gcd(a_1 - 1, N)\) is one of the factors.</p>
+
+<p>Second, you know that \(c_i = md_i \pmod N\) and \(d_i = a_i^{s_i} \pmod N\), then you can compute \(c_1 = m \pmod p\) and \(c_2 = m \pmod q\), since \(a_1 = 1 \pmod p\) and \(a_2 = 1 \pmod q\).</p>
+
+<p>Finaly, \(m = c_1 \pmod p\) and \(m = c_2 \pmod q\) this is a linear modular equation that can be solved by <a href="https://en.wikipedia.org/wiki/Chinese_remainder_theorem">CRT</a> to get the flag.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">Crypto.Util.number</span> <span class="kn">import</span> \<span class="o">*</span>
+<span class="kn">from</span> <span class="nn">sympy.ntheory.modular</span> <span class="kn">import</span> <span class="n">crt</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">118668704021991818349473680192223330422816228468750943595381082314526050113696380807584760546007047678131969252670742664045859564002270909023859216439518114223967366083739005529699291141394204380772133322697864571619729422536029697598505413459898192967998598101655904127997255253467376305279937967927007502679</span>
+<span class="n">a1</span> <span class="o">=</span> <span class="mi">90776977107449858385443758684442059641945999507299313330252819907558682299012274632127933880137958091084773046807425787489001724881817788815591177692784408706685784050224038774376770317829373320769691511381734535671635221319263406471410617846315198327518237604001149726830794649465985570494228797379448498927</span>
+<span class="n">c1</span> <span class="o">=</span> <span class="mi">6195249196454318189426748893437014217552608859756027615756624850269174100512987973139389433240944467740665747379606613850959142514227272665726030526141820783149433517571484830412752949115120491998636349010167878422854196170920795258210423564644389158199632339637707701033463855032399261894761531192528141533</span>
+<span class="n">c2</span> <span class="o">=</span> <span class="mi">36394983520778694746453349314125103778319956095037786845977975871195630823579330406427772373191300990672834473643822146541572711871337222201983386956653850943180058112595015124238527155928970536405040561393558156774450093806082156321669898136685900478208806747232019988936048555941851561561959786849518834025</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">GCD</span><span class="p">(</span><span class="n">a1</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">N</span><span class="o">//</span><span class="n">p</span>
+<span class="k">print</span><span class="p">(</span><span class="n">isPrime</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="n">q</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">long_to_bytes</span><span class="p">(</span><span class="n">crt</span><span class="p">([</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">],</span> <span class="p">[</span><span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">])[</span><span class="mi">0</span><span class="p">]))</span></code></pre></figure>
+
+<p>Flag: <code class="language-plaintext highlighter-rouge">ASCWG{D3_F3rm47_7h3_l1ttl3_7H30rY_0f_R5A}</code></p>
+
+<p><a id="logout"></a></p>
+
+<h2 id="log-out"><strong>Log Out</strong></h2>
+
+<p>Description:</p>
+
+<blockquote>
+  <p>A cryptographer has invented a protocol for authentication, but when he tried to test it out something went wrong.</p>
+</blockquote>
+
+<p>This one needs a solid understanding of how modular exponentiation work. Given a <code class="language-plaintext highlighter-rouge">log_out.py</code> script that has the following code.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">Crypto.Util.number</span> <span class="kn">import</span> \<span class="o">*</span>
+<span class="kn">from</span> <span class="nn">secret</span> <span class="kn">import</span> <span class="n">FLAG</span>
+
+<span class="n">BITS</span> <span class="o">=</span> <span class="mi">358</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">getPrime</span><span class="p">(</span><span class="n">BITS</span><span class="p">)</span> <span class="c1"># 458831312996324044306144898299845370771994439995921953739842657870615957299268933078781055225998534731979521
+</span><span class="k">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">gen</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">getRandomNBitInteger</span><span class="p">(</span><span class="n">BITS</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="n">p</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">inverse</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">p</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">return</span> <span class="n">e</span><span class="p">,</span> <span class="n">d</span>
+<span class="n">Alice</span> <span class="o">=</span> <span class="n">e1</span><span class="p">,</span> <span class="n">d1</span> <span class="o">=</span> <span class="n">gen</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="n">Bob</span> <span class="o">=</span> <span class="n">e2</span><span class="p">,</span> <span class="n">d2</span> <span class="o">=</span> <span class="n">gen</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+
+<span class="k">assert</span> <span class="n">e1</span><span class="o">*</span><span class="n">d1</span> <span class="o">%</span> <span class="p">(</span><span class="n">p</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+<span class="k">assert</span> <span class="n">e2</span><span class="o">*</span><span class="n">d2</span> <span class="o">%</span> <span class="p">(</span><span class="n">p</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">bytes_to_long</span><span class="p">(</span><span class="n">FLAG</span><span class="p">)</span>
+<span class="n">one</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">e1</span><span class="p">,</span><span class="n">p</span><span class="p">)</span> <span class="c1"># 61931188702156649671605655073486391182782890630770517291203521771853183608276742802393948908853893282002240
+</span><span class="n">two</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">one</span><span class="p">,</span><span class="n">e2</span><span class="p">,</span><span class="n">p</span><span class="p">)</span> <span class="c1"># 30961102159927747611133998031126561891432030459135102738698401883176384849554325319024060345831531631633754
+</span><span class="n">three</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">two</span><span class="p">,</span><span class="n">d1</span><span class="p">,</span><span class="n">p</span><span class="p">)</span> <span class="c1"># 31905239398903218257458412804055017253162990574306516376045451484133505407415750776680499099863816940837544
+</span><span class="k">print</span><span class="p">(</span><span class="n">one</span><span class="p">,</span> <span class="n">two</span><span class="p">,</span> <span class="n">three</span><span class="p">)</span></code></pre></figure>
+
+<p>The script has only one function <code class="language-plaintext highlighter-rouge">gen</code> that takes a prime \(p\) and generates a random 179-bit integer \(e\) and an integer \(e_id_i = 1 \pmod{p-1}\). Then, the script gets 2 painrs of (\(e_1,d_1\)) and \((e_2, d_2)\) and encrypts the flag as</p>
+
+<p>\(one = m^{e_1} \pmod p\)
+\(two = one^{e_2} \pmod p\)
+\(three = two^{d_1} \pmod p\)</p>
+
+<h3 id="solution-2">Solution</h3>
+
+<p>Actually, if you take a closer look at the script it’s just implements <a href="https://en.wikipedia.org/wiki/Three-pass_protocol">3 Pass Protocol</a> and if you know how things can get wrong here you can easly break it. So, from here we know that it uses modualr exponentiation over prime field and if this prime was weak it can break the protocol and get the plain message. A weak prime is an odd prime that its euler totient can be factored as small prime numbers and you can check this one easly on your machine or <a href="https://www.alpertron.com.ar/ECM.HTM">Alpertron</a>.</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="go">factor(p-1) = 2^8 × 3 × 5 × 7 × 13 × 19^2 × 53 × 113 × 167 × 2617 × 4649 × 6581 × 8501 × 13597 × 37897 × 79939 × 181639 × 240173 × 3730801 × 7011233 × 16829834759 × 28159186127651 × 239850655476463133</span></code></pre></figure>
+
+<p>Now, we can use the defined equations to solve the <a href="https://www.alpertron.com.ar/DILOG.HTM">DLP</a> to get the random key \(e_2\), since \(two = one^{e_1} = m^{e_1e_2} \pmod p\), then use the third equation to get the flag.</p>
+
+<p>\(three = one^{e_2d_1} = m^{e_1e_2d_1} = m^{e_2} \pmod p\)
+\(m = three^{d_2} = m^{e_2d_2} \pmod p\)</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">Crypto.Util.number</span> <span class="kn">import</span> \<span class="o">*</span>
+<span class="n">p</span> <span class="o">=</span> <span class="mi">458831312996324044306144898299845370771994439995921953739842657870615957299268933078781055225998534731979521</span>
+<span class="n">one</span> <span class="o">=</span> <span class="mi">61931188702156649671605655073486391182782890630770517291203521771853183608276742802393948908853893282002240</span>
+<span class="n">two</span> <span class="o">=</span> <span class="mi">30961102159927747611133998031126561891432030459135102738698401883176384849554325319024060345831531631633754</span>
+<span class="n">three</span> <span class="o">=</span> <span class="mi">31905239398903218257458412804055017253162990574306516376045451484133505407415750776680499099863816940837544</span>
+<span class="n">e2</span> <span class="o">=</span> <span class="mi">716487297247009701312843013478492214587216006472061211</span>
+<span class="n">d2</span> <span class="o">=</span> <span class="n">inverse</span><span class="p">(</span><span class="n">e2</span><span class="p">,</span> <span class="n">p</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">m</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">three</span><span class="p">,</span><span class="n">d2</span><span class="p">,</span><span class="n">p</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">long_to_bytes</span><span class="p">(</span><span class="n">m</span><span class="p">))</span></code></pre></figure>
+
+<p>Flag: <code class="language-plaintext highlighter-rouge">ASCWG{3Pa$$$$_7h3_5h4m1r_l095_Pr070c0l}</code></p>
+
+<p><a id="inbetween"></a></p>
+
+<h2 id="in-between"><strong>In Between</strong></h2>
+
+<p>Description:</p>
+
+<blockquote>
+  <p>I found some sort of smooth encryption scheme until I noticed what I’ve did wrong.</p>
+</blockquote>
+
+<p>This one was an interesting challenge uses broken RSA, the description has a big hint and you have to dig a little deeper researching how this works. Given 3 files 2 encrypted ones and <code class="language-plaintext highlighter-rouge">between.py</code> a python script.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">Crypto.Util.number</span> <span class="kn">import</span> <span class="n">getPrime</span><span class="p">,</span> <span class="n">long_to_bytes</span> <span class="k">as</span> <span class="n">ltb</span><span class="p">,</span> <span class="n">bytes_to_long</span> <span class="k">as</span> <span class="n">btl</span><span class="p">,</span> <span class="n">GCD</span><span class="p">,</span> <span class="n">isPrime</span><span class="p">,</span> <span class="n">inverse</span>
+<span class="kn">from</span> <span class="nn">Crypto.Cipher</span> <span class="kn">import</span> <span class="n">AES</span>
+<span class="kn">from</span> <span class="nn">Crypto.Util.Padding</span> <span class="kn">import</span> <span class="n">pad</span><span class="p">,</span> <span class="n">unpad</span>
+<span class="kn">from</span> <span class="nn">hashlib</span> <span class="kn">import</span> <span class="n">sha1</span>
+<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">getrandbits</span>
+<span class="kn">from</span> <span class="nn">secret</span> <span class="kn">import</span> <span class="n">FLAG</span>
+
+<span class="n">BITS</span> <span class="o">=</span> <span class="mi">512</span>
+<span class="k">def</span> <span class="nf">gen</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+<span class="n">r</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">while</span> <span class="ow">not</span> <span class="n">isPrime</span><span class="p">(</span><span class="n">r</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">getrandbits</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">r</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">:</span>
+<span class="n">r</span> <span class="n">_</span><span class="o">=</span> <span class="mi">2</span>
+<span class="n">r</span> <span class="n">_</span><span class="o">=</span> <span class="n">p</span>
+<span class="k">for</span> \<span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">12</span><span class="p">):</span>
+<span class="n">r</span> \<span class="o">*=</span> <span class="n">getrandbits</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+<span class="k">return</span> <span class="n">r</span><span class="o">+</span><span class="mi">1</span>
+
+<span class="k">def</span> <span class="nf">encrypt</span><span class="p">(</span><span class="n">plain</span><span class="p">,</span> <span class="n">secret</span><span class="p">):</span>
+<span class="n">key</span> <span class="o">=</span> <span class="n">sha1</span><span class="p">(</span><span class="n">ltb</span><span class="p">(</span><span class="n">secret</span><span class="p">)).</span><span class="n">digest</span><span class="p">()[:</span><span class="mi">16</span><span class="p">]</span>
+<span class="n">cipher</span> <span class="o">=</span> <span class="n">AES</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">AES</span><span class="p">.</span><span class="n">MODE_CBC</span><span class="p">)</span>
+<span class="k">return</span> <span class="n">key</span><span class="p">,</span> <span class="n">cipher</span><span class="p">.</span><span class="n">encrypt</span><span class="p">(</span><span class="n">pad</span><span class="p">(</span><span class="n">plain</span><span class="p">,</span> <span class="mi">16</span><span class="p">)),</span> <span class="n">cipher</span><span class="p">.</span><span class="n">iv</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">getPrime</span><span class="p">(</span><span class="n">BITS</span><span class="p">)</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">gen</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="n">e</span> <span class="o">=</span> <span class="mh">0x10001</span>
+<span class="n">N</span> <span class="o">=</span> <span class="n">p</span>\<span class="o">*</span><span class="n">q</span>
+<span class="n">secret</span> <span class="o">=</span> <span class="n">getPrime</span><span class="p">(</span><span class="n">BITS</span><span class="p">)</span>
+<span class="n">enc</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">secret</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'flag.jpg'</span><span class="p">,</span> <span class="s">'rb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">fi</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="s">'flag.jpg.enc'</span><span class="p">,</span> <span class="s">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">fo</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="s">'secret.enc'</span><span class="p">,</span> <span class="s">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">sw</span><span class="p">:</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">fi</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
+<span class="n">k</span><span class="p">,</span> <span class="n">ct</span><span class="p">,</span> <span class="n">iv</span> <span class="o">=</span> <span class="n">encrypt</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">secret</span><span class="p">)</span> <span class="c1"># iv: 060c341af2e010640dab4e36da52a0bf
+</span><span class="n">fo</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">ct</span><span class="p">)</span>
+<span class="n">sw</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">ltb</span><span class="p">(</span><span class="n">enc</span><span class="p">))</span></code></pre></figure>
+
+<p>Looking at the script, it has 2 functions the first one <code class="language-plaintext highlighter-rouge">encrypt</code> that takes a plain text and a secret key and encryptes the text with <strong>AES-CBC</strong> and the other <code class="language-plaintext highlighter-rouge">gen</code> function takes a prime \(p\) and generates another odd prime based on it.</p>
+
+<p>So, it generates a 512-bit prime \(p\) and another prime \(q = 2r_1pr_i + 1\), then continues to generate the public RSA key \(e=65537\) and \(N=pq\). Next, it generates a secret 512-bit prime and encrypts it using the generated public key. The last step, it encrypts the flag image file using the generated secret prime and write the encrypted secret and the encryped flag into another files <code class="language-plaintext highlighter-rouge">flag.jpg,enc</code> and <code class="language-plaintext highlighter-rouge">secret.enc</code> respectively.</p>
+
+<h3 id="solution-3">Solution</h3>
+
+<p>If you know exactly how RSA works, you would notice that \(gcd(pq,  (p-1)(q-1)) \neq 1\) which violates the RSA scheme. Now, obviously \(q-1\) cannot divide \(p\) and so we must have \(p\) divides \(q-1\), therefore \(q-1 = kp\) for some integer \(k &gt; 1\). Next, the description says that it uses a smooth encryption, so it has something to do with smooth numbers. Digging deeper about this you would find that RSA under some conditions has a weakness called powersmooth. A <a href="https://math.stackexchange.com/questions/4173300/definition-of-a-powersmooth-number">B-powersmooth</a> number is a product of coprime numbers less than B.</p>
+
+<p>Suppose that \(k\) is <strong>B-powersmooth</strong> for small B, then we have \(M = \alpha k\) and \(M\) is a product of prime powers up to \(B\). Thus, for any arbitrary number \(a^{MN} = a^{Mpq} = a^{\alpha (kp)q} = a^{(q-1)p} = 1\pmod q\), so we can get the one of the factor as \(gcd(a^{MN} - 1, N) = q\).</p>
+
+<p>The attack constructed as follows:</p>
+
+<ol>
+  <li>Find the correct \(B\).</li>
+  <li>Get all the primes powers less that \(B\).</li>
+  <li>Compute the \(gcd(a^{MN} - 1, N)\) and check if it’s one of the factors or not.</li>
+</ol>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c1"># sage script
+</span>
+<span class="n">B</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1e8</span><span class="p">,</span> <span class="mf">2e8</span><span class="p">,</span> <span class="mf">3e8</span><span class="p">]</span>
+<span class="k">def</span> <span class="nf">attack</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="mi">35000000</span><span class="p">):</span>
+<span class="n">M</span> <span class="o">=</span> <span class="n">prod</span><span class="p">([</span><span class="n">p</span><span class="o">^</span><span class="nb">int</span><span class="p">(</span><span class="n">log</span><span class="p">(</span><span class="n">B</span><span class="p">)</span><span class="o">//</span><span class="n">log</span><span class="p">(</span><span class="n">p</span><span class="p">))</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">prime_range</span><span class="p">(</span><span class="n">B</span><span class="o">+</span><span class="mi">1</span><span class="p">)])</span>
+<span class="n">X</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">M</span>\<span class="o">*</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">gcd</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="k">return</span> <span class="n">g</span> <span class="k">if</span> <span class="n">g</span> <span class="o">!=</span> <span class="mi">1</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
+<span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">B</span><span class="p">:</span>
+<span class="k">print</span><span class="p">(</span><span class="n">attack</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">b</span><span class="p">)))</span></code></pre></figure>
+
+<p>After almost 10 minutes you’ll get the correct factor with \(B=3e8\).</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">p</span> <span class="o">=</span> <span class="mi">9996930395710692308723580739714839673824098096948372397222427386572812982902478682725969655560512983970656202579690730301194267797899776213369834530408843</span>
+<span class="n">q</span> <span class="o">=</span> <span class="mi">13676546176221391845743984276096814665020986169532351881058926805368552212755389915876704203234021829266073063940714414760663706386188058384359455852297083418573870417737220019120715742271178904257599420856869702284679302607307220546439558652235458513126014250188801</span>
+<span class="n">N</span> <span class="o">=</span> <span class="n">p</span><span class="o">*</span><span class="n">q</span>
+<span class="n">phi</span> <span class="o">=</span> <span class="p">(</span><span class="n">p</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">q</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">inverse</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">phi</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">decrypt</span><span class="p">(</span><span class="n">ciphertext</span><span class="p">,</span> <span class="n">secret</span><span class="p">,</span> <span class="n">iv</span><span class="p">):</span>
+<span class="n">key</span> <span class="o">=</span> <span class="n">sha1</span><span class="p">(</span><span class="n">ltb</span><span class="p">(</span><span class="n">secret</span><span class="p">)).</span><span class="n">digest</span><span class="p">()[:</span><span class="mi">16</span><span class="p">]</span>
+<span class="n">cipher</span> <span class="o">=</span> <span class="n">AES</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">AES</span><span class="p">.</span><span class="n">MODE_CBC</span><span class="p">,</span> <span class="n">iv</span><span class="p">)</span>
+<span class="k">return</span> <span class="n">unpad</span><span class="p">(</span><span class="n">cipher</span><span class="p">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">ciphertext</span><span class="p">),</span> <span class="mi">16</span><span class="p">)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'secret.enc'</span><span class="p">,</span> <span class="s">'rb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
+<span class="n">secret_enc</span> <span class="o">=</span> <span class="n">btl</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">read</span><span class="p">())</span>
+<span class="n">secret</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">secret_enc</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">secret</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'flag.jpg.enc'</span><span class="p">,</span> <span class="s">'rb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">h</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="s">'flag_out.jpg'</span><span class="p">,</span> <span class="s">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">h2</span><span class="p">:</span>
+<span class="n">iv</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">.</span><span class="n">fromhex</span><span class="p">(</span><span class="s">'060c341af2e010640dab4e36da52a0bf'</span><span class="p">)</span>
+<span class="n">ct</span> <span class="o">=</span> <span class="n">h</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">decrypt</span><span class="p">(</span><span class="n">ct</span><span class="p">,</span> <span class="n">secret</span><span class="p">,</span> <span class="n">iv</span><span class="p">)</span>
+<span class="n">h2</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">m</span><span class="p">)</span></code></pre></figure>
+
+<p><a href="/assets/documentation/ASCWargames/2022/In-Between-Flag-592745c0302230894fe4f3acc61ba46973f49442c62c3bb5da1aef6819138814.jpg">
+  <img src="/assets/documentation/ASCWargames/2022/In-Between-Flag-592745c0302230894fe4f3acc61ba46973f49442c62c3bb5da1aef6819138814.jpg" alt="ASC" class="zooming" data-rjs="/assets/documentation/ASCWargames/2022/In-Between-Flag-592745c0302230894fe4f3acc61ba46973f49442c62c3bb5da1aef6819138814.jpg" data-zooming-width="604" data-zooming-height="140" />
+</a></p>
+
+<p>This attack works since the product of primes of a B-powersmooth number contains a subset that equal to a one of prime factors.</p>
+
+<p>Flag: <code class="language-plaintext highlighter-rouge">ASCWG{P0wer1n9_7h3_$m00th_0f_W33k_R5A_$ch3m3}</code></p>
+
+<p><a id="squaregroup"></a></p>
+
+<h2 id="square-group"><strong>Square Group</strong></h2>
+
+<blockquote>
+  <p>I’ve implemented this super secure algorithm can you break it?</p>
+</blockquote>
+
+<p>Actually, this challenge is the hardest one and it uses a El Gamal encryption using galois field. Given 2 files <code class="language-plaintext highlighter-rouge">output.txt</code> file and <code class="language-plaintext highlighter-rouge">square_group.py</code> a python sage script, let’s have a look.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">secret</span> <span class="kn">import</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">FLAG</span>
+<span class="kn">from</span> <span class="nn">Crypto.Util.number</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">random_prime</span><span class="p">(</span><span class="mi">2</span><span class="o">^</span><span class="mi">292</span><span class="p">)</span>
+<span class="n">F</span><span class="p">.</span><span class="o">&lt;</span><span class="n">g</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">GF</span><span class="p">(</span><span class="n">p</span><span class="o">^</span><span class="mi">2</span><span class="p">,</span> <span class="s">'g'</span><span class="p">)</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">F</span><span class="p">(</span><span class="n">g</span><span class="o">^</span><span class="n">a</span><span class="p">)</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">F</span><span class="p">(</span><span class="n">g</span><span class="o">^</span><span class="n">b</span><span class="p">)</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">bytes_to_long</span><span class="p">(</span><span class="n">FLAG</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">m</span><span class="p">.</span><span class="n">bit_length</span><span class="p">()</span> <span class="o">==</span> <span class="mi">319</span><span class="p">,</span> <span class="s">"[BIT SIZE ERROR]"</span>
+<span class="n">k</span> <span class="o">=</span> <span class="n">getrandbits</span><span class="p">(</span><span class="mi">256</span><span class="p">)</span>
+<span class="n">c1</span> <span class="o">=</span> <span class="n">F</span><span class="p">(</span><span class="n">g</span><span class="o">^</span><span class="n">k</span><span class="p">)</span>
+<span class="n">c2</span> <span class="o">=</span> <span class="n">F</span><span class="p">(</span><span class="n">m</span><span class="o">*</span><span class="n">A</span><span class="o">^</span><span class="n">k</span><span class="p">)</span></code></pre></figure>
+
+<p>Obviously, the script generates a 292-bit odd prime \(p\), then creates a finite field of size \(p^2\) with a group generator \(g\). After that, it calculates \(A = g^a\) and \(B = g^b\) in the galois group. A <a href="https://en.wikipedia.org/wiki/Finite_field">finite field</a> \(F_{p^2}\) is a group of finite number of elements (of size \(p^2\)) and each element on the form \(F = {x+yg : x,y \in GF(p)}\) where \(g\) is the group generator.</p>
+
+<p>Next, it converts the flag to an integer and generates a random 256-bit integer \(k\), then calculates \(c_1 = g^k\) and \(c_2 = mA^k\) also in the group which means addition, multiplication and subtraction operations are calculated inside the group \(F = GF(p^2)\).</p>
+
+<p>Let’s have a look at the other file.</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="go">p=7808808261360015401937185698517396439966052041595570744555697660178736409406537821914879
+A=994624118599273439394621380260612024769574069295856347262583816949463093938694374068048*g + 7347506893480480577445421299579485948782959433446893691339909418080574816261902573328140
+B=7450126928612503418678909312968592367965743905872306342210513251189577325432751921786867*g + 3752222068062758274773375759463057208078916797550789238029540291244899472217195194466577
+c1=7136735687590692247979294876477005084364049400865084776707060016253284318462817092615593*g + 6657675541958696150178558992705236561443142637506941735336975375664763127345451697731719
+c2=901435522984016617934008187902137349351958662418525525352377028097054635214542797226798*g + 6638201617319780555547138472700118770064559112794745161877570466029555182078290145046491</span></code></pre></figure>
+
+<h3 id="solution-4">Solution</h3>
+
+<p>It’s obvious that the script uses <a href="https://en.wikipedia.org/wiki/ElGamal_encryption">El Gamal</a> encryption scheme, but you would notice that the flag has 319 bits while the prime has only 292 bit, thus the encryption here is not correct and the decryption will get a compressed integere rather than the flag. Now, the attack goes as following:</p>
+
+<ol>
+  <li>Try to get the values of \(a\) and \(b\) using DLP.</li>
+  <li>Decrypt the corrupted flag, then bruteforcing to get the correct numbers of bits.</li>
+</ol>
+
+<p>If you start searching about <a href="https://doc.sagemath.org/html/en/reference/groups/sage/groups/generic.html">DLP</a> over finite field in Sage, you would get that it has 2 functions the first one is direct DLP <code class="language-plaintext highlighter-rouge">discrete_log</code> and the other solves it under some condition <code class="language-plaintext highlighter-rouge">linear_relation</code>. So, of course you shall first try the easier one in case it can get the correct solution quick. (You may be stuck at this point if you don’t know sage or the condition that the second function would work under. So, during the competition you should ask the admin about any hints he would give).</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">p</span> <span class="o">=</span> <span class="mi">7808808261360015401937185698517396439966052041595570744555697660178736409406537821914879</span>
+<span class="n">F</span><span class="p">.</span><span class="o">&lt;</span><span class="n">g</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">GF</span><span class="p">(</span><span class="n">p</span><span class="o">^</span><span class="mi">2</span><span class="p">,</span> <span class="s">'g'</span><span class="p">)</span>
+<span class="n">A</span> <span class="o">=</span> <span class="mi">994624118599273439394621380260612024769574069295856347262583816949463093938694374068048</span><span class="o">*</span><span class="n">g</span> <span class="o">+</span> <span class="mi">7347506893480480577445421299579485948782959433446893691339909418080574816261902573328140</span>
+<span class="n">B</span> <span class="o">=</span> <span class="mi">7450126928612503418678909312968592367965743905872306342210513251189577325432751921786867</span><span class="o">*</span><span class="n">g</span> <span class="o">+</span> <span class="mi">3752222068062758274773375759463057208078916797550789238029540291244899472217195194466577</span>
+<span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">=</span> <span class="n">linear_relation</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="s">'\*'</span><span class="p">)</span>
+
+<span class="c1"># (616571192307631787633959367126579, 1808360367944820210034920030960081223)</span></code></pre></figure>
+
+<p>Now, let’s see what happpens if we decrypt the values \(c_1\) and \(c_2\) by</p>
+
+<p>\(c_2c_1^{a}^{-1} = mA^kg^{ak}^{-1} = mg^{ak}g^{ak}^{-1} = m\).</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">c1</span> <span class="o">=</span> <span class="mi">7136735687590692247979294876477005084364049400865084776707060016253284318462817092615593</span><span class="o">*</span><span class="n">g</span> <span class="o">+</span> <span class="mi">6657675541958696150178558992705236561443142637506941735336975375664763127345451697731719</span>
+<span class="n">c2</span> <span class="o">=</span> <span class="mi">901435522984016617934008187902137349351958662418525525352377028097054635214542797226798</span><span class="o">*</span><span class="n">g</span> <span class="o">+</span> <span class="mi">6638201617319780555547138472700118770064559112794745161877570466029555182078290145046491</span>
+<span class="n">d</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(((</span><span class="n">c1</span><span class="o">^</span><span class="n">a</span><span class="p">)</span><span class="o">^-</span><span class="mi">1</span><span class="p">)</span>\<span class="o">*</span><span class="n">c2</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">long_to_bytes</span><span class="p">(</span><span class="n">d</span><span class="p">))</span>
+
+<span class="c1"># b'~Fy\xa5 K\xf1\xf3\xaf-\xb42\xdd\xeeE\x15\xfb\xb5P;\x8b8Z\xb3\xb0\x85\xab\xe3\x9a\xe1B\x84\xf4\xae\xa0p'</span></code></pre></figure>
+
+<p>Until that moment everything is going well and we already knew that this values if the compressed flag bits module \(p\). Suppose that \(d\) is the compressed bits, then \(m = rp + d\) and you know that the corerect flag is 319-bit long. Now, <code class="language-plaintext highlighter-rouge">319-292=27</code>is the remaining bits of the multiple \(r\) to get the correct value of the flag.</p>
+
+<p>Finally, we can bruteforce this value and get the correct flag bits.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="mi">26</span><span class="p">,</span> <span class="mi">2</span><span class="o">**</span><span class="mi">27</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+<span class="k">if</span> <span class="sa">b</span><span class="s">'ASCWG{'</span> <span class="ow">in</span> <span class="n">long_to_bytes</span><span class="p">(</span><span class="n">r</span><span class="o">*</span><span class="n">p</span> <span class="o">+</span> <span class="n">d</span><span class="p">):</span>
+<span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">long_to_bytes</span><span class="p">(</span><span class="n">r</span><span class="o">*</span><span class="n">p</span> <span class="o">+</span> <span class="n">d</span><span class="p">))</span>
+<span class="k">break</span></code></pre></figure>
+
+<p>Flag: <code class="language-plaintext highlighter-rouge">ASCWG{b17in9_0v3r_ElG@m41_G4l0i$_Gr0up5}</code></p>
+
+<p><a id="conc"></a></p>
+
+<h2 id="conclusion"><strong>Conclusion</strong></h2>
+
+<p>In this writeup, I’ve demostrated a detailed analysis of all the crypto challenges I’ve created in the competition as well as, my thought process of how I could solve the problem. I hope you’ve enjoyed the competition and learned something from the challenges that are created by me or even my teammates. Lastly, congrats to the first 3 teams, to every team who played fairly until the end and wish you all the best.</p>
+
+          </div>
+          <div class="article-share">
+            
+            
+            <a href="https://twitter.com/home?status=ASC+-+Wargames+2022+Finals%20-%20https://s4yed.github.io/posts/asc-wargames-finals-2022" title="Share on Twitter" rel="noreferrer noopener" target="_blank">
+              <svg viewBox="0 0 512 512"><path d="M492 109.5c-17.4 7.7-36 12.9-55.6 15.3 20-12 35.4-31 42.6-53.6 -18.7 11.1-39.4 19.2-61.5 23.5C399.8 75.8 374.6 64 346.8 64c-53.5 0-96.8 43.4-96.8 96.9 0 7.6 0.8 15 2.5 22.1 -80.5-4-151.9-42.6-199.6-101.3 -8.3 14.3-13.1 31-13.1 48.7 0 33.6 17.2 63.3 43.2 80.7C67 210.7 52 206.3 39 199c0 0.4 0 0.8 0 1.2 0 47 33.4 86.1 77.7 95 -8.1 2.2-16.7 3.4-25.5 3.4 -6.2 0-12.3-0.6-18.2-1.8 12.3 38.5 48.1 66.5 90.5 67.3 -33.1 26-74.9 41.5-120.3 41.5 -7.8 0-15.5-0.5-23.1-1.4C62.8 432 113.7 448 168.3 448 346.6 448 444 300.3 444 172.2c0-4.2-0.1-8.4-0.3-12.5C462.6 146 479 129 492 109.5z"/></svg>
+            </a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://s4yed.github.io/posts/asc-wargames-finals-2022" title="Share on Facebook" rel="noreferrer noopener" target="_blank">
+              <svg viewBox="0 0 512 512"><path d="M288 192v-38.1c0-17.2 3.8-25.9 30.5-25.9H352V64h-55.9c-68.5 0-91.1 31.4-91.1 85.3V192h-45v64h45v192h83V256h56.4l7.6-64H288z"/></svg>
+            </a>
+          </div>
+
+          
+            <div id="disqus_thread" class="article-comments"></div>
+            <script src="https://my-blog-0vgcdsd8x2.disqus.com/embed.js" async defer></script>
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+          
+        </article>
+        <footer class="footer scrollappear">
+    <p style="text-align: center">
+      This is my little tech blog, feel free to ask me any question &#169;
+      <a href="/about" title="About me">Ahmed Sayed</a>
+    </p>
+</footer>
+
+      </div>
+    </div>
+  </main>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-157807027-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-157807027-1');
+  </script>
+
+
+<script type="text/javascript" src="/assets/vendor-2c224c53eb697c739f9490c38819a72184f09472739fd9e492272ef174090428.js"></script>
+
+
+  <script type="text/javascript" src="/assets/webfonts-96493456d319d1bf419afdf8701552d4d486fee6afd304897d4fd81eb4e0cc0b.js"></script>
+
+
+
+  <script type="text/javascript" src="/assets/scrollappear-e2da8ea567e418637e31266cc5302126eaa79f62a2273739086358b589a89ee6.js"></script>
+
+
+<script type="text/javascript" src="/assets/application-cfde13ac81ddaf4351b2e739603e2baf688d0fcc9aba613fe62bbb1c7b037fb9.js"></script>
+
+
+  <script type="text/javascript" src="/assets/themetoggle-df0d3d73164dc26dffbd630182ae4d0dfa7bee6b694a2b5d565d73595b582bbf.js"></script>
+
+
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+</body>
+</html>
