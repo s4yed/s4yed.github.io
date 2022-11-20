@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Ahmed | CyCTF - Cairo ICT CTF 2022 by CyShield</title>
+  <meta name="description"
+    content="This is my writeup for the last blockchain challenge in the Cairo ICT CTF qualifications this year.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta property="og:title" content="CyCTF - Cairo ICT CTF 2022 by CyShield">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://s4yed.github.io/posts/cyctf-cairo-ict-2022">
+  <meta property="og:description"
+    content="This is my writeup for the last blockchain challenge in the Cairo ICT CTF qualifications this year.">
+  <meta property="og:site_name" content="Ahmed">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:url" content="https://s4yed.github.io/posts/cyctf-cairo-ict-2022">
+  <meta name="twitter:title" content="CyCTF - Cairo ICT CTF 2022 by CyShield">
+  <meta name="twitter:description"
+    content="This is my writeup for the last blockchain challenge in the Cairo ICT CTF qualifications this year.">
+
+
+
+  <meta property="og:image"
+    content="https://s4yed.github.io/assets/documentation/CyCTF/CyCTF-2022-a0f233279149bd857246cc605c2a4b98e076ec2bfbdf4e08f76220b5cde427af.png">
+  <meta name="twitter:image"
+    content="https://s4yed.github.io/assets/documentation/CyCTF/CyCTF-2022-a0f233279149bd857246cc605c2a4b98e076ec2bfbdf4e08f76220b5cde427af.png">
+
+
+
+  <link href="https://s4yed.github.io/feed.xml" type="application/rss+xml" rel="alternate"
+    title="Ahmed Last 10 blog posts" />
+
+
+
+
+
+
+  <link rel="icon" type="image/x-icon"
+    href="/assets/favicon-color-0e896bd8673d9f83cea8d7b0a12fcc894681d58fc475ad499adfed94067b1e1f.png">
+  <link rel="apple-touch-icon"
+    href="/assets/apple-touch-icon-dark-d161409442b7e523089f24d08d0a55951549ece7504207c376d53b020713494d.png">
+  <link rel="stylesheet" type="text/css" title="light" id="light"
+    href="/assets/light-bb7276d8d120b220c757b517d626ef0000a5e8683dccce2b722031baaae3ade1.css">
+  <link rel="stylesheet" type="text/css" title="dark" id="dark"
+    href="/assets/dark-bd87a972117a631461755cc733ab96b66bb38fb9d09359688cac8e4c2c561606.css" disabled="false">
+
+
+
+
+  <!-- Load KaTeX -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.1.1/katex.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.1.1/katex.min.js"></script>
+</head>
+
+<body>
+  <main>
+    <div class="grid grid-centered">
+      <div class="grid-cell">
+        <nav class="header-nav scrollappear">
+          <a href="/" class="header-logo" title="Ahmed">Ahmed</a>
+          <ul class="header-links">
+
+            <li>
+              <a href="/about" title="About me">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon-about">
+                  <use
+                    href="/assets/about-ab4928d09cef6e09136b8d40637999db4f9575f927c33156e7f3e37d450e5df1.svg#icon-about"
+                    xlink:href="/assets/about-ab4928d09cef6e09136b8d40637999db4f9575f927c33156e7f3e37d450e5df1.svg#icon-about">
+                  </use>
+                </svg>
+
+              </a>
+            </li>
+
+
+
+
+
+            <li>
+              <a href="https://github.com/s4yed" rel="noreferrer noopener" target="_blank" title="GitHub">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon-github">
+                  <use
+                    href="/assets/github-706d546fe6b5a32deca92fb08bbe60e78ea4e8027e889107905eb61f1063bcec.svg#icon-github"
+                    xlink:href="/assets/github-706d546fe6b5a32deca92fb08bbe60e78ea4e8027e889107905eb61f1063bcec.svg#icon-github">
+                  </use>
+                </svg>
+
+              </a>
+            </li>
+
+
+
+
+
+
+
+            <li>
+              <a href="https://www.linkedin.com/in/s4yed" rel="noreferrer noopener" target="_blank" title="LinkedIn">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon-linkedin">
+                  <use
+                    href="/assets/linkedin-3bd8eb5ea036958dc7b3ee3de6612dbfa9e0744f369f20f7895d6a2782bbaf43.svg#icon-linkedin"
+                    xlink:href="/assets/linkedin-3bd8eb5ea036958dc7b3ee3de6612dbfa9e0744f369f20f7895d6a2782bbaf43.svg#icon-linkedin">
+                  </use>
+                </svg>
+
+              </a>
+            </li>
+
+
+
+
+
+
+
+
+
+
+            <li>
+              <a href="https://discord.gg/Y4mm1#7774" rel="noreferrer noopener" target="_blank" title="Discord Server">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon-discord">
+                  <use
+                    href="/assets/discord-31958f8a24fd49834876e398b1793cd068c7d12a1db745c6da2ecc8b1f7576f5.svg#icon-discord"
+                    xlink:href="/assets/discord-31958f8a24fd49834876e398b1793cd068c7d12a1db745c6da2ecc8b1f7576f5.svg#icon-discord">
+                  </use>
+                </svg>
+
+              </a>
+            </li>
+
+
+
+
+            <li>
+              <a href="mailto:ahmedsayedgfx@gmail.com" title="Email">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon-email">
+                  <use
+                    href="/assets/email-30a104adb1e2728097a984fbea2995978b6fff6c12906a734044ebd388848b70.svg#icon-email"
+                    xlink:href="/assets/email-30a104adb1e2728097a984fbea2995978b6fff6c12906a734044ebd388848b70.svg#icon-email">
+                  </use>
+                </svg>
+
+              </a>
+            </li>
+
+
+            <li>
+              <a href="/feed.xml" rel="noreferrer noopener" target="_blank" title="RSS">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon-rss">
+                  <use href="/assets/rss-cdc7a721b47671668abb0ba57f9f8db8022096e0051ff51b9e08e6cc049453a4.svg#icon-rss"
+                    xlink:href="/assets/rss-cdc7a721b47671668abb0ba57f9f8db8022096e0051ff51b9e08e6cc049453a4.svg#icon-rss">
+                  </use>
+                </svg>
+
+              </a>
+            </li>
+
+
+            <li>
+              <a onclick="toggle()" title="Toggle Theme">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon-theme">
+                  <use
+                    href="/assets/theme-610197c56844c5ba34608b2018c4cc3b79f8833e2efc7a99bcb5589f1d3cfd7b.svg#icon-theme"
+                    xlink:href="/assets/theme-610197c56844c5ba34608b2018c4cc3b79f8833e2efc7a99bcb5589f1d3cfd7b.svg#icon-theme">
+                  </use>
+                </svg>
+
+              </a>
+            </li>
+
+          </ul>
+        </nav>
+
+
+        <ul class="header-tags scrollappear">
+
+
+
+          <li><a href="/tag/AES">Aes</a></li>
+
+
+          <li><a href="/tag/ASC-Wargames">Asc-wargames</a></li>
+
+
+          <li><a href="/tag/AUCTF">Auctf</a></li>
+
+
+          <li><a href="/tag/AnDetect">Andetect</a></li>
+
+
+          <li><a href="/tag/CTF">Ctf</a></li>
+
+
+          <li><a href="/tag/ECC">Ecc</a></li>
+
+
+          <li><a href="/tag/El-Gamal">El-gamal</a></li>
+
+
+          <li><a href="/tag/RSA">Rsa</a></li>
+
+
+          <li><a href="/tag/WPICTF">Wpictf</a></li>
+
+
+          <li><a href="/tag/algorithms">Algorithms</a></li>
+
+
+          <li>...</li>
+          <li><a href="/tags">Show all</a></li>
+
+        </ul>
+
+
+        <article class="article scrollappear">
+          <header class="article-header">
+            <h1>CyCTF - Cairo ICT CTF 2022 by CyShield</h1>
+            <p>This is my writeup for the last blockchain challenge in the Cairo ICT CTF qualifications this year.</p>
+            <div class="article-list-footer">
+              <span class="article-list-date">
+                November 20, 2022
+              </span>
+              <span class="article-list-divider">-</span>
+              <span class="article-list-minutes">
+
+
+                8 minute read
+
+              </span>
+              <span class="article-list-divider">-</span>
+              <div class="article-list-tags">
+
+
+                <a href="/tag/security" title="See all posts with tag 'Security'">Security</a>
+
+
+                <a href="/tag/blockchain" title="See all posts with tag 'Blockchain'">Blockchain</a>
+
+
+                <a href="/tag/CTF" title="See all posts with tag 'CTF'">CTF</a>
+
+
+                <a href="/tag/infosec" title="See all posts with tag 'Infosec'">Infosec</a>
+
+
+                <a href="/tag/python" title="See all posts with tag 'Python'">Python</a>
+
+
+                <a href="/tag/reverse" title="See all posts with tag 'Reverse'">Reverse</a>
+
+
+                <a href="/tag/hacking" title="See all posts with tag 'Hacking'">Hacking</a>
+
+              </div>
+            </div>
+          </header>
+
+          <div class="article-content">
+            <p><a
+                href="/assets/documentation/CyCTF/CyCTF-2022-a0f233279149bd857246cc605c2a4b98e076ec2bfbdf4e08f76220b5cde427af.png">
+                <img
+                  src="/assets/documentation/CyCTF/CyCTF-2022-a0f233279149bd857246cc605c2a4b98e076ec2bfbdf4e08f76220b5cde427af.png"
+                  alt="CyCTF" class="zooming"
+                  data-rjs="/assets/documentation/CyCTF/CyCTF-2022-a0f233279149bd857246cc605c2a4b98e076ec2bfbdf4e08f76220b5cde427af.png"
+                  data-zooming-width="917" data-zooming-height="516" />
+              </a></p>
+
+            <p>Hello hackers, this isn’t my first time to try to solve blockchain challenges. I got some basic
+              understanding of how it works in terms of smart contracts and the cryptography involved, but this time I
+              was lucky to give it a big try even after the qualification round.</p>
+
+            <h2 id="smart-crackme"><strong>Smart CrackMe</strong></h2>
+
+            <p>The challenge was given a public deployed contract with address <code
+                class="language-plaintext highlighter-rouge">0x31678C496E63BcEbd1398D25C9B21cDcb3cc5e23</code> on <a
+                href="https://goerli.etherscan.io/address/0x31678C496E63BcEbd1398D25C9B21cDcb3cc5e23">Etherscan</a>
+              along with its ABI. It has only one transaction and nothing else but the contract bytecode.</p>
+
+            <p><a
+                href="/assets/documentation/CyCTF/Etherscan-919a8c10eb1728ef5e4accb7a98f403d9440651ab0a73b72d22593c87aac7210.png">
+                <img
+                  src="/assets/documentation/CyCTF/Etherscan-919a8c10eb1728ef5e4accb7a98f403d9440651ab0a73b72d22593c87aac7210.png"
+                  alt="JEB" class="zooming"
+                  data-rjs="/assets/documentation/CyCTF/Etherscan-919a8c10eb1728ef5e4accb7a98f403d9440651ab0a73b72d22593c87aac7210.png"
+                  data-zooming-width="1440" data-zooming-height="586" />
+              </a></p>
+
+            <figure class="highlight">
+              <pre><code class="language-console" data-lang="console"><span class="go">0x6080604052600436106100345760003560e01c806308c5dc7f146100395780633ccfd60b146100695780638da5cb5b14610080575b600080fd5b610053600480360381019061004e919061040c565b6100ab565b6040516100609190610495565b60405180910390f35b34801561007557600080fd5b5061007e6102d6565b005b34801561008c57600080fd5b506100956103d1565b6040516100a2919061047a565b60405180910390f35b600080600090505b603081101561012f5782600082603081106100d1576100d06105ae565b5b602091828204019190069054906101000a900460ff1618600282603081106100fc576100fb6105ae565b5b602091828204019190066101000a81548160ff021916908360ff160217905550808061012790610536565b9150506100b3565b5060436002600060308110610147576101466105ae565b5b602091828204019190069054906101000a900460ff1660ff1614801561019a57506079600260016030811061017f5761017e6105ae565b5b602091828204019190069054906101000a900460ff1660ff16145b80156101d257506043600280603081106101b7576101b66105ae565b5b602091828204019190069054906101000a900460ff1660ff16145b801561020b5750605460026003603081106101f0576101ef6105ae565b5b602091828204019190069054906101000a900460ff1660ff16145b8015610244575060466002600460308110610229576102286105ae565b5b602091828204019190069054906101000a900460ff1660ff16145b801561027d5750607b6002600560308110610262576102616105ae565b5b602091828204019190069054906101000a900460ff1660ff16145b156102cc5733600460006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550600190506102d1565b600090505b919050565b600460009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff1614610366576040517f08c379a000000000000000000000000000000000000000000000000000000000815260040161035d906104b0565b60405180910390fd5b600460009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff166108fc479081150290604051600060405180830381858888f193505050501580156103ce573d6000803e3d6000fd5b50565b600460009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b6000813590506104068161060b565b92915050565b600060208284031215610422576104216105dd565b5b6000610430848285016103f7565b91505092915050565b610442816104e1565b82525050565b610451816104f3565b82525050565b60006104646018836104d0565b915061046f826105e2565b602082019050919050565b600060208201905061048f6000830184610439565b92915050565b60006020820190506104aa6000830184610448565b92915050565b600060208201905081810360008301526104c981610457565b9050919050565b600082825260208201905092915050565b60006104ec826104ff565b9050919050565b60008115159050919050565b600073ffffffffffffffffffffffffffffffffffffffff82169050919050565b6000819050919050565b600060ff82169050919050565b60006105418261051f565b91507fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff8214156105745761057361057f565b5b600182019050919050565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052601160045260246000fd5b7f4e487b7100000000000000000000000000000000000000000000000000000000600052603260045260246000fd5b600080fd5b7f43616c6c6572206973206e6f7420746865206f776e6572210000000000000000600082015250565b61061481610529565b811461061f57600080fd5b5056fea26469706673582212202df7f55fc48becfec4da6f96cff3b6fd616f35a2e864984c3078521a32ff8c4064736f6c63430008070033</span></code></pre>
+            </figure>
+
+            <p>And the contract ABI:</p>
+
+            <figure class="highlight">
+              <pre><code class="language-json" data-lang="json"><span class="err">//</span><span class="w"> </span><span class="err">SmartCrackMe.abi</span><span class="w">
+</span><span class="p">[</span><span class="w">
+	</span><span class="p">{</span><span class="w">
+		</span><span class="nl">"inputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+		</span><span class="nl">"stateMutability"</span><span class="p">:</span><span class="w"> </span><span class="s2">"nonpayable"</span><span class="p">,</span><span class="w">
+		</span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"constructor"</span><span class="w">
+	</span><span class="p">},</span><span class="w">
+	</span><span class="p">{</span><span class="w">
+		</span><span class="nl">"inputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+			</span><span class="p">{</span><span class="w">
+				</span><span class="nl">"internalType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"uint8"</span><span class="p">,</span><span class="w">
+				</span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"key"</span><span class="p">,</span><span class="w">
+				</span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"uint8"</span><span class="w">
+			</span><span class="p">}</span><span class="w">
+		</span><span class="p">],</span><span class="w">
+		</span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"check_flag"</span><span class="p">,</span><span class="w">
+		</span><span class="nl">"outputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+			</span><span class="p">{</span><span class="w">
+				</span><span class="nl">"internalType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bool"</span><span class="p">,</span><span class="w">
+				</span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+				</span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bool"</span><span class="w">
+			</span><span class="p">}</span><span class="w">
+		</span><span class="p">],</span><span class="w">
+		</span><span class="nl">"stateMutability"</span><span class="p">:</span><span class="w"> </span><span class="s2">"payable"</span><span class="p">,</span><span class="w">
+		</span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"function"</span><span class="w">
+	</span><span class="p">},</span><span class="w">
+	</span><span class="p">{</span><span class="w">
+		</span><span class="nl">"inputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+		</span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"owner"</span><span class="p">,</span><span class="w">
+		</span><span class="nl">"outputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+			</span><span class="p">{</span><span class="w">
+				</span><span class="nl">"internalType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"address payable"</span><span class="p">,</span><span class="w">
+				</span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+				</span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"address"</span><span class="w">
+			</span><span class="p">}</span><span class="w">
+		</span><span class="p">],</span><span class="w">
+		</span><span class="nl">"stateMutability"</span><span class="p">:</span><span class="w"> </span><span class="s2">"view"</span><span class="p">,</span><span class="w">
+		</span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"function"</span><span class="w">
+	</span><span class="p">},</span><span class="w">
+	</span><span class="p">{</span><span class="w">
+		</span><span class="nl">"inputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+		</span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"withdraw"</span><span class="p">,</span><span class="w">
+		</span><span class="nl">"outputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+		</span><span class="nl">"stateMutability"</span><span class="p">:</span><span class="w"> </span><span class="s2">"nonpayable"</span><span class="p">,</span><span class="w">
+		</span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"function"</span><span class="w">
+	</span><span class="p">}</span><span class="w">
+</span><span class="p">]</span></code></pre>
+            </figure>
+
+            <p>First thing noticed that the contract section has a button to decompile the bytecode and after
+              decompiling, it gives us the following code:</p>
+
+            <figure class="highlight">
+              <pre><code class="language-python" data-lang="python"><span class="c1"># Palkeoramix decompiler. 
+</span>
+<span class="k">def</span> <span class="nf">storage</span><span class="p">:</span>
+  <span class="n">stor2</span> <span class="ow">is</span> <span class="n">array</span> <span class="n">of</span> <span class="n">uint256</span> <span class="n">at</span> <span class="n">storage</span> <span class="mi">2</span>
+  <span class="n">owner</span> <span class="ow">is</span> <span class="n">addr</span> <span class="n">at</span> <span class="n">storage</span> <span class="mi">4</span>
+
+<span class="k">def</span> <span class="nf">owner</span><span class="p">():</span> <span class="c1"># not payable
+</span>  <span class="k">return</span> <span class="n">owner</span>
+
+<span class="c1">#
+#  Regular functions
+#
+</span>
+<span class="k">def</span> <span class="nf">_fallback</span><span class="p">()</span> <span class="n">payable</span><span class="p">:</span> <span class="c1"># default function
+</span>  <span class="n">revert</span>
+
+<span class="k">def</span> <span class="nf">withdraw</span><span class="p">():</span> <span class="c1"># not payable
+</span>  <span class="k">if</span> <span class="n">owner</span> <span class="o">!=</span> <span class="n">caller</span><span class="p">:</span>
+      <span class="n">revert</span> <span class="k">with</span> <span class="mi">0</span><span class="p">,</span> <span class="s">'Caller is not the owner!'</span>
+  <span class="n">call</span> <span class="n">owner</span> <span class="k">with</span><span class="p">:</span>
+     <span class="n">value</span> <span class="n">eth</span><span class="p">.</span><span class="n">balance</span><span class="p">(</span><span class="n">this</span><span class="p">.</span><span class="n">address</span><span class="p">)</span> <span class="n">wei</span>
+       <span class="n">gas</span> <span class="mi">2300</span> <span class="o">*</span> <span class="n">is_zero</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="n">wei</span>
+  <span class="k">if</span> <span class="ow">not</span> <span class="n">ext_call</span><span class="p">.</span><span class="n">success</span><span class="p">:</span>
+      <span class="n">revert</span> <span class="k">with</span> <span class="n">ext_call</span><span class="p">.</span><span class="n">return_data</span><span class="p">[</span><span class="mi">0</span> <span class="nb">len</span> <span class="n">return_data</span><span class="p">.</span><span class="n">size</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">unknown08c5dc7f</span><span class="p">(</span><span class="n">uint256</span> <span class="n">_param1</span><span class="p">)</span> <span class="n">payable</span><span class="p">:</span> 
+  <span class="n">require</span> <span class="n">calldata</span><span class="p">.</span><span class="n">size</span> <span class="o">-</span> <span class="mi">4</span> <span class="o">&gt;=</span><span class="n">ΓÇ</span><span class="err">▓</span> <span class="mi">32</span>
+  <span class="n">require</span> <span class="n">_param1</span> <span class="o">==</span> <span class="n">uint8</span><span class="p">(</span><span class="n">_param1</span><span class="p">)</span>
+  <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="k">while</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="mi">48</span><span class="p">:</span>
+      <span class="n">stor2</span><span class="p">[</span><span class="mf">0.03125</span> <span class="o">/</span> <span class="n">idx</span><span class="p">].</span><span class="n">field_0</span> <span class="o">=</span> <span class="n">uint8</span><span class="p">(</span><span class="n">stor</span><span class="p">(</span><span class="mf">0.03125</span> <span class="o">/</span> <span class="n">idx</span><span class="p">)[</span><span class="n">uint8</span><span class="p">(</span><span class="n">idx</span><span class="p">)]</span> <span class="n">xor</span> <span class="n">_param1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">256</span><span class="o">^</span><span class="p">(</span><span class="n">idx</span> <span class="o">%</span> <span class="mi">32</span><span class="p">)</span> <span class="ow">or</span> <span class="err">!</span><span class="p">(</span><span class="mi">255</span> <span class="o">*</span> <span class="mi">256</span><span class="o">^</span><span class="p">(</span><span class="n">idx</span> <span class="o">%</span> <span class="mi">32</span><span class="p">))</span> <span class="ow">and</span> <span class="n">stor2</span><span class="p">[</span><span class="mf">0.03125</span> <span class="o">/</span> <span class="n">idx</span><span class="p">].</span><span class="n">field_0</span>
+      <span class="k">if</span> <span class="n">idx</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+          <span class="n">revert</span> <span class="k">with</span> <span class="s">'NH{q'</span><span class="p">,</span> <span class="mi">17</span>
+      <span class="n">idx</span> <span class="o">=</span> <span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span>
+      <span class="k">continue</span> 
+  <span class="k">if</span> <span class="n">uint8</span><span class="p">(</span><span class="n">stor2</span><span class="p">.</span><span class="n">length</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">67</span><span class="p">:</span>
+      <span class="k">return</span> <span class="mi">0</span>
+  <span class="k">if</span> <span class="n">stor2</span><span class="p">.</span><span class="n">length</span><span class="p">.</span><span class="n">field_8</span> <span class="o">!=</span> <span class="mi">121</span><span class="p">:</span>
+      <span class="k">return</span> <span class="mi">0</span>
+  <span class="k">if</span> <span class="n">stor2</span><span class="p">.</span><span class="n">length</span><span class="p">.</span><span class="n">field_16</span> <span class="o">!=</span> <span class="mi">67</span><span class="p">:</span>
+      <span class="k">return</span> <span class="mi">0</span>
+  <span class="k">if</span> <span class="n">stor2</span><span class="p">.</span><span class="n">length</span><span class="p">.</span><span class="n">field_24</span> <span class="o">!=</span> <span class="mi">84</span><span class="p">:</span>
+      <span class="k">return</span> <span class="mi">0</span>
+  <span class="k">if</span> <span class="n">stor2</span><span class="p">.</span><span class="n">length</span><span class="p">.</span><span class="n">field_32</span> <span class="o">!=</span> <span class="mi">70</span><span class="p">:</span>
+      <span class="k">return</span> <span class="mi">0</span>
+  <span class="k">if</span> <span class="n">stor2</span><span class="p">.</span><span class="n">length</span><span class="p">.</span><span class="n">field_40</span> <span class="o">!=</span> <span class="mi">123</span><span class="p">:</span>
+      <span class="k">return</span> <span class="mi">0</span>
+  <span class="n">owner</span> <span class="o">=</span> <span class="n">caller</span>
+  <span class="k">return</span> <span class="mi">1</span></code></pre>
+            </figure>
+
+            <p>The website uses <a href="https://github.com/palkeo/panoramix">Panoramix</a> python decompiler and as we
+              see there’re only 3 functions <code class="language-plaintext highlighter-rouge">owner</code>, <code
+                class="language-plaintext highlighter-rouge">withdraw</code>, and the last one <code
+                class="language-plaintext highlighter-rouge">check_flag</code> that had been decompiled into this weird
+              name <code class="language-plaintext highlighter-rouge">unknown08c5dc7f</code>.</p>
+
+            <ol>
+              <li><code class="language-plaintext highlighter-rouge">owner</code>: Returns only the address of the
+                contract owner.</li>
+              <li><code class="language-plaintext highlighter-rouge">withdraw</code>: Checks if the method caller
+                address same as the contract owner address. If so withdraw the ballance, if not it aborts.</li>
+              <li><code class="language-plaintext highlighter-rouge">check_flag</code>: It takes 8-bit integer value,
+                does some calculations on the defined array of size 2 and lastly it checks if the final array value has
+                the correct flag format.</li>
+            </ol>
+
+            <p>I was stuck at the decompiled line inside the loop. It has weird syntax and didn’t know how represent the
+              first part. Actualy, I’ve tried to assume that some parts are useless and tweak the others but nothing
+              worked. So, I decided to look at the decompiler repo and see if there’s any options that I could use to
+              help me decompile the bytecode correctly, but unfortunately still nothing.</p>
+
+            <p>I asked one of my teammates if he knows any smart contract decompiler and he told me I could use <a
+                href="https://www.pnfsoftware.com/jeb/demo">JEB</a>. I started off and loaded the bytecode into JEB, it
+              shows me the opcode instructions and when I tried to decompile to the source code it gives a decompilation
+              error. I’ve tried to read the instructions and map it to what I’ve in the code above, but still no luck.
+            </p>
+
+            <p><a
+                href="/assets/documentation/CyCTF/JEB-Demo-86cc9fecccdfe0fa2b94ea81e9eda26942dfa20fb90d591182228d148a1671a3.png">
+                <img
+                  src="/assets/documentation/CyCTF/JEB-Demo-86cc9fecccdfe0fa2b94ea81e9eda26942dfa20fb90d591182228d148a1671a3.png"
+                  alt="JEB" class="zooming"
+                  data-rjs="/assets/documentation/CyCTF/JEB-Demo-86cc9fecccdfe0fa2b94ea81e9eda26942dfa20fb90d591182228d148a1671a3.png"
+                  data-zooming-width="1920" data-zooming-height="1039" />
+              </a></p>
+
+            <p>On the next day, I asked our reverse mate to take another look on the decompiled weird instructions, but
+              he couldn’t understand a thing from it. He decided to decompile it using his own JEB version and this time
+              the source code showed up on his screen.</p>
+
+            <figure class="highlight">
+              <pre><code class="language-python" data-lang="python"><span class="n">function</span> <span class="n">start</span><span class="p">()</span> <span class="p">{</span>
+    <span class="o">*</span><span class="mh">0x40</span> <span class="o">=</span> <span class="mh">0x80</span><span class="p">;</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="err">$</span><span class="n">msg</span><span class="p">.</span><span class="n">value</span> <span class="o">!=</span> <span class="mh">0x0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">revert</span><span class="p">(</span><span class="mh">0x0</span><span class="p">,</span> <span class="mh">0x0</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">var3</span> <span class="o">=</span> <span class="n">storage</span><span class="p">[</span><span class="mh">0x0</span><span class="p">];</span>
+    <span class="n">storage</span><span class="p">[</span><span class="mh">0x0</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">var3</span> <span class="o">&amp;</span> <span class="mh">0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff00</span><span class="p">)</span> <span class="o">|</span> <span class="mh">0xda</span><span class="p">;</span>
+    <span class="n">var3</span> <span class="o">=</span> <span class="n">storage</span><span class="p">[</span><span class="mh">0x0</span><span class="p">];</span>
+    <span class="n">storage</span><span class="p">[</span><span class="mh">0x0</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">var3</span> <span class="o">&amp;</span> <span class="mh">0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff00ff</span><span class="p">)</span> <span class="o">|</span> <span class="mh">0xe000</span><span class="p">;</span>
+    <span class="n">var3</span> <span class="o">=</span> <span class="n">storage</span><span class="p">[</span><span class="mh">0x0</span><span class="p">];</span>
+    <span class="n">storage</span><span class="p">[</span><span class="mh">0x0</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">var3</span> <span class="o">&amp;</span> <span class="mh">0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffff00ffff</span><span class="p">)</span> <span class="o">|</span> <span class="mh">0xda0000</span><span class="p">;</span>
+    <span class="n">var3</span> <span class="o">=</span> <span class="n">storage</span><span class="p">[</span><span class="mh">0x0</span><span class="p">];</span>
+    <span class="n">storage</span><span class="p">[</span><span class="mh">0x0</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">var3</span> <span class="o">&amp;</span> <span class="mh">0xffffffffffffffffffffffffffffffffffffffffffffffffffffffff00ffffff</span><span class="p">)</span> <span class="o">|</span> <span class="mh">0xcd000000</span><span class="p">;</span>
+    <span class="p">...</span>
+    <span class="n">var3</span> <span class="o">=</span> <span class="n">storage</span><span class="p">[</span><span class="mh">0x1</span><span class="p">];</span>
+    <span class="n">storage</span><span class="p">[</span><span class="mh">0x1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">var3</span> <span class="o">&amp;</span> <span class="mh">0xffffffffffffffffffffffffffffffffffffffffffffffff00ffffffffffffff</span><span class="p">)</span> <span class="o">|</span> <span class="mh">0xfc00000000000000</span><span class="p">;</span>
+    <span class="n">var3</span> <span class="o">=</span> <span class="n">storage</span><span class="p">[</span><span class="mh">0x1</span><span class="p">];</span>
+    <span class="n">storage</span><span class="p">[</span><span class="mh">0x1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">var3</span> <span class="o">&amp;</span> <span class="mh">0xffffffffffffffffffffffffffffffffffffffffffffff00ffffffffffffffff</span><span class="p">)</span> <span class="o">|</span> <span class="mh">0xf40000000000000000</span><span class="p">;</span>
+    <span class="n">var3</span> <span class="o">=</span> <span class="n">storage</span><span class="p">[</span><span class="mh">0x1</span><span class="p">];</span>
+    <span class="n">storage</span><span class="p">[</span><span class="mh">0x1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">var3</span> <span class="o">&amp;</span> <span class="mh">0xffffffffffffffffffffffffffffffffffffffffffff00ffffffffffffffffff</span><span class="p">)</span> <span class="o">|</span> <span class="mh">0xdc000000000000000000</span><span class="p">;</span>
+    <span class="n">var3</span> <span class="o">=</span> <span class="n">storage</span><span class="p">[</span><span class="mh">0x1</span><span class="p">];</span>
+    <span class="n">storage</span><span class="p">[</span><span class="mh">0x1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">var3</span> <span class="o">&amp;</span> <span class="mh">0xffffffffffffffffffffffffffffffffffffffffff00ffffffffffffffffffff</span><span class="p">)</span> <span class="o">|</span> <span class="mh">0xf400000000000000000000</span><span class="p">;</span>
+    <span class="n">var3</span> <span class="o">=</span> <span class="n">storage</span><span class="p">[</span><span class="mh">0x1</span><span class="p">];</span>
+    <span class="n">storage</span><span class="p">[</span><span class="mh">0x1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">var3</span> <span class="o">&amp;</span> <span class="mh">0xffffffffffffffffffffffffffffffffffffffff00ffffffffffffffffffffff</span><span class="p">)</span> <span class="o">|</span> <span class="mh">0xa10000000000000000000000</span><span class="p">;</span>
+    <span class="n">var3</span> <span class="o">=</span> <span class="n">storage</span><span class="p">[</span><span class="mh">0x1</span><span class="p">];</span>
+    <span class="n">storage</span><span class="p">[</span><span class="mh">0x1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">var3</span> <span class="o">&amp;</span> <span class="mh">0xffffffffffffffffffffffffffffffffffffff00ffffffffffffffffffffffff</span><span class="p">)</span> <span class="o">|</span> <span class="mh">0xdc000000000000000000000000</span><span class="p">;</span>
+    <span class="n">var3</span> <span class="o">=</span> <span class="n">storage</span><span class="p">[</span><span class="mh">0x1</span><span class="p">];</span>
+    <span class="n">storage</span><span class="p">[</span><span class="mh">0x1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">var3</span> <span class="o">&amp;</span> <span class="mh">0xffffffffffffffffffffffffffffffffffff00ffffffffffffffffffffffffff</span><span class="p">)</span> <span class="o">|</span> <span class="mh">0xcb00000000000000000000000000</span><span class="p">;</span>
+    <span class="n">var3</span> <span class="o">=</span> <span class="n">storage</span><span class="p">[</span><span class="mh">0x1</span><span class="p">];</span>
+    <span class="n">storage</span><span class="p">[</span><span class="mh">0x1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">var3</span> <span class="o">&amp;</span> <span class="mh">0xffffffffffffffffffffffffffffffffff00ffffffffffffffffffffffffffff</span><span class="p">)</span> <span class="o">|</span> <span class="mh">0xa60000000000000000000000000000</span><span class="p">;</span>
+    <span class="n">var3</span> <span class="o">=</span> <span class="n">storage</span><span class="p">[</span><span class="mh">0x1</span><span class="p">];</span>
+    <span class="n">storage</span><span class="p">[</span><span class="mh">0x1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">var3</span> <span class="o">&amp;</span> <span class="mh">0xffffffffffffffffffffffffffffffff00ffffffffffffffffffffffffffffff</span><span class="p">)</span> <span class="o">|</span> <span class="mh">0xe4000000000000000000000000000000</span><span class="p">;</span>
+    <span class="n">var0</span> <span class="o">=</span> <span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">;</span>
+    <span class="n">var3</span> <span class="o">=</span> <span class="n">storage</span><span class="p">[</span><span class="mh">0x4</span><span class="p">];</span>
+    <span class="n">storage</span><span class="p">[</span><span class="mh">0x4</span><span class="p">]</span> <span class="o">=</span> <span class="p">((</span><span class="n">address</span><span class="p">(</span><span class="n">var0</span><span class="p">))</span> <span class="o">*</span> <span class="mh">0x1</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">var3</span> <span class="o">&amp;</span> <span class="mh">0xffffffffffffffffffffffff0000000000000000000000000000000000000000</span><span class="p">);</span>
+    <span class="n">codecopy</span><span class="p">(</span><span class="mh">0x0</span><span class="p">,</span> <span class="mh">0xb77</span><span class="p">,</span> <span class="mh">0x658</span><span class="p">);</span>
+    <span class="k">return</span><span class="p">(</span><span class="mh">0x0</span><span class="p">,</span> <span class="mh">0x658</span><span class="p">);</span>
+<span class="p">}</span></code></pre>
+            </figure>
+
+            <p>First, we know that <code class="language-plaintext highlighter-rouge">storage</code> variable has size 2
+              from the previous decompiled code and now the code has flatten out the iterations one by one. He tried to
+              run the 48 lines above and the result wasn’t usefull, we tried to play with it, but still empty hand. The
+              competition has ended and we still couldn’t figure it out. After a day I decided to give it another try
+              and this time look a bit closer on the last decompiled code. I ran it and did a bruteforce xoring over the
+              result and I noticed the reversed flag appeared with byte <code
+                class="language-plaintext highlighter-rouge">0x99</code> 🙂.</p>
+
+            <p>Final code:</p>
+
+            <figure class="highlight">
+              <pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="n">xor</span>
+<span class="n">storage</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">2</span>
+<span class="n">var3</span> <span class="o">=</span> <span class="n">storage</span><span class="p">[</span><span class="mh">0x0</span><span class="p">];</span>
+<span class="n">storage</span><span class="p">[</span><span class="mh">0x0</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">var3</span> <span class="o">&amp;</span> <span class="mh">0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff00</span><span class="p">)</span> <span class="o">|</span> <span class="mh">0xda</span><span class="p">;</span>
+<span class="p">...</span>
+<span class="n">var3</span> <span class="o">=</span> <span class="n">storage</span><span class="p">[</span><span class="mh">0x1</span><span class="p">];</span>
+<span class="n">storage</span><span class="p">[</span><span class="mh">0x1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">var3</span> <span class="o">&amp;</span> <span class="mh">0xffffffffffffffffffffffffffffffff00ffffffffffffffffffffffffffffff</span><span class="p">)</span> <span class="o">|</span> <span class="mh">0xe4000000000000000000000000000000</span><span class="p">;</span>
+<span class="n">part1</span> <span class="o">=</span> <span class="n">xor</span><span class="p">(</span><span class="n">long_to_bytes</span><span class="p">(</span><span class="n">storage</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="mh">0x99</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">].</span><span class="n">decode</span><span class="p">()</span>
+<span class="n">part2</span> <span class="o">=</span> <span class="n">xor</span><span class="p">(</span><span class="n">long_to_bytes</span><span class="p">(</span><span class="n">storage</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="mh">0x99</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">].</span><span class="n">decode</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">part1</span><span class="o">+</span><span class="n">part2</span><span class="p">)</span></code></pre>
+            </figure>
+
+            <p>Flag: <code
+                class="language-plaintext highlighter-rouge">CyCTF{ju57_l1Ke_7EH_900d_0ld_CR4CkME2_RemEm8ER?}</code></p>
+
+
+          </div>
+          <div class="article-share">
+
+
+            <a href="https://twitter.com/home?status=CyCTF+-+Cairo+ICT+CTF+2022+by+CyShield%20-%20https://s4yed.github.io/posts/cyctf-cairo-ict-2022"
+              title="Share on Twitter" rel="noreferrer noopener" target="_blank">
+              <svg viewBox="0 0 512 512">
+                <path
+                  d="M492 109.5c-17.4 7.7-36 12.9-55.6 15.3 20-12 35.4-31 42.6-53.6 -18.7 11.1-39.4 19.2-61.5 23.5C399.8 75.8 374.6 64 346.8 64c-53.5 0-96.8 43.4-96.8 96.9 0 7.6 0.8 15 2.5 22.1 -80.5-4-151.9-42.6-199.6-101.3 -8.3 14.3-13.1 31-13.1 48.7 0 33.6 17.2 63.3 43.2 80.7C67 210.7 52 206.3 39 199c0 0.4 0 0.8 0 1.2 0 47 33.4 86.1 77.7 95 -8.1 2.2-16.7 3.4-25.5 3.4 -6.2 0-12.3-0.6-18.2-1.8 12.3 38.5 48.1 66.5 90.5 67.3 -33.1 26-74.9 41.5-120.3 41.5 -7.8 0-15.5-0.5-23.1-1.4C62.8 432 113.7 448 168.3 448 346.6 448 444 300.3 444 172.2c0-4.2-0.1-8.4-0.3-12.5C462.6 146 479 129 492 109.5z" />
+              </svg>
+            </a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://s4yed.github.io/posts/cyctf-cairo-ict-2022"
+              title="Share on Facebook" rel="noreferrer noopener" target="_blank">
+              <svg viewBox="0 0 512 512">
+                <path
+                  d="M288 192v-38.1c0-17.2 3.8-25.9 30.5-25.9H352V64h-55.9c-68.5 0-91.1 31.4-91.1 85.3V192h-45v64h45v192h83V256h56.4l7.6-64H288z" />
+              </svg>
+            </a>
+          </div>
+
+
+          <div id="disqus_thread" class="article-comments"></div>
+          <script src="https://my-blog-0vgcdsd8x2.disqus.com/embed.js" async defer></script>
+          <noscript>Please enable JavaScript to view the comments.</noscript>
+
+        </article>
+        <footer class="footer scrollappear">
+          <p style="text-align: center">
+            This is my little tech blog, feel free to ask me any question &#169;
+            <a href="/about" title="About me">Ahmed Sayed</a>
+          </p>
+        </footer>
+
+      </div>
+    </div>
+  </main>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-157807027-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'UA-157807027-1');
+  </script>
+
+
+  <script type="text/javascript"
+    src="/assets/vendor-2c224c53eb697c739f9490c38819a72184f09472739fd9e492272ef174090428.js"></script>
+
+
+  <script type="text/javascript"
+    src="/assets/webfonts-96493456d319d1bf419afdf8701552d4d486fee6afd304897d4fd81eb4e0cc0b.js"></script>
+
+
+
+  <script type="text/javascript"
+    src="/assets/scrollappear-e2da8ea567e418637e31266cc5302126eaa79f62a2273739086358b589a89ee6.js"></script>
+
+
+  <script type="text/javascript"
+    src="/assets/application-cfde13ac81ddaf4351b2e739603e2baf688d0fcc9aba613fe62bbb1c7b037fb9.js"></script>
+
+
+  <script type="text/javascript"
+    src="/assets/themetoggle-df0d3d73164dc26dffbd630182ae4d0dfa7bee6b694a2b5d565d73595b582bbf.js"></script>
+
+
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+    type="text/javascript"></script>
+</body>
+
+</html>
