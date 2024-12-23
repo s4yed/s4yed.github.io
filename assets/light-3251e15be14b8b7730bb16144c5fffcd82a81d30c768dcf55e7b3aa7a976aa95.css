@@ -421,7 +421,7 @@ body {
   background: #fff; }
 
 ::-webkit-scrollbar {
-  width: 10px; }
+  width: 7px; }
 
 ::-webkit-scrollbar-thumb {
   background-color: #a2a9be;
@@ -481,7 +481,6 @@ h6 {
     font-size: 21.25px; } }
 a {
   color: #525b75;
-  opacity: 0.8;
   text-decoration: underline;
   transition: color 0.2s linear; }
   a:hover, a:active {
@@ -522,7 +521,8 @@ hr {
 img {
   display: block;
   max-width: 100%;
-  margin: 0; }
+  margin: 0;
+  justify-self: center; }
 
 .notfound-wrapper {
   margin-top: 100px;
@@ -793,7 +793,6 @@ img {
   .article-content img,
   .article-content blockquote {
     display: block;
-    margin: auto;
     margin-bottom: 30px; }
   .article-content h2,
   .article-content h3,
@@ -941,6 +940,9 @@ img {
   border-radius: 4px; }
   .highlight pre {
     margin: 0; }
+
+.highlight::-webkit-scrollbar {
+  height: 7px; }
 
 .highlighter-rouge {
   padding: 2px 4px;

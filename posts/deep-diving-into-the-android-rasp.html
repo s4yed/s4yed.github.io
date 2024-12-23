@@ -1,0 +1,790 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Ahmed | Deep diving into the native world of Android RASP</title>
+  <meta name="description" content="A beginner guide of how Android RASPs can be detected and bypassed.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta property="og:title" content="Deep diving into the native world of Android RASP">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://s4yed.github.io/posts/deep-diving-into-the-android-rasp">
+  <meta property="og:description" content="A beginner guide of how Android RASPs can be detected and bypassed.">
+  <meta property="og:site_name" content="Ahmed">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:url" content="https://s4yed.github.io/posts/deep-diving-into-the-android-rasp">
+  <meta name="twitter:title" content="Deep diving into the native world of Android RASP">
+  <meta name="twitter:description" content="A beginner guide of how Android RASPs can be detected and bypassed.">
+
+  
+    
+      <meta property="og:image" content="https://s4yed.github.io/assets/documentation/Android-RASP/main-f6c7e7aff86be048264beb8c17b291eabfa61b95bfe1cc0bb98e2c096c44c32d.jpg">
+      <meta name="twitter:image" content="https://s4yed.github.io/assets/documentation/Android-RASP/main-f6c7e7aff86be048264beb8c17b291eabfa61b95bfe1cc0bb98e2c096c44c32d.jpg">
+    
+  
+
+  <link href="https://s4yed.github.io/feed.xml" type="application/rss+xml" rel="alternate" title="Ahmed Last 10 blog posts" />
+
+  
+
+  
+
+    
+      <link rel="icon" type="image/x-icon" href="/assets/favicon-color-0e896bd8673d9f83cea8d7b0a12fcc894681d58fc475ad499adfed94067b1e1f.png">
+      <link rel="apple-touch-icon" href="/assets/apple-touch-icon-dark-d161409442b7e523089f24d08d0a55951549ece7504207c376d53b020713494d.png">
+      <link rel="stylesheet" type="text/css" title="light" id="light" href="/assets/light-3251e15be14b8b7730bb16144c5fffcd82a81d30c768dcf55e7b3aa7a976aa95.css">
+      <link rel="stylesheet" type="text/css" title="dark" id="dark" href="/assets/dark-19f120cdf124f282df64ca9bb9946b6b121543b87672ac3403ea7f3118531e45.css" disabled="false">
+    
+
+  
+
+  <!-- Load KaTeX -->
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.1.1/katex.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.1.1/katex.min.js"></script>
+</head>
+
+<body>
+  <main>
+    <div class="grid grid-centered">
+      <div class="grid-cell">
+        <nav class="header-nav scrollappear">
+  <a href="/" class="header-logo" title="Ahmed">Ahmed</a>
+  <ul class="header-links">
+    
+      <li>
+        <a href="/about" title="About me">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon-about">
+  <use href="/assets/about-ab4928d09cef6e09136b8d40637999db4f9575f927c33156e7f3e37d450e5df1.svg#icon-about" xlink:href="/assets/about-ab4928d09cef6e09136b8d40637999db4f9575f927c33156e7f3e37d450e5df1.svg#icon-about"></use>
+</svg>
+
+        </a>
+      </li>
+    
+    
+    
+    
+    
+      <li>
+        <a href="https://github.com/s4yed" rel="noreferrer noopener" target="_blank" title="GitHub">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon-github">
+  <use href="/assets/github-706d546fe6b5a32deca92fb08bbe60e78ea4e8027e889107905eb61f1063bcec.svg#icon-github" xlink:href="/assets/github-706d546fe6b5a32deca92fb08bbe60e78ea4e8027e889107905eb61f1063bcec.svg#icon-github"></use>
+</svg>
+
+        </a>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+      <li>
+        <a href="https://www.linkedin.com/in/s4yed" rel="noreferrer noopener" target="_blank" title="LinkedIn">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon-linkedin">
+  <use href="/assets/linkedin-3bd8eb5ea036958dc7b3ee3de6612dbfa9e0744f369f20f7895d6a2782bbaf43.svg#icon-linkedin" xlink:href="/assets/linkedin-3bd8eb5ea036958dc7b3ee3de6612dbfa9e0744f369f20f7895d6a2782bbaf43.svg#icon-linkedin"></use>
+</svg>
+
+        </a>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      <li>
+        <a href="https://discord.gg/Y4mm1#7774" rel="noreferrer noopener" target="_blank" title="Discord Server">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon-discord">
+  <use href="/assets/discord-31958f8a24fd49834876e398b1793cd068c7d12a1db745c6da2ecc8b1f7576f5.svg#icon-discord" xlink:href="/assets/discord-31958f8a24fd49834876e398b1793cd068c7d12a1db745c6da2ecc8b1f7576f5.svg#icon-discord"></use>
+</svg>
+
+        </a>
+      </li>
+    
+    
+    
+    
+    
+      <li>
+        <a href="/feed.xml" rel="noreferrer noopener" target="_blank" title="RSS">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon-rss">
+  <use href="/assets/rss-cdc7a721b47671668abb0ba57f9f8db8022096e0051ff51b9e08e6cc049453a4.svg#icon-rss" xlink:href="/assets/rss-cdc7a721b47671668abb0ba57f9f8db8022096e0051ff51b9e08e6cc049453a4.svg#icon-rss"></use>
+</svg>
+
+        </a>
+      </li>
+    
+    
+      <li>
+        <a onclick="toggle()" title="Toggle Theme">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon-theme">
+  <use href="/assets/theme-610197c56844c5ba34608b2018c4cc3b79f8833e2efc7a99bcb5589f1d3cfd7b.svg#icon-theme" xlink:href="/assets/theme-610197c56844c5ba34608b2018c4cc3b79f8833e2efc7a99bcb5589f1d3cfd7b.svg#icon-theme"></use>
+</svg>
+
+        </a>
+      </li>
+    
+  </ul>
+</nav>
+
+
+  <ul class="header-tags scrollappear">
+    
+    
+      
+        <li><a href="/tag/AES">Aes</a></li>
+    
+      
+        <li><a href="/tag/ASC-Wargames">Asc-wargames</a></li>
+    
+      
+        <li><a href="/tag/AUCTF">Auctf</a></li>
+    
+      
+        <li><a href="/tag/AnDetect">Andetect</a></li>
+    
+      
+        <li><a href="/tag/CTF">Ctf</a></li>
+    
+      
+        <li><a href="/tag/ECC">Ecc</a></li>
+    
+      
+        <li><a href="/tag/RSA">Rsa</a></li>
+    
+      
+        <li><a href="/tag/WPICTF">Wpictf</a></li>
+    
+      
+        <li><a href="/tag/algorithms">Algorithms</a></li>
+    
+      
+        <li><a href="/tag/analysis">Analysis</a></li>
+    
+      
+        <li>...</li>
+        <li><a href="/tags">Show all</a></li>
+        
+  </ul>
+
+
+        <article class="article scrollappear">
+          <header class="article-header">
+            <h1>Deep diving into the native world of Android RASP</h1>
+            <p>A beginner guide of how Android RASPs can be detected and bypassed.</p>
+            <div class="article-list-footer">
+  <span class="article-list-date">
+    December 23, 2024
+  </span>
+  <span class="article-list-divider">-</span>
+  <span class="article-list-minutes">
+    
+    
+      15 minute read
+    
+  </span>
+  <span class="article-list-divider">-</span>
+  <div class="article-list-tags">
+    
+      
+      <a href="/tag/security" title="See all posts with tag 'Security'">Security</a>
+    
+      
+      <a href="/tag/infosec" title="See all posts with tag 'Infosec'">Infosec</a>
+    
+      
+      <a href="/tag/pentest" title="See all posts with tag 'pentest'">pentest</a>
+    
+      
+      <a href="/tag/android" title="See all posts with tag 'Android'">Android</a>
+    
+      
+      <a href="/tag/rasp" title="See all posts with tag 'RASP'">RASP</a>
+    
+  </div>
+</div>
+          </header>
+
+          <div class="article-content">
+            <p><a href="/assets/documentation/Android-RASP/main-f6c7e7aff86be048264beb8c17b291eabfa61b95bfe1cc0bb98e2c096c44c32d.jpg">
+  <img src="/assets/documentation/Android-RASP/main-f6c7e7aff86be048264beb8c17b291eabfa61b95bfe1cc0bb98e2c096c44c32d.jpg" alt="RASP" class="zooming" data-rjs="/assets/documentation/Android-RASP/main-f6c7e7aff86be048264beb8c17b291eabfa61b95bfe1cc0bb98e2c096c44c32d.jpg" data-zooming-width="1792" data-zooming-height="1024" />
+</a></p>
+
+<h3 id="table-of-content">Table of Content</h3>
+
+<ol>
+    <li><a href="#intro">Intro</a></li>
+    <li><a href="#java">Java World</a></li>
+    <li><a href="#revand">Reversing Android</a></li>
+    <li><a href="#native">Native World</a></li>
+    <li><a href="#revnat">Reversing Native</a></li>
+    <li><a href="#hook">Hooking</a></li>
+    <li><a href="#conc">Conslusion</a></li>
+</ol>
+
+<hr />
+
+<p><a id="intro"></a></p>
+
+<h2 id="intro"><strong>Intro</strong></h2>
+
+<p>Hello hackers, it’s been awhile since my last blogpost. Today we’re gonna talk more about specific topic in Android pentest (RASP). Android applications are growing rapidly every year compared to the year before. Despite the fact that private sectors and companies worldwide are struggling to secure their Android applications due to the huge attack surface, one approach businesses can take is to implement their own protections while building the application. However, this is an interim solution to protect their applications from being reverse-engineered or attacked by malicious actors. Another option is to seek an all-in-one solution that can provide a high level of security against reverse engineering, tampering, and/or hooking techniques. This is often referred to as <strong>Runtime Application Self-Protection (RASP)</strong>. In this blog, we’ll dive deep into how such solutions work or implemented in terms of both the code and reverse-engineering (the developer and attacker mindsets).</p>
+
+<p><a id="java"></a></p>
+
+<h2 id="java-world"><strong>Java World</strong></h2>
+
+<p>As you may know, there are two main languages for building Android apps: Java and Kotlin. While both are popular nowadays, Java is older, widely used, has a vast ecosystem, and strong community support. We will use it to explore how RASP solutions can be built. You can see in the following examples how some detection checks such as root can be implemented.</p>
+
+<h3 id="root-check"><strong>Root Check</strong></h3>
+
+<p><strong>SU</strong> binaries or <strong>SuperUser</strong> are crucial component of Android root access. It allowing the user or the application to gain super user permissions, access or modify system componenets that are restricted by default.</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">checkSuperUserBinary</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nc">String</span><span class="o">[]</span> <span class="n">paths</span> <span class="o">=</span> <span class="o">{</span>
+            <span class="s">"/sbin/su"</span><span class="o">,</span>
+            <span class="s">"/system/xbin/su"</span><span class="o">,</span>
+            <span class="s">"/system/bin/su"</span><span class="o">,</span>
+            <span class="s">"/system/sd/xbin/su"</span><span class="o">,</span>
+            <span class="s">"/system/bin/.ext/su"</span><span class="o">,</span>
+            <span class="s">"/system/sd/xbin/.ext/su"</span><span class="o">,</span>
+            <span class="s">"/system/xbin/daemonsu"</span><span class="o">,</span>
+            <span class="s">"/system/xbin/su"</span><span class="o">,</span>
+            <span class="s">"/system/su"</span><span class="o">,</span>
+            <span class="s">"/data/local/xbin/su"</span><span class="o">,</span>
+            <span class="s">"/data/local/bin/su"</span><span class="o">,</span>
+            <span class="s">"/data/local/su"</span><span class="o">,</span>
+            <span class="s">"/data/su"</span>
+    <span class="o">};</span>
+    <span class="k">for</span> <span class="o">(</span><span class="nc">String</span> <span class="n">path</span> <span class="o">:</span> <span class="n">paths</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="k">new</span> <span class="nc">File</span><span class="o">(</span><span class="n">path</span><span class="o">).</span><span class="na">exists</span><span class="o">())</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>Basically, the snippet above looks for <code class="language-plaintext highlighter-rouge">su</code> binaries in some directories and check if such file exists, if so it will return true.</p>
+
+<blockquote>
+  <p>Keep noted, <code class="language-plaintext highlighter-rouge">su</code> binaries can be also hidden in another directory or path so that such checks fail to detect if a device is rooted or not, so be aware of that.</p>
+</blockquote>
+
+<h3 id="emulator-check"><strong>Emulator Check</strong></h3>
+
+<p>Emulators become extremely handy when it comes to testing Android apps, so it’s super important to check whether is an app is being run on emulator or not. RASPs will look for some system or hardware properties such as, CPU model, brand, device manufacturer, …etc. Such system properties can be found in <code class="language-plaintext highlighter-rouge">/system/build.prop</code> as shown below.</p>
+
+<figure class="highlight"><pre><code class="language-cmd" data-lang="cmd">star2qltechn:/ # cat /system/build.prop
+
+# begin build properties
+# autogenerated by buildinfo.sh
+...
+ro.build.version.min_supported_target_sdk=17
+ro.build.date=Wed Jul 10 10:20:27 CST 2024
+ro.build.date.utc=1720578027
+ro.build.type=user
+ro.build.user=build
+ro.build.host=dev
+ro.build.tags=release-keys
+ro.build.flavor=aosp-user
+ro.build.system_root_image=true
+ro.product.model=AOSP
+ro.product.brand=samsung
+ro.product.name=ld_aosp_x86_64
+ro.product.device=star2qltechn
+# ro.product.cpu.abi and ro.product.cpu.abi2 are obsolete,
+# use ro.product.cpu.abilist instead.
+ro.product.cpu.abi=x86_64
+ro.product.cpu.abilist=x86_64,x86,arm64-v8a,armeabi-v7a,armeabi
+ro.product.cpu.abilist32=x86,armeabi-v7a,armeabi
+ro.product.cpu.abilist64=x86_64,arm64-v8a
+ro.product.manufacturer=Google
+ro.product.locale=en-US
+# end build properties
+#
+# from build/make/target/board/gsi_system.prop
+#
+# GSI always generate dex pre-opt in system image
+ro.cp_system_other_odex=0
+
+# GSI always disables adb authentication
+ro.adb.secure=0
+
+# TODO(b/78105955): disable privapp_permissions checking before the bug solved
+ro.control_privapp_permissions=disable
+
+#
+# ADDITIONAL_BUILD_PROPERTIES
+#
+vendor.rild.libpath=/vendor/lib64/libmtk-ril.so
+keyguard.no_require_sim=true
+ro.com.android.dataroaming=true
+ro.config.ringtone=Ring_Synth_04.ogg
+ro.config.notification_sound=pixiedust.ogg
+ro.carrier=unknown
+ro.config.alarm_alert=Alarm_Classic.ogg
+ro.dalvik.vm.native.bridge=0
+dalvik.vm.heapstartsize=8m
+dalvik.vm.heapgrowthlimit=192m
+dalvik.vm.heapsize=384m
+dalvik.vm.heaptargetutilization=0.75
+dalvik.vm.heapminfree=512k
+dalvik.vm.heapmaxfree=8m
+...</code></pre></figure>
+
+<p>Next, the following snippet can be implemented to get those properties and check for unknown models, brands, or even manufacturer names.</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">checkForEmulatorProps</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nc">String</span><span class="o">[]</span> <span class="n">dangerousProps</span> <span class="o">=</span> <span class="o">{</span>
+            <span class="s">"ro.build.tags"</span><span class="o">,</span>
+            <span class="s">"ro.product.device"</span><span class="o">,</span>
+            <span class="s">"ro.product.brand"</span><span class="o">,</span>
+            <span class="s">"ro.product.model"</span><span class="o">,</span>
+            <span class="s">"ro.product.name"</span><span class="o">,</span>
+            <span class="s">"ro.product.manufacturer"</span>
+    <span class="o">};</span>
+    <span class="k">for</span> <span class="o">(</span><span class="nc">String</span> <span class="n">prop</span> <span class="o">:</span> <span class="n">dangerousProps</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">String</span> <span class="n">propValue</span> <span class="o">=</span> <span class="n">getSystemProperty</span><span class="o">(</span><span class="n">prop</span><span class="o">,</span> <span class="s">""</span><span class="o">);</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">propValue</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="n">propValue</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="s">"test-keys"</span><span class="o">)</span> <span class="o">||</span>  <span class="n">propValue</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="s">"unknown"</span><span class="o">)))</span> <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="kd">static</span> <span class="nc">String</span> <span class="nf">getSystemProperty</span><span class="o">(</span><span class="nc">String</span> <span class="n">propName</span><span class="o">,</span> <span class="nc">String</span> <span class="n">defaultValue</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">try</span> <span class="o">{</span>
+        <span class="nc">Class</span><span class="o">&lt;?&gt;</span> <span class="n">systemProperties</span> <span class="o">=</span> <span class="nc">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="s">"android.os.SystemProperties"</span><span class="o">);</span>
+        <span class="k">return</span> <span class="o">(</span><span class="nc">String</span><span class="o">)</span> <span class="n">systemProperties</span><span class="o">.</span><span class="na">getMethod</span><span class="o">(</span><span class="s">"get"</span><span class="o">,</span> <span class="nc">String</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="nc">String</span><span class="o">.</span><span class="na">class</span><span class="o">).</span><span class="na">invoke</span><span class="o">(</span><span class="kc">null</span><span class="o">,</span> <span class="n">propName</span><span class="o">,</span> <span class="n">defaultValue</span><span class="o">);</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">defaultValue</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>Here’s basic check function found in real RASP solution that looks for <code class="language-plaintext highlighter-rouge">ro.build.tags</code> and <code class="language-plaintext highlighter-rouge">/system/xbin/su</code> binary along with <code class="language-plaintext highlighter-rouge">Superuser.apk</code> file.</p>
+
+<p><a href="/assets/documentation/Android-RASP/rj-1-9ce5f0ca06eb5cec41fc38b1427cd9177d3b83e82173a131162d947a9c1baae6.png">
+  <img src="/assets/documentation/Android-RASP/rj-1-9ce5f0ca06eb5cec41fc38b1427cd9177d3b83e82173a131162d947a9c1baae6.png" alt="RASP" class="zooming" data-rjs="/assets/documentation/Android-RASP/rj-1-9ce5f0ca06eb5cec41fc38b1427cd9177d3b83e82173a131162d947a9c1baae6.png" data-zooming-width="1197" data-zooming-height="219" />
+</a></p>
+
+<blockquote>
+  <p>Today most mobile emulators are allowing users to change those values to forge normal devices’ behavior so such checks will fail to detect.</p>
+</blockquote>
+
+<p>Some other checks can be used for emulation detection, such as looking for certain device features, virtual sensors, or specific applications or packages installed on the system related to specific emulator brands or versions.</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">hasKnownEmulatorPackages</span><span class="o">(</span><span class="nc">Context</span> <span class="n">context</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">String</span><span class="o">[]</span> <span class="n">knownEmulators</span> <span class="o">=</span> <span class="o">{</span><span class="s">"com.android.emulator"</span><span class="o">,</span> <span class="s">"com.genymotion"</span><span class="o">};</span>
+    <span class="nc">PackageManager</span> <span class="n">packageManager</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="na">getPackageManager</span><span class="o">();</span>
+    <span class="nc">List</span><span class="o">&lt;</span><span class="nc">ApplicationInfo</span><span class="o">&gt;</span> <span class="n">installedApps</span> <span class="o">=</span> <span class="n">packageManager</span><span class="o">.</span><span class="na">getInstalledApplications</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="nc">ApplicationInfo</span> <span class="n">appInfo</span> <span class="o">:</span> <span class="n">installedApps</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">for</span> <span class="o">(</span><span class="nc">String</span> <span class="n">emulator</span> <span class="o">:</span> <span class="n">knownEmulators</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">appInfo</span><span class="o">.</span><span class="na">packageName</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="n">emulator</span><span class="o">))</span> <span class="o">{</span>
+                <span class="k">return</span> <span class="kc">true</span><span class="o">;</span> <span class="c1">// It's an emulator</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>While RASPs check for these conditions, if they successfully find at least one of them, they will immediately terminate the application before it is fully created.</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">isDeviceEmulatorOrRooted</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="nf">checkSuperUserBinary</span><span class="o">()</span> <span class="o">||</span> <span class="n">checkForEmulatorProps</span><span class="o">()</span> <span class="o">||</span> <span class="n">hasKnownEmulatorPackages</span><span class="o">();</span> 
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">terminateApp</span><span class="o">(</span><span class="nc">Context</span> <span class="n">context</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">context</span> <span class="k">instanceof</span> <span class="nc">Activity</span><span class="o">)</span> <span class="o">{</span>
+        <span class="o">((</span><span class="nc">Activity</span><span class="o">)</span> <span class="n">context</span><span class="o">).</span><span class="na">finish</span><span class="o">();</span>
+    <span class="o">}</span>
+    <span class="nc">Process</span><span class="o">.</span><span class="na">killProcess</span><span class="o">(</span><span class="nc">Process</span><span class="o">.</span><span class="na">myPid</span><span class="o">());</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">exit</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="nd">@Override</span>
+<span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="nc">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
+    <span class="o">...</span>
+    <span class="k">if</span><span class="o">(</span><span class="n">isDeviceEmulatorOrRooted</span><span class="o">())</span>
+        <span class="n">terminateApp</span><span class="o">(</span><span class="n">context</span><span class="o">);</span>
+    <span class="o">...</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>Other checks such as integrity and hooking techniques would be implemented as well for blocking the bad actors to alter or patch the application code or even manipulate some functionalities during app’s runtime. Application’s signature verification (integrity check) could be implemented using <code class="language-plaintext highlighter-rouge">android.content.pm</code> library to get the package signature and compare it with an expected value. Besides, anti-hooking methods ensure that some libraries are not being loaded in memory during the app’s runtime or look for specific tools installed on the device itself such as <code class="language-plaintext highlighter-rouge">xposed</code> or <code class="language-plaintext highlighter-rouge">frida</code>.</p>
+
+<p><a id="revand"></a></p>
+
+<h2 id="reversing-android"><strong>Reversing Android</strong></h2>
+
+<p>Reversing Android applications can be challenging at times. However, in most cases, decompilers such as <strong>apktool</strong> or <strong>jadx</strong> can successfully decompile and extract Smali code. When Android apps are compiled from Java code, they are translated into bytecode, which can later be converted into Smali. Smali code is a readable format that represents the intermediate language of Android bytecode, which can be used to examine the application’s behavior or functionality.</p>
+
+<h3 id="bypassing-checks"><strong>Bypassing Checks</strong></h3>
+
+<blockquote>
+  <p>Be aware that, I’ll be using Smali code from debug build so you can easily reverse and read the instructions. In release builds, Smali will be more difficult to read, but you can still use the same approach.</p>
+</blockquote>
+
+<p>In the following example we’ll examine how the snippets above would be decompiled and how can be reversed. I’ll go with the hard path exploring Smali code so you can get used to it.</p>
+
+<p>Exploring <code class="language-plaintext highlighter-rouge">checkSuperUserBinary()</code>:</p>
+
+<figure class="highlight"><pre><code class="language-smali" data-lang="smali">.method public static checkSuperUserBinary()Z
+    .registers 13
+
+    .line 24
+    const-string v11, "/data/local/su"
+    const-string v12, "/data/su"
+    const-string v0, "/sbin/su"
+    const-string v1, "/system/xbin/su"
+    const-string v2, "/system/bin/su"
+    const-string v3, "/system/sd/xbin/su"
+    const-string v4, "/system/bin/.ext/su"
+    const-string v5, "/system/sd/xbin/.ext/su"
+    const-string v6, "/system/xbin/daemonsu"
+    const-string v7, "/system/xbin/su"
+    const-string v8, "/system/su"
+    const-string v9, "/data/local/xbin/su"
+    const-string v10, "/data/local/bin/su"
+    filled-new-array/range {v0 .. v12}, [Ljava/lang/String;
+    move-result-object v0
+
+    .line 40
+    .local v0, "paths":[Ljava/lang/String;
+    array-length v1, v0
+    const/4 v2, 0x0
+    move v3, v2
+    :goto_21
+    if-ge v3, v1, :cond_36
+    aget-object v4, v0, v3
+
+    .line 41
+    .local v4, "path":Ljava/lang/String;
+    new-instance v5, Ljava/io/File;
+    invoke-direct {v5, v4}, Ljava/io/File;-&gt;&lt;init&gt;(Ljava/lang/String;)V
+    invoke-virtual {v5}, Ljava/io/File;-&gt;exists()Z
+    move-result v5
+    if-eqz v5, :cond_32
+
+    .line 42
+    const/4 v1, 0x1
+    return v1
+
+    .line 41
+    :cond_32
+    nop
+
+    .line 40
+    .end local v4    # "path":Ljava/lang/String;
+    add-int/lit8 v3, v3, 0x1
+    goto :goto_21
+
+    .line 46
+    :cond_36
+    return v2
+.end method</code></pre></figure>
+
+<p>As you can see, the code defines the string paths from {v0 .. v12} registers and loop over them, then checks the existance of at least one of them <code class="language-plaintext highlighter-rouge">invoke-virtual {v5}, Ljava/io/File;-&gt;exists()Z</code>. In this case, you can patch the code and modify <code class="language-plaintext highlighter-rouge">const/4 v1, 0x1</code> to be <code class="language-plaintext highlighter-rouge">const/4 v1, 0x0</code> which will always return <code class="language-plaintext highlighter-rouge">false</code>. Or you can change <code class="language-plaintext highlighter-rouge">if-eqz v5, :cond_32</code> to be <code class="language-plaintext highlighter-rouge">if-nez v5, :cond_32</code> will do the same going to the last return value which be <code class="language-plaintext highlighter-rouge">false</code>.</p>
+
+<p>Next, exploring <code class="language-plaintext highlighter-rouge">checkForEmulatorProps()</code>:</p>
+
+<figure class="highlight"><pre><code class="language-smali" data-lang="smali">.method public static checkForEmulatorProps()Z
+    .registers 7
+
+    .line 50
+    const-string v4, "ro.product.name"
+    const-string v5, "ro.product.manufacturer"
+    const-string v0, "ro.build.tags"
+    const-string v1, "ro.product.device"
+    const-string v2, "ro.product.brand"
+    const-string v3, "ro.product.model"
+    filled-new-array/range {v0 .. v5}, [Ljava/lang/String;
+    move-result-object v0
+
+    .line 59
+    .local v0, "dangerousProps":[Ljava/lang/String;
+    array-length v1, v0
+    const/4 v2, 0x0
+    move v3, v2
+    :goto_13
+    if-ge v3, v1, :cond_34
+    aget-object v4, v0, v3
+
+    .line 60
+    .local v4, "prop":Ljava/lang/String;
+    const-string v5, ""
+    invoke-static {v4, v5}, Lcom/example/shield/AppUtils;-&gt;getSystemProperty(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+    move-result-object v5
+
+    .line 61
+    .local v5, "propValue":Ljava/lang/String;
+    if-eqz v5, :cond_31
+    const-string v6, "test-keys"
+    invoke-virtual {v5, v6}, Ljava/lang/String;-&gt;contains(Ljava/lang/CharSequence;)Z
+    move-result v6
+    if-nez v6, :cond_2f
+    const-string v6, "unknown"
+    invoke-virtual {v5, v6}, Ljava/lang/String;-&gt;contains(Ljava/lang/CharSequence;)Z
+    move-result v6
+    if-eqz v6, :cond_31
+
+    :cond_2f
+    const/4 v1, 0x1
+    return v1
+
+    .line 59
+    .end local v4    # "prop":Ljava/lang/String;
+    .end local v5    # "propValue":Ljava/lang/String;
+
+    :cond_31
+    add-int/lit8 v3, v3, 0x1
+
+    goto :goto_13
+
+    .line 63
+    :cond_34
+    return v2
+.end method</code></pre></figure>
+
+<p>Here, the Smali code is a little different since it will define the propertie names in <code class="language-plaintext highlighter-rouge">{v0 .. v5}</code> registers and call the other function <code class="language-plaintext highlighter-rouge">getSystemProperty</code> and if one of them contains dangrous property <code class="language-plaintext highlighter-rouge">test-keys</code> or <code class="language-plaintext highlighter-rouge">unknown</code> it will return <code class="language-plaintext highlighter-rouge">true</code>. Although, you can see that the <code class="language-plaintext highlighter-rouge">:cond_2f</code> contains the return value which can be replaced with <code class="language-plaintext highlighter-rouge">const/4 v1, 0x0</code> that will make the function always return <code class="language-plaintext highlighter-rouge">false</code>.</p>
+
+<p><a id="native"></a></p>
+
+<h2 id="native-world"><strong>Native World</strong></h2>
+
+<p>Android ecosystem provides an SDK-like toolset in addition to its original SDK, called NDK (Native Development Kit). It allows Android developers to write parts of an application in native code using <strong>C/C++</strong>. NDK also provides access to native APIs, which can be used to interact with native activities or access device physical components. Additionally, it offers JNI (Java Native Interface), which facilitates communication between <strong>Java</strong> and <strong>C/C++</strong>.</p>
+
+<h3 id="native-root-check"><strong>Native Root Check</strong></h3>
+
+<p>Checking root access in <strong>C/C++</strong> is much similar with <strong>Java</strong>, however in native there’re more APIs to use and combination of them can hinder the bad guys from reversing or manipulate their behavior.</p>
+
+<p>The following example shows how basic root detection function can be written natively.</p>
+
+<figure class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="kt">bool</span> <span class="nf">rootCheck</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// List of common root binary paths</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">paths</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span> <span class="s">"/system/xbin/su"</span><span class="p">,</span> <span class="s">"/system/bin/su"</span><span class="p">,</span> <span class="s">"/sbin/su"</span><span class="p">,</span> <span class="s">"/xbin/su"</span><span class="p">,</span> <span class="s">"/sbin/su"</span><span class="p">,</span> <span class="s">"/system/xbin/su"</span><span class="p">,</span> <span class="s">"/system/bin/.ext/su"</span><span class="p">,</span> <span class="s">"/system/sd/xbin/.ext/su"</span><span class="p">,</span> <span class="s">"/system/sd/xbin/su"</span><span class="p">,</span> <span class="s">"/system/bin/su"</span><span class="p">,</span><span class="s">"/system/xbin/daemonsu"</span><span class="p">,</span><span class="s">"/system/xbin/su"</span><span class="p">,</span><span class="s">"/system/su"</span><span class="p">,</span><span class="s">"/data/local/xbin/su"</span><span class="p">,</span> <span class="s">"/data/local/bin/su"</span><span class="p">,</span> <span class="s">"/data/local/su"</span><span class="p">,</span><span class="s">"/data/su"</span> <span class="p">}</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">path</span> <span class="o">:</span> <span class="n">paths</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">access</span><span class="p">(</span><span class="n">path</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span> <span class="n">X_OK</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// Check if the file exists and is executable</span>
+            <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>As you can see, it defines an array of <code class="language-plaintext highlighter-rouge">su</code> paths, then it loops over them to check whether if at least one of them has an execute permission <code class="language-plaintext highlighter-rouge">access(path.data(), X_OK)</code>. Another approach is by opening the file paths and see if it’s exist or not.</p>
+
+<h3 id="emulator-check-1"><strong>Emulator Check</strong></h3>
+
+<p>Similar to Java, emulator detection in native world can be done using system properties with <code class="language-plaintext highlighter-rouge">sys/system_properties.h</code> library.</p>
+
+<figure class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="kt">bool</span> <span class="nf">emulatorCheckProps</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kt">char</span> <span class="n">buildFingerPrint</span><span class="p">[</span><span class="n">PROP_VALUE_MAX</span><span class="p">];</span>
+    <span class="kt">char</span> <span class="n">buildModel</span><span class="p">[</span><span class="n">PROP_VALUE_MAX</span><span class="p">];</span>
+    <span class="kt">char</span> <span class="n">buildTags</span><span class="p">[</span><span class="n">PROP_VALUE_MAX</span><span class="p">];</span>
+    <span class="n">__system_property_get</span><span class="p">(</span><span class="s">"ro.build.tags"</span><span class="p">,</span> <span class="n">buildTags</span><span class="p">);</span>
+    <span class="n">__system_property_get</span><span class="p">(</span><span class="s">"ro.build.fingerprint"</span><span class="p">,</span> <span class="n">buildFingerPrint</span><span class="p">);</span>
+    <span class="n">__system_property_get</span><span class="p">(</span><span class="s">"ro.product.model"</span><span class="p">,</span> <span class="n">buildModel</span><span class="p">);</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">{</span><span class="n">buildFingerPrint</span><span class="p">}.</span><span class="n">find</span><span class="p">(</span><span class="s">"generic"</span><span class="p">)</span> <span class="o">!=</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">::</span><span class="n">npos</span><span class="p">)</span> <span class="o">||</span> \
+    <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">{</span><span class="n">buildModel</span><span class="p">}.</span><span class="n">find</span><span class="p">(</span><span class="s">"google_sdk"</span><span class="p">)</span> <span class="o">!=</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">::</span><span class="n">npos</span><span class="p">)</span> <span class="o">||</span> \
+    <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">{</span><span class="n">buildTags</span><span class="p">}.</span><span class="n">find</span><span class="p">(</span><span class="s">"test-keys"</span><span class="p">)</span> <span class="o">!=</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">::</span><span class="n">npos</span><span class="p">);</span>
+<span class="p">}</span></code></pre></figure>
+
+<blockquote>
+  <p>Such properties can be varied depends on the emulator type and the values may change.</p>
+</blockquote>
+
+<h3 id="writable-system-directory-check"><strong>Writable System Directory Check</strong></h3>
+
+<p>In Android devices, the system directory plays a crucial part of the file system that contains essential system files and resources required by the OS the function properly. For security concerns, this directory has only read and execute permissions by default, so that no application can write to it except system apps.</p>
+
+<figure class="highlight"><pre><code class="language-cmd" data-lang="cmd">drwxr-xr-x  17 root   root      4096 2024-07-10 05:22 system</code></pre></figure>
+
+<p>If this directory becomes writable it means that the device has root access. Some rooted emulators have added an option to lock/unlock this directory from being writable though.</p>
+
+<p>In the following example shows how this directory can be checked if it has write access or not.</p>
+
+<figure class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="kt">bool</span> <span class="nf">checkWritableSystem</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Try writing to a system directory (common locations for rooted devices)</span>
+    <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">systemDir</span> <span class="o">=</span> <span class="s">"/system/"</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">access</span><span class="p">(</span><span class="n">systemDir</span><span class="p">,</span> <span class="n">W_OK</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+<span class="p">}</span></code></pre></figure>
+
+<blockquote>
+  <p>Multiple approaches can also be used with file’s metadata using <code class="language-plaintext highlighter-rouge">stat</code> in <code class="language-plaintext highlighter-rouge">sys/stat.h</code> library and check for file or directory permissions.</p>
+</blockquote>
+
+<p><a id="revnat"></a></p>
+
+<h2 id="reversing-native"><strong>Reversing Native</strong></h2>
+
+<p>Reversing native code can be intemidating since it requires you to have some solid experience with reading assembly instructions and how the CPU executes them. Although, in some cases having the base knowledge of reversing <strong>Crackmes</strong> can assist you to uncover the hidden secret to bypass those checks easily. In this part, I’ll be using Ghidra for decompiling <code class="language-plaintext highlighter-rouge">.so</code> libraries. Feel free to choose IDA or any other disassembly tool you like.</p>
+
+<p>In Android NDK, there’s a common function called <code class="language-plaintext highlighter-rouge">JNI_OnLoad</code> that is called when the native library is loaded successfully. This function is part of the JNI (Java Native Interaface) and can be used for several action you want to execute once the library is loaded. You can see it as an entry point for any Android native library. Many RASPs obfuscate or hide their entry point so that no one could trace the execution though.</p>
+
+<figure class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="n">JNIEXPORT</span> <span class="n">jint</span> <span class="n">JNICALL</span> <span class="nf">JNI_OnLoad</span><span class="p">(</span><span class="n">JavaVM</span><span class="o">*</span> <span class="n">vm</span><span class="p">,</span> <span class="kt">void</span><span class="o">*</span> <span class="n">reserved</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Obtain the JNIEnv* pointer</span>
+    <span class="n">JNIEnv</span><span class="o">*</span> <span class="n">env</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">vm</span><span class="o">-&gt;</span><span class="n">GetEnv</span><span class="p">(</span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="kt">void</span><span class="o">**&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="n">env</span><span class="p">),</span> <span class="n">JNI_VERSION_1_6</span><span class="p">)</span> <span class="o">!=</span> <span class="n">JNI_OK</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">JNI_ERR</span><span class="p">;</span> <span class="c1">// JNI version not supported</span>
+    <span class="p">}</span>
+    <span class="n">LOGI</span><span class="p">(</span><span class="s">"Native library loaded and initialized!"</span><span class="p">);</span>
+    <span class="c1">// Perform any necessary initialization here</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">rootCheck</span><span class="p">()</span> <span class="o">||</span> <span class="n">emulatorCheckProps</span><span class="p">()</span> <span class="o">||</span> <span class="n">checkWritableSystem</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">LOGI</span><span class="p">(</span><span class="s">"Root or Emulator detected!"</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="c1">// Return JNI version</span>
+    <span class="k">return</span> <span class="n">JNI_VERSION_1_6</span><span class="p">;</span>
+<span class="p">}</span></code></pre></figure>
+
+<h3 id="decompiling-native-library"><strong>Decompiling Native Library</strong></h3>
+
+<p>As you can see, Ghidra shows the entry point <code class="language-plaintext highlighter-rouge">JNI_OnLoad</code> and the other checking functions let’s check it.</p>
+
+<p><a href="/assets/documentation/Android-RASP/rn-1-a7af32745fb4d072e09fe3dd6f7df1f7acb2df087d75293f491da8737dadf1db.png">
+  <img src="/assets/documentation/Android-RASP/rn-1-a7af32745fb4d072e09fe3dd6f7df1f7acb2df087d75293f491da8737dadf1db.png" alt="RASP" class="zooming" data-rjs="/assets/documentation/Android-RASP/rn-1-a7af32745fb4d072e09fe3dd6f7df1f7acb2df087d75293f491da8737dadf1db.png" data-zooming-width="327" data-zooming-height="351" />
+</a></p>
+
+<p>The easy way to bypass those checks is to look at the conditions in the if statement and patch the corresponding instructions one by one by replacing <code class="language-plaintext highlighter-rouge">JNZ</code> with <code class="language-plaintext highlighter-rouge">JZ</code>.</p>
+
+<p><a href="/assets/documentation/Android-RASP/rn-2-92ddb07a566ff7fc7e20a180b8c8f60a0a43ef106660657b2808e6cbe4ffabeb.png">
+  <img src="/assets/documentation/Android-RASP/rn-2-92ddb07a566ff7fc7e20a180b8c8f60a0a43ef106660657b2808e6cbe4ffabeb.png" alt="RASP" class="zooming" data-rjs="/assets/documentation/Android-RASP/rn-2-92ddb07a566ff7fc7e20a180b8c8f60a0a43ef106660657b2808e6cbe4ffabeb.png" data-zooming-width="1507" data-zooming-height="774" />
+</a></p>
+
+<p><a href="/assets/documentation/Android-RASP/rn-3-8fa108b1f97be7fb196023cca7fcdc7bbca2a6adbd1137082fb65ed7cacf7e11.png">
+  <img src="/assets/documentation/Android-RASP/rn-3-8fa108b1f97be7fb196023cca7fcdc7bbca2a6adbd1137082fb65ed7cacf7e11.png" alt="RASP" class="zooming" data-rjs="/assets/documentation/Android-RASP/rn-3-8fa108b1f97be7fb196023cca7fcdc7bbca2a6adbd1137082fb65ed7cacf7e11.png" data-zooming-width="667" data-zooming-height="360" />
+</a></p>
+
+<p>However, sometimes the decompiled code won’t be that easy to find the checks right away. In that case, you should look for the checking functions one by one and try to patch them.</p>
+
+<blockquote>
+  <p>Debug release with <strong>x86_64</strong> mode has been used in this example so that the process can be easy to grasp. In release version, the vendor may apply complex optimizations and obfuscation techniques on the library to hinder bad guys from reversing it as I said.</p>
+</blockquote>
+
+<p><a id="hook"></a></p>
+
+<h2 id="hooking"><strong>Hooking</strong></h2>
+
+<p>Technically speaking, hooking refers to the process of manipulate the application’s behavior or its methods at runtime. It’s like throwing a hook with the method’s name in memory and reimplement it with your own logic you want to execute. Most common tools such as Frida can be used to perform hooking in Android by writing <strong>JavaScript</strong> instead of <strong>Java</strong>. Hooking can be also benifacial when comes to monitor specific functions when it executes. In this part, we’ll implement some hooking scripts to intercept RASP methods and rewrite them.</p>
+
+<h3 id="hooking-android-functions"><strong>Hooking Android Functions</strong></h3>
+
+<p>Here’s an example of hooking <code class="language-plaintext highlighter-rouge">checkSuperUserBinary</code> function and make it always return <code class="language-plaintext highlighter-rouge">false</code>. It starts with getting the class name, then call any method inside that class.</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">Java</span><span class="p">.</span><span class="nx">perform</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Find the class by its name</span>
+    <span class="kd">var</span> <span class="nx">MainActivity</span> <span class="o">=</span> <span class="nx">Java</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="dl">'</span><span class="s1">com.example.app.MainActivity</span><span class="dl">'</span><span class="p">);</span>
+    
+    <span class="c1">// Hook the 'login' method in MainActivity</span>
+    <span class="nx">MainActivity</span><span class="p">.</span><span class="nx">checkSuperUserBinary</span><span class="p">.</span><span class="nx">implementation</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Inside root check!</span><span class="dl">'</span><span class="p">);</span>
+        <span class="c1">// Call the original login method</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">};</span>
+<span class="p">});</span></code></pre></figure>
+
+<p>By the same logic you can intercept <code class="language-plaintext highlighter-rouge">checkForEmulatorProps</code> or any other function you want to rewrite or overwrite its return value.</p>
+
+<blockquote>
+  <p>Only static methods can be reimplemented using frida with its public calss. If the function is non-static, this script might not work and you have to find another workaround to intercept it though.</p>
+</blockquote>
+
+<h3 id="hooking-native-functions"><strong>Hooking Native Functions</strong></h3>
+
+<p>Native hooking isn’t that straightforward like in Android since the library is loaded into the application’s memory and in order to access any functions exist inside. You have to find its virtual address first, then subtract it from the virtual adderes of the library.</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">const</span> <span class="nx">libImageBase</span> <span class="o">=</span> <span class="mh">0x00100000</span><span class="p">;</span> <span class="c1">//const moduleName = "insert module name here";</span>
+<span class="kd">const</span> <span class="nx">moduleBaseAddress</span> <span class="o">=</span> <span class="nx">Module</span><span class="p">.</span><span class="nx">findBaseAddress</span><span class="p">(</span><span class="nx">moduleName</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">functionRealAddress</span> <span class="o">=</span> <span class="nx">moduleBaseAddress</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="mh">0x00123cf0</span> <span class="o">-</span> <span class="nx">libImageBase</span><span class="p">);</span>
+<span class="nx">Interceptor</span><span class="p">.</span><span class="nx">attach</span><span class="p">(</span><span class="nx">functionRealAddress</span><span class="p">,</span> <span class="p">{</span>
+    <span class="na">onLeave</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">});</span></code></pre></figure>
+
+<p>Base lib address can be found in (Memory Map -&gt; Set Image Base) as seen in the image below <code class="language-plaintext highlighter-rouge">0x00100000</code>. The <code class="language-plaintext highlighter-rouge">findBaseAddress</code> gets the loaded library address in memory.</p>
+
+<p><a href="/assets/documentation/Android-RASP/h-1-b5da72cc26dba3535af7a1b6ae62086fee870c001fb86049e464e6739e3def1e.png">
+  <img src="/assets/documentation/Android-RASP/h-1-b5da72cc26dba3535af7a1b6ae62086fee870c001fb86049e464e6739e3def1e.png" alt="RASP" class="zooming" data-rjs="/assets/documentation/Android-RASP/h-1-b5da72cc26dba3535af7a1b6ae62086fee870c001fb86049e464e6739e3def1e.png" data-zooming-width="1377" data-zooming-height="637" />
+</a></p>
+
+<p>Function address can also be found while clicking on the method name and in the instruction part you can find the beginning of the function <code class="language-plaintext highlighter-rouge">0x00123cf0</code>.</p>
+
+<p><a href="/assets/documentation/Android-RASP/h-2-bc81facaeec9586a4e4956a04c00de9c0ea73544b967bd4609db8e0665c79c36.png">
+  <img src="/assets/documentation/Android-RASP/h-2-bc81facaeec9586a4e4956a04c00de9c0ea73544b967bd4609db8e0665c79c36.png" alt="RASP" class="zooming" data-rjs="/assets/documentation/Android-RASP/h-2-bc81facaeec9586a4e4956a04c00de9c0ea73544b967bd4609db8e0665c79c36.png" data-zooming-width="1047" data-zooming-height="646" />
+</a></p>
+
+<p>By subtracting the function address from the image base adderes, it gives how far the function it would be in memory from the physical library start address. That would be <code class="language-plaintext highlighter-rouge">0x23cf0</code> for the <code class="language-plaintext highlighter-rouge">rootCheck</code> method. You can do the same process for the remaining check methods.</p>
+
+<p><a id="conc"></a></p>
+
+<h2 id="conclusion"><strong>Conclusion</strong></h2>
+
+<p>In this blog post, we’ve discussed various methods of how Android RASPs can be implemented and how you, as a pentester, can bypass them. Of course, there are some proven solutions that are not susceptible to all the bypasses explained in this blog. However, there’s usually a flaw somewhere in the code waiting to be exploited. In the end, RASPs aren’t a bulletproof shield for Android apps. By understanding how they work and are implemented, you can easily spot the flaw.</p>
+
+<p>Happy Hacking! 🧑‍💻</p>
+
+          </div>
+          <div class="article-share">
+            
+            
+            <a href="https://twitter.com/home?status=Deep+diving+into+the+native+world+of+Android+RASP%20-%20https://s4yed.github.io/posts/deep-diving-into-the-android-rasp" title="Share on Twitter" rel="noreferrer noopener" target="_blank">
+              <svg viewBox="0 0 512 512"><path d="M492 109.5c-17.4 7.7-36 12.9-55.6 15.3 20-12 35.4-31 42.6-53.6 -18.7 11.1-39.4 19.2-61.5 23.5C399.8 75.8 374.6 64 346.8 64c-53.5 0-96.8 43.4-96.8 96.9 0 7.6 0.8 15 2.5 22.1 -80.5-4-151.9-42.6-199.6-101.3 -8.3 14.3-13.1 31-13.1 48.7 0 33.6 17.2 63.3 43.2 80.7C67 210.7 52 206.3 39 199c0 0.4 0 0.8 0 1.2 0 47 33.4 86.1 77.7 95 -8.1 2.2-16.7 3.4-25.5 3.4 -6.2 0-12.3-0.6-18.2-1.8 12.3 38.5 48.1 66.5 90.5 67.3 -33.1 26-74.9 41.5-120.3 41.5 -7.8 0-15.5-0.5-23.1-1.4C62.8 432 113.7 448 168.3 448 346.6 448 444 300.3 444 172.2c0-4.2-0.1-8.4-0.3-12.5C462.6 146 479 129 492 109.5z"/></svg>
+            </a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://s4yed.github.io/posts/deep-diving-into-the-android-rasp" title="Share on Facebook" rel="noreferrer noopener" target="_blank">
+              <svg viewBox="0 0 512 512"><path d="M288 192v-38.1c0-17.2 3.8-25.9 30.5-25.9H352V64h-55.9c-68.5 0-91.1 31.4-91.1 85.3V192h-45v64h45v192h83V256h56.4l7.6-64H288z"/></svg>
+            </a>
+          </div>
+
+          
+            <div id="disqus_thread" class="article-comments"></div>
+            <script src="https://my-blog-0vgcdsd8x2.disqus.com/embed.js" async defer></script>
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+          
+        </article>
+        <footer class="footer scrollappear">
+    <p style="text-align: center">
+      My little tech blog &#169; 2024
+      <!-- <a href="/about" title="About me">Ahmed Sayed</a> -->
+    </p>
+</footer>
+
+      </div>
+    </div>
+  </main>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-157807027-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-157807027-1');
+  </script>
+
+
+<script src="/assets/vendor-3ee2c63bbac916f96cd7f90e83ab767f058ead1301444c9966f5156911c8be7f.js" type="text/javascript"></script>
+
+
+  <script src="/assets/webfonts-96493456d319d1bf419afdf8701552d4d486fee6afd304897d4fd81eb4e0cc0b.js" type="text/javascript"></script>
+
+
+
+  <script src="/assets/scrollappear-e2da8ea567e418637e31266cc5302126eaa79f62a2273739086358b589a89ee6.js" type="text/javascript"></script>
+
+
+<script src="/assets/application-cfde13ac81ddaf4351b2e739603e2baf688d0fcc9aba613fe62bbb1c7b037fb9.js" type="text/javascript"></script>
+
+
+  <script src="/assets/themetoggle-df0d3d73164dc26dffbd630182ae4d0dfa7bee6b694a2b5d565d73595b582bbf.js" type="text/javascript"></script>
+
+
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+</body>
+</html>
