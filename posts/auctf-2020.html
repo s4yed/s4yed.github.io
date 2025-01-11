@@ -1,257 +1,340 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Ahmed | AUCTF 2020</title>
-  <meta name="description" content="This is some of my writeups for AUCTF 2020.">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Ahmed | AUCTF 2020</title>
+    <meta
+      name="description"
+      content="This is some of my writeups for AUCTF 2020."
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <meta property="og:title" content="AUCTF 2020">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://s4yed.github.io/posts/auctf-2020">
-  <meta property="og:description" content="This is some of my writeups for AUCTF 2020.">
-  <meta property="og:site_name" content="Ahmed">
+    <meta property="og:title" content="AUCTF 2020" />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://s4yed.github.io/posts/auctf-2020"
+    />
+    <meta
+      property="og:description"
+      content="This is some of my writeups for AUCTF 2020."
+    />
+    <meta property="og:site_name" content="Ahmed" />
 
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:url" content="https://s4yed.github.io/posts/auctf-2020">
-  <meta name="twitter:title" content="AUCTF 2020">
-  <meta name="twitter:description" content="This is some of my writeups for AUCTF 2020.">
+    <meta name="twitter:card" content="summary" />
+    <meta
+      name="twitter:url"
+      content="https://s4yed.github.io/posts/auctf-2020"
+    />
+    <meta name="twitter:title" content="AUCTF 2020" />
+    <meta
+      name="twitter:description"
+      content="This is some of my writeups for AUCTF 2020."
+    />
 
-  
-    
-      <meta property="og:image" content="https://s4yed.github.io/assets/documentation/AUCTF/auctf-logo-f4c506564857c6cbf71512884d2a45707c33c51be525e911b53b542bc2ade6e2.png">
-      <meta name="twitter:image" content="https://s4yed.github.io/assets/documentation/AUCTF/auctf-logo-f4c506564857c6cbf71512884d2a45707c33c51be525e911b53b542bc2ade6e2.png">
-    
-  
+    <meta
+      property="og:image"
+      content="https://s4yed.github.io/assets/documentation/AUCTF/auctf-logo-f4c506564857c6cbf71512884d2a45707c33c51be525e911b53b542bc2ade6e2.png"
+    />
+    <meta
+      name="twitter:image"
+      content="https://s4yed.github.io/assets/documentation/AUCTF/auctf-logo-f4c506564857c6cbf71512884d2a45707c33c51be525e911b53b542bc2ade6e2.png"
+    />
 
-  <link href="https://s4yed.github.io/feed.xml" type="application/rss+xml" rel="alternate" title="Ahmed Last 10 blog posts" />
+    <link
+      href="https://s4yed.github.io/feed.xml"
+      type="application/rss+xml"
+      rel="alternate"
+      title="Ahmed Last 10 blog posts"
+    />
 
-  
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="/assets/favicon-color-0e896bd8673d9f83cea8d7b0a12fcc894681d58fc475ad499adfed94067b1e1f.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="/assets/apple-touch-icon-dark-d161409442b7e523089f24d08d0a55951549ece7504207c376d53b020713494d.png"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      title="light"
+      id="light"
+      href="/assets/light-6cd738cd7b7b90c61b77536637c74a4bf7590f3c3dae64c6f0f18241101b1bbc.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      title="dark"
+      id="dark"
+      href="/assets/dark-9202b1e554a7cec881b092a5e6a4e526dda875a01455598a403ecc5318a9cf95.css"
+      disabled="false"
+    />
 
-  
+    <!-- Load KaTeX -->
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.1.1/katex.min.css"
+    />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.1.1/katex.min.js"></script>
+  </head>
 
-    
-      <link rel="icon" type="image/x-icon" href="/assets/favicon-color-0e896bd8673d9f83cea8d7b0a12fcc894681d58fc475ad499adfed94067b1e1f.png">
-      <link rel="apple-touch-icon" href="/assets/apple-touch-icon-dark-d161409442b7e523089f24d08d0a55951549ece7504207c376d53b020713494d.png">
-      <link rel="stylesheet" type="text/css" title="light" id="light" href="/assets/light-3251e15be14b8b7730bb16144c5fffcd82a81d30c768dcf55e7b3aa7a976aa95.css">
-      <link rel="stylesheet" type="text/css" title="dark" id="dark" href="/assets/dark-19f120cdf124f282df64ca9bb9946b6b121543b87672ac3403ea7f3118531e45.css" disabled="false">
-    
+  <body>
+    <main>
+      <div class="grid grid-centered">
+        <div class="grid-cell">
+          <nav class="header-nav scrollappear">
+            <a href="/" class="header-logo" title="Ahmed">Ahmed</a>
+            <ul class="header-links">
+              <li>
+                <a href="/about" title="About me">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon-about">
+                    <use
+                      href="/assets/about-ab4928d09cef6e09136b8d40637999db4f9575f927c33156e7f3e37d450e5df1.svg#icon-about"
+                      xlink:href="/assets/about-ab4928d09cef6e09136b8d40637999db4f9575f927c33156e7f3e37d450e5df1.svg#icon-about"
+                    ></use>
+                  </svg>
+                </a>
+              </li>
 
-  
+              <li>
+                <a
+                  href="https://github.com/s4yed"
+                  rel="noreferrer noopener"
+                  target="_blank"
+                  title="GitHub"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon-github">
+                    <use
+                      href="/assets/github-706d546fe6b5a32deca92fb08bbe60e78ea4e8027e889107905eb61f1063bcec.svg#icon-github"
+                      xlink:href="/assets/github-706d546fe6b5a32deca92fb08bbe60e78ea4e8027e889107905eb61f1063bcec.svg#icon-github"
+                    ></use>
+                  </svg>
+                </a>
+              </li>
 
-  <!-- Load KaTeX -->
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.1.1/katex.min.css">
-<script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.1.1/katex.min.js"></script>
-</head>
+              <li>
+                <a
+                  href="https://www.linkedin.com/in/s4yed"
+                  rel="noreferrer noopener"
+                  target="_blank"
+                  title="LinkedIn"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon-linkedin">
+                    <use
+                      href="/assets/linkedin-3bd8eb5ea036958dc7b3ee3de6612dbfa9e0744f369f20f7895d6a2782bbaf43.svg#icon-linkedin"
+                      xlink:href="/assets/linkedin-3bd8eb5ea036958dc7b3ee3de6612dbfa9e0744f369f20f7895d6a2782bbaf43.svg#icon-linkedin"
+                    ></use>
+                  </svg>
+                </a>
+              </li>
 
-<body>
-  <main>
-    <div class="grid grid-centered">
-      <div class="grid-cell">
-        <nav class="header-nav scrollappear">
-  <a href="/" class="header-logo" title="Ahmed">Ahmed</a>
-  <ul class="header-links">
-    
-      <li>
-        <a href="/about" title="About me">
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon-about">
-  <use href="/assets/about-ab4928d09cef6e09136b8d40637999db4f9575f927c33156e7f3e37d450e5df1.svg#icon-about" xlink:href="/assets/about-ab4928d09cef6e09136b8d40637999db4f9575f927c33156e7f3e37d450e5df1.svg#icon-about"></use>
-</svg>
+              <li>
+                <a
+                  href="https://discord.gg/Y4mm1#7774"
+                  rel="noreferrer noopener"
+                  target="_blank"
+                  title="Discord Server"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon-discord">
+                    <use
+                      href="/assets/discord-31958f8a24fd49834876e398b1793cd068c7d12a1db745c6da2ecc8b1f7576f5.svg#icon-discord"
+                      xlink:href="/assets/discord-31958f8a24fd49834876e398b1793cd068c7d12a1db745c6da2ecc8b1f7576f5.svg#icon-discord"
+                    ></use>
+                  </svg>
+                </a>
+              </li>
 
-        </a>
-      </li>
-    
-    
-    
-    
-    
-      <li>
-        <a href="https://github.com/s4yed" rel="noreferrer noopener" target="_blank" title="GitHub">
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon-github">
-  <use href="/assets/github-706d546fe6b5a32deca92fb08bbe60e78ea4e8027e889107905eb61f1063bcec.svg#icon-github" xlink:href="/assets/github-706d546fe6b5a32deca92fb08bbe60e78ea4e8027e889107905eb61f1063bcec.svg#icon-github"></use>
-</svg>
+              <li>
+                <a
+                  href="/feed.xml"
+                  rel="noreferrer noopener"
+                  target="_blank"
+                  title="RSS"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon-rss">
+                    <use
+                      href="/assets/rss-cdc7a721b47671668abb0ba57f9f8db8022096e0051ff51b9e08e6cc049453a4.svg#icon-rss"
+                      xlink:href="/assets/rss-cdc7a721b47671668abb0ba57f9f8db8022096e0051ff51b9e08e6cc049453a4.svg#icon-rss"
+                    ></use>
+                  </svg>
+                </a>
+              </li>
 
-        </a>
-      </li>
-    
-    
-    
-    
-    
-    
-    
-      <li>
-        <a href="https://www.linkedin.com/in/s4yed" rel="noreferrer noopener" target="_blank" title="LinkedIn">
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon-linkedin">
-  <use href="/assets/linkedin-3bd8eb5ea036958dc7b3ee3de6612dbfa9e0744f369f20f7895d6a2782bbaf43.svg#icon-linkedin" xlink:href="/assets/linkedin-3bd8eb5ea036958dc7b3ee3de6612dbfa9e0744f369f20f7895d6a2782bbaf43.svg#icon-linkedin"></use>
-</svg>
+              <li>
+                <a onclick="toggle()" title="Toggle Theme">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon-theme">
+                    <use
+                      href="/assets/theme-610197c56844c5ba34608b2018c4cc3b79f8833e2efc7a99bcb5589f1d3cfd7b.svg#icon-theme"
+                      xlink:href="/assets/theme-610197c56844c5ba34608b2018c4cc3b79f8833e2efc7a99bcb5589f1d3cfd7b.svg#icon-theme"
+                    ></use>
+                  </svg>
+                </a>
+              </li>
+            </ul>
+          </nav>
 
-        </a>
-      </li>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-      <li>
-        <a href="https://discord.gg/Y4mm1#7774" rel="noreferrer noopener" target="_blank" title="Discord Server">
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon-discord">
-  <use href="/assets/discord-31958f8a24fd49834876e398b1793cd068c7d12a1db745c6da2ecc8b1f7576f5.svg#icon-discord" xlink:href="/assets/discord-31958f8a24fd49834876e398b1793cd068c7d12a1db745c6da2ecc8b1f7576f5.svg#icon-discord"></use>
-</svg>
+          <ul class="header-tags scrollappear">
+            <li><a href="/tag/AES">Aes</a></li>
 
-        </a>
-      </li>
-    
-    
-    
-    
-    
-      <li>
-        <a href="/feed.xml" rel="noreferrer noopener" target="_blank" title="RSS">
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon-rss">
-  <use href="/assets/rss-cdc7a721b47671668abb0ba57f9f8db8022096e0051ff51b9e08e6cc049453a4.svg#icon-rss" xlink:href="/assets/rss-cdc7a721b47671668abb0ba57f9f8db8022096e0051ff51b9e08e6cc049453a4.svg#icon-rss"></use>
-</svg>
+            <li><a href="/tag/ASC-Wargames">Asc-wargames</a></li>
 
-        </a>
-      </li>
-    
-    
-      <li>
-        <a onclick="toggle()" title="Toggle Theme">
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon-theme">
-  <use href="/assets/theme-610197c56844c5ba34608b2018c4cc3b79f8833e2efc7a99bcb5589f1d3cfd7b.svg#icon-theme" xlink:href="/assets/theme-610197c56844c5ba34608b2018c4cc3b79f8833e2efc7a99bcb5589f1d3cfd7b.svg#icon-theme"></use>
-</svg>
+            <li><a href="/tag/AUCTF">Auctf</a></li>
 
-        </a>
-      </li>
-    
-  </ul>
-</nav>
+            <li><a href="/tag/AnDetect">Andetect</a></li>
 
+            <li><a href="/tag/CTF">Ctf</a></li>
 
-  <ul class="header-tags scrollappear">
-    
-    
-      
-        <li><a href="/tag/AES">Aes</a></li>
-    
-      
-        <li><a href="/tag/ASC-Wargames">Asc-wargames</a></li>
-    
-      
-        <li><a href="/tag/AUCTF">Auctf</a></li>
-    
-      
-        <li><a href="/tag/AnDetect">Andetect</a></li>
-    
-      
-        <li><a href="/tag/CTF">Ctf</a></li>
-    
-      
-        <li><a href="/tag/ECC">Ecc</a></li>
-    
-      
-        <li><a href="/tag/RSA">Rsa</a></li>
-    
-      
-        <li><a href="/tag/WPICTF">Wpictf</a></li>
-    
-      
-        <li><a href="/tag/algorithms">Algorithms</a></li>
-    
-      
-        <li><a href="/tag/analysis">Analysis</a></li>
-    
-      
-        <li>...</li>
-        <li><a href="/tags">Show all</a></li>
-        
-  </ul>
+            <li><a href="/tag/ECC">Ecc</a></li>
 
+            <li><a href="/tag/RSA">Rsa</a></li>
 
-        <article class="article scrollappear">
-          <header class="article-header">
-            <h1>AUCTF 2020</h1>
-            <p>This is some of my writeups for AUCTF 2020.</p>
-            <div class="article-list-footer">
-  <span class="article-list-date">
-    April 6, 2020
-  </span>
-  <span class="article-list-divider">-</span>
-  <span class="article-list-minutes">
-    
-    
-      8 minute read
-    
-  </span>
-  <span class="article-list-divider">-</span>
-  <div class="article-list-tags">
-    
-      
-      <a href="/tag/security" title="See all posts with tag 'Security'">Security</a>
-    
-      
-      <a href="/tag/AUCTF" title="See all posts with tag 'AUCTF'">AUCTF</a>
-    
-      
-      <a href="/tag/CTF" title="See all posts with tag 'CTF'">CTF</a>
-    
-      
-      <a href="/tag/hashcat" title="See all posts with tag 'hashcat'">hashcat</a>
-    
-      
-      <a href="/tag/john" title="See all posts with tag 'john'">john</a>
-    
-      
-      <a href="/tag/cracking" title="See all posts with tag 'cracking'">cracking</a>
-    
-      
-      <a href="/tag/passwords" title="See all posts with tag 'passwords'">passwords</a>
-    
-      
-      <a href="/tag/infosec" title="See all posts with tag 'Infosec'">Infosec</a>
-    
-      
-      <a href="/tag/linux" title="See all posts with tag 'Linux'">Linux</a>
-    
-      
-      <a href="/tag/wireshark" title="See all posts with tag 'Wireshark'">Wireshark</a>
-    
-      
-      <a href="/tag/python" title="See all posts with tag 'Python'">Python</a>
-    
-      
-      <a href="/tag/shell" title="See all posts with tag 'Shell'">Shell</a>
-    
-      
-      <a href="/tag/hacking" title="See all posts with tag 'Hacking'">Hacking</a>
-    
-  </div>
-</div>
-          </header>
+            <li><a href="/tag/WPICTF">Wpictf</a></li>
 
-          <div class="article-content">
-            <p><a href="/assets/documentation/AUCTF/auctf-logo-f4c506564857c6cbf71512884d2a45707c33c51be525e911b53b542bc2ade6e2.png">
-  <img src="/assets/documentation/AUCTF/auctf-logo-f4c506564857c6cbf71512884d2a45707c33c51be525e911b53b542bc2ade6e2.png" alt="Angstrom" class="zooming" data-rjs="/assets/documentation/AUCTF/auctf-logo-f4c506564857c6cbf71512884d2a45707c33c51be525e911b53b542bc2ade6e2.png" data-zooming-width="750" data-zooming-height="450">
-</a></p>
+            <li><a href="/tag/algorithms">Algorithms</a></li>
 
-<p>I participated in AUCTF 2020 with my team <a href="https://ctftime.org/team/113157">P1rates</a> and I was able to solve some cool challenges with them. This is my writeup about some challenges I managed to solve during the competition.</p>
+            <li><a href="/tag/analysis">Analysis</a></li>
 
-<h2 id="forensics">Forensics</h2>
-<hr>
+            <li>...</li>
+            <li><a href="/tags">Show all</a></li>
+          </ul>
 
-<h3 id="1-block2">1. Block2</h3>
+          <article class="article scrollappear">
+            <header class="article-header">
+              <h1>AUCTF 2020</h1>
+              <p>This is some of my writeups for AUCTF 2020.</p>
+              <div class="article-list-footer">
+                <span class="article-list-date"> April 6, 2020 </span>
+                <span class="article-list-divider">-</span>
+                <span class="article-list-minutes"> 8 minute read </span>
+                <span class="article-list-divider">-</span>
+                <div class="article-list-tags">
+                  <a
+                    href="/tag/security"
+                    title="See all posts with tag 'Security'"
+                    >Security</a
+                  >
 
-<p>The challenge want to get the time when the player of <code class="language-plaintext highlighter-rouge">Mine Craft</code> rolled back and give us <a href="https://gofile.io/?c=y6Z6Gs"><code class="language-plaintext highlighter-rouge">co_block.sql</code></a> file with data inside it.
-I looked into the file and I saw <code class="language-plaintext highlighter-rouge">rolled_back</code> column if it is <code class="language-plaintext highlighter-rouge">1</code> it rolled back otherwise <code class="language-plaintext highlighter-rouge">0</code>. So, I wrote <code class="language-plaintext highlighter-rouge">python</code> script to get the flag.</p>
+                  <a href="/tag/AUCTF" title="See all posts with tag 'AUCTF'"
+                    >AUCTF</a
+                  >
 
-<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c1">#!/usr/bin/env python
+                  <a href="/tag/CTF" title="See all posts with tag 'CTF'"
+                    >CTF</a
+                  >
+
+                  <a
+                    href="/tag/hashcat"
+                    title="See all posts with tag 'hashcat'"
+                    >hashcat</a
+                  >
+
+                  <a href="/tag/john" title="See all posts with tag 'john'"
+                    >john</a
+                  >
+
+                  <a
+                    href="/tag/cracking"
+                    title="See all posts with tag 'cracking'"
+                    >cracking</a
+                  >
+
+                  <a
+                    href="/tag/passwords"
+                    title="See all posts with tag 'passwords'"
+                    >passwords</a
+                  >
+
+                  <a
+                    href="/tag/infosec"
+                    title="See all posts with tag 'Infosec'"
+                    >Infosec</a
+                  >
+
+                  <a href="/tag/linux" title="See all posts with tag 'Linux'"
+                    >Linux</a
+                  >
+
+                  <a
+                    href="/tag/wireshark"
+                    title="See all posts with tag 'Wireshark'"
+                    >Wireshark</a
+                  >
+
+                  <a href="/tag/python" title="See all posts with tag 'Python'"
+                    >Python</a
+                  >
+
+                  <a href="/tag/shell" title="See all posts with tag 'Shell'"
+                    >Shell</a
+                  >
+
+                  <a
+                    href="/tag/hacking"
+                    title="See all posts with tag 'Hacking'"
+                    >Hacking</a
+                  >
+                </div>
+              </div>
+            </header>
+
+            <div class="article-content">
+              <p>
+                <a
+                  href="/assets/documentation/AUCTF/auctf-logo-f4c506564857c6cbf71512884d2a45707c33c51be525e911b53b542bc2ade6e2.png"
+                >
+                  <img
+                    src="/assets/documentation/AUCTF/auctf-logo-f4c506564857c6cbf71512884d2a45707c33c51be525e911b53b542bc2ade6e2.png"
+                    alt="Angstrom"
+                    class="zooming"
+                    data-rjs="/assets/documentation/AUCTF/auctf-logo-f4c506564857c6cbf71512884d2a45707c33c51be525e911b53b542bc2ade6e2.png"
+                    data-zooming-width="750"
+                    data-zooming-height="450"
+                  />
+                </a>
+              </p>
+
+              <p>
+                I participated in AUCTF 2020 with my team
+                <a href="https://ctftime.org/team/113157">P1rates</a> and I was
+                able to solve some cool challenges with them. This is my writeup
+                about some challenges I managed to solve during the competition.
+              </p>
+
+              <h2 id="forensics">Forensics</h2>
+              <hr />
+
+              <h3 id="1-block2">1. Block2</h3>
+
+              <p>
+                The challenge want to get the time when the player of
+                <code class="language-plaintext highlighter-rouge"
+                  >Mine Craft</code
+                >
+                rolled back and give us
+                <a href="https://gofile.io/?c=y6Z6Gs"
+                  ><code class="language-plaintext highlighter-rouge"
+                    >co_block.sql</code
+                  ></a
+                >
+                file with data inside it. I looked into the file and I saw
+                <code class="language-plaintext highlighter-rouge"
+                  >rolled_back</code
+                >
+                column if it is
+                <code class="language-plaintext highlighter-rouge">1</code> it
+                rolled back otherwise
+                <code class="language-plaintext highlighter-rouge">0</code>. So,
+                I wrote
+                <code class="language-plaintext highlighter-rouge">python</code>
+                script to get the flag.
+              </p>
+
+              <figure class="highlight">
+                <pre><code class="language-python" data-lang="python"><span class="c1">#!/usr/bin/env python
 </span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'co_block.sql'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">.</span><span class="n">readlines</span><span class="p">():</span>
         <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="p">.</span><span class="n">strip</span><span class="p">().</span><span class="n">split</span><span class="p">(</span><span class="s">'</span><span class="se">\t</span><span class="s">'</span><span class="p">)</span>
@@ -261,31 +344,71 @@ I looked into the file and I saw <code class="language-plaintext highlighter-rou
                 <span class="k">print</span> <span class="s">'auctf{'</span> <span class="o">+</span> <span class="n">line</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s">'}'</span>
                 <span class="k">break</span>
         <span class="k">except</span><span class="p">:</span>
-            <span class="k">pass</span></code></pre></figure>
+            <span class="k">pass</span></code></pre>
+              </figure>
 
-<p>There is another solution to this challenge and that is:</p>
+              <p>There is another solution to this challenge and that is:</p>
 
-<ol>
-  <li>Start your <code class="language-plaintext highlighter-rouge">MySQL</code> server <code class="language-plaintext highlighter-rouge">service mysql start</code> and create a new database.</li>
-  <li>Import the given file into the database <code class="language-plaintext highlighter-rouge">mysql -u root -p auctf &lt; co_block.sql</code>.</li>
-  <li>After that you can select what you need from the database.</li>
-</ol>
+              <ol>
+                <li>
+                  Start your
+                  <code class="language-plaintext highlighter-rouge"
+                    >MySQL</code
+                  >
+                  server
+                  <code class="language-plaintext highlighter-rouge"
+                    >service mysql start</code
+                  >
+                  and create a new database.
+                </li>
+                <li>
+                  Import the given file into the database
+                  <code class="language-plaintext highlighter-rouge"
+                    >mysql -u root -p auctf &lt; co_block.sql</code
+                  >.
+                </li>
+                <li>
+                  After that you can select what you need from the database.
+                </li>
+              </ol>
 
-<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>mysql <span class="nt">-u</span> root <span class="nt">-p</span> auctf <span class="nt">-e</span> <span class="s2">"SELECT time FROM co_block WHERE rolled_back = 1;"</span>
+              <figure class="highlight">
+                <pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>mysql <span class="nt">-u</span> root <span class="nt">-p</span> auctf <span class="nt">-e</span> <span class="s2">"SELECT time FROM co_block WHERE rolled_back = 1;"</span>
 <span class="go">Enter password: 
 +------------+
 | time       |
 +------------+
 | 1581060905 |
-+------------+</span></code></pre></figure>
++------------+</span></code></pre>
+              </figure>
 
-<p>The Flag: <code class="language-plaintext highlighter-rouge">auctf{1581060905}</code></p>
+              <p>
+                The Flag:
+                <code class="language-plaintext highlighter-rouge"
+                  >auctf{1581060905}</code
+                >
+              </p>
 
-<h3 id="2-animal-crossing">2. Animal Crossing</h3>
+              <h3 id="2-animal-crossing">2. Animal Crossing</h3>
 
-<p>This challenge gave us a <a href="https://gofile.io/?c=wYVVwe"><code class="language-plaintext highlighter-rouge">pcapng</code></a> file with a lot of dns traffic after open it with <code class="language-plaintext highlighter-rouge">strings</code> I saw some weird values sended by <code class="language-plaintext highlighter-rouge">DNS</code> traffic.</p>
+              <p>
+                This challenge gave us a
+                <a href="https://gofile.io/?c=wYVVwe"
+                  ><code class="language-plaintext highlighter-rouge"
+                    >pcapng</code
+                  ></a
+                >
+                file with a lot of dns traffic after open it with
+                <code class="language-plaintext highlighter-rouge"
+                  >strings</code
+                >
+                I saw some weird values sended by
+                <code class="language-plaintext highlighter-rouge">DNS</code>
+                traffic.
+              </p>
 
-<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>strings animalcrossing.pcapng | less
+              <figure class="highlight">
+                <pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>strings animalcrossing.pcapng | less
 <span class="go">quickbrownfoxes
 9RGlkIHlvdSBldmVyIGhlYXIgdGhlIHRyYWdlZHkgb2YgRGFydGggUGxhZ
 quickbrownfoxes
@@ -298,240 +421,725 @@ hostmaster
 925pYy4gSGUgY291bGQgc2F2ZSBvdGhlcnMgZnJvbSBkZWF0aCwgYnV0IG
 quickbrownfoxes
 925pYy4gSGUgY291bGQgc2F2ZSBvdGhlcnMgZnJvbSBkZWF0aCwgYnV0IG
-quickbrownfoxes</span></code></pre></figure>
+quickbrownfoxes</span></code></pre>
+              </figure>
 
-<p>After I extrqacted the distinct values and put them into a file it looks like <code class="language-plaintext highlighter-rouge">base64</code> values and after decoding it contains the flag.</p>
+              <p>
+                After I extrqacted the distinct values and put them into a file
+                it looks like
+                <code class="language-plaintext highlighter-rouge">base64</code>
+                values and after decoding it contains the flag.
+              </p>
 
-<p>The Flag: <code class="language-plaintext highlighter-rouge">auctf{it_was_star_wars_all_along}</code></p>
+              <p>
+                The Flag:
+                <code class="language-plaintext highlighter-rouge"
+                  >auctf{it_was_star_wars_all_along}</code
+                >
+              </p>
 
-<h3 id="3-boom">3. Boom</h3>
-<p>The challnege give me <a href="https://gofile.io/?c=Kv8a7s"><code class="language-plaintext highlighter-rouge">boom.sql.gz</code></a> file I tried different approaches to solve this challenge and extract the hidden file but nothing worked but this one that I’m going to explain:</p>
+              <h3 id="3-boom">3. Boom</h3>
+              <p>
+                The challnege give me
+                <a href="https://gofile.io/?c=Kv8a7s"
+                  ><code class="language-plaintext highlighter-rouge"
+                    >boom.sql.gz</code
+                  ></a
+                >
+                file I tried different approaches to solve this challenge and
+                extract the hidden file but nothing worked but this one that I’m
+                going to explain:
+              </p>
 
-<ol>
-  <li>Run <code class="language-plaintext highlighter-rouge">MySQL</code> server to create a new database called <code class="language-plaintext highlighter-rouge">auctf</code>.</li>
-  <li>Import <code class="language-plaintext highlighter-rouge">boom.sql</code> file into the created database.</li>
-  <li>Export the hidden archive file into a new one using some <code class="language-plaintext highlighter-rouge">SQL</code> command.</li>
-</ol>
+              <ol>
+                <li>
+                  Run
+                  <code class="language-plaintext highlighter-rouge"
+                    >MySQL</code
+                  >
+                  server to create a new database called
+                  <code class="language-plaintext highlighter-rouge">auctf</code
+                  >.
+                </li>
+                <li>
+                  Import
+                  <code class="language-plaintext highlighter-rouge"
+                    >boom.sql</code
+                  >
+                  file into the created database.
+                </li>
+                <li>
+                  Export the hidden archive file into a new one using some
+                  <code class="language-plaintext highlighter-rouge">SQL</code>
+                  command.
+                </li>
+              </ol>
 
-<p>Solution:</p>
-<ol>
-  <li>Start <code class="language-plaintext highlighter-rouge">MySQL</code> server <code class="language-plaintext highlighter-rouge">service mysql start</code>.</li>
-  <li>Dump the given file into the database <code class="language-plaintext highlighter-rouge">mysql -u root -p auctf &lt; boom.sql</code>.</li>
-  <li>Export the archive with the following <code class="language-plaintext highlighter-rouge">mysql -u root -p auctf -e "SELECT image INTO DUMPFILE '/tmp/flag.7z' FROM images;"</code>
-</li>
-</ol>
+              <p>Solution:</p>
+              <ol>
+                <li>
+                  Start
+                  <code class="language-plaintext highlighter-rouge"
+                    >MySQL</code
+                  >
+                  server
+                  <code class="language-plaintext highlighter-rouge"
+                    >service mysql start</code
+                  >.
+                </li>
+                <li>
+                  Dump the given file into the database
+                  <code class="language-plaintext highlighter-rouge"
+                    >mysql -u root -p auctf &lt; boom.sql</code
+                  >.
+                </li>
+                <li>
+                  Export the archive with the following
+                  <code class="language-plaintext highlighter-rouge"
+                    >mysql -u root -p auctf -e "SELECT image INTO DUMPFILE
+                    '/tmp/flag.7z' FROM images;"</code
+                  >
+                </li>
+              </ol>
 
-<p>After extracting the archive I got a <code class="language-plaintext highlighter-rouge">PNG</code> image, I ran <code class="language-plaintext highlighter-rouge">stegsolve</code> to see any hidden data, and I got the flag at <code class="language-plaintext highlighter-rouge">XOR</code> channel.</p>
+              <p>
+                After extracting the archive I got a
+                <code class="language-plaintext highlighter-rouge">PNG</code>
+                image, I ran
+                <code class="language-plaintext highlighter-rouge"
+                  >stegsolve</code
+                >
+                to see any hidden data, and I got the flag at
+                <code class="language-plaintext highlighter-rouge">XOR</code>
+                channel.
+              </p>
 
-<p><a href="/assets/documentation/AUCTF/flag-stegsolve-00826954f5f621d6a1917574d143339a81c48e1f0b483a5a6f1e4f3521a8d495.png">
-  <img src="/assets/documentation/AUCTF/flag-stegsolve-00826954f5f621d6a1917574d143339a81c48e1f0b483a5a6f1e4f3521a8d495.png" alt="flag" class="zooming" data-rjs="/assets/documentation/AUCTF/flag-stegsolve-00826954f5f621d6a1917574d143339a81c48e1f0b483a5a6f1e4f3521a8d495.png" data-zooming-width="1869" data-zooming-height="1052">
-</a></p>
+              <p>
+                <a
+                  href="/assets/documentation/AUCTF/flag-stegsolve-00826954f5f621d6a1917574d143339a81c48e1f0b483a5a6f1e4f3521a8d495.png"
+                >
+                  <img
+                    src="/assets/documentation/AUCTF/flag-stegsolve-00826954f5f621d6a1917574d143339a81c48e1f0b483a5a6f1e4f3521a8d495.png"
+                    alt="flag"
+                    class="zooming"
+                    data-rjs="/assets/documentation/AUCTF/flag-stegsolve-00826954f5f621d6a1917574d143339a81c48e1f0b483a5a6f1e4f3521a8d495.png"
+                    data-zooming-width="1869"
+                    data-zooming-height="1052"
+                  />
+                </a>
+              </p>
 
-<p>The Flag: <code class="language-plaintext highlighter-rouge">auctf{B00M_!!}</code></p>
+              <p>
+                The Flag:
+                <code class="language-plaintext highlighter-rouge"
+                  >auctf{B00M_!!}</code
+                >
+              </p>
 
-<h3 id="4-fahrenheit-451">4. Fahrenheit 451</h3>
+              <h3 id="4-fahrenheit-451">4. Fahrenheit 451</h3>
 
-<p>This challenge also gave us <a href="https://gofile.io/?c=rkwQDX"><code class="language-plaintext highlighter-rouge">pcapng</code></a> file I run strings on it but nothing usefull. I ran <code class="language-plaintext highlighter-rouge">binwalk</code> I saw <code class="language-plaintext highlighter-rouge">PDF</code> file at offset <code class="language-plaintext highlighter-rouge">0x25326</code> and tried to extract it it was corrupted.</p>
+              <p>
+                This challenge also gave us
+                <a href="https://gofile.io/?c=rkwQDX"
+                  ><code class="language-plaintext highlighter-rouge"
+                    >pcapng</code
+                  ></a
+                >
+                file I run strings on it but nothing usefull. I ran
+                <code class="language-plaintext highlighter-rouge"
+                  >binwalk</code
+                >
+                I saw
+                <code class="language-plaintext highlighter-rouge">PDF</code>
+                file at offset
+                <code class="language-plaintext highlighter-rouge"
+                  >0x25326</code
+                >
+                and tried to extract it it was corrupted.
+              </p>
 
-<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>binwalk f451.pcapng 
+              <figure class="highlight">
+                <pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>binwalk f451.pcapng 
 <span class="go">
 DECIMAL       HEXADECIMAL     DESCRIPTION
 --------------------------------------------------------------------------------
-152358        0x25326         PDF document, version: "1.5"</span></code></pre></figure>
+152358        0x25326         PDF document, version: "1.5"</span></code></pre>
+              </figure>
 
-<p>So, I decided to open <code class="language-plaintext highlighter-rouge">wireshark</code> to get the actual file, I saw some <code class="language-plaintext highlighter-rouge">SMB</code> traffic and it might be the file is transfered with this protocol. I exported the objects with <code class="language-plaintext highlighter-rouge">File -&gt; Export Objects -&gt; SMB</code> I got the <code class="language-plaintext highlighter-rouge">PDF</code>.</p>
+              <p>
+                So, I decided to open
+                <code class="language-plaintext highlighter-rouge"
+                  >wireshark</code
+                >
+                to get the actual file, I saw some
+                <code class="language-plaintext highlighter-rouge">SMB</code>
+                traffic and it might be the file is transfered with this
+                protocol. I exported the objects with
+                <code class="language-plaintext highlighter-rouge"
+                  >File -&gt; Export Objects -&gt; SMB</code
+                >
+                I got the
+                <code class="language-plaintext highlighter-rouge">PDF</code>.
+              </p>
 
-<p><a href="/assets/documentation/AUCTF/fah451-wireshark-098472e61e56b17934961e82cdc3665266e3f07571e2e55eea0dddddcce65a25.png">
-  <img src="/assets/documentation/AUCTF/fah451-wireshark-098472e61e56b17934961e82cdc3665266e3f07571e2e55eea0dddddcce65a25.png" alt="flag" class="zooming" data-rjs="/assets/documentation/AUCTF/fah451-wireshark-098472e61e56b17934961e82cdc3665266e3f07571e2e55eea0dddddcce65a25.png" data-zooming-width="1853" data-zooming-height="600">
-</a></p>
+              <p>
+                <a
+                  href="/assets/documentation/AUCTF/fah451-wireshark-098472e61e56b17934961e82cdc3665266e3f07571e2e55eea0dddddcce65a25.png"
+                >
+                  <img
+                    src="/assets/documentation/AUCTF/fah451-wireshark-098472e61e56b17934961e82cdc3665266e3f07571e2e55eea0dddddcce65a25.png"
+                    alt="flag"
+                    class="zooming"
+                    data-rjs="/assets/documentation/AUCTF/fah451-wireshark-098472e61e56b17934961e82cdc3665266e3f07571e2e55eea0dddddcce65a25.png"
+                    data-zooming-width="1853"
+                    data-zooming-height="600"
+                  />
+                </a>
+              </p>
 
-<p>I struglled a lot with this file to see how I can do with it and I assumed that maybe there is some hidden texts inside the <code class="language-plaintext highlighter-rouge">PDF</code> I opened it and press <code class="language-plaintext highlighter-rouge">CTR + A</code> to select all text and I saw some hidden weird value at page 7.</p>
+              <p>
+                I struglled a lot with this file to see how I can do with it and
+                I assumed that maybe there is some hidden texts inside the
+                <code class="language-plaintext highlighter-rouge">PDF</code> I
+                opened it and press
+                <code class="language-plaintext highlighter-rouge"
+                  >CTR + A</code
+                >
+                to select all text and I saw some hidden weird value at page 7.
+              </p>
 
-<p><a href="/assets/documentation/AUCTF/hidden-flag-95433ccce02f9ff0455601f039453bfba168904e4961de079938730166bc413d.png">
-  <img src="/assets/documentation/AUCTF/hidden-flag-95433ccce02f9ff0455601f039453bfba168904e4961de079938730166bc413d.png" alt="flag" class="zooming" data-rjs="/assets/documentation/AUCTF/hidden-flag-95433ccce02f9ff0455601f039453bfba168904e4961de079938730166bc413d.png" data-zooming-width="769" data-zooming-height="237">
-</a></p>
+              <p>
+                <a
+                  href="/assets/documentation/AUCTF/hidden-flag-95433ccce02f9ff0455601f039453bfba168904e4961de079938730166bc413d.png"
+                >
+                  <img
+                    src="/assets/documentation/AUCTF/hidden-flag-95433ccce02f9ff0455601f039453bfba168904e4961de079938730166bc413d.png"
+                    alt="flag"
+                    class="zooming"
+                    data-rjs="/assets/documentation/AUCTF/hidden-flag-95433ccce02f9ff0455601f039453bfba168904e4961de079938730166bc413d.png"
+                    data-zooming-width="769"
+                    data-zooming-height="237"
+                  />
+                </a>
+              </p>
 
-<p>It looks like garbage, but he given a word <code class="language-plaintext highlighter-rouge">Substitute</code> as a hint in the challenge description <code class="language-plaintext highlighter-rouge">2F4E7L3FC?0E9603@@&lt;DPP`PN</code> so I opened <code class="language-plaintext highlighter-rouge">ascii</code> table and observe the values with <code class="language-plaintext highlighter-rouge">auctf{</code>.
-He just subtracted the actual flag with <code class="language-plaintext highlighter-rouge">47</code>, so I wrote some lines of code to get the actual flag.</p>
+              <p>
+                It looks like garbage, but he given a word
+                <code class="language-plaintext highlighter-rouge"
+                  >Substitute</code
+                >
+                as a hint in the challenge description
+                <code class="language-plaintext highlighter-rouge"
+                  >2F4E7L3FC?0E9603@@&lt;DPP`PN</code
+                >
+                so I opened
+                <code class="language-plaintext highlighter-rouge">ascii</code>
+                table and observe the values with
+                <code class="language-plaintext highlighter-rouge">auctf{</code
+                >. He just subtracted the actual flag with
+                <code class="language-plaintext highlighter-rouge">47</code>, so
+                I wrote some lines of code to get the actual flag.
+              </p>
 
-<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c1">#!/usr/bin/env python
+              <figure class="highlight">
+                <pre><code class="language-python" data-lang="python"><span class="c1">#!/usr/bin/env python
 </span><span class="n">cipher</span> <span class="o">=</span> <span class="s">'2F4E7L3FC?0E9603@@&lt;DPP`PN'</span>
 <span class="n">flag</span> <span class="o">=</span> <span class="s">''</span>
 <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">cipher</span><span class="p">:</span>
-    <span class="n">flag</span> <span class="o">+=</span> <span class="nb">chr</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">+</span> <span class="mi">47</span><span class="p">)</span></code></pre></figure>
+    <span class="n">flag</span> <span class="o">+=</span> <span class="nb">chr</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">+</span> <span class="mi">47</span><span class="p">)</span></code></pre>
+              </figure>
 
-<p>It gave me part of the flag and the last <code class="language-plaintext highlighter-rouge">4</code> bytes are also garbage <code class="language-plaintext highlighter-rouge">auctf{burn_the_books\x7f\x7f\x8f\x7f}</code>. But after analysing the last four bytes he just added it with <code class="language-plaintext highlighter-rouge">47</code> <img class="emoji" title=":grinning:" alt=":grinning:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f600.png" height="20" width="20"></p>
+              <p>
+                It gave me part of the flag and the last
+                <code class="language-plaintext highlighter-rouge">4</code>
+                bytes are also garbage
+                <code class="language-plaintext highlighter-rouge"
+                  >auctf{burn_the_books\x7f\x7f\x8f\x7f}</code
+                >. But after analysing the last four bytes he just added it with
+                <code class="language-plaintext highlighter-rouge">47</code>
+                <img
+                  class="emoji"
+                  title=":grinning:"
+                  alt=":grinning:"
+                  src="https://github.githubassets.com/images/icons/emoji/unicode/1f600.png"
+                  height="20"
+                  width="20"
+                />
+              </p>
 
-<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">P -&gt;</span><span class="w"> </span><span class="o">!</span> and  <span class="sb">`</span> -&gt; 1</code></pre></figure>
+              <figure class="highlight">
+                <pre><code class="language-console" data-lang="console"><span class="gp">P -&gt;</span><span class="w"> </span><span class="o">!</span> and  <span class="sb">`</span> -&gt; 1</code></pre>
+              </figure>
 
-<p>The Flag: <code class="language-plaintext highlighter-rouge">auctf{burn_the_books!!1!}</code></p>
+              <p>
+                The Flag:
+                <code class="language-plaintext highlighter-rouge"
+                  >auctf{burn_the_books!!1!}</code
+                >
+              </p>
 
-<h3 id="5-oops">5. Oops</h3>
+              <h3 id="5-oops">5. Oops</h3>
 
-<p>This challenge was a little easy for me it gave us a virtual hard disk <a href="https://gofile.io/?c=ZV8Qg5"><code class="language-plaintext highlighter-rouge">debmini.vhdx</code></a>. I tried to mount it, but it is corrupted, so let’s run <code class="language-plaintext highlighter-rouge">binwalk</code> to see any files or hidden data and extract any thing inside that disk.</p>
+              <p>
+                This challenge was a little easy for me it gave us a virtual
+                hard disk
+                <a href="https://gofile.io/?c=ZV8Qg5"
+                  ><code class="language-plaintext highlighter-rouge"
+                    >debmini.vhdx</code
+                  ></a
+                >. I tried to mount it, but it is corrupted, so let’s run
+                <code class="language-plaintext highlighter-rouge"
+                  >binwalk</code
+                >
+                to see any files or hidden data and extract any thing inside
+                that disk.
+              </p>
 
-<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>binwalk debmini.vhdx <span class="nt">-e</span> <span class="nt">-D</span><span class="o">=</span><span class="s1">'.*'</span>
+              <figure class="highlight">
+                <pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>binwalk debmini.vhdx <span class="nt">-e</span> <span class="nt">-D</span><span class="o">=</span><span class="s1">'.*'</span>
 <span class="go">
 DECIMAL       HEXADECIMAL     DESCRIPTION
 --------------------------------------------------------------------------------
-4194304       0x400000        ISO 9660 Primary Volume,</span></code></pre></figure>
+4194304       0x400000        ISO 9660 Primary Volume,</span></code></pre>
+              </figure>
 
-<p>After extraction I got some system files inside <code class="language-plaintext highlighter-rouge">iso-root</code> folder I examine the folders but nothing useful, so I ran <code class="language-plaintext highlighter-rouge">strings * | grep -oE "auctf{.*}"</code> and grep for any flag format and I found it.</p>
+              <p>
+                After extraction I got some system files inside
+                <code class="language-plaintext highlighter-rouge"
+                  >iso-root</code
+                >
+                folder I examine the folders but nothing useful, so I ran
+                <code class="language-plaintext highlighter-rouge"
+                  >strings * | grep -oE "auctf{.*}"</code
+                >
+                and grep for any flag format and I found it.
+              </p>
 
-<p>The Flag: <code class="language-plaintext highlighter-rouge">auctf{pls_dont_delete_me}</code></p>
+              <p>
+                The Flag:
+                <code class="language-plaintext highlighter-rouge"
+                  >auctf{pls_dont_delete_me}</code
+                >
+              </p>
 
-<h2 id="password-cracking">Password Cracking</h2>
-<hr>
+              <h2 id="password-cracking">Password Cracking</h2>
+              <hr />
 
-<blockquote>
-  <p>Note: The process of cracking may take a long time to get the password depends on the <code class="language-plaintext highlighter-rouge">wordlist</code> you use and your machine hardware.</p>
-</blockquote>
+              <blockquote>
+                <p>
+                  Note: The process of cracking may take a long time to get the
+                  password depends on the
+                  <code class="language-plaintext highlighter-rouge"
+                    >wordlist</code
+                  >
+                  you use and your machine hardware.
+                </p>
+              </blockquote>
 
-<h3 id="1-big-mac">1. Big Mac</h3>
-<p>The challenge gave us the salt <code class="language-plaintext highlighter-rouge">thisisasecret</code> and the hash <code class="language-plaintext highlighter-rouge">5ee9fafd697e40593d66bef8427d40f8beca6921</code> and after analysing the hash it is <code class="language-plaintext highlighter-rouge">SHA1</code>, but the challenge called <code class="language-plaintext highlighter-rouge">Big MAC</code>. So, the goal here is to find the correct <code class="language-plaintext highlighter-rouge">MAC</code> type and put the hash with the salt in the correct format to use <code class="language-plaintext highlighter-rouge">hashcat</code>.</p>
+              <h3 id="1-big-mac">1. Big Mac</h3>
+              <p>
+                The challenge gave us the salt
+                <code class="language-plaintext highlighter-rouge"
+                  >thisisasecret</code
+                >
+                and the hash
+                <code class="language-plaintext highlighter-rouge"
+                  >5ee9fafd697e40593d66bef8427d40f8beca6921</code
+                >
+                and after analysing the hash it is
+                <code class="language-plaintext highlighter-rouge">SHA1</code>,
+                but the challenge called
+                <code class="language-plaintext highlighter-rouge">Big MAC</code
+                >. So, the goal here is to find the correct
+                <code class="language-plaintext highlighter-rouge">MAC</code>
+                type and put the hash with the salt in the correct format to use
+                <code class="language-plaintext highlighter-rouge">hashcat</code
+                >.
+              </p>
 
-<p>The hash type is <code class="language-plaintext highlighter-rouge">HMAC-SHA1</code> and the format might look like:</p>
+              <p>
+                The hash type is
+                <code class="language-plaintext highlighter-rouge"
+                  >HMAC-SHA1</code
+                >
+                and the format might look like:
+              </p>
 
-<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="go">5ee9fafd697e40593d66bef8427d40f8beca6921:thisisasecret</span></code></pre></figure>
+              <figure class="highlight">
+                <pre><code class="language-console" data-lang="console"><span class="go">5ee9fafd697e40593d66bef8427d40f8beca6921:thisisasecret</span></code></pre>
+              </figure>
 
-<p>Now, after I ran the <code class="language-plaintext highlighter-rouge">hashcat</code> it gave me the correct password:</p>
+              <p>
+                Now, after I ran the
+                <code class="language-plaintext highlighter-rouge"
+                  >hashcat</code
+                >
+                it gave me the correct password:
+              </p>
 
-<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>hashcat <span class="nt">-a</span> 0 <span class="nt">-m</span> 160 big_mac.txt /usr/share/wordlists/rockyou.txt  <span class="nt">--show</span>
-<span class="go">5ee9fafd697e40593d66bef8427d40f8beca6921:thisisasecret:scarface</span></code></pre></figure>
+              <figure class="highlight">
+                <pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>hashcat <span class="nt">-a</span> 0 <span class="nt">-m</span> 160 big_mac.txt /usr/share/wordlists/rockyou.txt  <span class="nt">--show</span>
+<span class="go">5ee9fafd697e40593d66bef8427d40f8beca6921:thisisasecret:scarface</span></code></pre>
+              </figure>
 
-<p>The Flag: <code class="language-plaintext highlighter-rouge">scarface</code></p>
+              <p>
+                The Flag:
+                <code class="language-plaintext highlighter-rouge"
+                  >scarface</code
+                >
+              </p>
 
-<h3 id="2-zippy">2. Zippy</h3>
+              <h3 id="2-zippy">2. Zippy</h3>
 
-<p>This challenge gave us <a href="https://gofile.io/?c=6pFD2a"><code class="language-plaintext highlighter-rouge">zippy.zip</code></a> file and it contains 6 other <code class="language-plaintext highlighter-rouge">zip</code> file that are protected by some passwords, so the goal is to extract the hashs for every one and crack it with our friend <code class="language-plaintext highlighter-rouge">john</code>.</p>
+              <p>
+                This challenge gave us
+                <a href="https://gofile.io/?c=6pFD2a"
+                  ><code class="language-plaintext highlighter-rouge"
+                    >zippy.zip</code
+                  ></a
+                >
+                file and it contains 6 other
+                <code class="language-plaintext highlighter-rouge">zip</code>
+                file that are protected by some passwords, so the goal is to
+                extract the hashs for every one and crack it with our friend
+                <code class="language-plaintext highlighter-rouge">john</code>.
+              </p>
 
-<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>zip2john zippy.zip <span class="o">&gt;</span> hash1
+              <figure class="highlight">
+                <pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>zip2john zippy.zip <span class="o">&gt;</span> hash1
 <span class="gp">root@kali:~#</span><span class="w"> </span>john <span class="nt">-w</span><span class="o">=</span>/usr/share/wordlists/rockyou.txt hash1
 <span class="gp">root@kali:~#</span><span class="w"> </span>john <span class="nt">--show</span> hash1
 <span class="go">zippy.zip/unzipme.zip:8297018229:unzipme.zip:zippy.zip:zippy.zip
-1 password hash cracked, 0 left</span></code></pre></figure>
+1 password hash cracked, 0 left</span></code></pre>
+              </figure>
 
-<p>After cracking the first pass I repeat the above process to extract the hashes and crack the other passwords:</p>
+              <p>
+                After cracking the first pass I repeat the above process to
+                extract the hashes and crack the other passwords:
+              </p>
 
-<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="go">8297018229
+              <figure class="highlight">
+                <pre><code class="language-console" data-lang="console"><span class="go">8297018229
 pugh1948
 cobra0
 madboy99
 racoon211
 imverygoooooooooooooooooooooooooooooooooooooooooooooooo
-LEFTEYE</span></code></pre></figure>
+LEFTEYE</span></code></pre>
+              </figure>
 
-<p>Now, we extract all files and got the <code class="language-plaintext highlighter-rouge">flag.txt</code> file.
-The Flag: <code class="language-plaintext highlighter-rouge">y0ud1d17#15789</code></p>
+              <p>
+                Now, we extract all files and got the
+                <code class="language-plaintext highlighter-rouge"
+                  >flag.txt</code
+                >
+                file. The Flag:
+                <code class="language-plaintext highlighter-rouge"
+                  >y0ud1d17#15789</code
+                >
+              </p>
 
-<h3 id="3-manager">3. Manager</h3>
+              <h3 id="3-manager">3. Manager</h3>
 
-<p>The challenge gave us keepass <a href="https://gofile.io/?c=WDmRI7"><code class="language-plaintext highlighter-rouge">manager.kdbx</code></a> file and told us the password is all digits, so the goal is to get the password hash, create a wordlist, crack it, and get the flag inside that file.
-I used my friend <code class="language-plaintext highlighter-rouge">john</code> to extract the hash and format it to using <code class="language-plaintext highlighter-rouge">hashcat</code>.</p>
+              <p>
+                The challenge gave us keepass
+                <a href="https://gofile.io/?c=WDmRI7"
+                  ><code class="language-plaintext highlighter-rouge"
+                    >manager.kdbx</code
+                  ></a
+                >
+                file and told us the password is all digits, so the goal is to
+                get the password hash, create a wordlist, crack it, and get the
+                flag inside that file. I used my friend
+                <code class="language-plaintext highlighter-rouge">john</code>
+                to extract the hash and format it to using
+                <code class="language-plaintext highlighter-rouge">hashcat</code
+                >.
+              </p>
 
-<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>keepass2john manager.kdbx | <span class="nb">cut</span> <span class="nt">-d</span> <span class="s2">":"</span> <span class="nt">-f2</span> <span class="o">&gt;</span> <span class="nb">hash</span>
+              <figure class="highlight">
+                <pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>keepass2john manager.kdbx | <span class="nb">cut</span> <span class="nt">-d</span> <span class="s2">":"</span> <span class="nt">-f2</span> <span class="o">&gt;</span> <span class="nb">hash</span>
 <span class="gp">root@kali:~#</span><span class="w"> </span>crunch 3 7 0123456789 <span class="o">&gt;</span> numbers.lst
 <span class="go">Crunch will now generate the following amount of data: 87654000 bytes
 83 MB
 0 GB
 0 TB
 0 PB
-Crunch will now generate the following number of lines: 11111000</span></code></pre></figure>
+Crunch will now generate the following number of lines: 11111000</span></code></pre>
+              </figure>
 
-<p>Now, I ran the following process on my actual host in order to make hashcat faster, take advantage of my hardware and utilize my <code class="language-plaintext highlighter-rouge">GPU</code> to crack the password. And within 3-5 minutes it cracked the password.</p>
+              <p>
+                Now, I ran the following process on my actual host in order to
+                make hashcat faster, take advantage of my hardware and utilize
+                my
+                <code class="language-plaintext highlighter-rouge">GPU</code> to
+                crack the password. And within 3-5 minutes it cracked the
+                password.
+              </p>
 
-<blockquote>
-  <p>Note: The following command causes screen to lag and you have to run it and let the machine finish its work.</p>
-</blockquote>
+              <blockquote>
+                <p>
+                  Note: The following command causes screen to lag and you have
+                  to run it and let the machine finish its work.
+                </p>
+              </blockquote>
 
-<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>hashcat <span class="nt">-a</span> 0 <span class="nt">-w</span> 3 <span class="nt">-m</span> 13400 <span class="nb">hash </span>numbers.lst <span class="nt">--show</span>
-<span class="gp">$</span>keepass<span class="nv">$*</span>2<span class="k">*</span>60000<span class="k">*</span>0<span class="k">*</span>f31bf71589af9d69d3a9d58b97755405de93aedfbefe244129bb5ac64ed8af41<span class="k">*</span>2f0e592de948bbc65eb9738af2daca231ae54c851ceb1e98f16a69e8f5f48336<span class="k">*</span>8a868c9aedf169c857a8734188bba8eb<span class="k">*</span>8f12fb161ef9e102ef805b84f5ee733c2a645b71099cbf8dab1ed750c58756ee<span class="k">*</span>34fe5cf5eb7991a826a71c3330f88ce9c5ed7cf0e041e4e50a24110d2a69cdd7:157865</code></pre></figure>
+              <figure class="highlight">
+                <pre><code class="language-console" data-lang="console"><span class="gp">root@kali:~#</span><span class="w"> </span>hashcat <span class="nt">-a</span> 0 <span class="nt">-w</span> 3 <span class="nt">-m</span> 13400 <span class="nb">hash </span>numbers.lst <span class="nt">--show</span>
+<span class="gp">$</span>keepass<span class="nv">$*</span>2<span class="k">*</span>60000<span class="k">*</span>0<span class="k">*</span>f31bf71589af9d69d3a9d58b97755405de93aedfbefe244129bb5ac64ed8af41<span class="k">*</span>2f0e592de948bbc65eb9738af2daca231ae54c851ceb1e98f16a69e8f5f48336<span class="k">*</span>8a868c9aedf169c857a8734188bba8eb<span class="k">*</span>8f12fb161ef9e102ef805b84f5ee733c2a645b71099cbf8dab1ed750c58756ee<span class="k">*</span>34fe5cf5eb7991a826a71c3330f88ce9c5ed7cf0e041e4e50a24110d2a69cdd7:157865</code></pre>
+              </figure>
 
-<p>After open the file and give it the password <code class="language-plaintext highlighter-rouge">157865</code> it contains.</p>
+              <p>
+                After open the file and give it the password
+                <code class="language-plaintext highlighter-rouge">157865</code>
+                it contains.
+              </p>
 
-<p>The Flag: <code class="language-plaintext highlighter-rouge">y0u4r34r34lh4ck3rn0w#!$1678</code></p>
+              <p>
+                The Flag:
+                <code class="language-plaintext highlighter-rouge"
+                  >y0u4r34r34lh4ck3rn0w#!$1678</code
+                >
+              </p>
 
-<h2 id="web">Web</h2>
-<hr>
+              <h2 id="web">Web</h2>
+              <hr />
 
-<h3 id="1-api-madness">1. API madness</h3>
-<p>This challenge was frustrating to my friends and I looked at it in a different way. I’ll explain my way of thinking in simple words because the challenge is no longer available.</p>
+              <h3 id="1-api-madness">1. API madness</h3>
+              <p>
+                This challenge was frustrating to my friends and I looked at it
+                in a different way. I’ll explain my way of thinking in simple
+                words because the challenge is no longer available.
+              </p>
 
-<p>Solution:</p>
-<ol>
-  <li>When I go to the <code class="language-plaintext highlighter-rouge">URL</code> I got some info about the site and gave me <code class="language-plaintext highlighter-rouge">/static/help</code> route to look.</li>
-  <li>After I look what it says there are some endpoints to make <code class="language-plaintext highlighter-rouge">POST</code> requests. <code class="language-plaintext highlighter-rouge">/api/login</code> to login with <code class="language-plaintext highlighter-rouge">username</code> and <code class="language-plaintext highlighter-rouge">password</code> , <code class="language-plaintext highlighter-rouge">/api/ftp/get_file</code> to get a <code class="language-plaintext highlighter-rouge">file</code> from the server, and <code class="language-plaintext highlighter-rouge">/api/ftp/dir</code> to get a directory.</li>
-  <li>I tried to make <code class="language-plaintext highlighter-rouge">POST</code> request using <code class="language-plaintext highlighter-rouge">Postman</code> to login with <code class="language-plaintext highlighter-rouge">username</code> and <code class="language-plaintext highlighter-rouge">password</code> it gave me <code class="language-plaintext highlighter-rouge">400</code> bad request, so I assumed it accepts data as <code class="language-plaintext highlighter-rouge">JSON</code> format <code class="language-plaintext highlighter-rouge">{"username":"username","password":"password"}</code>.</li>
-  <li>I send the request and It took about 2-3 minutes to finish, so I hold on and after returninig it gave me an error page.</li>
-  <li>I looked at the errors and I saw a stack trace error in the bottom of the page and the error happened because of some hidden endpoint <code class="language-plaintext highlighter-rouge">/api/login_check</code> to check for the token field in the request body.</li>
-  <li>Now, I assumed that endpoint is check for the correct <code class="language-plaintext highlighter-rouge">username</code> and <code class="language-plaintext highlighter-rouge">password</code> and if it’s correct it returns the token.</li>
-  <li>I tried the above credintials and it worked and gave me the token.</li>
-  <li>Now, I have the token and I know there is <code class="language-plaintext highlighter-rouge">/api/ftp/get_file</code> endpoint to get a file from the server, so I send the request with following body to get the flag file <code class="language-plaintext highlighter-rouge">{"file":"flag.txt","token": "bc842c31a9e54efe320d30d948be61291f3ceee4766e36ab25fa65243cd76e0e"}</code>.</li>
-  <li>It returned with the <code class="language-plaintext highlighter-rouge">base64</code> text <code class="language-plaintext highlighter-rouge">YXVjdGZ7MHdAc3BfNnJvSzNOX0B1dGh9Cg==</code> and after decode it gives me the flag.</li>
-</ol>
+              <p>Solution:</p>
+              <ol>
+                <li>
+                  When I go to the
+                  <code class="language-plaintext highlighter-rouge">URL</code>
+                  I got some info about the site and gave me
+                  <code class="language-plaintext highlighter-rouge"
+                    >/static/help</code
+                  >
+                  route to look.
+                </li>
+                <li>
+                  After I look what it says there are some endpoints to make
+                  <code class="language-plaintext highlighter-rouge">POST</code>
+                  requests.
+                  <code class="language-plaintext highlighter-rouge"
+                    >/api/login</code
+                  >
+                  to login with
+                  <code class="language-plaintext highlighter-rouge"
+                    >username</code
+                  >
+                  and
+                  <code class="language-plaintext highlighter-rouge"
+                    >password</code
+                  >
+                  ,
+                  <code class="language-plaintext highlighter-rouge"
+                    >/api/ftp/get_file</code
+                  >
+                  to get a
+                  <code class="language-plaintext highlighter-rouge">file</code>
+                  from the server, and
+                  <code class="language-plaintext highlighter-rouge"
+                    >/api/ftp/dir</code
+                  >
+                  to get a directory.
+                </li>
+                <li>
+                  I tried to make
+                  <code class="language-plaintext highlighter-rouge">POST</code>
+                  request using
+                  <code class="language-plaintext highlighter-rouge"
+                    >Postman</code
+                  >
+                  to login with
+                  <code class="language-plaintext highlighter-rouge"
+                    >username</code
+                  >
+                  and
+                  <code class="language-plaintext highlighter-rouge"
+                    >password</code
+                  >
+                  it gave me
+                  <code class="language-plaintext highlighter-rouge">400</code>
+                  bad request, so I assumed it accepts data as
+                  <code class="language-plaintext highlighter-rouge">JSON</code>
+                  format
+                  <code class="language-plaintext highlighter-rouge"
+                    >{"username":"username","password":"password"}</code
+                  >.
+                </li>
+                <li>
+                  I send the request and It took about 2-3 minutes to finish, so
+                  I hold on and after returninig it gave me an error page.
+                </li>
+                <li>
+                  I looked at the errors and I saw a stack trace error in the
+                  bottom of the page and the error happened because of some
+                  hidden endpoint
+                  <code class="language-plaintext highlighter-rouge"
+                    >/api/login_check</code
+                  >
+                  to check for the token field in the request body.
+                </li>
+                <li>
+                  Now, I assumed that endpoint is check for the correct
+                  <code class="language-plaintext highlighter-rouge"
+                    >username</code
+                  >
+                  and
+                  <code class="language-plaintext highlighter-rouge"
+                    >password</code
+                  >
+                  and if it’s correct it returns the token.
+                </li>
+                <li>
+                  I tried the above credintials and it worked and gave me the
+                  token.
+                </li>
+                <li>
+                  Now, I have the token and I know there is
+                  <code class="language-plaintext highlighter-rouge"
+                    >/api/ftp/get_file</code
+                  >
+                  endpoint to get a file from the server, so I send the request
+                  with following body to get the flag file
+                  <code class="language-plaintext highlighter-rouge"
+                    >{"file":"flag.txt","token":
+                    "bc842c31a9e54efe320d30d948be61291f3ceee4766e36ab25fa65243cd76e0e"}</code
+                  >.
+                </li>
+                <li>
+                  It returned with the
+                  <code class="language-plaintext highlighter-rouge"
+                    >base64</code
+                  >
+                  text
+                  <code class="language-plaintext highlighter-rouge"
+                    >YXVjdGZ7MHdAc3BfNnJvSzNOX0B1dGh9Cg==</code
+                  >
+                  and after decode it gives me the flag.
+                </li>
+              </ol>
 
-<p>Note: The <code class="language-plaintext highlighter-rouge">/console</code> page is just a distraction nothing to do with it. <img class="emoji" title=":grinning:" alt=":grinning:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f600.png" height="20" width="20"></p>
+              <p>
+                Note: The
+                <code class="language-plaintext highlighter-rouge"
+                  >/console</code
+                >
+                page is just a distraction nothing to do with it.
+                <img
+                  class="emoji"
+                  title=":grinning:"
+                  alt=":grinning:"
+                  src="https://github.githubassets.com/images/icons/emoji/unicode/1f600.png"
+                  height="20"
+                  width="20"
+                />
+              </p>
 
-<p>The Flag: <code class="language-plaintext highlighter-rouge">auctf{0w@sp_6roK3N_@uth}</code></p>
+              <p>
+                The Flag:
+                <code class="language-plaintext highlighter-rouge"
+                  >auctf{0w@sp_6roK3N_@uth}</code
+                >
+              </p>
 
-<blockquote>
-  <p>I’ll update the remaining challenges soon!</p>
-</blockquote>
+              <blockquote>
+                <p>I’ll update the remaining challenges soon!</p>
+              </blockquote>
+            </div>
+            <div class="article-share">
+              <a
+                href="https://twitter.com/home?status=AUCTF+2020%20-%20https://s4yed.github.io/posts/auctf-2020"
+                title="Share on Twitter"
+                rel="noreferrer noopener"
+                target="_blank"
+              >
+                <svg viewbox="0 0 512 512">
+                  <path
+                    d="M492 109.5c-17.4 7.7-36 12.9-55.6 15.3 20-12 35.4-31 42.6-53.6 -18.7 11.1-39.4 19.2-61.5 23.5C399.8 75.8 374.6 64 346.8 64c-53.5 0-96.8 43.4-96.8 96.9 0 7.6 0.8 15 2.5 22.1 -80.5-4-151.9-42.6-199.6-101.3 -8.3 14.3-13.1 31-13.1 48.7 0 33.6 17.2 63.3 43.2 80.7C67 210.7 52 206.3 39 199c0 0.4 0 0.8 0 1.2 0 47 33.4 86.1 77.7 95 -8.1 2.2-16.7 3.4-25.5 3.4 -6.2 0-12.3-0.6-18.2-1.8 12.3 38.5 48.1 66.5 90.5 67.3 -33.1 26-74.9 41.5-120.3 41.5 -7.8 0-15.5-0.5-23.1-1.4C62.8 432 113.7 448 168.3 448 346.6 448 444 300.3 444 172.2c0-4.2-0.1-8.4-0.3-12.5C462.6 146 479 129 492 109.5z"
+                  ></path>
+                </svg>
+              </a>
+              <a
+                href="https://www.facebook.com/sharer/sharer.php?u=https://s4yed.github.io/posts/auctf-2020"
+                title="Share on Facebook"
+                rel="noreferrer noopener"
+                target="_blank"
+              >
+                <svg viewbox="0 0 512 512">
+                  <path
+                    d="M288 192v-38.1c0-17.2 3.8-25.9 30.5-25.9H352V64h-55.9c-68.5 0-91.1 31.4-91.1 85.3V192h-45v64h45v192h83V256h56.4l7.6-64H288z"
+                  ></path>
+                </svg>
+              </a>
+            </div>
 
-          </div>
-          <div class="article-share">
-            
-            
-            <a href="https://twitter.com/home?status=AUCTF+2020%20-%20https://s4yed.github.io/posts/auctf-2020" title="Share on Twitter" rel="noreferrer noopener" target="_blank">
-              <svg viewbox="0 0 512 512"><path d="M492 109.5c-17.4 7.7-36 12.9-55.6 15.3 20-12 35.4-31 42.6-53.6 -18.7 11.1-39.4 19.2-61.5 23.5C399.8 75.8 374.6 64 346.8 64c-53.5 0-96.8 43.4-96.8 96.9 0 7.6 0.8 15 2.5 22.1 -80.5-4-151.9-42.6-199.6-101.3 -8.3 14.3-13.1 31-13.1 48.7 0 33.6 17.2 63.3 43.2 80.7C67 210.7 52 206.3 39 199c0 0.4 0 0.8 0 1.2 0 47 33.4 86.1 77.7 95 -8.1 2.2-16.7 3.4-25.5 3.4 -6.2 0-12.3-0.6-18.2-1.8 12.3 38.5 48.1 66.5 90.5 67.3 -33.1 26-74.9 41.5-120.3 41.5 -7.8 0-15.5-0.5-23.1-1.4C62.8 432 113.7 448 168.3 448 346.6 448 444 300.3 444 172.2c0-4.2-0.1-8.4-0.3-12.5C462.6 146 479 129 492 109.5z"></path></svg>
-            </a>
-            <a href="https://www.facebook.com/sharer/sharer.php?u=https://s4yed.github.io/posts/auctf-2020" title="Share on Facebook" rel="noreferrer noopener" target="_blank">
-              <svg viewbox="0 0 512 512"><path d="M288 192v-38.1c0-17.2 3.8-25.9 30.5-25.9H352V64h-55.9c-68.5 0-91.1 31.4-91.1 85.3V192h-45v64h45v192h83V256h56.4l7.6-64H288z"></path></svg>
-            </a>
-          </div>
-
-          
             <div id="disqus_thread" class="article-comments"></div>
-            <script src="https://my-blog-0vgcdsd8x2.disqus.com/embed.js" async defer></script>
+            <script
+              src="https://my-blog-0vgcdsd8x2.disqus.com/embed.js"
+              async
+              defer
+            ></script>
             <noscript>Please enable JavaScript to view the comments.</noscript>
-          
-        </article>
-        <footer class="footer scrollappear">
-    <p style="text-align: center">
-      My little tech blog © 2024
-      <!-- <a href="/about" title="About me">Ahmed Sayed</a> -->
-    </p>
-</footer>
-
+          </article>
+          <footer class="footer scrollappear">
+            <p style="text-align: center">
+              My little tech blog © 2024
+              <!-- <a href="/about" title="About me">Ahmed Sayed</a> -->
+            </p>
+          </footer>
+        </div>
       </div>
-    </div>
-  </main>
-  
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-157807027-1"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'UA-157807027-1');
-  </script>
+    </main>
 
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-157807027-1"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "UA-157807027-1");
+    </script>
 
-<script src="/assets/vendor-3ee2c63bbac916f96cd7f90e83ab767f058ead1301444c9966f5156911c8be7f.js" type="text/javascript"></script>
+    <script
+      src="/assets/vendor-3ee2c63bbac916f96cd7f90e83ab767f058ead1301444c9966f5156911c8be7f.js"
+      type="text/javascript"
+    ></script>
 
+    <script
+      src="/assets/webfonts-96493456d319d1bf419afdf8701552d4d486fee6afd304897d4fd81eb4e0cc0b.js"
+      type="text/javascript"
+    ></script>
 
-  <script src="/assets/webfonts-96493456d319d1bf419afdf8701552d4d486fee6afd304897d4fd81eb4e0cc0b.js" type="text/javascript"></script>
+    <script
+      src="/assets/scrollappear-e2da8ea567e418637e31266cc5302126eaa79f62a2273739086358b589a89ee6.js"
+      type="text/javascript"
+    ></script>
 
+    <script
+      src="/assets/application-cfde13ac81ddaf4351b2e739603e2baf688d0fcc9aba613fe62bbb1c7b037fb9.js"
+      type="text/javascript"
+    ></script>
 
+    <script
+      src="/assets/themetoggle-df0d3d73164dc26dffbd630182ae4d0dfa7bee6b694a2b5d565d73595b582bbf.js"
+      type="text/javascript"
+    ></script>
 
-  <script src="/assets/scrollappear-e2da8ea567e418637e31266cc5302126eaa79f62a2273739086358b589a89ee6.js" type="text/javascript"></script>
-
-
-<script src="/assets/application-cfde13ac81ddaf4351b2e739603e2baf688d0fcc9aba613fe62bbb1c7b037fb9.js" type="text/javascript"></script>
-
-
-  <script src="/assets/themetoggle-df0d3d73164dc26dffbd630182ae4d0dfa7bee6b694a2b5d565d73595b582bbf.js" type="text/javascript"></script>
-
-
-<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
-</body>
+    <script
+      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+      type="text/javascript"
+    ></script>
+  </body>
 </html>

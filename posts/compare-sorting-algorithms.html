@@ -1,252 +1,349 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Ahmed | Comparison Between Most Common Sorting Algorithms</title>
-  <meta name="description" content="This is my statistical analysis for most common sorting algorithms.">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Ahmed | Comparison Between Most Common Sorting Algorithms</title>
+    <meta
+      name="description"
+      content="This is my statistical analysis for most common sorting algorithms."
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <meta property="og:title" content="Comparison Between Most Common Sorting Algorithms">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://s4yed.github.io/posts/compare-sorting-algorithms">
-  <meta property="og:description" content="This is my statistical analysis for most common sorting algorithms.">
-  <meta property="og:site_name" content="Ahmed">
+    <meta
+      property="og:title"
+      content="Comparison Between Most Common Sorting Algorithms"
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://s4yed.github.io/posts/compare-sorting-algorithms"
+    />
+    <meta
+      property="og:description"
+      content="This is my statistical analysis for most common sorting algorithms."
+    />
+    <meta property="og:site_name" content="Ahmed" />
 
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:url" content="https://s4yed.github.io/posts/compare-sorting-algorithms">
-  <meta name="twitter:title" content="Comparison Between Most Common Sorting Algorithms">
-  <meta name="twitter:description" content="This is my statistical analysis for most common sorting algorithms.">
+    <meta name="twitter:card" content="summary" />
+    <meta
+      name="twitter:url"
+      content="https://s4yed.github.io/posts/compare-sorting-algorithms"
+    />
+    <meta
+      name="twitter:title"
+      content="Comparison Between Most Common Sorting Algorithms"
+    />
+    <meta
+      name="twitter:description"
+      content="This is my statistical analysis for most common sorting algorithms."
+    />
 
-  
-    <meta property="og:image" content="https://s4yed.github.io/assets/about1-4dfba7de50ddc737f9e4bba1b4f7f6dc13e1da7693e73b4357b420e3409f6d76.jpg">
-    <meta name="twitter:image" content="https://s4yed.github.io/assets/about1-4dfba7de50ddc737f9e4bba1b4f7f6dc13e1da7693e73b4357b420e3409f6d76.jpg">
-  
+    <meta
+      property="og:image"
+      content="https://s4yed.github.io/assets/about1-4dfba7de50ddc737f9e4bba1b4f7f6dc13e1da7693e73b4357b420e3409f6d76.jpg"
+    />
+    <meta
+      name="twitter:image"
+      content="https://s4yed.github.io/assets/about1-4dfba7de50ddc737f9e4bba1b4f7f6dc13e1da7693e73b4357b420e3409f6d76.jpg"
+    />
 
-  <link href="https://s4yed.github.io/feed.xml" type="application/rss+xml" rel="alternate" title="Ahmed Last 10 blog posts" />
+    <link
+      href="https://s4yed.github.io/feed.xml"
+      type="application/rss+xml"
+      rel="alternate"
+      title="Ahmed Last 10 blog posts"
+    />
 
-  
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="/assets/favicon-color-0e896bd8673d9f83cea8d7b0a12fcc894681d58fc475ad499adfed94067b1e1f.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="/assets/apple-touch-icon-dark-d161409442b7e523089f24d08d0a55951549ece7504207c376d53b020713494d.png"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      title="light"
+      id="light"
+      href="/assets/light-6cd738cd7b7b90c61b77536637c74a4bf7590f3c3dae64c6f0f18241101b1bbc.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      title="dark"
+      id="dark"
+      href="/assets/dark-9202b1e554a7cec881b092a5e6a4e526dda875a01455598a403ecc5318a9cf95.css"
+      disabled="false"
+    />
 
-  
+    <!-- Load KaTeX -->
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.1.1/katex.min.css"
+    />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.1.1/katex.min.js"></script>
+  </head>
 
-    
-      <link rel="icon" type="image/x-icon" href="/assets/favicon-color-0e896bd8673d9f83cea8d7b0a12fcc894681d58fc475ad499adfed94067b1e1f.png">
-      <link rel="apple-touch-icon" href="/assets/apple-touch-icon-dark-d161409442b7e523089f24d08d0a55951549ece7504207c376d53b020713494d.png">
-      <link rel="stylesheet" type="text/css" title="light" id="light" href="/assets/light-3251e15be14b8b7730bb16144c5fffcd82a81d30c768dcf55e7b3aa7a976aa95.css">
-      <link rel="stylesheet" type="text/css" title="dark" id="dark" href="/assets/dark-19f120cdf124f282df64ca9bb9946b6b121543b87672ac3403ea7f3118531e45.css" disabled="false">
-    
+  <body>
+    <main>
+      <div class="grid grid-centered">
+        <div class="grid-cell">
+          <nav class="header-nav scrollappear">
+            <a href="/" class="header-logo" title="Ahmed">Ahmed</a>
+            <ul class="header-links">
+              <li>
+                <a href="/about" title="About me">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon-about">
+                    <use
+                      href="/assets/about-ab4928d09cef6e09136b8d40637999db4f9575f927c33156e7f3e37d450e5df1.svg#icon-about"
+                      xlink:href="/assets/about-ab4928d09cef6e09136b8d40637999db4f9575f927c33156e7f3e37d450e5df1.svg#icon-about"
+                    ></use>
+                  </svg>
+                </a>
+              </li>
 
-  
+              <li>
+                <a
+                  href="https://github.com/s4yed"
+                  rel="noreferrer noopener"
+                  target="_blank"
+                  title="GitHub"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon-github">
+                    <use
+                      href="/assets/github-706d546fe6b5a32deca92fb08bbe60e78ea4e8027e889107905eb61f1063bcec.svg#icon-github"
+                      xlink:href="/assets/github-706d546fe6b5a32deca92fb08bbe60e78ea4e8027e889107905eb61f1063bcec.svg#icon-github"
+                    ></use>
+                  </svg>
+                </a>
+              </li>
 
-  <!-- Load KaTeX -->
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.1.1/katex.min.css">
-<script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.1.1/katex.min.js"></script>
-</head>
+              <li>
+                <a
+                  href="https://www.linkedin.com/in/s4yed"
+                  rel="noreferrer noopener"
+                  target="_blank"
+                  title="LinkedIn"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon-linkedin">
+                    <use
+                      href="/assets/linkedin-3bd8eb5ea036958dc7b3ee3de6612dbfa9e0744f369f20f7895d6a2782bbaf43.svg#icon-linkedin"
+                      xlink:href="/assets/linkedin-3bd8eb5ea036958dc7b3ee3de6612dbfa9e0744f369f20f7895d6a2782bbaf43.svg#icon-linkedin"
+                    ></use>
+                  </svg>
+                </a>
+              </li>
 
-<body>
-  <main>
-    <div class="grid grid-centered">
-      <div class="grid-cell">
-        <nav class="header-nav scrollappear">
-  <a href="/" class="header-logo" title="Ahmed">Ahmed</a>
-  <ul class="header-links">
-    
-      <li>
-        <a href="/about" title="About me">
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon-about">
-  <use href="/assets/about-ab4928d09cef6e09136b8d40637999db4f9575f927c33156e7f3e37d450e5df1.svg#icon-about" xlink:href="/assets/about-ab4928d09cef6e09136b8d40637999db4f9575f927c33156e7f3e37d450e5df1.svg#icon-about"></use>
-</svg>
+              <li>
+                <a
+                  href="https://discord.gg/Y4mm1#7774"
+                  rel="noreferrer noopener"
+                  target="_blank"
+                  title="Discord Server"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon-discord">
+                    <use
+                      href="/assets/discord-31958f8a24fd49834876e398b1793cd068c7d12a1db745c6da2ecc8b1f7576f5.svg#icon-discord"
+                      xlink:href="/assets/discord-31958f8a24fd49834876e398b1793cd068c7d12a1db745c6da2ecc8b1f7576f5.svg#icon-discord"
+                    ></use>
+                  </svg>
+                </a>
+              </li>
 
-        </a>
-      </li>
-    
-    
-    
-    
-    
-      <li>
-        <a href="https://github.com/s4yed" rel="noreferrer noopener" target="_blank" title="GitHub">
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon-github">
-  <use href="/assets/github-706d546fe6b5a32deca92fb08bbe60e78ea4e8027e889107905eb61f1063bcec.svg#icon-github" xlink:href="/assets/github-706d546fe6b5a32deca92fb08bbe60e78ea4e8027e889107905eb61f1063bcec.svg#icon-github"></use>
-</svg>
+              <li>
+                <a
+                  href="/feed.xml"
+                  rel="noreferrer noopener"
+                  target="_blank"
+                  title="RSS"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon-rss">
+                    <use
+                      href="/assets/rss-cdc7a721b47671668abb0ba57f9f8db8022096e0051ff51b9e08e6cc049453a4.svg#icon-rss"
+                      xlink:href="/assets/rss-cdc7a721b47671668abb0ba57f9f8db8022096e0051ff51b9e08e6cc049453a4.svg#icon-rss"
+                    ></use>
+                  </svg>
+                </a>
+              </li>
 
-        </a>
-      </li>
-    
-    
-    
-    
-    
-    
-    
-      <li>
-        <a href="https://www.linkedin.com/in/s4yed" rel="noreferrer noopener" target="_blank" title="LinkedIn">
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon-linkedin">
-  <use href="/assets/linkedin-3bd8eb5ea036958dc7b3ee3de6612dbfa9e0744f369f20f7895d6a2782bbaf43.svg#icon-linkedin" xlink:href="/assets/linkedin-3bd8eb5ea036958dc7b3ee3de6612dbfa9e0744f369f20f7895d6a2782bbaf43.svg#icon-linkedin"></use>
-</svg>
+              <li>
+                <a onclick="toggle()" title="Toggle Theme">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon-theme">
+                    <use
+                      href="/assets/theme-610197c56844c5ba34608b2018c4cc3b79f8833e2efc7a99bcb5589f1d3cfd7b.svg#icon-theme"
+                      xlink:href="/assets/theme-610197c56844c5ba34608b2018c4cc3b79f8833e2efc7a99bcb5589f1d3cfd7b.svg#icon-theme"
+                    ></use>
+                  </svg>
+                </a>
+              </li>
+            </ul>
+          </nav>
 
-        </a>
-      </li>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-      <li>
-        <a href="https://discord.gg/Y4mm1#7774" rel="noreferrer noopener" target="_blank" title="Discord Server">
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon-discord">
-  <use href="/assets/discord-31958f8a24fd49834876e398b1793cd068c7d12a1db745c6da2ecc8b1f7576f5.svg#icon-discord" xlink:href="/assets/discord-31958f8a24fd49834876e398b1793cd068c7d12a1db745c6da2ecc8b1f7576f5.svg#icon-discord"></use>
-</svg>
+          <ul class="header-tags scrollappear">
+            <li><a href="/tag/AES">Aes</a></li>
 
-        </a>
-      </li>
-    
-    
-    
-    
-    
-      <li>
-        <a href="/feed.xml" rel="noreferrer noopener" target="_blank" title="RSS">
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon-rss">
-  <use href="/assets/rss-cdc7a721b47671668abb0ba57f9f8db8022096e0051ff51b9e08e6cc049453a4.svg#icon-rss" xlink:href="/assets/rss-cdc7a721b47671668abb0ba57f9f8db8022096e0051ff51b9e08e6cc049453a4.svg#icon-rss"></use>
-</svg>
+            <li><a href="/tag/ASC-Wargames">Asc-wargames</a></li>
 
-        </a>
-      </li>
-    
-    
-      <li>
-        <a onclick="toggle()" title="Toggle Theme">
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon-theme">
-  <use href="/assets/theme-610197c56844c5ba34608b2018c4cc3b79f8833e2efc7a99bcb5589f1d3cfd7b.svg#icon-theme" xlink:href="/assets/theme-610197c56844c5ba34608b2018c4cc3b79f8833e2efc7a99bcb5589f1d3cfd7b.svg#icon-theme"></use>
-</svg>
+            <li><a href="/tag/AUCTF">Auctf</a></li>
 
-        </a>
-      </li>
-    
-  </ul>
-</nav>
+            <li><a href="/tag/AnDetect">Andetect</a></li>
 
+            <li><a href="/tag/CTF">Ctf</a></li>
 
-  <ul class="header-tags scrollappear">
-    
-    
-      
-        <li><a href="/tag/AES">Aes</a></li>
-    
-      
-        <li><a href="/tag/ASC-Wargames">Asc-wargames</a></li>
-    
-      
-        <li><a href="/tag/AUCTF">Auctf</a></li>
-    
-      
-        <li><a href="/tag/AnDetect">Andetect</a></li>
-    
-      
-        <li><a href="/tag/CTF">Ctf</a></li>
-    
-      
-        <li><a href="/tag/ECC">Ecc</a></li>
-    
-      
-        <li><a href="/tag/RSA">Rsa</a></li>
-    
-      
-        <li><a href="/tag/WPICTF">Wpictf</a></li>
-    
-      
-        <li><a href="/tag/algorithms">Algorithms</a></li>
-    
-      
-        <li><a href="/tag/analysis">Analysis</a></li>
-    
-      
-        <li>...</li>
-        <li><a href="/tags">Show all</a></li>
-        
-  </ul>
+            <li><a href="/tag/ECC">Ecc</a></li>
 
+            <li><a href="/tag/RSA">Rsa</a></li>
 
-        <article class="article scrollappear">
-          <header class="article-header">
-            <h1>Comparison Between Most Common Sorting Algorithms</h1>
-            <p>This is my statistical analysis for most common sorting algorithms.</p>
-            <div class="article-list-footer">
-  <span class="article-list-date">
-    July 31, 2019
-  </span>
-  <span class="article-list-divider">-</span>
-  <span class="article-list-minutes">
-    
-    
-      7 minute read
-    
-  </span>
-  <span class="article-list-divider">-</span>
-  <div class="article-list-tags">
-    
-      
-      <a href="/tag/data" title="See all posts with tag 'Data'">Data</a>
-    
-      
-      <a href="/tag/analysis" title="See all posts with tag 'Analysis'">Analysis</a>
-    
-      
-      <a href="/tag/algorithms" title="See all posts with tag 'Algorithms'">Algorithms</a>
-    
-      
-      <a href="/tag/sorting" title="See all posts with tag 'Sorting'">Sorting</a>
-    
-  </div>
-</div>
-          </header>
+            <li><a href="/tag/WPICTF">Wpictf</a></li>
 
-          <div class="article-content">
-            <h1 id="intro">Intro</h1>
-<p>In the world of algorithms, the first thing we would talk about is sorting. How we can sort a set of elements in a certain order? How long it takes to sort a set with a huge number of elements in it? To answer these questions we should be aware of most common sorting algorithms and its running time. There are two types of sorting algorithms, the slower one that could take <code class="language-plaintext highlighter-rouge">Ɵ(n^2)</code> time, and the faster one could take <code class="language-plaintext highlighter-rouge">Ɵ(n log n)</code> time. In this report, we shall discuss those types of algorithms and compare between them with different list sizes and the running time for each of them.</p>
+            <li><a href="/tag/algorithms">Algorithms</a></li>
 
-<h1 id="data">Data</h1>
-<ol>
-  <li>
-    <p>Prepare the code to produce the following:</p>
+            <li><a href="/tag/analysis">Analysis</a></li>
 
-    <ul>
-      <li>Random Array.</li>
-      <li>Sorted Array.</li>
-      <li>Reversed Sorted Array.</li>
-      <li>Three Semi-Sorted Arrays (20% – 50% – 80%) of the elements out of its place.</li>
-      <li>Bubble Sort.</li>
-      <li>Insertion Sort.2</li>
-      <li>Selection Sort.</li>
-      <li>Merge Sort.</li>
-      <li>Modified Merge Sort this modified version implement the merge sort but on the linked list.</li>
-      <li>Quick Sort.</li>
-      <li>Randomized Quick Sort.</li>
-      <li>Built-in Sort.</li>
-    </ul>
+            <li>...</li>
+            <li><a href="/tags">Show all</a></li>
+          </ul>
 
-    <p>We used <code class="language-plaintext highlighter-rouge">C++</code> as our programming language to implement the functions that produced all of the above. Each of the sorting functions takes the size of the array and the array itself as an input. Then, we start with <code class="language-plaintext highlighter-rouge">N = 10000</code> and increment each time <code class="language-plaintext highlighter-rouge">10000</code> up to <code class="language-plaintext highlighter-rouge">N = 200000</code>. Now we have 20 arrays with different sizes.</p>
-  </li>
-  <li>
-    <p>Calculate the running time for each sort algorithm with each of the arrays and produce six directories represents 6 different arrays that mentioned before. Each directory contains 8 files, each file contains 20 lines, and each line contains 2 space separated values. The first one the size of the array and the second value represents the running time that took from the sorting algorithm.</p>
-  </li>
-  <li>
-    <p>Create Python file by which we can read the data and plot the graph to show us the curve for each sorting algorithm. We used some Python libraries to load and manipulate the data. The following libraries must be installed to run <code class="language-plaintext highlighter-rouge">Graph.py</code>:</p>
-    <ul>
-      <li>Pandas.</li>
-      <li>Numpy.</li>
-      <li>Matplotlib.</li>
-    </ul>
-  </li>
-</ol>
+          <article class="article scrollappear">
+            <header class="article-header">
+              <h1>Comparison Between Most Common Sorting Algorithms</h1>
+              <p>
+                This is my statistical analysis for most common sorting
+                algorithms.
+              </p>
+              <div class="article-list-footer">
+                <span class="article-list-date"> July 31, 2019 </span>
+                <span class="article-list-divider">-</span>
+                <span class="article-list-minutes"> 7 minute read </span>
+                <span class="article-list-divider">-</span>
+                <div class="article-list-tags">
+                  <a href="/tag/data" title="See all posts with tag 'Data'"
+                    >Data</a
+                  >
 
-<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+                  <a
+                    href="/tag/analysis"
+                    title="See all posts with tag 'Analysis'"
+                    >Analysis</a
+                  >
+
+                  <a
+                    href="/tag/algorithms"
+                    title="See all posts with tag 'Algorithms'"
+                    >Algorithms</a
+                  >
+
+                  <a
+                    href="/tag/sorting"
+                    title="See all posts with tag 'Sorting'"
+                    >Sorting</a
+                  >
+                </div>
+              </div>
+            </header>
+
+            <div class="article-content">
+              <h1 id="intro">Intro</h1>
+              <p>
+                In the world of algorithms, the first thing we would talk about
+                is sorting. How we can sort a set of elements in a certain
+                order? How long it takes to sort a set with a huge number of
+                elements in it? To answer these questions we should be aware of
+                most common sorting algorithms and its running time. There are
+                two types of sorting algorithms, the slower one that could take
+                <code class="language-plaintext highlighter-rouge">Ɵ(n^2)</code>
+                time, and the faster one could take
+                <code class="language-plaintext highlighter-rouge"
+                  >Ɵ(n log n)</code
+                >
+                time. In this report, we shall discuss those types of algorithms
+                and compare between them with different list sizes and the
+                running time for each of them.
+              </p>
+
+              <h1 id="data">Data</h1>
+              <ol>
+                <li>
+                  <p>Prepare the code to produce the following:</p>
+
+                  <ul>
+                    <li>Random Array.</li>
+                    <li>Sorted Array.</li>
+                    <li>Reversed Sorted Array.</li>
+                    <li>
+                      Three Semi-Sorted Arrays (20% – 50% – 80%) of the elements
+                      out of its place.
+                    </li>
+                    <li>Bubble Sort.</li>
+                    <li>Insertion Sort.2</li>
+                    <li>Selection Sort.</li>
+                    <li>Merge Sort.</li>
+                    <li>
+                      Modified Merge Sort this modified version implement the
+                      merge sort but on the linked list.
+                    </li>
+                    <li>Quick Sort.</li>
+                    <li>Randomized Quick Sort.</li>
+                    <li>Built-in Sort.</li>
+                  </ul>
+
+                  <p>
+                    We used
+                    <code class="language-plaintext highlighter-rouge"
+                      >C++</code
+                    >
+                    as our programming language to implement the functions that
+                    produced all of the above. Each of the sorting functions
+                    takes the size of the array and the array itself as an
+                    input. Then, we start with
+                    <code class="language-plaintext highlighter-rouge"
+                      >N = 10000</code
+                    >
+                    and increment each time
+                    <code class="language-plaintext highlighter-rouge"
+                      >10000</code
+                    >
+                    up to
+                    <code class="language-plaintext highlighter-rouge"
+                      >N = 200000</code
+                    >. Now we have 20 arrays with different sizes.
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Calculate the running time for each sort algorithm with each
+                    of the arrays and produce six directories represents 6
+                    different arrays that mentioned before. Each directory
+                    contains 8 files, each file contains 20 lines, and each line
+                    contains 2 space separated values. The first one the size of
+                    the array and the second value represents the running time
+                    that took from the sorting algorithm.
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Create Python file by which we can read the data and plot
+                    the graph to show us the curve for each sorting algorithm.
+                    We used some Python libraries to load and manipulate the
+                    data. The following libraries must be installed to run
+                    <code class="language-plaintext highlighter-rouge"
+                      >Graph.py</code
+                    >:
+                  </p>
+                  <ul>
+                    <li>Pandas.</li>
+                    <li>Numpy.</li>
+                    <li>Matplotlib.</li>
+                  </ul>
+                </li>
+              </ol>
+
+              <figure class="highlight">
+                <pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
 <span class="n">plt</span><span class="p">.</span><span class="n">style</span><span class="p">.</span><span class="n">use</span><span class="p">(</span><span class="s">'bmh'</span><span class="p">)</span>
@@ -314,111 +411,269 @@
 
     <span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
 
-<span class="n">show_graph</span><span class="p">()</span></code></pre></figure>
+<span class="n">show_graph</span><span class="p">()</span></code></pre>
+              </figure>
 
-<h1 id="outcomes">Outcomes</h1>
-<p><strong>1. Random Arrays</strong></p>
+              <h1 id="outcomes">Outcomes</h1>
+              <p><strong>1. Random Arrays</strong></p>
 
-<p><a href="/assets/documentation/data-analysis/Figure_1-461c556fe9a36dbff3011e2f68e8549b6ddb26e2ee9718d437b134674ce7bebb.png">
-  <img src="/assets/documentation/data-analysis/Figure_1-461c556fe9a36dbff3011e2f68e8549b6ddb26e2ee9718d437b134674ce7bebb.png" alt="Fig1" class="zooming" data-rjs="/assets/documentation/data-analysis/Figure_1-461c556fe9a36dbff3011e2f68e8549b6ddb26e2ee9718d437b134674ce7bebb.png" data-zooming-width="1920" data-zooming-height="983" />
-</a></p>
+              <p>
+                <a
+                  href="/assets/documentation/data-analysis/Figure_1-461c556fe9a36dbff3011e2f68e8549b6ddb26e2ee9718d437b134674ce7bebb.png"
+                >
+                  <img
+                    src="/assets/documentation/data-analysis/Figure_1-461c556fe9a36dbff3011e2f68e8549b6ddb26e2ee9718d437b134674ce7bebb.png"
+                    alt="Fig1"
+                    class="zooming"
+                    data-rjs="/assets/documentation/data-analysis/Figure_1-461c556fe9a36dbff3011e2f68e8549b6ddb26e2ee9718d437b134674ce7bebb.png"
+                    data-zooming-width="1920"
+                    data-zooming-height="983"
+                  />
+                </a>
+              </p>
 
-<p>In the <strong>Figure_1</strong>, bubble sort is bad choice it takes so much time and grows quickly. Selection sort and Insertion sort almost grows together with average <code class="language-plaintext highlighter-rouge">29.95 (ms)</code>, the above three algorithms is almost <code class="language-plaintext highlighter-rouge">Ɵ(n^2)</code>. 
-The other five algorithms are less in time, the Modified Merge sort and Randomized Quick sort are larger because of randomization process and handling pointers in the linked list.
-It’s obvious that Merge sort, Quick sort and Built-in <code class="language-plaintext highlighter-rouge">C++</code> sort is a better choice for random arrays with <code class="language-plaintext highlighter-rouge">Ɵ(n log n)</code> running time.</p>
+              <p>
+                In the <strong>Figure_1</strong>, bubble sort is bad choice it
+                takes so much time and grows quickly. Selection sort and
+                Insertion sort almost grows together with average
+                <code class="language-plaintext highlighter-rouge"
+                  >29.95 (ms)</code
+                >, the above three algorithms is almost
+                <code class="language-plaintext highlighter-rouge">Ɵ(n^2)</code
+                >. The other five algorithms are less in time, the Modified
+                Merge sort and Randomized Quick sort are larger because of
+                randomization process and handling pointers in the linked list.
+                It’s obvious that Merge sort, Quick sort and Built-in
+                <code class="language-plaintext highlighter-rouge">C++</code>
+                sort is a better choice for random arrays with
+                <code class="language-plaintext highlighter-rouge"
+                  >Ɵ(n log n)</code
+                >
+                running time.
+              </p>
 
-<p><strong>2. Semi-Sorted Arrays</strong></p>
+              <p><strong>2. Semi-Sorted Arrays</strong></p>
 
-<p><a href="/assets/documentation/data-analysis/Figure_2-2b7e1540157ab66b815ef49b8e02d766af1e3cee7eaeb8a946c91014e82f44b8.png">
-  <img src="/assets/documentation/data-analysis/Figure_2-2b7e1540157ab66b815ef49b8e02d766af1e3cee7eaeb8a946c91014e82f44b8.png" alt="Fig2" class="zooming" data-rjs="/assets/documentation/data-analysis/Figure_2-2b7e1540157ab66b815ef49b8e02d766af1e3cee7eaeb8a946c91014e82f44b8.png" data-zooming-width="1920" data-zooming-height="983" />
-</a></p>
+              <p>
+                <a
+                  href="/assets/documentation/data-analysis/Figure_2-2b7e1540157ab66b815ef49b8e02d766af1e3cee7eaeb8a946c91014e82f44b8.png"
+                >
+                  <img
+                    src="/assets/documentation/data-analysis/Figure_2-2b7e1540157ab66b815ef49b8e02d766af1e3cee7eaeb8a946c91014e82f44b8.png"
+                    alt="Fig2"
+                    class="zooming"
+                    data-rjs="/assets/documentation/data-analysis/Figure_2-2b7e1540157ab66b815ef49b8e02d766af1e3cee7eaeb8a946c91014e82f44b8.png"
+                    data-zooming-width="1920"
+                    data-zooming-height="983"
+                  />
+                </a>
+              </p>
 
-<p>In the <strong>Figure_2</strong>, bubble sort is also a bad choice it takes so much time and grows quickly. Selection sort and Insertion sort almost grows together with average <code class="language-plaintext highlighter-rouge">29.95 (ms)</code>, the above three algorithms is almost <code class="language-plaintext highlighter-rouge">Ɵ(n^2)</code>. 
-The other five algorithms are less in time, the Modified Merge sort and Randomized Quick sort are larger because of randomization process and handling pointers in the linked list.
-It’s obvious that Merge sort, Quick sort and Built-in <code class="language-plaintext highlighter-rouge">C++</code> sort is also a better choice for semi-sorted arrays <code class="language-plaintext highlighter-rouge">Ɵ(n log n)</code> running time.</p>
+              <p>
+                In the <strong>Figure_2</strong>, bubble sort is also a bad
+                choice it takes so much time and grows quickly. Selection sort
+                and Insertion sort almost grows together with average
+                <code class="language-plaintext highlighter-rouge"
+                  >29.95 (ms)</code
+                >, the above three algorithms is almost
+                <code class="language-plaintext highlighter-rouge">Ɵ(n^2)</code
+                >. The other five algorithms are less in time, the Modified
+                Merge sort and Randomized Quick sort are larger because of
+                randomization process and handling pointers in the linked list.
+                It’s obvious that Merge sort, Quick sort and Built-in
+                <code class="language-plaintext highlighter-rouge">C++</code>
+                sort is also a better choice for semi-sorted arrays
+                <code class="language-plaintext highlighter-rouge"
+                  >Ɵ(n log n)</code
+                >
+                running time.
+              </p>
 
-<p><strong>3. Sorted Arrays</strong></p>
+              <p><strong>3. Sorted Arrays</strong></p>
 
-<p><a href="/assets/documentation/data-analysis/Figure_3-90da80e77bd90edf76f3f947380775e4a1e5be227ac2ad8bf0b8811fa553e93f.png">
-  <img src="/assets/documentation/data-analysis/Figure_3-90da80e77bd90edf76f3f947380775e4a1e5be227ac2ad8bf0b8811fa553e93f.png" alt="Fig1" class="zooming" data-rjs="/assets/documentation/data-analysis/Figure_3-90da80e77bd90edf76f3f947380775e4a1e5be227ac2ad8bf0b8811fa553e93f.png" data-zooming-width="1920" data-zooming-height="983" />
-</a></p>
+              <p>
+                <a
+                  href="/assets/documentation/data-analysis/Figure_3-90da80e77bd90edf76f3f947380775e4a1e5be227ac2ad8bf0b8811fa553e93f.png"
+                >
+                  <img
+                    src="/assets/documentation/data-analysis/Figure_3-90da80e77bd90edf76f3f947380775e4a1e5be227ac2ad8bf0b8811fa553e93f.png"
+                    alt="Fig1"
+                    class="zooming"
+                    data-rjs="/assets/documentation/data-analysis/Figure_3-90da80e77bd90edf76f3f947380775e4a1e5be227ac2ad8bf0b8811fa553e93f.png"
+                    data-zooming-width="1920"
+                    data-zooming-height="983"
+                  />
+                </a>
+              </p>
 
-<p>Unlike the previous figures, the <strong>Figure_3</strong> show us the Quick sort is the worst in this case, slower than selection and bubble sort.
-The Modified Merge sort and Randomized sort are less in running time because of randomization process and handling pointers in linked list.
-Insertion sort is almost <code class="language-plaintext highlighter-rouge">0.99 (ms)</code> in all sizes and it’s faster than Built-in <code class="language-plaintext highlighter-rouge">C++</code>. It’s obvious that Insertion sort is the best choice for sorted arrays with <code class="language-plaintext highlighter-rouge">Ɵ(n)</code> running time.</p>
+              <p>
+                Unlike the previous figures, the <strong>Figure_3</strong> show
+                us the Quick sort is the worst in this case, slower than
+                selection and bubble sort. The Modified Merge sort and
+                Randomized sort are less in running time because of
+                randomization process and handling pointers in linked list.
+                Insertion sort is almost
+                <code class="language-plaintext highlighter-rouge"
+                  >0.99 (ms)</code
+                >
+                in all sizes and it’s faster than Built-in
+                <code class="language-plaintext highlighter-rouge">C++</code>.
+                It’s obvious that Insertion sort is the best choice for sorted
+                arrays with
+                <code class="language-plaintext highlighter-rouge">Ɵ(n)</code>
+                running time.
+              </p>
 
-<p><strong>4. Reversed Sorted Array</strong></p>
+              <p><strong>4. Reversed Sorted Array</strong></p>
 
-<p><a href="/assets/documentation/data-analysis/Figure_4-a8ee40fc93a6095b6074ecd56e1b362d3f3bedff28c449251ed4fb66b00e09df.png">
-  <img src="/assets/documentation/data-analysis/Figure_4-a8ee40fc93a6095b6074ecd56e1b362d3f3bedff28c449251ed4fb66b00e09df.png" alt="Fig1" class="zooming" data-rjs="/assets/documentation/data-analysis/Figure_4-a8ee40fc93a6095b6074ecd56e1b362d3f3bedff28c449251ed4fb66b00e09df.png" data-zooming-width="1920" data-zooming-height="983" />
-</a></p>
+              <p>
+                <a
+                  href="/assets/documentation/data-analysis/Figure_4-a8ee40fc93a6095b6074ecd56e1b362d3f3bedff28c449251ed4fb66b00e09df.png"
+                >
+                  <img
+                    src="/assets/documentation/data-analysis/Figure_4-a8ee40fc93a6095b6074ecd56e1b362d3f3bedff28c449251ed4fb66b00e09df.png"
+                    alt="Fig1"
+                    class="zooming"
+                    data-rjs="/assets/documentation/data-analysis/Figure_4-a8ee40fc93a6095b6074ecd56e1b362d3f3bedff28c449251ed4fb66b00e09df.png"
+                    data-zooming-width="1920"
+                    data-zooming-height="983"
+                  />
+                </a>
+              </p>
 
-<p><strong>Figure_4</strong> show us the same lines as in the sorted arrays, but the Insertion sort was unlucky it grows with <code class="language-plaintext highlighter-rouge">Ɵ(n^2)</code> running time.</p>
+              <p>
+                <strong>Figure_4</strong> show us the same lines as in the
+                sorted arrays, but the Insertion sort was unlucky it grows with
+                <code class="language-plaintext highlighter-rouge">Ɵ(n^2)</code>
+                running time.
+              </p>
 
-<h1 id="conclusion">Conclusion</h1>
-<p>As we discussed above the most common sorting algorithms used in different types of lists. If the list contains random elements we can use the Built-in or Quick sort, it’s more efficient, less in memory and less in running time from other sorting algorithms.</p>
+              <h1 id="conclusion">Conclusion</h1>
+              <p>
+                As we discussed above the most common sorting algorithms used in
+                different types of lists. If the list contains random elements
+                we can use the Built-in or Quick sort, it’s more efficient, less
+                in memory and less in running time from other sorting
+                algorithms.
+              </p>
 
-<p>Insertion sort with sorted array it takes almost <code class="language-plaintext highlighter-rouge">Ɵ(n)</code> running time. Quick sort with sorted list or reversed sorted list it takes <code class="language-plaintext highlighter-rouge">Ɵ(n^2)</code> running time. Because of iterate n through <code class="language-plaintext highlighter-rouge">(n-1)</code> and it’s simple to calculate <code class="language-plaintext highlighter-rouge">T(n) = T(n-1) + Ɵ(1)</code> for both kinds.</p>
+              <p>
+                Insertion sort with sorted array it takes almost
+                <code class="language-plaintext highlighter-rouge">Ɵ(n)</code>
+                running time. Quick sort with sorted list or reversed sorted
+                list it takes
+                <code class="language-plaintext highlighter-rouge">Ɵ(n^2)</code>
+                running time. Because of iterate n through
+                <code class="language-plaintext highlighter-rouge">(n-1)</code>
+                and it’s simple to calculate
+                <code class="language-plaintext highlighter-rouge"
+                  >T(n) = T(n-1) + Ɵ(1)</code
+                >
+                for both kinds.
+              </p>
 
-<p>So, it depends on what kind of lists you have, but in the real world, we insert element in place. We don’t have to sort just take an element and put it into its right place and that takes <code class="language-plaintext highlighter-rouge">Ɵ(n)</code> to shift other elements after inserting the picked one.</p>
+              <p>
+                So, it depends on what kind of lists you have, but in the real
+                world, we insert element in place. We don’t have to sort just
+                take an element and put it into its right place and that takes
+                <code class="language-plaintext highlighter-rouge">Ɵ(n)</code>
+                to shift other elements after inserting the picked one.
+              </p>
 
-<h4 id="notes">Notes:</h4>
-<p>All collected data produced by 4-core processor, so it might be slightly different if we use another higher computer to run the program. And it might be fast enough to get better results, but the running time for each algorithm will be the same.</p>
+              <h4 id="notes">Notes:</h4>
+              <p>
+                All collected data produced by 4-core processor, so it might be
+                slightly different if we use another higher computer to run the
+                program. And it might be fast enough to get better results, but
+                the running time for each algorithm will be the same.
+              </p>
+            </div>
+            <div class="article-share">
+              <a
+                href="https://twitter.com/home?status=Comparison+Between+Most+Common+Sorting+Algorithms%20-%20https://s4yed.github.io/posts/compare-sorting-algorithms"
+                title="Share on Twitter"
+                rel="noreferrer noopener"
+                target="_blank"
+              >
+                <svg viewBox="0 0 512 512">
+                  <path
+                    d="M492 109.5c-17.4 7.7-36 12.9-55.6 15.3 20-12 35.4-31 42.6-53.6 -18.7 11.1-39.4 19.2-61.5 23.5C399.8 75.8 374.6 64 346.8 64c-53.5 0-96.8 43.4-96.8 96.9 0 7.6 0.8 15 2.5 22.1 -80.5-4-151.9-42.6-199.6-101.3 -8.3 14.3-13.1 31-13.1 48.7 0 33.6 17.2 63.3 43.2 80.7C67 210.7 52 206.3 39 199c0 0.4 0 0.8 0 1.2 0 47 33.4 86.1 77.7 95 -8.1 2.2-16.7 3.4-25.5 3.4 -6.2 0-12.3-0.6-18.2-1.8 12.3 38.5 48.1 66.5 90.5 67.3 -33.1 26-74.9 41.5-120.3 41.5 -7.8 0-15.5-0.5-23.1-1.4C62.8 432 113.7 448 168.3 448 346.6 448 444 300.3 444 172.2c0-4.2-0.1-8.4-0.3-12.5C462.6 146 479 129 492 109.5z"
+                  />
+                </svg>
+              </a>
+              <a
+                href="https://www.facebook.com/sharer/sharer.php?u=https://s4yed.github.io/posts/compare-sorting-algorithms"
+                title="Share on Facebook"
+                rel="noreferrer noopener"
+                target="_blank"
+              >
+                <svg viewBox="0 0 512 512">
+                  <path
+                    d="M288 192v-38.1c0-17.2 3.8-25.9 30.5-25.9H352V64h-55.9c-68.5 0-91.1 31.4-91.1 85.3V192h-45v64h45v192h83V256h56.4l7.6-64H288z"
+                  />
+                </svg>
+              </a>
+            </div>
 
-          </div>
-          <div class="article-share">
-            
-            
-            <a href="https://twitter.com/home?status=Comparison+Between+Most+Common+Sorting+Algorithms%20-%20https://s4yed.github.io/posts/compare-sorting-algorithms" title="Share on Twitter" rel="noreferrer noopener" target="_blank">
-              <svg viewBox="0 0 512 512"><path d="M492 109.5c-17.4 7.7-36 12.9-55.6 15.3 20-12 35.4-31 42.6-53.6 -18.7 11.1-39.4 19.2-61.5 23.5C399.8 75.8 374.6 64 346.8 64c-53.5 0-96.8 43.4-96.8 96.9 0 7.6 0.8 15 2.5 22.1 -80.5-4-151.9-42.6-199.6-101.3 -8.3 14.3-13.1 31-13.1 48.7 0 33.6 17.2 63.3 43.2 80.7C67 210.7 52 206.3 39 199c0 0.4 0 0.8 0 1.2 0 47 33.4 86.1 77.7 95 -8.1 2.2-16.7 3.4-25.5 3.4 -6.2 0-12.3-0.6-18.2-1.8 12.3 38.5 48.1 66.5 90.5 67.3 -33.1 26-74.9 41.5-120.3 41.5 -7.8 0-15.5-0.5-23.1-1.4C62.8 432 113.7 448 168.3 448 346.6 448 444 300.3 444 172.2c0-4.2-0.1-8.4-0.3-12.5C462.6 146 479 129 492 109.5z"/></svg>
-            </a>
-            <a href="https://www.facebook.com/sharer/sharer.php?u=https://s4yed.github.io/posts/compare-sorting-algorithms" title="Share on Facebook" rel="noreferrer noopener" target="_blank">
-              <svg viewBox="0 0 512 512"><path d="M288 192v-38.1c0-17.2 3.8-25.9 30.5-25.9H352V64h-55.9c-68.5 0-91.1 31.4-91.1 85.3V192h-45v64h45v192h83V256h56.4l7.6-64H288z"/></svg>
-            </a>
-          </div>
-
-          
             <div id="disqus_thread" class="article-comments"></div>
-            <script src="https://my-blog-0vgcdsd8x2.disqus.com/embed.js" async defer></script>
+            <script
+              src="https://my-blog-0vgcdsd8x2.disqus.com/embed.js"
+              async
+              defer
+            ></script>
             <noscript>Please enable JavaScript to view the comments.</noscript>
-          
-        </article>
-        <footer class="footer scrollappear">
-    <p style="text-align: center">
-      My little tech blog &#169; 2024
-      <!-- <a href="/about" title="About me">Ahmed Sayed</a> -->
-    </p>
-</footer>
-
+          </article>
+          <footer class="footer scrollappear">
+            <p style="text-align: center">
+              My little tech blog &#169; 2024
+              <!-- <a href="/about" title="About me">Ahmed Sayed</a> -->
+            </p>
+          </footer>
+        </div>
       </div>
-    </div>
-  </main>
-  
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-157807027-1"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'UA-157807027-1');
-  </script>
+    </main>
 
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-157807027-1"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "UA-157807027-1");
+    </script>
 
-<script src="/assets/vendor-3ee2c63bbac916f96cd7f90e83ab767f058ead1301444c9966f5156911c8be7f.js" type="text/javascript"></script>
+    <script
+      src="/assets/vendor-3ee2c63bbac916f96cd7f90e83ab767f058ead1301444c9966f5156911c8be7f.js"
+      type="text/javascript"
+    ></script>
 
+    <script
+      src="/assets/webfonts-96493456d319d1bf419afdf8701552d4d486fee6afd304897d4fd81eb4e0cc0b.js"
+      type="text/javascript"
+    ></script>
 
-  <script src="/assets/webfonts-96493456d319d1bf419afdf8701552d4d486fee6afd304897d4fd81eb4e0cc0b.js" type="text/javascript"></script>
+    <script
+      src="/assets/scrollappear-e2da8ea567e418637e31266cc5302126eaa79f62a2273739086358b589a89ee6.js"
+      type="text/javascript"
+    ></script>
 
+    <script
+      src="/assets/application-cfde13ac81ddaf4351b2e739603e2baf688d0fcc9aba613fe62bbb1c7b037fb9.js"
+      type="text/javascript"
+    ></script>
 
+    <script
+      src="/assets/themetoggle-df0d3d73164dc26dffbd630182ae4d0dfa7bee6b694a2b5d565d73595b582bbf.js"
+      type="text/javascript"
+    ></script>
 
-  <script src="/assets/scrollappear-e2da8ea567e418637e31266cc5302126eaa79f62a2273739086358b589a89ee6.js" type="text/javascript"></script>
-
-
-<script src="/assets/application-cfde13ac81ddaf4351b2e739603e2baf688d0fcc9aba613fe62bbb1c7b037fb9.js" type="text/javascript"></script>
-
-
-  <script src="/assets/themetoggle-df0d3d73164dc26dffbd630182ae4d0dfa7bee6b694a2b5d565d73595b582bbf.js" type="text/javascript"></script>
-
-
-<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
-</body>
+    <script
+      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+      type="text/javascript"
+    ></script>
+  </body>
 </html>
